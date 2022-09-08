@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { NextPage } from "next";
+import Link from 'next/link';
 
 import { OMNM_ICON_HEIGHT, OMNM_ICON_WIDTH } from "./landing.const";
 
@@ -33,7 +34,12 @@ export const LadingScreen: NextPage = () => {
             </Typography>
           </Box>
         </Box>
-        <Box>나도 반가워</Box>
+        <Link href="/login">
+          <a>로그인</a>
+        </Link>
+        {/* <Link href="/signup">
+          <a>회원가입</a>
+        </Link> */}
       </Box>
     </Box>
   );
