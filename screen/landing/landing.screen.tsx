@@ -37,9 +37,9 @@ export const LadingScreen: NextPage = () => {
         <Link href="/login">
           <a>로그인</a>
         </Link>
-        {/* <Link href="/signup">
+        <Link href="/signup">
           <a>회원가입</a>
-        </Link> */}
+        </Link>
       </Box>
     </Box>
   );
