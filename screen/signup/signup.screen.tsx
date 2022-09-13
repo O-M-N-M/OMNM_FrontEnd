@@ -1,11 +1,10 @@
 import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
 import { NextPage } from "next";
-import { v1 } from "uuid";
-import { atom, useRecoilState } from 'recoil';
 import Image from "next/image";
 import logo from '../../public/logo.png';
 
 import { AccountBox } from './account';
+import { useState } from "react";
 
 const steps = [
   '계정 생성',
@@ -13,13 +12,10 @@ const steps = [
   '프로필 작성'
 ];
 
-const counter = atom({
-  key: `myCounter${v1()}`,
-  default: 0
-});
-
 export const SignUpScreen: NextPage = () => {
-  const [activeStep, setActiveStep] = useRecoilState(counter);
+  const [activeStep, setActiveStep] = useState(0);
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -31,7 +27,7 @@ export const SignUpScreen: NextPage = () => {
         <Image src={logo} width={75} height={75} />
         <Typography className="text-lg mt-4">회원가입</Typography>
 
-        <form className="w-96 h-96 mt-4 shadow-[0_4px_20px_0_rgba(0,0,0,0.1)] p-10">
+        <Box className="border border-solid border-gray0 rounded-lg pt-14 pr-14 pl-14 pb-10 mt-10 w-96">
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>
@@ -41,32 +37,26 @@ export const SignUpScreen: NextPage = () => {
               </Step>
             ))}
           </Stepper>
-          <Box>
-            {activeStep === 0 ? (<Typography><AccountBox /></Typography>)
-              : activeStep === 1 ? (<Typography>2</Typography>)
-                : (<Typography>3</Typography>)}
 
-            <Box className="flex justify-end">
-              {activeStep !== 2 ?
-                (<Button onClick={handleNext} className="bg-accent1 rounded-full text-white text-xs block w-24 p-2.5">
-                  다음
-                </Button>)
-                :
-                (<Button className="bg-accent1 rounded-full text-white text-xs block w-24 p-2.5">
-                  완료
-                </Button>)}
-            </Box>
+          {
+            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} />) :
+              activeStep === 1 ? (<Typography>2</Typography>) :
+                (<Typography>3</Typography>)
+          }
+
+          <Box className="flex justify-end mt-8">
+            {activeStep !== 2 ?
+              (<Button onClick={handleNext} className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
+                다음
+              </Button>)
+              :
+              (<Button className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
+                완료
+              </Button>)}
           </Box>
-        </form>
+        </Box>
 
-        {/* <form className="shadow-[0_4px_20px_0_rgba(0,0,0,0.1)] rounded-lg p-14 mt-4">
-          <Typography className="text-sm mt-4">아이디</Typography>
-          <input type="text" placeholder="아이디 입력" className="rounded-full text-gray1 border border-gray2 ring-gray2 text-xs block w-60 p-2.5 mt-2" required />
-          <Typography className="text-sm mt-4">학교 이메일</Typography>
-          <input type="text" placeholder="학교 이메일 입력" className="rounded-full text-gray1 border border-gray2 ring-gray2 text-xs block w-60 p-2.5 mt-2" required />
-
-          <Button className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-60 p-2.5 mt-6">확인</Button>
-        </form> */}
+        {/* </form> */}
       </Box>
     </Box>
   );

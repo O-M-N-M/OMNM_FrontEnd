@@ -22,6 +22,9 @@ module.exports = {
         accent3: "#E9F4FF",
         sky0: "#F0F9FF",
       },
+      spacing: {
+        '68': '17rem'
+      }
     },
   },
   corePlugins: {
