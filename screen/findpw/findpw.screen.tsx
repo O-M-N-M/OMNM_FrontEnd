@@ -42,8 +42,8 @@ export const FindPwScreen: NextPage = () => {
         <Image src={logo} width={75} height={75} />
 
         <form onSubmit={onSubmit} className="border border-solid border-gray0 rounded-lg p-14 mt-10">
-          <Typography className="text-xl font-bold">비밀번호 찾기</Typography>
-          <Typography className="text-sm mt-6">아이디</Typography>
+          <Typography className="text-black text-xl font-medium">비밀번호 찾기</Typography>
+          <Typography className="text-black text-sm font-medium mt-6">아이디</Typography>
           <input
             type="text"
             name="id"
@@ -51,7 +51,7 @@ export const FindPwScreen: NextPage = () => {
             value={id}
             onChange={(e) => setId(e.target.value)}
             className="rounded-full text-gray1 border border-solid border-gray0 text-xs block w-60 p-2.5 mt-2 focus:outline-none" required />
-          <Typography className="text-sm mt-4">학교 이메일</Typography>
+          <Typography className="text-black text-sm font-medium mt-4">학교 이메일</Typography>
           <Box className="flex items-center">
             <input
               type="text"
@@ -60,7 +60,7 @@ export const FindPwScreen: NextPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="rounded-full text-gray1 border border-solid border-gray0 text-xs block w-32 p-2.5 mt-2 focus:outline-none" required />
-            <Typography className="text-black text-sm ml-4">@cau.ac.kr</Typography>
+            <Typography className="text-black text-sm font-regular ml-4 mt-2">@cau.ac.kr</Typography>
           </Box>
 
           <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-60 p-2.5 mt-6">확인</Button>
