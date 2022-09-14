@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Divider } from "@mui/material";
+import { Box, Button, Stack, Divider, Typography } from "@mui/material";
 import Link from 'next/link';
 import { NextPage } from "next";
 import Image from "next/image";
@@ -12,9 +12,9 @@ export const LoginScreen: NextPage = () => {
 
         <form>
           <Stack direction="column">
-            <input type="text" placeholder="아이디 입력" className="rounded-full text-gray1 border border-solid border-gray0 text-sm block w-60 p-2.5 mt-6 focus:outline-none" required />
-            <input type="password" placeholder="비밀번호 입력" className="rounded-full text-gray1 border border-solid border-gray0 text-sm block w-60 p-2.5 mt-2 focus:outline-none" required />
-            <Button className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-60 p-2.5 mt-2">로그인</Button>
+            <input type="text" placeholder="아이디 입력" className="text-gray1 text-xs rounded-full border border-solid border-gray0 block w-64 p-4 mt-6 focus:outline-none" required />
+            <input type="password" placeholder="비밀번호 입력" className="text-gray1 text-xs rounded-full border border-solid border-gray0 block w-64 p-4 mt-2 focus:outline-none" required />
+            <Button className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-64 p-4 mt-2">로그인</Button>
           </Stack>
         </form>
 
@@ -25,12 +25,25 @@ export const LoginScreen: NextPage = () => {
           className="mt-2"
         >
           <Link href="/findid">
-            <a className="text-gray3 hover:text-gray1 visited:text-gray3 text-xs no-underline">아이디 찾기</a>
+            <a className="no-underline">
+              <Typography className="text-gray3 text-xs font-medium">아이디 찾기</Typography>
+            </a>
           </Link>
           <Link href="/findpw">
-            <a className="text-gray3 hover:text-gray1 visited:text-gray3 text-xs no-underline">비밀번호 찾기</a>
+            <a className="no-underline">
+              <Typography className="text-gray3 text-xs font-medium">비밀번호 찾기</Typography>
+            </a>
           </Link>
         </Stack>
+
+        <Box className="flex items-center mt-2">
+          <Typography className="text-gray1 text-xxs font-regular">회원이 아니신가요?</Typography>
+          <Link href="/signup">
+            <a className="ml-2">
+              <Typography className="text-accent1 text-xxs font-regular">회원가입하러 가기</Typography>
+            </a>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );

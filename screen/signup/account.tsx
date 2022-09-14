@@ -23,7 +23,10 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
         <Button className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-xs w-20 p-2.5 mt-2 ml-4">중복확인</Button>
       </Box>
 
-      <Typography className="text-black text-sm mt-4">비밀번호</Typography>
+      <Box className="flex items-center mt-4">
+        <Typography className="text-black text-sm">비밀번호</Typography>
+        <Typography className="text-gray1 text-xxs ml-4">6~12자 이내 숫자, 특수문자, 영문자 모두 포함</Typography>
+      </Box>
       <input
         type="password"
         name="pw"

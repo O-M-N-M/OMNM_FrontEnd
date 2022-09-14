@@ -24,7 +24,28 @@ module.exports = {
       },
       spacing: {
         '68': '17rem'
-      }
+      },
+      fontWeight: {
+        'bold': 700,
+        'medium': 500,
+        'regular': 400
+      },
+      fontSize: {
+        'xxs': ['10px', '16px'],
+        'h1': ['56px', '70.11px'],
+        'h2': ['48px', '60.1px'],
+        'h3': ['36px', '45.07px'],
+        'h4': ['28px', '35.06px'],
+        'b1': ['24px', '30.05px'],
+        'b2': ['20px', '25.04px'],
+        'b3': ['18px', '22.54px'],
+        'c1': ['16px', '20.03px'],
+        'c2': ['12px', '15.02px'],
+        'button': ['22px', '27.54px']
+      },
+      width: {
+        '100': '26rem'
+      },
     },
   },
   corePlugins: {

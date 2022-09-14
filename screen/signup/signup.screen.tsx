@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from '../../public/logo.png';
 
 import { AccountBox } from './account';
+import { EmailBox } from './email';
 import { useState } from "react";
 
 const steps = [
@@ -16,6 +17,8 @@ export const SignUpScreen: NextPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [school, setSchool] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -25,9 +28,9 @@ export const SignUpScreen: NextPage = () => {
     <Box className="flex justify-center items-center min-h-screen">
       <Box className="flex flex-col items-center">
         <Image src={logo} width={75} height={75} />
-        <Typography className="text-lg mt-4">회원가입</Typography>
+        <Typography className="text-lg mt-4 font-sans">회원가입</Typography>
 
-        <Box className="border border-solid border-gray0 rounded-lg pt-14 pr-14 pl-14 pb-10 mt-10 w-96">
+        <Box className="border border-solid border-gray0 rounded-lg pt-14 pr-14 pl-14 pb-10 mt-8 w-full">
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>
@@ -40,7 +43,7 @@ export const SignUpScreen: NextPage = () => {
 
           {
             activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} />) :
-              activeStep === 1 ? (<Typography>2</Typography>) :
+              activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} />) :
                 (<Typography>3</Typography>)
           }
 
