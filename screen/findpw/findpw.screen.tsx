@@ -51,7 +51,11 @@ export const FindPwScreen: NextPage = () => {
             value={id}
             onChange={(e) => setId(e.target.value)}
             className="rounded-full text-gray1 border border-solid border-gray0 text-xs block w-60 p-2.5 mt-2 focus:outline-none" required />
-          <Typography className="text-black text-sm font-medium mt-4">학교 이메일</Typography>
+
+          <Box>
+            <Typography className="text-black text-sm font-medium mt-4">학교 이메일</Typography>
+            <Typography className="text-gray1 text-xxs font-regular">학교 이메일로 임시 비밀번호가 전송됩니다.</Typography>
+          </Box>
           <Box className="flex items-center">
             <input
               type="text"
