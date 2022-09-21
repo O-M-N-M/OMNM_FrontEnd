@@ -28,7 +28,7 @@ export const SignUpScreen: NextPage = () => {
     <Box className="flex justify-center items-center min-h-screen">
       <Box className="flex flex-col items-center">
         <Image src={logo} width={75} height={75} />
-        <Typography className="text-lg mt-4 font-sans">회원가입</Typography>
+        <Typography className="text-lg mt-4">회원가입</Typography>
 
         <Box className="border border-solid border-gray0 rounded-lg pt-14 pr-14 pl-14 pb-10 mt-8 w-full">
           <Stepper activeStep={activeStep} alternativeLabel>

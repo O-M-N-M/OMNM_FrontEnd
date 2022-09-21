@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from '../../public/logo.png';
 import { useState } from "react";
 import axios from "axios";
+import { setCookie } from "cookies-next";
 
 export const LoginScreen: NextPage = () => {
   const [id, setId] = useState('');
@@ -19,8 +20,8 @@ export const LoginScreen: NextPage = () => {
 
     await axios.post(url, body, headers)
       .then(res => {
-        console.log(res)
-
+        setCookie('auth', res.data);
+        document.location = '/';
       })
       .catch(err => console.log(err.response))
   }
