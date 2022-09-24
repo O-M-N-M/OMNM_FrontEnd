@@ -1,12 +1,28 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { NextPage } from "next";
+import { useEffect, useState } from "react";
 import Link from 'next/link';
 
 import { OMNM_ICON_HEIGHT, OMNM_ICON_WIDTH } from "./landing.const";
 
 import { Icon } from "@/components";
+import { getCookie, hasCookie } from "cookies-next";
+import axios from "axios";
 
 export const LadingScreen: NextPage = () => {
+  const onClick = async () => {
+    if (hasCookie('OMNM')) {
+      await axios.get('/api/test', {
+        headers: {
+          OMNM: `${getCookie('OMNM')}`
+        }
+      }).then(res => alert(res.data)).catch(err => console.log(err));
+
+    } else {
+      alert('쿠키 없다아아아아아아ㅏ');
+    }
+  }
+
   return (
     <Box className="flex flex-col items-center w-screen">
       <Box className="flex justify-between w-full max-w-screen-lg gap-3">
@@ -40,6 +56,10 @@ export const LadingScreen: NextPage = () => {
         <Link href="/signup">
           <a>회원가입</a>
         </Link>
+
+        <Button onClick={onClick}>쿠키 있없</Button>
+
+        {/* <Typography>{ck}</Typography> */}
       </Box>
     </Box>
   );
