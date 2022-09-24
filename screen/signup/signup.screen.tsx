@@ -1,11 +1,13 @@
 import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
+import basicProfile from '../../public/basicProfile.png';
 import logo from '../../public/logo.png';
 
 import { AccountBox } from './account';
 import { EmailBox } from './email';
-import { useState } from "react";
+import { ProfileBox } from './profile';
+import { InputHTMLAttributes, useState } from "react";
 
 const steps = [
   '계정 생성',
@@ -19,6 +21,11 @@ export const SignUpScreen: NextPage = () => {
   const [pw, setPw] = useState('');
   const [school, setSchool] = useState('');
   const [email, setEmail] = useState('');
+  const [image, setImage] = useState<HTMLInputElement | null>(null);
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState(0);
+  const [kakao, setKakao] = useState('');
+  const [dormitory, setDormitory] = useState(0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -44,7 +51,7 @@ export const SignUpScreen: NextPage = () => {
           {
             activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} />) :
               activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} />) :
-                (<Typography>3</Typography>)
+                (<ProfileBox image={image} setImage={setImage} name={name} setName={setName} gender={gender} setGender={setGender} kakao={kakao} setKakao={setKakao} dormitory={dormitory} setDormitory={setDormitory} />)
           }
 
           <Box className="flex justify-end mt-8">

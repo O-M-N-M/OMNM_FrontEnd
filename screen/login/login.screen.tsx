@@ -20,7 +20,7 @@ export const LoginScreen: NextPage = () => {
 
     await axios.post(url, body, headers)
       .then(res => {
-        setCookie('auth', res.data);
+        setCookie('OMNM', res.data);
         document.location = '/';
       })
       .catch(err => console.log(err.response))
