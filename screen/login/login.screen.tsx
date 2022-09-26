@@ -1,15 +1,21 @@
-import { Box, Button, Stack, Divider, Typography } from "@mui/material";
+import { Box, Button, Stack, Divider, Typography, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import { useState } from "react";
+
+import axios from "axios";
+import { setCookie } from "cookies-next";
+
 import Link from 'next/link';
 import { NextPage } from "next";
 import Image from "next/image";
 import logo from '../../public/logo.png';
-import { useState } from "react";
-import axios from "axios";
-import { setCookie } from "cookies-next";
+import failIcon from '../../public/failIcon.png';
+
 
 export const LoginScreen: NextPage = () => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [fail, setFail] = useState(false);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +28,7 @@ export const LoginScreen: NextPage = () => {
       .then(res => {
         console.log(res.data);
         if (res.data === '비밀번호 틀림' || res.data === '아이디 없음') {
-          alert('로그인 실패');
+          setFail(true);
         } else {
           setCookie('OMNM', res.data);
           document.location = '/';
@@ -82,6 +88,26 @@ export const LoginScreen: NextPage = () => {
             </a>
           </Link>
         </Box>
+
+        {
+          fail === true ?
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
+              <Box className="flex justify-end">
+                <IconButton onClick={() => setFail(false)}>
+                  <CloseIcon aria-label="close" />
+                </IconButton>
+              </Box>
+
+              <Box className="text-center">
+                <Image src={failIcon} />
+              </Box>
+
+              <Box className="text-center">
+                <Typography className="text-sm text-black">아이디 또는 비밀번호를 잘못 입력하였습니다.</Typography>
+              </Box>
+            </Box>
+            : <></>
+        }
       </Box>
     </Box>
   );
