@@ -20,8 +20,13 @@ export const LoginScreen: NextPage = () => {
 
     await axios.post(url, body, headers)
       .then(res => {
-        setCookie('OMNM', res.data);
-        document.location = '/';
+        console.log(res.data);
+        if (res.data === '비밀번호 틀림' || res.data === '아이디 없음') {
+          alert('로그인 실패');
+        } else {
+          setCookie('OMNM', res.data);
+          document.location = '/';
+        }
       })
       .catch(err => console.log(err.response))
   }

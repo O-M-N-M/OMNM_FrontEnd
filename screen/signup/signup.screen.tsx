@@ -21,7 +21,7 @@ export const SignUpScreen: NextPage = () => {
   const [pw, setPw] = useState('');
   const [school, setSchool] = useState('');
   const [email, setEmail] = useState('');
-  const [image, setImage] = useState<HTMLInputElement | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const [name, setName] = useState('');
   const [gender, setGender] = useState(0);
   const [kakao, setKakao] = useState('');

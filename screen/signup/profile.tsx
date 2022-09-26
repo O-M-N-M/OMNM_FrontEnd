@@ -7,12 +7,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 interface props {
-  image: HTMLInputElement | null;
+  image: File | null;
   name: string;
   gender: number;
   kakao: string;
   dormitory: number;
-  setImage: Dispatch<SetStateAction<HTMLInputElement | null>>;
+  setImage: Dispatch<SetStateAction<File | null>>;
   setName: Dispatch<SetStateAction<string>>;
   setGender: Dispatch<SetStateAction<number>>;
   setKakao: Dispatch<SetStateAction<string>>;
@@ -22,20 +22,26 @@ interface props {
 export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, name, setName, gender, setGender, kakao, setKakao, dormitory, setDormitory }) => {
   return (
     <Box className="mt-4">
-      {
-        image === null ?
-          <Image src={basicProfile} width={90} height={90} className="rounded-full" />
-          : <Image src={window.URL.createObjectURL(image)} width={90} height={90} className="rounded-full" />
-      }
-      <IconButton aria-label="upload picture" component="label">
-        <input
-          hidden
-          accept="image/*"
-          type="file"
-          onChange={(e) => setImage(e.currentTarget)} />
-        <PhotoCamera />
-      </IconButton>
-
+      <Box className="text-center">
+        {
+          image === null ?
+            <Image src={basicProfile} width={90} height={90} className="rounded-full" />
+            : <Image src={URL.createObjectURL(image)} width={90} height={90} className="rounded-full" />
+        }
+        <IconButton aria-label="upload picture" component="label" className="bg-white border border-solid border-gray1">
+          <input
+            hidden
+            accept="image/*"
+            type="file"
+            onChange={(e) => {
+              if (e.target.files !== null) {
+                console.log(e.target.files[0]);
+                setImage(e.target.files[0]);
+              }
+            }} />
+          <PhotoCamera fontSize="small" />
+        </IconButton>
+      </Box>
       <Typography className="text-black text-sm font-medium">이름</Typography>
       <input
         type="text"
