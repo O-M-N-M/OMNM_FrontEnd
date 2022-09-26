@@ -1,12 +1,20 @@
-import { Box, Typography, Button } from "@mui/material";
-import { NextPage } from "next";
-import Image from "next/image";
+import { Box, Typography, Button, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from "react";
+
+import { NextPage } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import emailIcon from '../../public/emailIcon.png';
+import failIcon from '../../public/failIcon.png';
 import logo from '../../public/logo.png';
 
 export const FindPwScreen: NextPage = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [noEmail, setNoEmail] = useState(false);
+  const [notMatch, setNotMatch] = useState(false);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,19 +29,22 @@ export const FindPwScreen: NextPage = () => {
         .then(res => res.text())
         .then(txt => {
           if (txt === '존재하지 않는 이메일') {
-            alert('이메일이 존재하지 않습니다.');
+            setNoEmail(true);
           }
           else if (txt === '이메일과 아이디가 일치하지 않음') {
-            alert('이메일과 아이디가 일치하지 않습니다.');
+            setNotMatch(true);
           }
           else if (txt === '인증번호 발송 성공') {
-            alert('임시 비밀번호를 발송했습니다.');
-            document.location = '/login';
+            setSuccess(true);
           }
         });
     } catch (err) {
       console.log(err);
     }
+  }
+
+  const noEmailClick = () => {
+    setNoEmail(false);
   }
 
   return (
@@ -69,6 +80,68 @@ export const FindPwScreen: NextPage = () => {
 
           <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-60 p-2.5 mt-6">확인</Button>
         </form>
+
+        {
+          success === true ?
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 p-10 w-[27rem]">
+              <Box className="text-center">
+                <Image src={emailIcon} />
+              </Box>
+
+              <Box className="flex justify-center items-center mt-2">
+                <Typography className="text-sm text-black">학교 이메일로</Typography>
+                <Typography className="text-sm text-accent1">&nbsp;임시 비밀번호</Typography>
+                <Typography className="text-sm text-black">를 발송했습니다.</Typography>
+              </Box>
+
+              <Box className="flex justify-center items-center mt-4">
+                <Link href="/login">
+                  <a className="bg-accent1 rounded-full w-32 p-2">
+                    <Typography className="text-white text-sm text-center">확인</Typography>
+                  </a>
+                </Link>
+              </Box>
+            </Box>
+            : <></>
+        }
+        {
+          noEmail === true ?
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
+              <Box className="flex justify-end">
+                <IconButton onClick={() => setNoEmail(false)}>
+                  <CloseIcon aria-label="close" />
+                </IconButton>
+              </Box>
+
+              <Box className="text-center">
+                <Image src={failIcon} />
+              </Box>
+
+              <Box className="text-center">
+                <Typography className="text-sm text-black">이메일이 존재하지 않습니다.</Typography>
+              </Box>
+            </Box>
+            : <></>
+        }
+        {
+          notMatch === true ?
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
+              <Box className="flex justify-end">
+                <IconButton onClick={() => setNotMatch(false)}>
+                  <CloseIcon aria-label="close" />
+                </IconButton>
+              </Box>
+
+              <Box className="text-center">
+                <Image src={failIcon} />
+              </Box>
+
+              <Box className="text-center">
+                <Typography className="text-sm text-black">이메일과 아이디가 일치하지 않습니다.</Typography>
+              </Box>
+            </Box>
+            : <></>
+        }
       </Box>
     </Box>
   );
