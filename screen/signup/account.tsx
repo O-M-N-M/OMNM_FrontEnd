@@ -75,4 +75,3 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
         className="rounded-full text-gray1 border border-solid border-gray0 text-xs block w-68 p-2.5 mt-2 focus:outline-none" required />
     </Box>
   );
-};
