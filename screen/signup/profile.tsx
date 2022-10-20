@@ -77,4 +77,5 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
       </FormControl>
 
     </Box>
-  )
+  );
+}
