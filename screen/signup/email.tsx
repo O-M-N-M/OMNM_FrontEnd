@@ -98,3 +98,4 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
       </form>
     </Box>
   );
+}
