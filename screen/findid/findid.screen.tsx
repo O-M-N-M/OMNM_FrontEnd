@@ -3,6 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import { NextPage } from "next";
 import Image from "next/image";
+import magnifying from '../../public/magnifying.png';
 import Link from "next/link";
 import React, { useState } from "react";
 import logo from '../../public/logo.png';
@@ -64,14 +65,18 @@ export const FindIdScreen: NextPage = () => {
           <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-60 p-2.5 mt-6">확인</Button>
         </form>
         {open === true ?
-          <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10">
+          <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
             <Box className="flex justify-end">
               <IconButton onClick={onClick}>
                 <CloseIcon aria-label="close" />
               </IconButton>
             </Box>
 
-            <Box className="flex justify-center items-center">
+            <Box className="text-center">
+              <Image src={magnifying} />
+            </Box>
+
+            <Box className="flex justify-center items-center mt-2">
               <Typography className="text-sm text-black">입력한 정보로 조회된 아이디는</Typography>
               <Typography className="text-sm text-accent1">&nbsp;{id}&nbsp;</Typography>
               <Typography className="text-sm text-black"> 입니다.</Typography>
