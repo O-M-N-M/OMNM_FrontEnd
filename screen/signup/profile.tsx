@@ -1,6 +1,6 @@
 import { Box, Typography, FormControlLabel, Radio, RadioGroup, FormControl, IconButton, } from "@mui/material";
-import React, { Dispatch, InputHTMLAttributes, SetStateAction } from "react";
-import Image, { StaticImageData } from "next/image";
+import React, { Dispatch, SetStateAction } from "react";
+import Image from "next/image";
 import basicProfile from '../../public/basicProfile.png';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -22,20 +22,19 @@ interface props {
 export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, name, setName, gender, setGender, kakao, setKakao, dormitory, setDormitory }) => {
   return (
     <Box className="mt-4">
-      <Box className="text-center">
+      <Box className="relative text-center">
         {
           image === null ?
-            <Image src={basicProfile} width={90} height={90} className="rounded-full" />
-            : <Image src={URL.createObjectURL(image)} width={90} height={90} className="rounded-full" />
+            <Image src={basicProfile} width={90} height={90} className="absolute rounded-full" />
+            : <Image src={URL.createObjectURL(image)} width={90} height={90} className="absolute rounded-full" />
         }
-        <IconButton aria-label="upload picture" component="label" className="bg-white border border-solid border-gray1">
+        <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-24 bg-white border border-solid border-gray1">
           <input
             hidden
             accept="image/*"
             type="file"
             onChange={(e) => {
               if (e.target.files !== null) {
-                console.log(e.target.files[0]);
                 setImage(e.target.files[0]);
               }
             }} />
@@ -53,7 +52,7 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
 
       <Typography className="text-black text-sm mt-4">성별</Typography>
       <FormControl>
-        <RadioGroup row>
+        <RadioGroup row onChange={(e) => setGender(parseInt(e.target.value))}>
           <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">남자</Typography>} />
           <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">여자</Typography>} />
         </RadioGroup>
@@ -70,10 +69,10 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
 
       <Typography className="text-black text-sm mt-4">생활관 정보</Typography>
       <FormControl>
-        <RadioGroup row>
-          <FormControlLabel value="3082" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">308관 2인실</Typography>} />
-          <FormControlLabel value="3084" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">308관 4인실</Typography>} />
-          <FormControlLabel value="3092" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">309관 2인실</Typography>} />
+        <RadioGroup row onChange={(e) => setDormitory(parseInt(e.target.value))}>
+          <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">308관 2인실</Typography>} />
+          <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">308관 4인실</Typography>} />
+          <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-xs font-regular">309관 2인실</Typography>} />
         </RadioGroup>
       </FormControl>
 

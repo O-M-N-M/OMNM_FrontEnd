@@ -1,13 +1,15 @@
 import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
+import { useState } from "react";
 import { NextPage } from "next";
+
 import Image from "next/image";
-import basicProfile from '../../public/basicProfile.png';
 import logo from '../../public/logo.png';
+import signupSuccess from '../../public/signupSuccess.png';
 
 import { AccountBox } from './account';
 import { EmailBox } from './email';
 import { ProfileBox } from './profile';
-import { InputHTMLAttributes, useState } from "react";
+import axios from "axios";
 
 const steps = [
   '계정 생성',
@@ -19,6 +21,7 @@ export const SignUpScreen: NextPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [pwCheck, setPwCheck] = useState('');
   const [school, setSchool] = useState('');
   const [email, setEmail] = useState('');
   const [image, setImage] = useState<File | null>(null);
@@ -27,8 +30,47 @@ export const SignUpScreen: NextPage = () => {
   const [kakao, setKakao] = useState('');
   const [dormitory, setDormitory] = useState(0);
 
+  const [one, setOne] = useState(false);
+  const [two, setTwo] = useState(false);
+  const [three, setThree] = useState(false);
+
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    let pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,12}$/;
+
+    if (activeStep === 0 && !one) alert('아이디 중복확인을 해주세요');
+    else if (activeStep === 0 && !pwReg.test(pw)) alert('올바른 비밀번호가 아닙니다.');
+    else if (activeStep === 0 && pw !== pwCheck) alert('비밀번호가 같지 않습니다.');
+
+    else if (activeStep === 1 && !two) alert('이메일 인증을 완료해주세요');
+    else setActiveStep(activeStep + 1);
+  }
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    let imageFormData;
+    let body;
+    if (image === null) {
+      body = `loginId=${id}&password=${pw}&name=${name}&email=${email}@cau.ac.kr&school=${school}&gender=${gender}&kakaoId=${kakao}&dormitory=${dormitory}`;
+    } else {
+      imageFormData = new FormData();
+      imageFormData.append('imageFile', image);
+      body = `loginId=${id}&password=${pw}&name=${name}&email=${email}@cau.ac.kr&school=${school}&gender=${gender}&multipartFile=${imageFormData}&kakaoId=${kakao}&dormitory=${dormitory}`;
+    }
+
+    const url = '/api/join';
+    const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
+
+    console.log(id, pw, email, school, gender, imageFormData, image, kakao, dormitory);
+
+    await axios.post(url, body, headers)
+      .then(res => {
+        if (res.data === '회원가입 완료') {
+          setThree(true);
+        } else {
+          alert('회원가입 실패');
+        }
+      }).catch(err => console.error(err))
   }
 
   return (
@@ -49,8 +91,8 @@ export const SignUpScreen: NextPage = () => {
           </Stepper>
 
           {
-            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} />) :
-              activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} />) :
+            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} pwCheck={pwCheck} setPwCheck={setPwCheck} pass={one} setPass={setOne} />) :
+              activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} pass={two} setPass={setTwo} />) :
                 (<ProfileBox image={image} setImage={setImage} name={name} setName={setName} gender={gender} setGender={setGender} kakao={kakao} setKakao={setKakao} dormitory={dormitory} setDormitory={setDormitory} />)
           }
 
@@ -60,13 +102,41 @@ export const SignUpScreen: NextPage = () => {
                 다음
               </Button>)
               :
-              (<Button className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
-                완료
-              </Button>)}
+              (
+                <form onSubmit={onSubmit} >
+                  <Button type="submit" className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
+                    완료
+                  </Button>
+                </form>
+              )
+            }
           </Box>
         </Box>
 
-        {/* </form> */}
+        {
+          three === true ?
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
+              <Box className="text-center">
+                <Image width={76} height={70} src={signupSuccess} />
+              </Box>
+
+              <Box className="flex justify-center items-center mt-2">
+                <Typography className="text-2xl font-medium text-black">회원가입</Typography>
+                <Typography className="text-2xl font-regular text-black">이</Typography>
+                <Typography className="text-2xl font-medium text-black">&nbsp;완료</Typography>
+                <Typography className="text-2xl font-regular text-black">되었습니다.</Typography>
+              </Box>
+
+              <Box className="text-center mt-4">
+                <Typography className="text-xs text-black">{name}님 회원가입을 축하합니다.</Typography>
+                <Typography className="text-xs text-black">로그인한 후 룸메 찾기를 위한 설문조사를 진행해주세요.</Typography>
+              </Box>
+
+              <Button className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">로그인</Button>
+            </Box>
+            : <></>
+        }
+
       </Box>
     </Box>
   );
