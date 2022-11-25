@@ -14,6 +14,8 @@ module.exports = {
         gray1: "#9B9EA1",
         gray2: "#CCCCCC",
         gray3: "#8F9295",
+        gray4: "#8B95A1",
+        gray5: "#FBFBFB",
         black: "#383838",
         red: "#E33A3A",
         green: "#4CAF50",
@@ -21,6 +23,7 @@ module.exports = {
         accent2: "#1CDDAD",
         accent3: "#E9F4FF",
         sky0: "#F0F9FF",
+        sky1: "#E0F2FE"
       },
       spacing: {
         '68': '17rem'
