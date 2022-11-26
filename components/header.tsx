@@ -5,15 +5,35 @@ import logo from '../public/logo2.png';
 import MyPageIcon from '../public/Group1.ico';
 import Link from "next/link";
 
-import { hasCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { useEffect, useState } from "react";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const Header = () => {
   const [cookie, setCookie] = useState(false);
+  const [profile, setProfile] = useState<string | null>(null)
 
   useEffect(() => {
+    const loadProfile = async () => {
+      const url = '/api/myInfo';
+      const token = getCookie('OMNM');
+
+      const config: AxiosRequestConfig = {
+        method: 'get',
+        url: url,
+        headers: {
+          'OMNM': `${token}`
+        }
+      }
+
+      const response: AxiosResponse = await axios(config);
+      setProfile(response.data.profileUrl);
+      console.log(profile);
+    };
+
     if (hasCookie('OMNM')) {
       setCookie(true);
+      loadProfile();
     }
   }, [])
 
@@ -28,7 +48,13 @@ const Header = () => {
       {
         cookie ? (
           <a className="ml-auto mr-[15%] mt-1">
-            <Image src={MyPageIcon} width={26} height={26} />
+            {
+              profile === null ? (
+                <Image src={MyPageIcon} width={26} height={26} />
+              ) : (
+                <Image loader={() => profile} src={profile} width={26} height={26} />
+              )
+            }
           </a>
         ) : (
           <Link href='/login'>
