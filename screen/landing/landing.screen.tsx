@@ -27,8 +27,6 @@ export const LadingScreen: NextPage = () => {
 
   return (
     <>
-      <Header />
-
       <Box className='flex flex-row mt-40'>
         <Box className="ml-[15%]">
           <Typography className="text-[3.3rem] font-bold">
