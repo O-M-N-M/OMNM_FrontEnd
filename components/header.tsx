@@ -28,7 +28,6 @@ const Header = () => {
 
       const response: AxiosResponse = await axios(config);
       setProfile(response.data.profileUrl);
-      console.log(profile);
     };
 
     if (hasCookie('OMNM')) {

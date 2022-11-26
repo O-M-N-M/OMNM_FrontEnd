@@ -49,6 +49,9 @@ module.exports = {
       width: {
         '100': '26rem'
       },
+      backgroundImage: theme => ({
+        'main-background': "url('/mainBackground.png')",
+      })
     },
   },
   corePlugins: {
