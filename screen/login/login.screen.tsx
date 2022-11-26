@@ -26,7 +26,6 @@ export const LoginScreen: NextPage = () => {
 
     await axios.post(url, body, headers)
       .then(res => {
-        console.log(res.data);
         if (res.data === '비밀번호 틀림' || res.data === '아이디 없음') {
           setFail(true);
         } else {
@@ -34,7 +33,7 @@ export const LoginScreen: NextPage = () => {
           document.location = '/main';
         }
       })
-      .catch(err => console.log(err.response))
+      .catch(err => console.log(err.response));
   }
 
   return (
