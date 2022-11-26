@@ -48,22 +48,36 @@ export const SignUpScreen: NextPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let imageFormData;
-    let body;
-    if (image === null) {
-      body = `loginId=${id}&password=${pw}&name=${name}&email=${email}@cau.ac.kr&school=${school}&gender=${gender}&kakaoId=${kakao}&dormitory=${dormitory}`;
-    } else {
-      imageFormData = new FormData();
-      imageFormData.append('imageFile', image);
-      body = `loginId=${id}&password=${pw}&name=${name}&email=${email}@cau.ac.kr&school=${school}&gender=${gender}&multipartFile=${imageFormData}&kakaoId=${kakao}&dormitory=${dormitory}`;
+    const formData = new FormData();
+    const userDto = {
+      loginId: `${id}`,
+      password: `${pw}`,
+      name: `${name}`,
+      email: `${email}@cau.ac.kr`,
+      school: `${school}`,
+      gender: gender,
+      kakaoId: `${kakao}`,
+      dormitory: dormitory
+    };
+
+    if (image !== null) {
+      formData.append('file', image);
     }
+    formData.append(
+      'key',
+      new Blob([JSON.stringify(userDto)],
+        { type: "application/json" }
+      )
+    );
+
+    formData.forEach((v) => {
+      console.log(v)
+    })
 
     const url = '/api/join';
-    const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
+    const headers = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-    console.log(id, pw, email, school, gender, imageFormData, image, kakao, dormitory);
-
-    await axios.post(url, body, headers)
+    await axios.post(url, formData, headers)
       .then(res => {
         if (res.data === '회원가입 완료') {
           setThree(true);
@@ -136,7 +150,6 @@ export const SignUpScreen: NextPage = () => {
             </Box>
             : <></>
         }
-
       </Box>
     </Box>
   );
