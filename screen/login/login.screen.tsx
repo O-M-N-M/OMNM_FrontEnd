@@ -31,7 +31,7 @@ export const LoginScreen: NextPage = () => {
           setFail(true);
         } else {
           setCookie('OMNM', res.data);
-          document.location = '/';
+          document.location = '/main';
         }
       })
       .catch(err => console.log(err.response))
@@ -90,7 +90,7 @@ export const LoginScreen: NextPage = () => {
         </Box>
 
         {
-          fail === true ?
+          fail ?
             <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
               <Box className="flex justify-end">
                 <IconButton onClick={() => setFail(false)}>
