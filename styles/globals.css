@@ -20,6 +20,35 @@ a {
   box-sizing: border-box;
 }
 
+
+.swiper-button-prev {
+  width: 12.63px !important;
+  height: 21.63px !important;
+  color: transparent !important;
+  background-image: url('../public/arrowPrevInactive.png');
+
+  margin-left: 30rem;
+  transform: translate(0px, 7.5rem);
+}
+
+.swiper-button-next {
+  width: 12.63px !important;
+  height: 21.63px !important;
+  color: transparent !important;
+  background-image: url('../public/arrowNextActive.png');
+
+  margin-right: 30rem;
+  transform: translate(0px, 7.5rem);
+}
+
+.swiper-pagination-bullet {
+  background-color: #BAE6FD !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #38BDF8 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
