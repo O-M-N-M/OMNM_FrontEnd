@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Image from "next/image";
+import Router from "next/router";
 
 import Footer from '../../components/footer';
 import profile from '../../public/basicProfile.png';
@@ -44,7 +45,12 @@ export const MainScreen: NextPage = () => {
           }
           setList(res.data);
         })
-        .catch((err) => console.log(err.response));
+        .catch((err) => {
+          if (err.response.status === 403) {
+            alert('세션이 만료되었습니다.\n로그인을 다시해주세요.');
+            Router.push('/login');
+          }
+        });
     }
 
     loadRecommandList();
