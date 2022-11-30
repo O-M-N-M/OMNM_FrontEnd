@@ -39,7 +39,7 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
     if (!send) alert('인증번호를 전송하지 않았습니다.');
     else {
       const url = '/api/join/emailValidation/checkNumber';
-      const body = `email=${email}@gmail.com&userValidationNumber=${num}`;
+      const body = `email=${email}@cau.ac.kr&userValidationNumber=${num}`;
       const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
 
       await axios.post(url, body, headers)
