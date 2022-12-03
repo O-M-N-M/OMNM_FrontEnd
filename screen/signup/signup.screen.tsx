@@ -4,12 +4,13 @@ import { NextPage } from "next";
 
 import Image from "next/image";
 import logo from '../../public/logo.png';
-import signupSuccess from '../../public/signupSuccess.png';
 
 import { AccountBox } from './account';
 import { EmailBox } from './email';
 import { ProfileBox } from './profile';
+
 import axios from "axios";
+import Router from "next/router";
 
 const steps = [
   '계정 생성',
@@ -88,7 +89,7 @@ export const SignUpScreen: NextPage = () => {
   }
 
   return (
-    <Box className="flex justify-center items-center min-h-screen">
+    <Box className="flex justify-center items-center h-[calc(100vh-50px)]">
       <Box className="flex flex-col items-center">
         <Image src={logo} width={75} height={75} />
         <Typography className="text-lg mt-4">회원가입</Typography>
@@ -128,27 +129,14 @@ export const SignUpScreen: NextPage = () => {
         </Box>
 
         {
-          three === true ?
-            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
-              <Box className="text-center">
-                <Image width={76} height={70} src={signupSuccess} />
-              </Box>
-
-              <Box className="flex justify-center items-center mt-2">
-                <Typography className="text-2xl font-medium text-black">회원가입</Typography>
-                <Typography className="text-2xl font-regular text-black">이</Typography>
-                <Typography className="text-2xl font-medium text-black">&nbsp;완료</Typography>
-                <Typography className="text-2xl font-regular text-black">되었습니다.</Typography>
-              </Box>
-
-              <Box className="text-center mt-4">
-                <Typography className="text-xs text-black">{name}님 회원가입을 축하합니다.</Typography>
-                <Typography className="text-xs text-black">로그인한 후 룸메 찾기를 위한 설문조사를 진행해주세요.</Typography>
-              </Box>
-
-              <Button className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">로그인</Button>
-            </Box>
-            : <></>
+          three && (
+            <>
+              {Router.push({
+                pathname: '/signup_success',
+                query: { userName: name }
+              })}
+            </>
+          )
         }
       </Box>
     </Box>
