@@ -19,18 +19,46 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 
 export const MainScreen: NextPage = () => {
+  const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
   const [count, setCount] = useState('4');
   const [list, setList] = useState([]);
+
+  // const onClick = () => {
+  //   const loadDetailInfo = async () => {
+  //     const url = '/api/'
+  //   }
+  // }
 
   const handleChange = (event: SelectChangeEvent) => {
     setCount(event.target.value);
   };
 
   useEffect(() => {
+    const token = getCookie('OMNM');
+
+    const getUserId = async () => {
+      const url = '/api/myInfo';
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setUserId(res.data.userId);
+          setUserName(res.data.name);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
     const loadRecommandList = async () => {
       const url = '/api/main';
       const body = `criteria=${parseInt(count)}`;
-      const token = getCookie('OMNM');
       const headers = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -54,13 +82,14 @@ export const MainScreen: NextPage = () => {
     }
 
     loadRecommandList();
+    getUserId();
   }, [count])
 
   return (
     <Box className="bg-main-background">
-      <Box className="w-full h-screen py-28">
+      <Box className="w-full h-fit py-28">
         <Box className="flex flex-row w-screen">
-          <Typography className="text-4xl font-bold mx-[15%]">홍길동님을 위한</Typography>
+          <Typography className="text-4xl font-bold mx-[15%]">{userName}님을 위한</Typography>
 
           <Box className="flex flex-row">
             <Typography className="text-xs text-accent1 font-medium mt-3 mr-2">성향 일치 개수</Typography>
