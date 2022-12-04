@@ -15,7 +15,7 @@ import { setHttpAgentOptions } from "next/dist/server/config";
 export const SurveyMateScreen: NextPage = () => {
 
   const [age, setAge] = useState([
-    { value : "0", text:"상관없음", checked : false}
+    { value : "5", text:"상관없음", checked : false}
    ,{ value : "1",  text:"20대 초반", checked : false}
    ,{ value : "2", text:"20대 중반", checked : false}
    ,{ value : "3", text:"20대 후반", checked : false}
@@ -39,6 +39,8 @@ export const SurveyMateScreen: NextPage = () => {
     , { key: "ISTJ", checked: false }
     , { key: "ISTP", checked: false }
   ]);
+
+  
 
   const [selectedAge, setSelectedAge] = useState([]);
   const [selectedMbti, setSelectedMbti] = useState([]);
@@ -75,13 +77,14 @@ export const SurveyMateScreen: NextPage = () => {
   }
 
   const ageGroup = [
-     { value : "0", text:"상관없음", checked : false}
+     { value : "5", text:"상관없음", checked : false}
     ,{ value : "1",  text:"20대 초반", checked : false}
     ,{ value : "2", text:"20대 중반", checked : false}
     ,{ value : "3", text:"20대 후반", checked : false}
     ,{ value : "4", text:"30대 후반", checked : false}
     
   ];
+
 
   const checkHandler = ({ target }) => {
     age[target.value].checked = !age[target.value].checked;
@@ -91,9 +94,9 @@ export const SurveyMateScreen: NextPage = () => {
       selectedAge.splice(selectedAge.indexOf(target.value), 1);
       setSelectedAge([...selectedAge]);
     }
-
-
   };
+
+
   
   const handleSmokingChange = (event) => {
     setIsSmoking(event.target.value);
@@ -198,7 +201,7 @@ export const SurveyMateScreen: NextPage = () => {
                 <FormControlLabel value="2" control={<Checkbox size="sm" onChange={(e) => checkHandler(e)} />} label={<Typography sx={{ fontWeight: 400, fontSize: "18px", lineHeight: "23px", color: "#383838" }}>20대 중반</Typography>} />
                 <FormControlLabel value="3" control={<Checkbox size="sm" onChange={(e) => checkHandler(e)} />} label={<Typography sx={{ fontWeight: 400, fontSize: "18px", lineHeight: "23px", color: "#383838" }}>20대 후반</Typography>} />
                 <FormControlLabel value="4" control={<Checkbox size="sm" onChange={(e) => checkHandler(e)} />} label={<Typography sx={{ fontWeight: 400, fontSize: "18px", lineHeight: "23px", color: "#383838" }}>30대 후반</Typography>} />
-                <FormControlLabel value="0" control={<Checkbox size="sm" onChange={(e) => checkHandler(e)} />} label={<Typography sx={{ fontWeight: 400, fontSize: "18px", lineHeight: "23px", color: "#383838" }}>상관없음</Typography>} />
+                <FormControlLabel value="5" control={<Checkbox size="sm" onChange={(e) => checkHandler(e)} />} label={<Typography sx={{ fontWeight: 400, fontSize: "18px", lineHeight: "23px", color: "#383838" }}>상관없음</Typography>} />
 
               </Box>
             </Box>

@@ -208,7 +208,7 @@ export const SurveyMeScreen: NextPage = () => {
           <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", marginTop: "36px" }}>
             <Box sx={{ width: '100%', height: "100%", display: flexbox }}>
               <Box sx={{ float: "right", textAlign: "right" }}>
-                <input style={{width:"60px", height:"35px", borderTop:"none", borderRight:"none", borderLeft:"none", borderbottom: "2px solid #1CDDAD" }} min="0" max="100" type="number"
+                <input style={{width:"60px", height:"35px", borderTop:"none", borderRight:"none", borderLeft:"none", borderBottom: "2px solid #1CDDAD" }} min="0" max="100" type="number"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                 ></input>
