@@ -8,6 +8,7 @@ export default function MyPageProfile() {
   const [name, setName] = useState("");
   const [kakaoId, setKakaoId] = useState("");
   const [dormitory, setDormitory] = useState(0);
+  const [profileUrl, setProfileUrl] = useState("");
 
   const dormitoryArr = ["308관 2인실", "308관 4인실", "309관 2인실"];
   axios
@@ -20,6 +21,7 @@ export default function MyPageProfile() {
       setName(res.data.name);
       setKakaoId(res.data.kakaoId);
       setDormitory(res.data.dormitory);
+      setProfileUrl(res.data.profileUrl);
     })
     .catch((err) => console.log(err));
 
@@ -34,8 +36,16 @@ export default function MyPageProfile() {
       }}
     >
       <div style={{ padding: "0px 63px 0px 63px" }}>
-        {/* <Image src={basicProfile} width={100} height={100} /> */}
-        <Image src="/basicProfile.png" width={100} height={100} />
+        {profileUrl === null || profileUrl === "" ? (
+          <Image src="/basicProfile.png" width={100} height={100} />
+        ) : (
+          <Image
+            loader={() => profileUrl}
+            src={profileUrl}
+            width={100}
+            height={100}
+          />
+        )}
       </div>
 
       <div
