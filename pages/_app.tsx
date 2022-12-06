@@ -4,9 +4,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 
-import { UIProvider } from "@/provider";
+import Header from "../components/header";
 
-import Header from '../components/header';
+import { UIProvider } from "@/provider";
 
 const queryClient = new QueryClient();
 

@@ -1,17 +1,15 @@
 import { Box, Button, Pagination } from "@mui/material";
-import { flexbox } from "@mui/system";
 import { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
-import group from "../../public/Group1.png";
 import basicProfile from "../../public/basicProfile.png";
 import bin from "../../public/bin.png";
 import check from "../../public/check.png";
-import logo from "../../public/logo2.png";
 
 import MyPageLeft from "./components/mypage_left";
+
+import Footer from "@/components/footer";
 
 export const MyPageLikeScreen: NextPage = () => {
     return (
@@ -26,42 +24,6 @@ export const MyPageLikeScreen: NextPage = () => {
                 fontStyle: "normal",
             }}
         >
-            <Box
-                sx={{
-                    backgroundColor: "#FFFFFF",
-                    width: "100%",
-                    height: "100%",
-                    display: flexbox,
-                    paddingLeft: "360px",
-                    paddingRight: "360px",
-                    borderBottom: 1,
-                    borderColor: "#DBDBDB",
-                }}
-            >
-                <Link href="/">
-                    <Box
-                        sx={{
-                            width: "50%",
-                            float: "left",
-                            textAlign: "left",
-                            paddingTop: "10px",
-                        }}
-                    >
-                        <Image src={logo} width={115} height={20} style={{ top: 10 }} />
-                    </Box>
-                </Link>
-                <Box
-                    sx={{
-                        width: "50%",
-                        float: "right",
-                        textAlign: "right",
-                        paddingTop: "10px",
-                    }}
-                >
-                    <Image src={group} width={26} height={26} style={{ top: 10 }} />
-                </Box>
-            </Box>
-
             <Box
                 sx={{
                     width: "100%",
@@ -91,7 +53,6 @@ export const MyPageLikeScreen: NextPage = () => {
                                     fontSize: "20px",
                                     fontWeight: "500",
                                     lineHeight: "25px",
-                                   
                                 }}
                             >
                                 찜한 룸메 리스트
@@ -111,7 +72,6 @@ export const MyPageLikeScreen: NextPage = () => {
                                     borderRadius: "10px",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    
                                 }}
                             >
                                 <div
@@ -349,6 +309,8 @@ export const MyPageLikeScreen: NextPage = () => {
                     </div>
                 </div>
             </Box>
+
+            <Footer />
         </Box>
     );
 };

@@ -1,15 +1,10 @@
 import { Box, Typography, Button } from "@mui/material";
-import { flexbox } from "@mui/system";
 import { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 
-import group from "../../public/Group1.png";
-import logo from "../../public/logo2.png";
-import logorights from "../../public/logorights.png";
-
 import MyPageLeft from "./components/mypage_left";
+
+import Footer from "@/components/footer";
 
 export const MyPageUnregisterScreen: NextPage = () => {
   const [pw, setPW] = useState("");
@@ -27,42 +22,6 @@ export const MyPageUnregisterScreen: NextPage = () => {
         fontStyle: "normal",
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "#FFFFFF",
-          width: "100%",
-          height: "100%",
-          display: flexbox,
-          paddingLeft: "360px",
-          paddingRight: "360px",
-          borderBottom: 1,
-          borderColor: "#DBDBDB",
-        }}
-      >
-        <Link href="/">
-          <Box
-            sx={{
-              width: "50%",
-              float: "left",
-              textAlign: "left",
-              paddingTop: "10px",
-            }}
-          >
-            <Image src={logo} width={115} height={20} style={{ top: 10 }} />
-          </Box>
-        </Link>
-        <Box
-          sx={{
-            width: "50%",
-            float: "right",
-            textAlign: "right",
-            paddingTop: "10px",
-          }}
-        >
-          <Image src={group} width={26} height={26} style={{ top: 10 }} />
-        </Box>
-      </Box>
-
       <Box
         sx={{
           width: "100%",
@@ -172,81 +131,8 @@ export const MyPageUnregisterScreen: NextPage = () => {
           </div>
         </div>
       </Box>
-      <Box
-        component="footer"
-        sx={{
-          backgroundColor: "#FBFBFB;",
-          width: "1920px",
-          height: "180px",
-          position: "absolute",
-          fontFamily: "Spoqa Han Sans Neo",
-          fontStyle: "normal",
-          paddingLeft: "360px",
-          paddingRight: "360px",
-          padding: "34px 360px 34px 360px",
-          borderBottom: 0,
-        }}
-      >
-        <Link href="/">
-          <Box
-            sx={{
-              width: "50%",
-              float: "left",
-              textAlign: "left",
-              paddingTop: "30px",
-            }}
-          >
-            <Image src={logorights} width={234} height={91} />
-          </Box>
-        </Link>
-        <Box
-          sx={{
-            width: "50%",
-            float: "right",
-            textAlign: "right",
-            paddingTop: "30px",
-          }}
-        >
-          <div style={{ height: "30px" }}>
-            <span
-              style={{
-                marginLeft: "150px",
-                float: "left",
-                fontSize: "16px",
-                fontWeight: "500",
-              }}
-            >
-              메인
-            </span>
-            <span
-              style={{ float: "right", fontSize: "16px", fontWeight: "500" }}
-            >
-              마이페이지
-            </span>
-          </div>
-          <div style={{ height: "30px" }}>
-            <span
-              style={{ float: "right", fontSize: "14px", fontWeight: "400" }}
-            >
-              룸메 신청 내역
-            </span>
-          </div>
-          <div style={{ height: "30px" }}>
-            <span
-              style={{ float: "right", fontSize: "14px", fontWeight: "400" }}
-            >
-              성향 설문조사
-            </span>
-          </div>
-          <div style={{ height: "30px" }}>
-            <span
-              style={{ float: "right", fontSize: "14px", fontWeight: "400" }}
-            >
-              설정
-            </span>
-          </div>
-        </Box>
-      </Box>
+
+      <Footer />
     </Box>
   );
 };

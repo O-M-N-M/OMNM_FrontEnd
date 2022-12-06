@@ -1,16 +1,14 @@
 import { Box } from "@mui/material";
-import { flexbox } from "@mui/system";
 import { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
-import group from "../../public/Group1.png";
 import edit from "../../public/edit.png";
-import logo from "../../public/logo2.png";
 
 import MyPageLeft from "./components/mypage_left";
 import MyPageQuestions from "./components/mypage_question";
+
+import Footer from "@/components/footer";
 
 export const MyPageMySurveyScreen: NextPage = () => {
   return (
@@ -25,42 +23,6 @@ export const MyPageMySurveyScreen: NextPage = () => {
         fontStyle: "normal",
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "#FFFFFF",
-          width: "100%",
-          height: "100%",
-          display: flexbox,
-          paddingLeft: "360px",
-          paddingRight: "360px",
-          borderBottom: 1,
-          borderColor: "#DBDBDB",
-        }}
-      >
-        <Link href="/">
-          <Box
-            sx={{
-              width: "50%",
-              float: "left",
-              textAlign: "left",
-              paddingTop: "10px",
-            }}
-          >
-            <Image src={logo} width={115} height={20} style={{ top: 10 }} />
-          </Box>
-        </Link>
-        <Box
-          sx={{
-            width: "50%",
-            float: "right",
-            textAlign: "right",
-            paddingTop: "10px",
-          }}
-        >
-          <Image src={group} width={26} height={26} style={{ top: 10 }} />
-        </Box>
-      </Box>
-
       <Box
         sx={{
           width: "100%",
@@ -101,6 +63,7 @@ export const MyPageMySurveyScreen: NextPage = () => {
           <MyPageQuestions />
         </div>
       </Box>
+      <Footer />
     </Box>
   );
 };

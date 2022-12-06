@@ -4,19 +4,14 @@ import { getCookie } from "cookies-next";
 import Image from "next/image";
 import React, { useState } from "react";
 
-import basicProfile from "../../../public/basicProfile.png";
-
 export default function MyPageProfile() {
-  const [userId, setUserId] = useState(0);
   const [name, setName] = useState("");
-  const [profileUrl, setProfileUrl] = useState("");
   const [kakaoId, setKakaoId] = useState("");
   const [dormitory, setDormitory] = useState(0);
 
   const dormitoryArr = ["308관 2인실", "308관 4인실", "309관 2인실"];
 
   axios
-    // .get("/api/users/3", {
     .get("/api/myInfo", {
       headers: {
         OMNM: `${getCookie("OMNM")}`,
@@ -40,7 +35,8 @@ export default function MyPageProfile() {
       }}
     >
       <div style={{ padding: "0px 63px 0px 63px" }}>
-        <Image src={basicProfile} width={100} height={100} />
+        {/* <Image src={basicProfile} width={100} height={100} /> */}
+        <Image src="/basicProfile.png" width={100} height={100} />
       </div>
 
       <div

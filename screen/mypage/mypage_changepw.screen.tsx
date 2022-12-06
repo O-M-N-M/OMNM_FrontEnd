@@ -1,14 +1,10 @@
 import { Box, Typography, Button } from "@mui/material";
-import { flexbox } from "@mui/system";
 import { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 
-import group from "../../public/Group1.png";
-import logo from "../../public/logo2.png";
-
 import MyPageLeft from "./components/mypage_left";
+
+import Footer from "@/components/footer";
 
 export const MyPageChangePwScreen: NextPage = () => {
     const [pw, setPW] = useState("");
@@ -25,42 +21,6 @@ export const MyPageChangePwScreen: NextPage = () => {
                 fontStyle: "normal",
             }}
         >
-            <Box
-                sx={{
-                    backgroundColor: "#FFFFFF",
-                    width: "100%",
-                    height: "100%",
-                    display: flexbox,
-                    paddingLeft: "360px",
-                    paddingRight: "360px",
-                    borderBottom: 1,
-                    borderColor: "#DBDBDB",
-                }}
-            >
-                <Link href="/">
-                    <Box
-                        sx={{
-                            width: "50%",
-                            float: "left",
-                            textAlign: "left",
-                            paddingTop: "10px",
-                        }}
-                    >
-                        <Image src={logo} width={115} height={20} style={{ top: 10 }} />
-                    </Box>
-                </Link>
-                <Box
-                    sx={{
-                        width: "50%",
-                        float: "right",
-                        textAlign: "right",
-                        paddingTop: "10px",
-                    }}
-                >
-                    <Image src={group} width={26} height={26} style={{ top: 10 }} />
-                </Box>
-            </Box>
-
             <Box
                 sx={{
                     width: "100%",
@@ -84,11 +44,10 @@ export const MyPageChangePwScreen: NextPage = () => {
                         padding: "64px 60px",
                     }}
                 >
-                    <div style={{ height: "875px"}}>
+                    <div style={{ height: "875px" }}>
                         <div style={{ height: "25px" }}>
                             <span
                                 style={{
-                        
                                     fontSize: "20px",
                                     fontWeight: "500",
                                     lineHeight: "25px",
@@ -168,6 +127,8 @@ export const MyPageChangePwScreen: NextPage = () => {
                     </div>
                 </div>
             </Box>
+
+            <Footer />
         </Box>
     );
 };
