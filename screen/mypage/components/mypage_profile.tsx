@@ -2,19 +2,31 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 import basicProfile from "../../../public/basicProfile.png";
 
 export default function MyPageProfile() {
+  const [userId, setUserId] = useState(0);
+  const [name, setName] = useState("");
+  const [profileUrl, setProfileUrl] = useState("");
+  const [kakaoId, setKakaoId] = useState("");
+  const [dormitory, setDormitory] = useState(0);
+
+  const dormitoryArr = ["308관 2인실", "308관 4인실", "309관 2인실"];
+
   axios
-    .get("/api/users/3", {
-      // .get("/api/myPersonality", {
+    // .get("/api/users/3", {
+    .get("/api/myInfo", {
       headers: {
         OMNM: `${getCookie("OMNM")}`,
       },
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      setName(res.data.name);
+      setKakaoId(res.data.kakaoId);
+      setDormitory(res.data.dormitory);
+    })
     .catch((err) => console.log(err));
 
   return (
@@ -41,7 +53,7 @@ export default function MyPageProfile() {
           fontSize: "24px",
         }}
       >
-        <span>이효인</span>
+        <span>{name}</span>
       </div>
 
       <div
@@ -66,7 +78,7 @@ export default function MyPageProfile() {
               fontWeight: "400",
             }}
           >
-            lovv3517
+            {kakaoId}
           </span>
         </div>
         <div style={{ height: "18px", marginTop: "20px" }}>
@@ -80,7 +92,7 @@ export default function MyPageProfile() {
               fontWeight: "400",
             }}
           >
-            308관 2인실
+            {dormitoryArr[dormitory]}
           </span>
         </div>
       </div>
