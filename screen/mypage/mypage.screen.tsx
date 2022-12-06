@@ -3,9 +3,9 @@ import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
 
-import Footer from "/components/footer";
-
 import MyPageLeft from "./components/mypage_left";
+
+import Footer from "@/components/footer";
 
 export const MyPageScreen: NextPage = () => {
   return (

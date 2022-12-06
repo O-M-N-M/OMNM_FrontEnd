@@ -36,9 +36,7 @@ export const MyPageChangePwScreen: NextPage = () => {
                 <div
                     style={{
                         width: "894px",
-                        height: "584px",
-                        marginTop: "170px",
-                        marginLeft: "305px",
+                        marginLeft: "306px",
                         border: "1px solid #DBDBDB",
                         borderRadius: "20px",
                         padding: "64px 60px",
@@ -113,7 +111,6 @@ export const MyPageChangePwScreen: NextPage = () => {
                                         color: "#FFFFFF",
                                         fontFamily: "Spoqa Han Sans Neo",
                                         border: "1px solid #4B99EB",
-                                        fontFamily: "Spoqa Han Sans Neo",
                                         fontStyle: "normal",
                                         fontWeight: "400",
                                         fontSize: "15px",

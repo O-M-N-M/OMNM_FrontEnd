@@ -17,7 +17,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
       sx={{
         backgroundColor: "#FFFFFF",
         width: "100%",
-        height: "50px",
         position: "absolute",
         fontFamily: "Spoqa Han Sans Neo",
         fontStyle: "normal",
@@ -37,10 +36,8 @@ export const MyPageMateSurveyScreen: NextPage = () => {
         {/* main content */}
         <div
           style={{
-            width: "895px",
-            height: "857px",
-            marginTop: "170px",
-            marginLeft: "305px",
+            width: "894px",
+            marginLeft: "306px",
             border: "1px solid #DBDBDB",
             borderRadius: "20px",
             padding: "64px 60px",
