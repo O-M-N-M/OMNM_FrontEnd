@@ -34,7 +34,7 @@ export const MyPageLikeScreen: NextPage = () => {
                 {/* main content */}
                 <div
                     style={{
-                        width: "894px",
+                        minWidth: "894px",
                         marginLeft: "305px",
                         border: "1px solid #DBDBDB",
                         borderRadius: "20px",

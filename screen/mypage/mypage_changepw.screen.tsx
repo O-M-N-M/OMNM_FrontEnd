@@ -23,7 +23,7 @@ export const MyPageChangePwScreen: NextPage = () => {
         >
             <Box
                 sx={{
-                    width: "100%",
+                    minWidth: "894px",
                     paddingLeft: "15%",
                     paddingRight: "15%",
                     marginTop: "120px",

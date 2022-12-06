@@ -36,7 +36,7 @@ export const MyPageUnregisterScreen: NextPage = () => {
         {/* main content */}
         <div
           style={{
-            width: "894px",
+            minWidth: "894px",
             marginLeft: "306px",
             border: "1px solid #DBDBDB",
             borderRadius: "20px",

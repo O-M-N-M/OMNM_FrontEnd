@@ -35,6 +35,7 @@ export const MyPageMySurveyScreen: NextPage = () => {
         {/* main content */}
         <div
           style={{
+            minWidth: "894px",
             marginLeft: "305px",
             border: "1px solid #DBDBDB",
             borderRadius: "20px",
