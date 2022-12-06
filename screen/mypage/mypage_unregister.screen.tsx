@@ -25,8 +25,8 @@ export const MyPageUnregisterScreen: NextPage = () => {
       <Box
         sx={{
           width: "100%",
-          paddingLeft: "360px",
-          paddingRight: "360px",
+          paddingLeft: "15%",
+          paddingRight: "15%",
           marginTop: "120px",
           marginBottom: "120px",
         }}

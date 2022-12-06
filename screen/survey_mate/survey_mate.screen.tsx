@@ -164,8 +164,8 @@ export const SurveyMateScreen: NextPage = () => {
         <Box
           sx={{
             backgroundColor: "#FFFFFF",
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "120px",
             marginBottom: "12px",
           }}
@@ -220,8 +220,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -403,8 +403,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -562,8 +562,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -675,8 +675,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -788,8 +788,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -901,8 +901,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1063,8 +1063,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1160,8 +1160,8 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1286,9 +1286,9 @@ export const SurveyMateScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
+            paddingLeft: "15%",
             paddingBottom: "120px",
-            paddingRight: "360px",
+            paddingRight: "15%",
             marginTop: "54px",
           }}
         >

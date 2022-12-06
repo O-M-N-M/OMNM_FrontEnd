@@ -181,8 +181,8 @@ export const SurveyMeScreen: NextPage = () => {
         <Box
           sx={{
             backgroundColor: "#FFFFFF",
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "120px",
             marginBottom: "12px",
           }}
@@ -234,11 +234,10 @@ export const SurveyMeScreen: NextPage = () => {
             </Box>
           </Box>
         </Box>
-
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -343,8 +342,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -418,8 +417,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -531,8 +530,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -606,8 +605,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -703,8 +702,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -853,8 +852,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1009,8 +1008,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1119,8 +1118,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1245,8 +1244,8 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
-            paddingRight: "360px",
+            paddingLeft: "15%",
+            paddingRight: "15%",
             marginTop: "28px",
           }}
         >
@@ -1338,9 +1337,9 @@ export const SurveyMeScreen: NextPage = () => {
 
         <Box
           sx={{
-            paddingLeft: "360px",
+            paddingLeft: "15%",
             paddingBottom: "120px",
-            paddingRight: "360px",
+            paddingRight: "15%",
             marginTop: "54px",
           }}
         >
