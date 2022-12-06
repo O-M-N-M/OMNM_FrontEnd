@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 import MyPageLeft from "./components/mypage_left";
@@ -53,17 +54,19 @@ export const MyPageScreen: NextPage = () => {
               >
                 룸메 신청 받은 리스트
               </span>
-              <span
-                style={{
-                  float: "right",
-                  fontSize: "12px",
-                  fontWeight: "500",
-                  lineHeight: "15px",
-                  color: "#9B9EA1",
-                }}
-              >
-                더보기
-              </span>
+              <Link href="/mypage_receive">
+                <span
+                  style={{
+                    float: "right",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    lineHeight: "15px",
+                    color: "#9B9EA1",
+                  }}
+                >
+                  더보기
+                </span>
+              </Link>
             </div>
             <div style={{ marginTop: "24px" }}>
               <div style={{ float: "left" }}>
@@ -773,17 +776,19 @@ export const MyPageScreen: NextPage = () => {
               >
                 룸메 신청 보낸 리스트
               </span>
-              <span
-                style={{
-                  float: "right",
-                  fontSize: "12px",
-                  fontWeight: "500",
-                  lineHeight: "15px",
-                  color: "#9B9EA1",
-                }}
-              >
-                더보기
-              </span>
+              <Link href="/mypage_send">
+                <span
+                  style={{
+                    float: "right",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    lineHeight: "15px",
+                    color: "#9B9EA1",
+                  }}
+                >
+                  더보기
+                </span>
+              </Link>
             </div>
             <div style={{ marginTop: "24px" }}>
               <div style={{ float: "left" }}>
