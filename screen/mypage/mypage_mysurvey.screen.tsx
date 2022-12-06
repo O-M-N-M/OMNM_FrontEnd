@@ -3,8 +3,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
 
-import edit from "../../public/edit.png";
-
 import MyPageLeft from "./components/mypage_left";
 import MyPageQuestions from "./components/mypage_question";
 
@@ -56,7 +54,7 @@ export const MyPageMySurveyScreen: NextPage = () => {
             </span>
 
             <div style={{ float: "right" }}>
-              <Image src={edit} width={20} height={20} />
+              <Image src="/edit.png" width={20} height={20} />
             </div>
           </div>
 

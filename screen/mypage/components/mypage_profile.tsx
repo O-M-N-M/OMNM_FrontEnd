@@ -10,7 +10,6 @@ export default function MyPageProfile() {
   const [dormitory, setDormitory] = useState(0);
 
   const dormitoryArr = ["308관 2인실", "308관 4인실", "309관 2인실"];
-
   axios
     .get("/api/myInfo", {
       headers: {

@@ -4,8 +4,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
 
-import edit from "../../public/edit.png";
-
 import MyPageLeft from "./components/mypage_left";
 
 import Footer from "@/components/footer";
@@ -55,7 +53,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                 룸메 성향 설문조사
               </span>
               <div style={{ float: "right" }}>
-                <Image src={edit} width={20} height={20} />
+                <Image src="/edit.png" width={20} height={20} />
               </div>
               <Box
                 sx={{

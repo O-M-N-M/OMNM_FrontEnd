@@ -3,10 +3,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
 
-import basicProfile from "../../public/basicProfile.png";
-import bin from "../../public/bin.png";
-import check from "../../public/check.png";
-
 import MyPageLeft from "./components/mypage_left";
 
 import Footer from "@/components/footer";
@@ -58,7 +54,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                 찜한 룸메 리스트
                             </span>
                             <div style={{ float: "right" }}>
-                                <Image src={bin} width={20} height={20} />
+                                <Image src="/bin.png" width={20} height={20} />
                             </div>
                         </div>
 
@@ -81,7 +77,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                         marginTop: "20px",
                                     }}
                                 >
-                                    <Image src={basicProfile} width={60} height={60} />
+                                    <Image src="/basicProfile.png" width={60} height={60} />
                                 </div>
                                 <div style={{ marginTop: "10px", marginLeft: "10px" }}>
                                     <span
@@ -119,7 +115,7 @@ export const MyPageLikeScreen: NextPage = () => {
                             </div>
 
                             <div style={{ marginLeft: "45px", marginTop: "-70px" }}>
-                                <Image src={check} width={14} height={14} />
+                                <Image src="/check.png" width={14} height={14} />
                                 <span style={{ marginLeft: "5px" }}>56%</span>
                             </div>
                             <div style={{ marginLeft: "30px", marginTop: "10px" }}>
@@ -162,7 +158,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                         marginTop: "20px",
                                     }}
                                 >
-                                    <Image src={basicProfile} width={60} height={60} />
+                                    <Image src="/basicProfile.png" width={60} height={60} />
                                 </div>
                                 <div style={{ marginTop: "10px", marginLeft: "10px" }}>
                                     <span
@@ -200,7 +196,7 @@ export const MyPageLikeScreen: NextPage = () => {
                             </div>
 
                             <div style={{ marginLeft: "45px", marginTop: "-70px" }}>
-                                <Image src={check} width={14} height={14} />
+                                <Image src="/check.png" width={14} height={14} />
                                 <span style={{ marginLeft: "5px" }}>56%</span>
                             </div>
                             <div style={{ marginLeft: "30px", marginTop: "10px" }}>
@@ -243,7 +239,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                         marginTop: "20px",
                                     }}
                                 >
-                                    <Image src={basicProfile} width={60} height={60} />
+                                    <Image src="/basicProfile.png" width={60} height={60} />
                                 </div>
                                 <div style={{ marginTop: "10px", marginLeft: "10px" }}>
                                     <span
@@ -281,7 +277,7 @@ export const MyPageLikeScreen: NextPage = () => {
                             </div>
 
                             <div style={{ marginLeft: "45px", marginTop: "-70px" }}>
-                                <Image src={check} width={14} height={14} />
+                                <Image src="/check.png" width={14} height={14} />
                                 <span style={{ marginLeft: "5px" }}>56%</span>
                             </div>
                             <div style={{ marginLeft: "30px", marginTop: "10px" }}>

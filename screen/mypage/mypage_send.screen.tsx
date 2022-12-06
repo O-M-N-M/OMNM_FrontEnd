@@ -3,10 +3,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
 
-import basicProfile from "../../public/basicProfile.png";
-import bin from "../../public/bin.png";
-import check from "../../public/check.png";
-
 import MyPageLeft from "./components/mypage_left";
 
 import Footer from "@/components/footer";
@@ -58,7 +54,7 @@ export const MyPageSendScreen: NextPage = () => {
                 룸메 신청 보낸 리스트
               </span>
               <div style={{ float: "right" }}>
-                <Image src={bin} width={20} height={20} />
+                <Image src="/bin.png" width={20} height={20} />
               </div>
             </div>
             <div style={{ marginTop: "24px" }}>
@@ -90,7 +86,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -117,7 +113,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -156,7 +152,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -183,7 +179,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -222,7 +218,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -249,7 +245,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -288,7 +284,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -315,7 +311,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -354,7 +350,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -381,7 +377,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -436,7 +432,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -463,7 +459,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -502,7 +498,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -529,7 +525,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -568,7 +564,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -595,7 +591,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -634,7 +630,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -661,7 +657,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -700,7 +696,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -727,7 +723,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -788,7 +784,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -815,7 +811,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -854,7 +850,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -881,7 +877,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -920,7 +916,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -947,7 +943,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -986,7 +982,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1013,7 +1009,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -1052,7 +1048,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1079,7 +1075,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -1134,7 +1130,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1161,7 +1157,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -1200,7 +1196,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1227,7 +1223,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -1266,7 +1262,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1293,7 +1289,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -1332,7 +1328,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1359,7 +1355,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
@@ -1398,7 +1394,7 @@ export const MyPageSendScreen: NextPage = () => {
                     }}
                   >
                     <div style={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
+                      <Image src="/basicProfile.png" width={24} height={24} />
                     </div>
                     <div style={{ float: "left", marginLeft: "12px" }}>
                       <span
@@ -1425,7 +1421,7 @@ export const MyPageSendScreen: NextPage = () => {
                       </span>
                     </div>
                     <div style={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
+                      <Image src="/check.png" width={14} height={14} />
                       <span style={{ marginLeft: "8px" }}>78%</span>
                     </div>
                     <div style={{ float: "left", marginLeft: "48px" }}>
