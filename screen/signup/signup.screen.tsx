@@ -1,13 +1,16 @@
 import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
+import { useState } from "react";
 import { NextPage } from "next";
+
 import Image from "next/image";
-import basicProfile from '../../public/basicProfile.png';
 import logo from '../../public/logo.png';
 
 import { AccountBox } from './account';
 import { EmailBox } from './email';
 import { ProfileBox } from './profile';
-import { InputHTMLAttributes, useState } from "react";
+
+import axios from "axios";
+import Router from "next/router";
 
 const steps = [
   '계정 생성',
@@ -19,20 +22,74 @@ export const SignUpScreen: NextPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [pwCheck, setPwCheck] = useState('');
   const [school, setSchool] = useState('');
   const [email, setEmail] = useState('');
-  const [image, setImage] = useState<HTMLInputElement | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const [name, setName] = useState('');
   const [gender, setGender] = useState(0);
   const [kakao, setKakao] = useState('');
   const [dormitory, setDormitory] = useState(0);
 
+  const [one, setOne] = useState(false);
+  const [two, setTwo] = useState(false);
+  const [three, setThree] = useState(false);
+
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    let pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,12}$/;
+
+    if (activeStep === 0 && !one) alert('아이디 중복확인을 해주세요');
+    else if (activeStep === 0 && !pwReg.test(pw)) alert('올바른 비밀번호가 아닙니다.');
+    else if (activeStep === 0 && pw !== pwCheck) alert('비밀번호가 같지 않습니다.');
+
+    else if (activeStep === 1 && !two) alert('이메일 인증을 완료해주세요');
+    else setActiveStep(activeStep + 1);
+  }
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const userDto = {
+      loginId: `${id}`,
+      password: `${pw}`,
+      name: `${name}`,
+      email: `${email}@cau.ac.kr`,
+      school: `${school}`,
+      gender: gender,
+      kakaoId: `${kakao}`,
+      dormitory: dormitory
+    };
+
+    if (image !== null) {
+      formData.append('file', image);
+    }
+    formData.append(
+      'key',
+      new Blob([JSON.stringify(userDto)],
+        { type: "application/json" }
+      )
+    );
+
+    formData.forEach((v) => {
+      console.log(v)
+    })
+
+    const url = '/api/join';
+    const headers = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+    await axios.post(url, formData, headers)
+      .then(res => {
+        if (res.data === '회원가입 완료') {
+          setThree(true);
+        } else {
+          alert('회원가입 실패');
+        }
+      }).catch(err => console.error(err))
   }
 
   return (
-    <Box className="flex justify-center items-center min-h-screen">
+    <Box className="flex justify-center items-center h-[calc(100vh-50px)]">
       <Box className="flex flex-col items-center">
         <Image src={logo} width={75} height={75} />
         <Typography className="text-lg mt-4">회원가입</Typography>
@@ -49,8 +106,8 @@ export const SignUpScreen: NextPage = () => {
           </Stepper>
 
           {
-            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} />) :
-              activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} />) :
+            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} pwCheck={pwCheck} setPwCheck={setPwCheck} pass={one} setPass={setOne} />) :
+              activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} pass={two} setPass={setTwo} />) :
                 (<ProfileBox image={image} setImage={setImage} name={name} setName={setName} gender={gender} setGender={setGender} kakao={kakao} setKakao={setKakao} dormitory={dormitory} setDormitory={setDormitory} />)
           }
 
@@ -60,13 +117,27 @@ export const SignUpScreen: NextPage = () => {
                 다음
               </Button>)
               :
-              (<Button className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
-                완료
-              </Button>)}
+              (
+                <form onSubmit={onSubmit} >
+                  <Button type="submit" className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
+                    완료
+                  </Button>
+                </form>
+              )
+            }
           </Box>
         </Box>
 
-        {/* </form> */}
+        {
+          three && (
+            <>
+              {Router.push({
+                pathname: '/signup_success',
+                query: { userName: name }
+              })}
+            </>
+          )
+        }
       </Box>
     </Box>
   );
