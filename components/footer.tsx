@@ -37,7 +37,7 @@ const Footer = () => {
               </Typography>
             </a>
           </Link>
-          <Link href="/mypage_mysurvey">
+          <Link href="/survey_me">
             <a>
               <Typography className="font-regular text-xs mb-2">
                 성향 설문조사
