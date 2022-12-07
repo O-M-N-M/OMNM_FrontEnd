@@ -23,7 +23,7 @@ export const MyPageScreen: NextPage = () => {
 
   const onClickHandler = () => {
     axios
-      .get(`/api/main/propose/${value}`, {
+      .get(`/api/users/${value}`, {
         headers: {
           OMNM: `${getCookie("OMNM")}`,
         },
@@ -32,6 +32,17 @@ export const MyPageScreen: NextPage = () => {
         console.log(res);
       })
       .catch((err) => console.log(err));
+
+    // axios
+    //   .get(`/api/main/propose/${value}`, {
+    //     headers: {
+    //       OMNM: `${getCookie("OMNM")}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
 
     // axios
     //   .delete(`/api/users/67/connection/reverse/82`, {
