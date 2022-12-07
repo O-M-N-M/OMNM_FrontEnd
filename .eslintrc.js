@@ -6,6 +6,8 @@ module.exports = {
     node: true,
   },
   extends: [
+    "next",
+    "prettier",
     "eslint:recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
@@ -14,6 +16,8 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
   ],
   rules: {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
     "import/order": [
       1,
       {

@@ -4,6 +4,8 @@
         "es2021": true
     },
     "extends": [
+        "next",
+        "prettier",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
@@ -20,5 +22,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "react/no-unescaped-entities": "off",
+        "@next/next/no-page-custom-font": "off"
     }
 }
