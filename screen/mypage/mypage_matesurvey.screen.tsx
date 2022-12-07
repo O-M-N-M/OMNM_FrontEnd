@@ -63,7 +63,8 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                   marginTop: "36px",
                 }}
               >
-                <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+              </Box>
+               <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
                   <Box sx={{ float: "right", textAlign: "right" }}>
                     <input
                       style={{
@@ -78,7 +79,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     ></input>
                   </Box>
                 </Box>
-              </Box>
+              
             </div>
 
             <div style={{ marginTop: "36px" }}>
