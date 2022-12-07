@@ -1,14 +1,120 @@
 import { Box, Button } from "@mui/material";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 import MyPageLeft from "./components/mypage_left";
 
 import Footer from "@/components/footer";
 
 export const MyPageScreen: NextPage = () => {
+  const [value, setValue] = useState(0);
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const [school, setSchool] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState(0);
+  const [kakao, setKakao] = useState("");
+  const [dormitory, setDormitory] = useState(0);
+
+  const onClickHandler = () => {
+    axios
+      .get(`/api/main/propose/${value}`, {
+        headers: {
+          OMNM: `${getCookie("OMNM")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+
+    // axios
+    //   .delete(`/api/users/67/connection/reverse/82`, {
+    //     headers: {
+    //       OMNM: `${getCookie("OMNM")}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
+
+    // const url = "/api/main";
+    // const body = `criteria=4`;
+    // const headers = {
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //     OMNM: `${getCookie("OMNM")}`,
+    //   },
+    // };
+
+    // axios
+    //   .post(url, body, headers)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
+  const onClickReqHandler = () => {
+    axios
+      .get(`/api/users/${value}/connection`, {
+        headers: {
+          OMNM: `${getCookie("OMNM")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onClickResHandler = () => {
+    axios
+      .get(`/api/users/${value}/propose`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onClickJoinHandler = () => {
+    const url = "/api/join";
+    const headers = { headers: { "Content-Type": "multipart/form-data" } };
+
+    const formData = new FormData();
+
+    const userDto = {
+      loginId: id,
+      password: pw,
+      name: name,
+      email: `${email}@cau.ac.kr`,
+      school: school,
+      gender: gender,
+      kakaoId: kakao,
+      dormitory: dormitory,
+    };
+
+    formData.append(
+      "key",
+      new Blob([JSON.stringify(userDto)], { type: "application/json" })
+    );
+
+    axios
+      .post(url, formData, headers)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <Box
       component="div"
@@ -21,6 +127,50 @@ export const MyPageScreen: NextPage = () => {
         fontStyle: "normal",
       }}
     >
+      <div>
+        <div style={{ float: "left" }}>
+          조회
+          <br />
+          userNumber:
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            style={{ textAlign: "center" }}
+          />
+          <br />
+          <button onClick={onClickHandler}>룸메신청하기</button>
+          <br />
+          <button onClick={onClickReqHandler}>신청리스트조회</button>
+          <br />
+          <button onClick={onClickResHandler}>받은리스트조회</button>
+        </div>
+        <div style={{ float: "left", marginLeft: "100px" }}>
+          회원가입
+          <br />
+          id:
+          <input
+            type="text"
+            value={id}
+            onChange={(e) => {
+              setId(e.target.value);
+              setPw(e.target.value);
+              setSchool(e.target.value + "대학교");
+              setEmail(e.target.value);
+              setName(e.target.value + "_이름");
+              setKakao(e.target.value + "_카카오");
+
+              setGender(0);
+              setDormitory(0);
+            }}
+            style={{ textAlign: "center" }}
+          />
+          <br />
+          <button onClick={onClickJoinHandler}>회원가입</button>
+        </div>
+      </div>
       <Box
         sx={{
           width: "100%",
@@ -1489,7 +1639,6 @@ export const MyPageScreen: NextPage = () => {
           <div></div>
         </div>
       </Box>
-
       <Footer />
     </Box>
   );
