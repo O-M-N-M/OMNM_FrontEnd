@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "check-types": "tsc --noemit",
+    "lint": "npm run check-types && next lint",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "lint-fix": "next lint --fix",
     "eslint": "eslint js,ts,tsx"
   },
