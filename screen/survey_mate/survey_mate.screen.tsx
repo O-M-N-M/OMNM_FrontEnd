@@ -55,7 +55,7 @@ export const SurveyMateScreen: NextPage = () => {
   const [nationality, setNationality] = useState("");
   const [armyService, setArmyService] = useState("");
 
-  const mbtiClickHanddler = ({ e, index }) => {
+  const mbtiClickHanddler = ({ e, index }: any) => {
     const t = e.target.parentNode;
     const c = e.target;
     mbti[index].checked = !mbti[index].checked;
@@ -83,7 +83,7 @@ export const SurveyMateScreen: NextPage = () => {
     { value: "4", text: "30대 후반", checked: false },
   ];
 
-  const checkHandler = ({ target }) => {
+  const checkHandler = ({ target }:any) => {
     age[target.value].checked = !age[target.value].checked;
     if (age[target.value].checked) {
       setSelectedAge([...selectedAge, target.value]);
