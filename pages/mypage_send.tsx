@@ -1,3 +1,3 @@
-import { MyPageSendScreen } from "@/screen";
+// import { MyPageSendScreen } from "@/screen";
 
-export default MyPageSendScreen;
+// export default MyPageSendScreen;

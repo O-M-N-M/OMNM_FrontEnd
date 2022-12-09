@@ -1,3 +1,3 @@
-import { MyPageChangePwScreen } from "@/screen";
+// import { MyPageChangePwScreen } from "@/screen";
 
-export default MyPageChangePwScreen;
+// export default MyPageChangePwScreen;

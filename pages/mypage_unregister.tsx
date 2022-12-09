@@ -1,3 +1,3 @@
-import { MyPageUnregisterScreen } from "@/screen";
+// import { MyPageUnregisterScreen } from "@/screen";
 
-export default MyPageUnregisterScreen;
+// export default MyPageUnregisterScreen;

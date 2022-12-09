@@ -1,3 +1,3 @@
-import { MyPageLikeScreen } from "@/screen";
+// import { MyPageLikeScreen } from "@/screen";
 
-export default MyPageLikeScreen;
+// export default MyPageLikeScreen;

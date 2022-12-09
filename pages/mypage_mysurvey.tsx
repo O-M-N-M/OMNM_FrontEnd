@@ -1,3 +1,3 @@
-import { MyPageMySurveyScreen } from "@/screen";
+// import { MyPageMySurveyScreen } from "@/screen";
 
-export default MyPageMySurveyScreen;
+// export default MyPageMySurveyScreen;

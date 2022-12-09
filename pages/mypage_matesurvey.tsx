@@ -1,3 +1,3 @@
-import { MyPageMateSurveyScreen } from "@/screen";
+// import { MyPageMateSurveyScreen } from "@/screen";
 
-export default MyPageMateSurveyScreen;
+// export default MyPageMateSurveyScreen;

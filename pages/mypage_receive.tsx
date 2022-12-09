@@ -1,3 +1,3 @@
-import { MyPageReceiveScreen } from "@/screen";
+// import { MyPageReceiveScreen } from "@/screen";
 
-export default MyPageReceiveScreen;
+// export default MyPageReceiveScreen;
