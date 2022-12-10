@@ -6,7 +6,7 @@
     "check-types": "tsc --noemit",
     "lint": "npm run check-types && next lint",
     "dev": "next dev",
-    "build": "next build",
+    "build": "GENERATE_SOURCEMAP=false next build",
     "start": "next start",
     "lint-fix": "next lint --fix",
     "eslint": "eslint js,ts,tsx"
