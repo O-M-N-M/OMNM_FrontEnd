@@ -5,5 +5,5 @@ export * from "./findpw";
 export * from "./signup";
 export * from "./survey_mate";
 export * from "./survey_me";
-//export * from "./mypage";
+export * from "./mypage";
 export * from "./main";
