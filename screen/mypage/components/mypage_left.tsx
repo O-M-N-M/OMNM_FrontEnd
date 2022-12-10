@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
@@ -16,13 +17,13 @@ export default function MyPageLeft() {
   }
 
   return (
-    <div style={{ width: "300px", height: "100%", float: "left" }}>
+    <Box sx={{ width: "300px", height: "100%", float: "left" }}>
       {/* left profile */}
       <MyPageProfile></MyPageProfile>
 
       {/* left menu  */}
-      <div
-        style={{
+      <Box
+        sx={{
           marginTop: "24px",
           alignItems: "center",
           width: "282px",
@@ -31,12 +32,12 @@ export default function MyPageLeft() {
           borderRadius: "20px",
         }}
       >
-        <div style={{ height: "" }}>
-          <div>
-            <span
-              style={{
+        <Box sx={{ height: "" }}>
+          <Box>
+            <Typography
+              sx={{
                 fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
+                fontsx: "normal",
                 fontWeight: "500",
                 fontSize: "16px",
                 lineHeight: "20px",
@@ -44,61 +45,76 @@ export default function MyPageLeft() {
               }}
             >
               룸메 신청 리스트
-            </span>
-          </div>
+            </Typography>
+          </Box>
 
           <Link href="/mypage_receive">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
                 gap: "12px",
               }}
             >
-              <span></span>신청 받은 리스트
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                신청 받은 리스트
+              </Typography>
+            </Box>
           </Link>
           <Link href="/mypage_send">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
                 gap: "12px",
               }}
             >
-              <span>신청 보낸 리스트</span>
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                신청 보낸 리스트
+              </Typography>
+            </Box>
           </Link>
           <Link href="/mypage_like">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
                 gap: "12px",
               }}
             >
-              <span>찜한 룸메 리스트</span>
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                찜한 룸메 리스트
+              </Typography>
+            </Box>
           </Link>
-        </div>
+        </Box>
 
-        <div style={{ height: "120px", marginTop: "36px" }}>
-          <span
-            style={{
+        <Box sx={{ height: "120px", marginTop: "36px" }}>
+          <Typography
+            sx={{
               fontFamily: "Spoqa Han Sans Neo",
-              fontStyle: "normal",
+              fontsx: "normal",
               fontWeight: "500",
               fontSize: "16px",
               lineHeight: "20px",
@@ -106,44 +122,54 @@ export default function MyPageLeft() {
             }}
           >
             성향 설문조사
-          </span>
+          </Typography>
           <Link href="/mypage_mysurvey">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
                 gap: "12px",
               }}
             >
-              <span>나의 성향 설문조사</span>
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                나의 성향 설문조사
+              </Typography>
+            </Box>
           </Link>
           <Link href="/mypage_matesurvey">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
                 gap: "12px",
               }}
             >
-              <span>룸메 성향 설문조사</span>
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                룸메 성향 설문조사
+              </Typography>
+            </Box>
           </Link>
-        </div>
+        </Box>
 
-        <div style={{ height: "120px", marginTop: "36px" }}>
-          <span
-            style={{
+        <Box sx={{ height: "120px", marginTop: "36px" }}>
+          <Typography
+            sx={{
               fontFamily: "Spoqa Han Sans Neo",
-              fontStyle: "normal",
+              fontsx: "normal",
               fontWeight: "500",
               fontSize: "16px",
               lineHeight: "20px",
@@ -151,50 +177,70 @@ export default function MyPageLeft() {
             }}
           >
             설정
-          </span>
+          </Typography>
           <Link href="/mypage_changepw">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
               }}
             >
-              <span>비밀번호 변경</span>
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                비밀번호 변경
+              </Typography>
+            </Box>
           </Link>
           <Link href="/mypage_unregister">
-            <div
-              style={{
+            <Box
+              sx={{
                 marginTop: "20px",
-                fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "20px",
               }}
             >
-              <span>회원 탈퇴</span>
-            </div>
+              <Typography
+                sx={{
+                  fontFamily: "Spoqa Han Sans Neo",
+                  fontsx: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  letterSpacing: "-0.3px",
+                }}>
+                회원 탈퇴
+              </Typography>
+            </Box>
           </Link>
-          <div
+          <Box
             onClick={onClickLogout}
-            style={{
+            sx={{
               marginTop: "20px",
               fontFamily: "Spoqa Han Sans Neo",
-              fontStyle: "normal",
+              fontsx: "normal",
               fontWeight: "400",
               fontSize: "16px",
               lineHeight: "20px",
             }}
           >
-            <span>로그아웃</span>
-          </div>
-        </div>
-      </div>
-    </div>
+            <Typography
+              sx={{
+                fontFamily: "Spoqa Han Sans Neo",
+                fontsx: "normal",
+                fontWeight: "500",
+                fontSize: "16px",
+                lineHeight: "20px",
+                letterSpacing: "-0.3px",
+              }}>
+              로그아웃
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }//

@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { flexbox } from "@mui/system";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -11,13 +11,12 @@ import Footer from "@/components/footer";
 export const MyPageMateSurveyScreen: NextPage = () => {
   return (
     <Box
-      component="div"
       sx={{
         backgroundColor: "#FFFFFF",
         width: "100%",
         position: "absolute",
         fontFamily: "Spoqa Han Sans Neo",
-        fontStyle: "normal",
+        fontsx: "normal",
       }}
     >
       <Box
@@ -32,8 +31,8 @@ export const MyPageMateSurveyScreen: NextPage = () => {
         <MyPageLeft></MyPageLeft>
 
         {/* main content */}
-        <div
-          style={{
+        <Box
+          sx={{
             minWidth: "894px",
             marginLeft: "306px",
             border: "1px solid #DBDBDB",
@@ -41,20 +40,20 @@ export const MyPageMateSurveyScreen: NextPage = () => {
             padding: "64px 60px",
           }}
         >
-          <div style={{ height: "875px" }}>
-            <div style={{ height: "25px" }}>
-              <span
-                style={{
+          <Box sx={{ height: "875px" }}>
+            <Box sx={{ height: "25px" }}>
+              <Typography
+                sx={{
                   fontSize: "20px",
                   fontWeight: "500",
                   lineHeight: "25px",
                 }}
               >
                 룸메 성향 설문조사
-              </span>
-              <div style={{ float: "right" }}>
+              </Typography>
+              <Box sx={{ float: "right" }}>
                 <Image src="/edit.png" width={20} height={20} />
-              </div>
+              </Box>
               <Box
                 sx={{
                   display: "flex",
@@ -64,27 +63,27 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                 }}
               >
               </Box>
-               <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
-                  <Box sx={{ float: "right", textAlign: "right" }}>
-                    <input
-                      style={{
-                        width: "50px",
-                        height: "45px",
-                        borderTop: "none",
-                        borderRight: "none",
-                        borderLeft: "none",
-                        borderBottom: "2px solid #1CDDAD",
-                        marginRight: "20px",
-                      }}
-                    ></input>
-                  </Box>
+              <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
+                <Box sx={{ float: "right", textAlign: "right" }}>
+                  <input
+                    style={{
+                      width: "50px",
+                      height: "45px",
+                      borderTop: "none",
+                      borderRight: "none",
+                      borderLeft: "none",
+                      borderBottom: "2px solid #1CDDAD",
+                      marginRight: "20px",
+                    }}
+                  ></input>
                 </Box>
-              
-            </div>
+              </Box>
 
-            <div style={{ marginTop: "36px" }}>
-              <div
-                style={{
+            </Box>
+
+            <Box sx={{ marginTop: "36px" }}>
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -115,7 +114,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -133,7 +131,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                   </Box>
 
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -148,7 +145,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                   </Box>
 
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -167,7 +163,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -183,10 +179,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -217,7 +213,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -234,7 +229,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -248,7 +242,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 MBTI
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -267,7 +260,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -283,10 +276,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -317,7 +310,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -334,7 +326,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -348,7 +339,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 흡연 여부
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -367,7 +357,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -383,10 +373,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -417,7 +407,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -434,7 +423,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -448,7 +436,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 학과
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -467,7 +454,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -483,10 +470,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -517,7 +504,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -534,7 +520,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -548,7 +533,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 생활 패턴
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -567,7 +551,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -583,10 +567,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -617,7 +601,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -634,7 +617,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -648,7 +630,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 방 청소 빈도
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -667,7 +648,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -683,10 +664,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -717,7 +698,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -734,7 +714,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -748,7 +727,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 국적
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -767,7 +745,7 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     marginTop: "36px",
                   }}
                 >
-                  <Box sx={{ width: "100%", height: "100%", display: flexbox }}>
+                  <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
                     <Box sx={{ float: "right", textAlign: "right" }}>
                       <input
                         style={{
@@ -783,10 +761,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   marginTop: "20px",
                   width: "774px",
                   height: "66px",
@@ -817,7 +795,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   >
                     <Box
-                      component="span"
                       sx={{
                         paddingTop: "10px",
                         display: "table-cell",
@@ -834,7 +811,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     </Box>
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       marginTop: "15px",
                       fontWeight: 500,
@@ -848,7 +824,6 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     선호하는 룸메의 군복무 여부
                   </Box>
                   <Box
-                    component="span"
                     sx={{
                       fontWeight: 500,
                       fontSize: "16px",
@@ -859,10 +834,10 @@ export const MyPageMateSurveyScreen: NextPage = () => {
                     }}
                   ></Box>
                 </Box>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </Box>
       <Footer />
     </Box>

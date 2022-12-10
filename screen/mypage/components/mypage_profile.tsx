@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
@@ -26,8 +26,8 @@ export default function MyPageProfile() {
     .catch((err) => console.log(err));
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         width: "282px",
         height: "418px",
         padding: "40px 28px",
@@ -35,7 +35,7 @@ export default function MyPageProfile() {
         borderRadius: "20px",
       }}
     >
-      <div style={{ padding: "0px 63px 0px 63px" }}>
+      <Box sx={{ padding: "0px 63px 0px 63px" }}>
         {profileUrl === null || profileUrl === "" ? (
           <Image src="/basicProfile.png" width={100} height={100} />
         ) : (
@@ -46,23 +46,23 @@ export default function MyPageProfile() {
             height={100}
           />
         )}
-      </div>
+      </Box>
 
-      <div
-        style={{
+      <Box
+        sx={{
           textAlign: "center",
           marginTop: "20px",
           fontFamily: "Spoqa Han Sans Neo",
-          fontStyle: "normal",
+          fontsx: "normal",
           fontWeight: "500",
           fontSize: "24px",
         }}
       >
-        <span>{name}</span>
-      </div>
+        <Typography>{name}</Typography>
+      </Box>
 
-      <div
-        style={{
+      <Box
+        sx={{
           width: "226px",
           height: "104px",
           marginTop: "24px",
@@ -72,36 +72,36 @@ export default function MyPageProfile() {
           textAlign: "center",
         }}
       >
-        <div style={{ height: "18px" }}>
-          <span style={{ float: "left", fontSize: "14px", fontWeight: "400" }}>
+        <Box sx={{ height: "18px" }}>
+          <Typography sx={{ float: "left", fontSize: "14px", fontWeight: "400" }}>
             카카오톡ID
-          </span>
-          <span
-            style={{
+          </Typography>
+          <Typography
+            sx={{
               float: "right",
               fontSize: "14px",
               fontWeight: "400",
             }}
           >
             {kakaoId}
-          </span>
-        </div>
-        <div style={{ height: "18px", marginTop: "20px" }}>
-          <span style={{ float: "left", fontSize: "14px", fontWeight: "400" }}>
+          </Typography>
+        </Box>
+        <Box sx={{ height: "18px", marginTop: "20px" }}>
+          <Typography sx={{ float: "left", fontSize: "14px", fontWeight: "400" }}>
             생활관 정보
-          </span>
-          <span
-            style={{
+          </Typography>
+          <Typography
+            sx={{
               float: "right",
               fontSize: "14px",
               fontWeight: "400",
             }}
           >
             {dormitoryArr[dormitory]}
-          </span>
-        </div>
-      </div>
-      <div style={{ marginTop: "20px" }}>
+          </Typography>
+        </Box>
+      </Box>
+      <Box sx={{ marginTop: "20px" }}>
         <Button
           type="submit"
           sx={{
@@ -111,7 +111,7 @@ export default function MyPageProfile() {
             height: "40px",
             color: "#FFFFFF",
             fontFamily: "Spoqa Han Sans Neo",
-            fontStyle: "normal",
+            fontsx: "normal",
             fontWeight: "500",
             fontSize: "14px",
             lineHeight: "18px",
@@ -120,7 +120,7 @@ export default function MyPageProfile() {
         >
           개인정보 수정
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

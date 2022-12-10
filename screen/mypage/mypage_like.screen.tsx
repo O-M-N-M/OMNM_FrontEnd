@@ -1,4 +1,4 @@
-import { Box, Button, Pagination } from "@mui/material";
+import { Box, Button, Pagination, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
@@ -10,14 +10,13 @@ import Footer from "@/components/footer";
 export const MyPageLikeScreen: NextPage = () => {
     return (
         <Box
-            component="div"
             sx={{
                 backgroundColor: "#FFFFFF",
                 width: "100%",
                 height: "50px",
                 position: "absolute",
                 fontFamily: "Spoqa Han Sans Neo",
-                fontStyle: "normal",
+                fontsx: "normal",
             }}
         >
             <Box
@@ -32,8 +31,8 @@ export const MyPageLikeScreen: NextPage = () => {
                 <MyPageLeft></MyPageLeft>
 
                 {/* main content */}
-                <div
-                    style={{
+                <Box
+                    sx={{
                         minWidth: "894px",
                         marginLeft: "305px",
                         border: "1px solid #DBDBDB",
@@ -41,10 +40,10 @@ export const MyPageLikeScreen: NextPage = () => {
                         padding: "64px 60px",
                     }}
                 >
-                    <div style={{ height: "875px" }}>
-                        <div style={{ height: "25px" }}>
-                            <span
-                                style={{
+                    <Box sx={{ height: "875px" }}>
+                        <Box sx={{ height: "25px" }}>
+                            <Typography
+                                sx={{
                                     float: "left",
                                     fontSize: "20px",
                                     fontWeight: "500",
@@ -52,15 +51,15 @@ export const MyPageLikeScreen: NextPage = () => {
                                 }}
                             >
                                 찜한 룸메 리스트
-                            </span>
-                            <div style={{ float: "right" }}>
+                            </Typography>
+                            <Box sx={{ float: "right" }}>
                                 <Image src="/bin.png" width={20} height={20} />
-                            </div>
-                        </div>
+                            </Box>
+                        </Box>
 
-                        <div style={{ marginTop: "36px", marginBottom: "40px" }}>
-                            <div
-                                style={{
+                        <Box sx={{ marginTop: "36px", marginBottom: "40px" }}>
+                            <Box
+                                sx={{
                                     marginTop: "10px",
                                     width: "144px",
                                     height: "194px",
@@ -70,18 +69,18 @@ export const MyPageLikeScreen: NextPage = () => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <div
-                                    style={{
+                                <Box
+                                    sx={{
                                         float: "none",
                                         marginLeft: "40px",
                                         marginTop: "20px",
                                     }}
                                 >
                                     <Image src="/basicProfile.png" width={60} height={60} />
-                                </div>
-                                <div style={{ marginTop: "10px", marginLeft: "10px" }}>
-                                    <span
-                                        style={{
+                                </Box>
+                                <Box sx={{ marginTop: "10px", marginLeft: "10px" }}>
+                                    <Typography
+                                        sx={{
                                             float: "left",
                                             width: "72px",
                                             height: "20px",
@@ -94,9 +93,9 @@ export const MyPageLikeScreen: NextPage = () => {
                                         }}
                                     >
                                         정가영
-                                    </span>
-                                    <span
-                                        style={{
+                                    </Typography>
+                                    <Typography
+                                        sx={{
                                             float: "right",
                                             width: "24px",
                                             height: "15px",
@@ -110,15 +109,15 @@ export const MyPageLikeScreen: NextPage = () => {
                                         }}
                                     >
                                         · 24
-                                    </span>
-                                </div>
-                            </div>
+                                    </Typography>
+                                </Box>
+                            </Box>
 
-                            <div style={{ marginLeft: "45px", marginTop: "-70px" }}>
+                            <Box sx={{ marginLeft: "45px", marginTop: "-70px" }}>
                                 <Image src="/check.png" width={14} height={14} />
-                                <span style={{ marginLeft: "5px" }}>56%</span>
-                            </div>
-                            <div style={{ marginLeft: "30px", marginTop: "10px" }}>
+                                <Typography sx={{ marginLeft: "5px" }}>56%</Typography>
+                            </Box>
+                            <Box sx={{ marginLeft: "30px", marginTop: "10px" }}>
                                 <Button
                                     type="submit"
                                     sx={{
@@ -129,7 +128,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                         color: "#4B99EB",
                                         border: "1px solid #4B99EB",
                                         fontFamily: "Spoqa Han Sans Neo",
-                                        fontStyle: "normal",
+                                        fontsx: "normal",
                                         fontWeight: "400",
                                         fontSize: "12px",
                                         lineHeight: "15px",
@@ -137,11 +136,11 @@ export const MyPageLikeScreen: NextPage = () => {
                                 >
                                     프로필 보기
                                 </Button>
-                            </div>
-                        </div>
-                        <div style={{ marginTop: "36px", marginBottom: "40px" }}>
-                            <div
-                                style={{
+                            </Box>
+                        </Box>
+                        <Box sx={{ marginTop: "36px", marginBottom: "40px" }}>
+                            <Box
+                                sx={{
                                     marginTop: "10px",
                                     width: "144px",
                                     height: "194px",
@@ -151,18 +150,18 @@ export const MyPageLikeScreen: NextPage = () => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <div
-                                    style={{
+                                <Box
+                                    sx={{
                                         float: "none",
                                         marginLeft: "40px",
                                         marginTop: "20px",
                                     }}
                                 >
                                     <Image src="/basicProfile.png" width={60} height={60} />
-                                </div>
-                                <div style={{ marginTop: "10px", marginLeft: "10px" }}>
-                                    <span
-                                        style={{
+                                </Box>
+                                <Box sx={{ marginTop: "10px", marginLeft: "10px" }}>
+                                    <Typography
+                                        sx={{
                                             float: "left",
                                             width: "72px",
                                             height: "20px",
@@ -175,9 +174,9 @@ export const MyPageLikeScreen: NextPage = () => {
                                         }}
                                     >
                                         정가영
-                                    </span>
-                                    <span
-                                        style={{
+                                    </Typography>
+                                    <Typography
+                                        sx={{
                                             float: "right",
                                             width: "24px",
                                             height: "15px",
@@ -191,15 +190,15 @@ export const MyPageLikeScreen: NextPage = () => {
                                         }}
                                     >
                                         · 24
-                                    </span>
-                                </div>
-                            </div>
+                                    </Typography>
+                                </Box>
+                            </Box>
 
-                            <div style={{ marginLeft: "45px", marginTop: "-70px" }}>
+                            <Box sx={{ marginLeft: "45px", marginTop: "-70px" }}>
                                 <Image src="/check.png" width={14} height={14} />
-                                <span style={{ marginLeft: "5px" }}>56%</span>
-                            </div>
-                            <div style={{ marginLeft: "30px", marginTop: "10px" }}>
+                                <Typography sx={{ marginLeft: "5px" }}>56%</Typography>
+                            </Box>
+                            <Box sx={{ marginLeft: "30px", marginTop: "10px" }}>
                                 <Button
                                     type="submit"
                                     sx={{
@@ -210,7 +209,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                         color: "#4B99EB",
                                         border: "1px solid #4B99EB",
                                         fontFamily: "Spoqa Han Sans Neo",
-                                        fontStyle: "normal",
+                                        fontsx: "normal",
                                         fontWeight: "400",
                                         fontSize: "12px",
                                         lineHeight: "15px",
@@ -218,11 +217,11 @@ export const MyPageLikeScreen: NextPage = () => {
                                 >
                                     프로필 보기
                                 </Button>
-                            </div>
-                        </div>
-                        <div style={{ marginTop: "36px", marginBottom: "40px" }}>
-                            <div
-                                style={{
+                            </Box>
+                        </Box>
+                        <Box sx={{ marginTop: "36px", marginBottom: "40px" }}>
+                            <Box
+                                sx={{
                                     marginTop: "10px",
                                     width: "144px",
                                     height: "194px",
@@ -232,18 +231,18 @@ export const MyPageLikeScreen: NextPage = () => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <div
-                                    style={{
+                                <Box
+                                    sx={{
                                         float: "none",
                                         marginLeft: "40px",
                                         marginTop: "20px",
                                     }}
                                 >
                                     <Image src="/basicProfile.png" width={60} height={60} />
-                                </div>
-                                <div style={{ marginTop: "10px", marginLeft: "10px" }}>
-                                    <span
-                                        style={{
+                                </Box>
+                                <Box sx={{ marginTop: "10px", marginLeft: "10px" }}>
+                                    <Typography
+                                        sx={{
                                             float: "left",
                                             width: "72px",
                                             height: "20px",
@@ -256,9 +255,9 @@ export const MyPageLikeScreen: NextPage = () => {
                                         }}
                                     >
                                         정가영
-                                    </span>
-                                    <span
-                                        style={{
+                                    </Typography>
+                                    <Typography
+                                        sx={{
                                             float: "right",
                                             width: "24px",
                                             height: "15px",
@@ -272,15 +271,15 @@ export const MyPageLikeScreen: NextPage = () => {
                                         }}
                                     >
                                         · 24
-                                    </span>
-                                </div>
-                            </div>
+                                    </Typography>
+                                </Box>
+                            </Box>
 
-                            <div style={{ marginLeft: "45px", marginTop: "-70px" }}>
+                            <Box sx={{ marginLeft: "45px", marginTop: "-70px" }}>
                                 <Image src="/check.png" width={14} height={14} />
-                                <span style={{ marginLeft: "5px" }}>56%</span>
-                            </div>
-                            <div style={{ marginLeft: "30px", marginTop: "10px" }}>
+                                <Typography sx={{ marginLeft: "5px" }}>56%</Typography>
+                            </Box>
+                            <Box sx={{ marginLeft: "30px", marginTop: "10px" }}>
                                 <Button
                                     type="submit"
                                     sx={{
@@ -291,7 +290,7 @@ export const MyPageLikeScreen: NextPage = () => {
                                         color: "#4B99EB",
                                         border: "1px solid #4B99EB",
                                         fontFamily: "Spoqa Han Sans Neo",
-                                        fontStyle: "normal",
+                                        fontsx: "normal",
                                         fontWeight: "400",
                                         fontSize: "12px",
                                         lineHeight: "15px",
@@ -299,11 +298,11 @@ export const MyPageLikeScreen: NextPage = () => {
                                 >
                                     프로필 보기
                                 </Button>
-                            </div>
-                        </div>
+                            </Box>
+                        </Box>
                         <Pagination count={5} />
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             </Box>
 
             <Footer />

@@ -12,14 +12,13 @@ export const MyPageUnregisterScreen: NextPage = () => {
 
   return (
     <Box
-      component="div"
       sx={{
         backgroundColor: "#FFFFFF",
         width: "100%",
         height: "50px",
         position: "absolute",
         fontFamily: "Spoqa Han Sans Neo",
-        fontStyle: "normal",
+        fontsx: "normal",
       }}
     >
       <Box
@@ -34,8 +33,8 @@ export const MyPageUnregisterScreen: NextPage = () => {
         <MyPageLeft></MyPageLeft>
 
         {/* main content */}
-        <div
-          style={{
+        <Box
+          sx={{
             minWidth: "894px",
             marginLeft: "306px",
             border: "1px solid #DBDBDB",
@@ -43,9 +42,9 @@ export const MyPageUnregisterScreen: NextPage = () => {
             padding: "64px 60px",
           }}
         >
-          <div style={{ height: "875px" }}>
-            <div
-              style={{
+          <Box sx={{ height: "875px" }}>
+            <Box
+              sx={{
                 height: "25px",
                 width: "79px",
                 marginTop: "35px",
@@ -53,8 +52,8 @@ export const MyPageUnregisterScreen: NextPage = () => {
                 marginBottom: "360px",
               }}
             >
-              <span
-                style={{
+              <Typography
+                sx={{
                   fontSize: "20px",
                   fontWeight: "500",
                   lineHeight: "25px",
@@ -62,11 +61,11 @@ export const MyPageUnregisterScreen: NextPage = () => {
                 }}
               >
                 회원 탈퇴
-              </span>
-            </div>
+              </Typography>
+            </Box>
 
-            <div
-              style={{
+            <Box
+              sx={{
                 width: "310px",
                 height: "176px",
                 marginTop: "40px",
@@ -101,7 +100,7 @@ export const MyPageUnregisterScreen: NextPage = () => {
                 />
               </form>
 
-              <div style={{ marginLeft: "150px", marginTop: "10px" }}>
+              <Box sx={{ marginLeft: "150px", marginTop: "10px" }}>
                 <Button
                   type="submit"
                   sx={{
@@ -112,7 +111,7 @@ export const MyPageUnregisterScreen: NextPage = () => {
                     color: "#FFFFFF",
                     fontFamily: "Spoqa Han Sans Neo",
                     border: "1px solid #4B99EB",
-                    fontStyle: "normal",
+                    fontsx: "normal",
                     fontWeight: "400",
                     fontSize: "15px",
                     lineHeight: "15px",
@@ -120,10 +119,10 @@ export const MyPageUnregisterScreen: NextPage = () => {
                 >
                   확인
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </Box>
 
       <Footer />

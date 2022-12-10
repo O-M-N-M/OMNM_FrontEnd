@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
@@ -11,14 +11,13 @@ import Footer from "@/components/footer";
 export const MyPageMySurveyScreen: NextPage = () => {
   return (
     <Box
-      component="div"
       sx={{
         backgroundColor: "#FFFFFF",
         width: "100%",
         height: "50px",
         position: "absolute",
         fontFamily: "Spoqa Han Sans Neo",
-        fontStyle: "normal",
+        fontsx: "normal",
       }}
     >
       <Box
@@ -33,8 +32,8 @@ export const MyPageMySurveyScreen: NextPage = () => {
         <MyPageLeft></MyPageLeft>
 
         {/* main content */}
-        <div
-          style={{
+        <Box
+          sx={{
             minWidth: "894px",
             marginLeft: "305px",
             border: "1px solid #DBDBDB",
@@ -43,24 +42,24 @@ export const MyPageMySurveyScreen: NextPage = () => {
           }}
         >
           {/* 박스 */}
-          <div style={{ marginBottom: "36px" }}>
-            <span
-              style={{
+          <Box sx={{ marginBottom: "36px" }}>
+            <Typography
+              sx={{
                 fontSize: "20px",
                 fontWeight: "500",
                 lineHeight: "25px",
               }}
             >
               나의 성향 설문조사
-            </span>
+            </Typography>
 
-            <div style={{ float: "right" }}>
+            <Box sx={{ float: "right" }}>
               <Image src="/edit.png" width={20} height={20} />
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           <MyPageQuestions />
-        </div>
+        </Box>
       </Box>
       <Footer />
     </Box>

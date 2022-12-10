@@ -1,4 +1,4 @@
-import { Box, Button, Pagination } from "@mui/material";
+import { Box, Button, Pagination, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
 import React from "react";
@@ -10,14 +10,13 @@ import Footer from "@/components/footer";
 export const MyPageReceiveScreen: NextPage = () => {
   return (
     <Box
-      component="div"
       sx={{
         backgroundColor: "#FFFFFF",
         width: "100%",
         height: "50px",
         position: "absolute",
         fontFamily: "Spoqa Han Sans Neo",
-        fontStyle: "normal",
+        fontsx: "normal",
       }}
     >
       <Box
@@ -32,8 +31,8 @@ export const MyPageReceiveScreen: NextPage = () => {
         <MyPageLeft></MyPageLeft>
 
         {/* main content */}
-        <div
-          style={{
+        <Box
+          sx={{
             minWidth: "894px",
             marginLeft: "306px",
             border: "1px solid #DBDBDB",
@@ -41,10 +40,10 @@ export const MyPageReceiveScreen: NextPage = () => {
             padding: "64px 60px",
           }}
         >
-          <div style={{ height: "400px" }}>
-            <div style={{ height: "25px" }}>
-              <span
-                style={{
+          <Box sx={{ height: "400px" }}>
+            <Box sx={{ height: "25px" }}>
+              <Typography
+                sx={{
                   float: "left",
                   fontSize: "20px",
                   fontWeight: "500",
@@ -52,17 +51,17 @@ export const MyPageReceiveScreen: NextPage = () => {
                 }}
               >
                 룸메 신청 받은 리스트
-              </span>
-              <div style={{ float: "right" }}>
+              </Typography>
+              <Box sx={{ float: "right" }}>
                 <Image src="/bin.png" width={20} height={20} />
-              </div>
-            </div>
+              </Box>
+            </Box>
 
-            <div style={{ marginTop: "24px" }}>
-              <div style={{ float: "left" }}>
-                <div>
-                  <span
-                    style={{
+            <Box sx={{ marginTop: "24px" }}>
+              <Box sx={{ float: "left" }}>
+                <Box>
+                  <Typography
+                    sx={{
                       height: "15px",
                       fontSize: "12px",
                       fontWeight: "400",
@@ -71,11 +70,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                     }}
                   >
                     9.24
-                  </span>
-                </div>
-                <div style={{ marginTop: "6px" }}>
-                  <div
-                    style={{
+                  </Typography>
+                </Box>
+                <Box sx={{ marginTop: "6px" }}>
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -86,12 +85,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -99,9 +98,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -111,13 +110,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -128,7 +127,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -137,11 +136,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -152,12 +151,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -165,9 +164,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -177,13 +176,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -194,7 +193,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -203,11 +202,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -218,12 +217,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -231,9 +230,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -243,13 +242,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -260,7 +259,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -269,11 +268,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -284,12 +283,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -297,9 +296,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -309,13 +308,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -326,7 +325,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -335,11 +334,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -350,12 +349,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -363,9 +362,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -375,13 +374,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -392,7 +391,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -401,14 +400,14 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style={{ float: "right" }}>
-                <div>
-                  <span
-                    style={{
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+              <Box sx={{ float: "right" }}>
+                <Box>
+                  <Typography
+                    sx={{
                       height: "15px",
                       fontSize: "12px",
                       fontWeight: "400",
@@ -417,11 +416,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                     }}
                   >
                     9.24
-                  </span>
-                </div>
-                <div style={{ marginTop: "6px" }}>
-                  <div
-                    style={{
+                  </Typography>
+                </Box>
+                <Box sx={{ marginTop: "6px" }}>
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -432,12 +431,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -445,9 +444,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -457,13 +456,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -474,7 +473,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -483,11 +482,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -498,12 +497,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -511,9 +510,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -523,13 +522,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -540,7 +539,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -549,11 +548,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -564,12 +563,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -577,9 +576,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -589,13 +588,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -606,7 +605,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -615,11 +614,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -630,12 +629,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -643,9 +642,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -655,13 +654,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -672,7 +671,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -681,11 +680,11 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
-                  <div
-                    style={{
+                  <Box
+                    sx={{
                       marginTop: "10px",
                       width: "372px",
                       height: "48px",
@@ -696,12 +695,12 @@ export const MyPageReceiveScreen: NextPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ float: "left", marginTop: "4px" }}>
+                    <Box sx={{ float: "left", marginTop: "4px" }}>
                       <Image src="/basicProfile.png" width={24} height={24} />
-                    </div>
-                    <div style={{ float: "left", marginLeft: "12px" }}>
-                      <span
-                        style={{
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "12px" }}>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "16px",
                           fontWeight: "500",
@@ -709,9 +708,9 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         이기태
-                      </span>
-                      <span
-                        style={{
+                      </Typography>
+                      <Typography
+                        sx={{
                           height: "15px",
                           fontSize: "12px",
                           fontWeight: "400",
@@ -721,13 +720,13 @@ export const MyPageReceiveScreen: NextPage = () => {
                         }}
                       >
                         · 24
-                      </span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "28px" }}>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "28px" }}>
                       <Image src="/check.png" width={14} height={14} />
-                      <span style={{ marginLeft: "8px" }}>78%</span>
-                    </div>
-                    <div style={{ float: "left", marginLeft: "48px" }}>
+                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
+                    </Box>
+                    <Box sx={{ float: "left", marginLeft: "48px" }}>
                       <Button
                         type="submit"
                         sx={{
@@ -738,7 +737,7 @@ export const MyPageReceiveScreen: NextPage = () => {
                           color: "#4B99EB",
                           border: "1px solid #4B99EB",
                           fontFamily: "Spoqa Han Sans Neo",
-                          fontStyle: "normal",
+                          fontsx: "normal",
                           fontWeight: "400",
                           fontSize: "12px",
                           lineHeight: "15px",
@@ -747,19 +746,18 @@ export const MyPageReceiveScreen: NextPage = () => {
                       >
                         프로필 보기
                       </Button>
-                    </div>
-                  </div>
-                </div>
+                    </Box>
+                  </Box>
+                </Box>
                 <Pagination
                   color="primary"
-                  size="string"
                   sx={{ margin: 5 }}
                   count={3}
                 />
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </Box>
 
       <Footer />

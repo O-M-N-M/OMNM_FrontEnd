@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import React from "react";
 
 export default function MyPageQuestions() {
@@ -17,9 +18,9 @@ export default function MyPageQuestions() {
   return (
     <>
       {list.map((item, i) => (
-        <div>
-          <div
-            style={{
+        <Box>
+          <Box
+            sx={{
               marginTop: "20px",
               width: "100%",
               height: "66px",
@@ -30,8 +31,8 @@ export default function MyPageQuestions() {
               padding: "20px 40px 20px 40px",
             }}
           >
-            <div
-              style={{
+            <Box
+              sx={{
                 backgroundColor: "#1CDDAD",
                 minWidth: "52px",
                 width: "52px",
@@ -41,8 +42,8 @@ export default function MyPageQuestions() {
                 textAlign: "center",
               }}
             >
-              <span
-                style={{
+              <Typography
+                sx={{
                   verticalAlign: "middle",
                   fontWeight: 500,
                   fontSize: "12px",
@@ -51,22 +52,22 @@ export default function MyPageQuestions() {
                 }}
               >
                 문항{i + 1}
-              </span>
-            </div>
-            <span style={{ float: "left", marginLeft: "12px", width: "100%" }}>
+              </Typography>
+            </Box>
+            <Typography sx={{ float: "left", marginLeft: "12px", width: "100%" }}>
               {item.title}
-            </span>
-            <div
-              style={{
+            </Typography>
+            <Box
+              sx={{
                 float: "right",
                 height: "26px",
                 borderBottom: "1px solid #1CDDAD",
               }}
             >
-              <span>{item.value}</span>
-            </div>
-          </div>
-        </div>
+              <Typography>{item.value}</Typography>
+            </Box>
+          </Box>
+        </Box>
       ))}
     </>
   );
