@@ -107,33 +107,33 @@ export const SurveyMeScreen: NextPage = () => {
     { text: "기타", value: "50" },
   ];
 
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSelectedMbti(event.target.value);
   };
-  const handleSmokingChange = (event) => {
+  const handleSmokingChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setIsSmoking(event.target.value);
   };
-  const handleDepartmentChange = (event) => {
+  const handleDepartmentChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setDepartment(event.target.value);
   };
 
-  const handleLifeCycleChange = (event) => {
+  const handleLifeCycleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setLifeCycle(event.target.value);
   };
 
-  const handleSleepingPatternChange = (event) => {
+  const handleSleepingPatternChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSleepingPattern(event.target.value);
   };
 
-  const handleCleaningChange = (event) => {
+  const handleCleaningChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setCleaning(event.target.value);
   };
 
-  const handleNationalityChange = (event) => {
+  const handleNationalityChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setNationality(event.target.value);
   };
 
-  const handleArmyServiceChange = (event) => {
+  const handleArmyServiceChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setArmyService(event.target.value);
   };
 

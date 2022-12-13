@@ -45,12 +45,12 @@ export const SurveyMateScreen: NextPage = () => {
     { key: "ISTP", checked: false },
   ]);
 
-  const [selectedAge, setSelectedAge] = useState([]);
-  const [selectedMbti, setSelectedMbti] = useState([]);
+  const [selectedAge, setSelectedAge] = useState<never[]>([]);
+  const [selectedMbti, setSelectedMbti] = useState<String[]>([]);
   const [isSmoking, setIsSmoking] = useState("");
   const [department, setDepartment] = useState("");
   const [lifeCycle, setLifeCycle] = useState("");
-  // const [sleepingPattern, setSleepingPattern] = useState('');
+  const [sleepingPattern, setSleepingPattern] = useState('');
   const [cleaning, setCleaning] = useState("");
   const [nationality, setNationality] = useState("");
   const [armyService, setArmyService] = useState("");
@@ -83,6 +83,7 @@ export const SurveyMateScreen: NextPage = () => {
     { value: "4", text: "30대 후반", checked: false },
   ];
 
+ 
   const checkHandler = ({ target }:any) => {
     age[target.value].checked = !age[target.value].checked;
     if (age[target.value].checked) {
@@ -93,30 +94,30 @@ export const SurveyMateScreen: NextPage = () => {
     }
   };
 
-  const handleSmokingChange = (event) => {
+  const handleSmokingChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setIsSmoking(event.target.value);
   };
-  const handleDepartmentChange = (event) => {
+  const handleDepartmentChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setDepartment(event.target.value);
   };
 
-  const handleLifeCycleChange = (event) => {
+  const handleLifeCycleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setLifeCycle(event.target.value);
   };
 
-  const handleSleepingPatternChange = (event) => {
+  const handleSleepingPatternChange = (event: { target: { value: any; }; }) => {
     setSleepingPattern(event.target.value);
   };
 
-  const handleCleaningChange = (event) => {
+  const handleCleaningChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setCleaning(event.target.value);
   };
 
-  const handleNationalityChange = (event) => {
+  const handleNationalityChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setNationality(event.target.value);
   };
 
-  const handleArmyServiceChange = (event) => {
+  const handleArmyServiceChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setArmyService(event.target.value);
   };
 
@@ -518,7 +519,7 @@ export const SurveyMateScreen: NextPage = () => {
                       lineHeight: "23px",
                       color: "#9B9EA1",
                     }}
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       mbtiClickHanddler({ e, index });
                     }}
                   >
@@ -1321,3 +1322,7 @@ export const SurveyMateScreen: NextPage = () => {
     </form>
   );
 };
+function setSleepingPattern(value: any) {
+  throw new Error("Function not implemented.");
+}
+
