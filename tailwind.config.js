@@ -51,6 +51,7 @@ module.exports = {
       },
       backgroundImage: theme => ({
         'main-background': "url('/mainBackground.png')",
+        'landing-last-background': "url('/landingLastBackground.png')"
       })
     },
   },

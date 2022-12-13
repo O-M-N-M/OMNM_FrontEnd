@@ -37,8 +37,8 @@ export const LoginScreen: NextPage = () => {
   }
 
   return (
-    <Box className="flex justify-center items-center min-h-screen">
-      <Box className="flex flex-col items-center">
+    <Box className="flex justify-center items-center min-h-[calc(100vh-50px)]">
+      <Box className='flex flex-col items-center my-[5%]'>
         <Image src={logo} width={54} height={55} />
 
         <form onSubmit={onSubmit}>
@@ -49,15 +49,15 @@ export const LoginScreen: NextPage = () => {
               placeholder="아이디 입력"
               value={id}
               onChange={(e) => setId(e.target.value)}
-              className="text-gray1 text-sm rounded-full border border-solid border-gray0 block w-[19rem] p-4 mt-6 focus:outline-none" required />
+              className="text-gray1 text-sm font-regular rounded-full border border-solid border-gray0 block w-[19rem] h-12 p-4 mt-9 focus:outline-none" required />
             <input
               type="password"
               name="pw"
               placeholder="비밀번호 입력"
               value={pw}
               onChange={(e) => setPw(e.target.value)}
-              className="text-gray1 text-sm rounded-full border border-solid border-gray0 block w-[19rem] p-4 mt-2 focus:outline-none" required />
-            <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm font-medium block w-[19rem] p-4 mt-2">로그인</Button>
+              className="text-gray1 text-sm font-regular rounded-full border border-solid border-gray0 block w-[19rem] h-12 p-4 mt-4 focus:outline-none" required />
+            <Button type="submit" className="bg-accent1 rounded-full border border-gray2 text-white text-base font-medium block w-[19rem] p-4 mt-4">로그인</Button>
           </Stack>
         </form>
 
@@ -65,25 +65,25 @@ export const LoginScreen: NextPage = () => {
           direction="row"
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
-          className="mt-2"
+          className="mt-9"
         >
           <Link href="/findid">
             <a className="no-underline">
-              <Typography className="text-gray3 text-sm font-medium">아이디 찾기</Typography>
+              <Typography className="text-gray1 text-sm font-medium">아이디 찾기</Typography>
             </a>
           </Link>
           <Link href="/findpw">
             <a className="no-underline">
-              <Typography className="text-gray3 text-sm font-medium">비밀번호 찾기</Typography>
+              <Typography className="text-gray1 text-sm font-medium">비밀번호 찾기</Typography>
             </a>
           </Link>
         </Stack>
 
-        <Box className="flex items-center mt-2">
-          <Typography className="text-gray1 text-xs font-regular">회원이 아니신가요?</Typography>
+        <Box className="flex items-center mt-3.5">
+          <Typography className="text-gray1 text-xs font-medium">회원이 아니신가요?</Typography>
           <Link href="/signup">
             <a className="ml-2">
-              <Typography className="text-accent1 text-xs font-regular">회원가입하러 가기</Typography>
+              <Typography className="text-accent1 text-xs font-medium">회원가입하러 가기</Typography>
             </a>
           </Link>
         </Box>

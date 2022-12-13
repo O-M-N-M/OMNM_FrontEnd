@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Box, Typography, Button } from "@mui/material";
 
+import landingMiddleContent from '../../public/landingMiddleContent.jpg';
 import LogoString1 from '../../public/logo3.png';
 import LogoString2 from '../../public/logo4.png';
 import LogoBoth from '../../public/logo.png';
@@ -27,7 +28,7 @@ export const LadingScreen: NextPage = () => {
 
   return (
     <>
-      <Box className='flex flex-row my-40'>
+      <Box className='flex flex-row justify-center items-center min-h-[calc(100vh-50px)]'>
         <Box className="ml-[15%]">
           <Typography className="text-[3.3rem] font-bold">
             {`오늘 만나고 내일 만나는\n기숙사 `}
@@ -68,6 +69,26 @@ export const LadingScreen: NextPage = () => {
         <Box className='flex bg-white w-80 h-36 rounded-full drop-shadow-[0px_4px_10px_rgba(0,0,0,0.14)] justify-center items-center my-36 ml-auto mr-[15%]'>
           <Typography className="text-black text-5xl font-bold">{totalUser} 명</Typography>
         </Box>
+      </Box>
+
+      <Box>
+        <Image src={landingMiddleContent} />
+      </Box>
+
+      <Box className='bg-landing-last-background flex flex-col justify-center items-center py-24'>
+        <Typography className='text-black text-3xl font-regular'>가장 간편한 기숙사 룸메이트 매칭 서비스</Typography>
+
+        <Box className='flex flex-row justify-center items-center mt-6'>
+          <Typography className='text-accent1 text-6xl font-medium mr-2'>너도?</Typography>
+          <Typography className='text-accent2 text-6xl font-medium mr-2'>나도!</Typography>
+          <Image src={LogoString1} width={299.52} height={50.52} />
+        </Box>
+
+        <Link href='/login'>
+          <Button className='bg-accent1 w-64 h-20 rounded-full mt-14'>
+            <Typography className='text-white text-xl font-medium'>룸메이트 만나러 가기</Typography>
+          </Button>
+        </Link>
       </Box>
     </>
   );

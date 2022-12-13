@@ -48,24 +48,24 @@ export const FindPwScreen: NextPage = () => {
   }
 
   return (
-    <Box className="flex justify-center items-center min-h-screen">
-      <Box className="flex flex-col items-center">
-        <Image src={logo} width={75} height={75} />
+    <Box className="flex justify-center items-center min-h-[calc(100vh-50px)]">
+      <Box className="flex flex-col items-center my-[5%]">
+        <Image src={logo} width={60} height={61} />
 
-        <form onSubmit={onSubmit} className="border border-solid border-gray0 rounded-lg p-14 mt-10">
-          <Typography className="text-black text-xl font-medium">비밀번호 찾기</Typography>
-          <Typography className="text-black text-sm font-medium mt-6">아이디</Typography>
+        <form onSubmit={onSubmit} className="border border-solid rounded-2xl border-gray0 px-20 py-14 mt-8">
+          <Typography className="text-black text-2xl font-medium">비밀번호 찾기</Typography>
+          <Typography className="text-black text-lg font-medium mt-10">아이디</Typography>
           <input
             type="text"
             name="id"
             placeholder="아이디 입력"
             value={id}
             onChange={(e) => setId(e.target.value)}
-            className="rounded-full text-gray1 border border-solid border-gray0 text-xs block w-60 p-2.5 mt-2 focus:outline-none" required />
+            className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-2 focus:outline-none" required />
 
           <Box>
-            <Typography className="text-black text-sm font-medium mt-4">학교 이메일</Typography>
-            <Typography className="text-gray1 text-xxs font-regular">학교 이메일로 임시 비밀번호가 전송됩니다.</Typography>
+            <Typography className="text-black text-lg font-medium mt-10">학교 이메일</Typography>
+            <Typography className="text-gray1 text-xs font-regular">학교 이메일로 임시 비밀번호가 전송됩니다.</Typography>
           </Box>
           <Box className="flex items-center">
             <input
@@ -74,11 +74,11 @@ export const FindPwScreen: NextPage = () => {
               placeholder="학교 아이디"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-full text-gray1 border border-solid border-gray0 text-xs block w-32 p-2.5 mt-2 focus:outline-none" required />
-            <Typography className="text-black text-sm font-regular ml-4 mt-2">@cau.ac.kr</Typography>
+              className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-4 focus:outline-none" required />
+            <Typography className="text-black text-sm font-regular ml-5 mt-2">@cau.ac.kr</Typography>
           </Box>
 
-          <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-60 p-2.5 mt-6">확인</Button>
+          <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-full h-12 p-2.5 mt-10">확인</Button>
         </form>
 
         {

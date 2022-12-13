@@ -20,15 +20,17 @@ a {
   box-sizing: border-box;
 }
 
+.swiper {
+  min-height: 20rem;
+}
 
 .swiper-button-prev {
   width: 12.63px !important;
   height: 21.63px !important;
   color: transparent !important;
-  background-image: url('../public/arrowPrevInactive.png');
+  background-image: url('../public/arrowPrevActive.png');
 
-  margin-left: 30rem;
-  transform: translate(0px, 7.5rem);
+  /* transform: translate(20rem, 10rem); */
 }
 
 .swiper-button-next {
@@ -37,25 +39,14 @@ a {
   color: transparent !important;
   background-image: url('../public/arrowNextActive.png');
 
-  margin-right: 30rem;
-  transform: translate(0px, 7.5rem);
+  /* transform: translate(-20rem, 10rem); */
 }
 
 .swiper-pagination-bullet {
-  background-color: #BAE6FD !important;
+  background-color: #76ccfb !important;
+  /* transform: translate(0, 10px) !important; */
 }
 
 .swiper-pagination-bullet-active {
   background-color: #38BDF8 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-
-  body {
-    color: white;
-    background: black;
-  }
 }

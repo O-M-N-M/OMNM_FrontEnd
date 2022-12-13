@@ -1,11 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
+import { getCookie, hasCookie } from "cookies-next";
 
 import { Box, Typography } from "@mui/material";
+
 import logo from '../public/logo2.png';
 import MyPageIcon from '../public/Group1.ico';
-import Link from "next/link";
 
-import { getCookie, hasCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
@@ -33,34 +34,48 @@ const Header = () => {
     if (hasCookie('OMNM')) {
       setCookie(true);
       loadProfile();
+    } else {
+      setCookie(false);
     }
-  }, [])
+  })
 
   return (
     <Box className="flex items-center bg-white border-gray0 border-0 border-b border-solid w-auto h-[50px]">
-      <Link href='/'>
-        <a className="ml-[15%]">
-          <Image src={logo} width={115} height={20} />
-        </a>
-      </Link>
-
       {
         cookie ? (
-          <a className="ml-auto mr-[15%] mt-1">
-            {
-              profile === null ? (
-                <Image src={MyPageIcon} width={26} height={26} />
-              ) : (
-                <Image loader={() => profile} src={profile} width={26} height={26} />
-              )
-            }
-          </a>
-        ) : (
-          <Link href='/login'>
+          <>
+            <Link href='/main'>
+              <a className="ml-[15%]">
+                <Image src={logo} width={115} height={20} />
+              </a>
+            </Link>
+
             <a className="ml-auto mr-[15%] mt-1">
-              <Typography className="text-base fomt-medium">로그인</Typography>
+              {
+                profile === null ? (
+                  <Image src={MyPageIcon} width={26} height={26} />
+                ) : (
+                  <Box className='border border-gray1 border-solid rounded-full w-[26px] h-[26px]'>
+                    <Image loader={() => profile} src={profile} width={26} height={26} className='rounded-full' />
+                  </Box>
+                )
+              }
             </a>
-          </Link>
+          </>
+        ) : (
+          <>
+            <Link href='/'>
+              <a className="ml-[15%]">
+                <Image src={logo} width={115} height={20} />
+              </a>
+            </Link>
+
+            <Link href='/login'>
+              <a className="ml-auto mr-[15%] mt-1">
+                <Typography className="text-base fomt-medium">로그인</Typography>
+              </a>
+            </Link>
+          </>
         )
       }
     </Box>

@@ -27,12 +27,12 @@ export const SignUpScreen: NextPage = () => {
   const [email, setEmail] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [name, setName] = useState('');
-  const [gender, setGender] = useState(0);
+  const [gender, setGender] = useState(-1);
   const [kakao, setKakao] = useState('');
-  const [dormitory, setDormitory] = useState(0);
+  const [dormitory, setDormitory] = useState(-1);
 
   const [one, setOne] = useState(false);
-  const [two, setTwo] = useState(false);
+  const [two, setTwo] = useState<boolean | number>(-1);
   const [three, setThree] = useState(false);
 
   const handleNext = () => {
@@ -49,57 +49,61 @@ export const SignUpScreen: NextPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    const userDto = {
-      loginId: `${id}`,
-      password: `${pw}`,
-      name: `${name}`,
-      email: `${email}@cau.ac.kr`,
-      school: `${school}`,
-      gender: gender,
-      kakaoId: `${kakao}`,
-      dormitory: dormitory
-    };
+    if (gender === -1) alert('성별을 선택해주세요.');
+    else if (dormitory === -1) alert('기숙사를 선택해주세요.');
+    else {
+      const formData = new FormData();
+      const userDto = {
+        loginId: `${id}`,
+        password: `${pw}`,
+        name: `${name}`,
+        email: `${email}@cau.ac.kr`,
+        school: `${school}`,
+        gender: gender,
+        kakaoId: `${kakao}`,
+        dormitory: dormitory
+      };
 
-    if (image !== null) {
-      formData.append('file', image);
+      if (image !== null) {
+        formData.append('file', image);
+      }
+      formData.append(
+        'key',
+        new Blob([JSON.stringify(userDto)],
+          { type: "application/json" }
+        )
+      );
+
+      formData.forEach((v) => {
+        console.log(v)
+      })
+
+      const url = '/api/join';
+      const headers = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+      await axios.post(url, formData, headers)
+        .then(res => {
+          if (res.data === '회원가입 완료') {
+            setThree(true);
+          } else {
+            alert('회원가입 실패');
+          }
+        }).catch(err => console.error(err));
     }
-    formData.append(
-      'key',
-      new Blob([JSON.stringify(userDto)],
-        { type: "application/json" }
-      )
-    );
-
-    formData.forEach((v) => {
-      console.log(v)
-    })
-
-    const url = '/api/join';
-    const headers = { headers: { 'Content-Type': 'multipart/form-data' } };
-
-    await axios.post(url, formData, headers)
-      .then(res => {
-        if (res.data === '회원가입 완료') {
-          setThree(true);
-        } else {
-          alert('회원가입 실패');
-        }
-      }).catch(err => console.error(err))
   }
 
   return (
-    <Box className="flex justify-center items-center h-[calc(100vh-50px)]">
-      <Box className="flex flex-col items-center">
-        <Image src={logo} width={75} height={75} />
-        <Typography className="text-lg mt-4">회원가입</Typography>
+    <Box className="flex justify-center items-center min-h-[calc(100vh-50px)]">
+      <Box className="flex flex-col items-center my-[5%]">
+        <Image src={logo} width={60} height={61} />
+        <Typography className="text-black text-2xl font-medium mt-5">회원가입</Typography>
 
-        <Box className="border border-solid border-gray0 rounded-lg pt-14 pr-14 pl-14 pb-10 mt-8 w-full">
+        <Box className="border border-solid border-gray0 rounded-2xl px-20 py-14 mt-6 w-full">
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>
-                  <Typography className="text-xs">{label}</Typography>
+                  <Typography className="text-black text-xs font-medium">{label}</Typography>
                 </StepLabel>
               </Step>
             ))}
@@ -111,15 +115,15 @@ export const SignUpScreen: NextPage = () => {
                 (<ProfileBox image={image} setImage={setImage} name={name} setName={setName} gender={gender} setGender={setGender} kakao={kakao} setKakao={setKakao} dormitory={dormitory} setDormitory={setDormitory} />)
           }
 
-          <Box className="flex justify-end mt-8">
+          <Box className="flex justify-end mt-10">
             {activeStep !== 2 ?
-              (<Button onClick={handleNext} className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
+              (<Button onClick={handleNext} className="bg-accent1 rounded-full text-white text-base font-medium block px-8 py-3.5">
                 다음
               </Button>)
               :
               (
                 <form onSubmit={onSubmit} >
-                  <Button type="submit" className="bg-accent1 rounded-full text-white text-xs block w-20 p-2.5">
+                  <Button type="submit" className="bg-accent1 rounded-full text-white text-base font-medium block px-8 py-3.5">
                     완료
                   </Button>
                 </form>
