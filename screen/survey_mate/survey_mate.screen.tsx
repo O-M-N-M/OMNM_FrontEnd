@@ -45,7 +45,7 @@ export const SurveyMateScreen: NextPage = () => {
     { key: "ISTP", checked: false },
   ]);
 
-  const [selectedAge, setSelectedAge] = useState<never[]>([]);
+  const [selectedAge, setSelectedAge] = useState<never>([]);
   const [selectedMbti, setSelectedMbti] = useState<String[]>([]);
   const [isSmoking, setIsSmoking] = useState("");
   const [department, setDepartment] = useState("");
