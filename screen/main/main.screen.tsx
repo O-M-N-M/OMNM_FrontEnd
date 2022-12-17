@@ -156,7 +156,7 @@ export const MainScreen: NextPage = () => {
 
   return (
     <Box className="bg-main-background">
-      <Box className="w-full h-[calc(100vh-50px)] py-28">
+      <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-50px)] py-28">
         <Box className="flex flex-row">
           <Typography className="text-5xl font-bold ml-[15%]">{userName}님을 위한</Typography>
 

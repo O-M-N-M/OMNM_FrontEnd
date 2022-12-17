@@ -21,14 +21,18 @@ interface props {
 
 export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, name, setName, gender, setGender, kakao, setKakao, dormitory, setDormitory }) => {
   return (
-    <Box className="mt-10">
+    <Box className="flex flex-col justify-center items-center mt-10">
       <Box className="relative text-center">
         {
           image === null ?
             <Image src={basicProfile} width={90} height={90} className="absolute rounded-full" />
-            : <Image src={URL.createObjectURL(image)} width={90} height={90} className="absolute rounded-full" />
+            : (
+              <Box className='border border-gray1 border-solid rounded-full w-[90px] h-[90px]'>
+                <Image src={URL.createObjectURL(image)} width={90} height={90} className="absolute rounded-full" />
+              </Box>
+            )
         }
-        <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-16 bg-white border border-solid border-gray1">
+        <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-[-15px] bg-white border border-solid border-gray1">
           <input
             hidden
             accept="image/*"
@@ -42,43 +46,50 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
         </IconButton>
       </Box>
 
-      <Typography className="text-black text-lg font-medium mt-10">이름</Typography>
-      <input
-        type="text"
-        name="name"
-        placeholder="이름 입력"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[75%] h-12 p-2.5 mt-2 focus:outline-none" required />
+      <Box className='w-full mt-10'>
+        <Typography className="text-black text-lg font-medium">이름</Typography>
+        <input
+          type="text"
+          name="name"
+          placeholder="이름 입력"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[75%] h-12 p-2.5 mt-2 focus:outline-none" required />
+      </Box>
 
-      <Typography className="text-black text-lg font-medium mt-9">성별</Typography>
-      <FormControl>
-        <RadioGroup row onChange={(e) => setGender(parseInt(e.target.value))}>
-          <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">남자</Typography>} />
-          <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">여자</Typography>} />
-        </RadioGroup>
-      </FormControl>
+      <Box className='w-full mt-9'>
+        <Typography className="text-black text-lg font-medium">성별</Typography>
+        <FormControl>
+          <RadioGroup row onChange={(e) => setGender(parseInt(e.target.value))}>
+            <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">남자</Typography>} />
+            <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">여자</Typography>} />
+          </RadioGroup>
+        </FormControl>
+      </Box>
 
-      <Typography className="text-black text-lg font-medium mt-9">카카오톡 아이디</Typography>
-      <input
-        type="text"
-        name="kakao"
-        placeholder="카카오톡 아이디 입력"
-        value={kakao}
-        onChange={(e) => setKakao(e.target.value)}
-        className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[75%] h-12 p-2.5 mt-2 focus:outline-none" required />
+      <Box className='w-full mt-9'>
+        <Typography className="text-black text-lg font-medium">카카오톡 아이디</Typography>
+        <input
+          type="text"
+          name="kakao"
+          placeholder="카카오톡 아이디 입력"
+          value={kakao}
+          onChange={(e) => setKakao(e.target.value)}
+          className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[75%] h-12 p-2.5 mt-2 focus:outline-none" required />
+      </Box>
 
-      <Typography className="text-black text-lg font-medium mt-9">생활관 정보</Typography>
-      <FormControl>
-        <RadioGroup row onChange={(e) => setDormitory(parseInt(e.target.value))} className='flex flex-col'>
-          <Box>
-            <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">308관 2인실</Typography>} />
-            <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">308관 4인실</Typography>} />
-          </Box>
-          <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">309관 2인실</Typography>} />
-        </RadioGroup>
-      </FormControl>
-
+      <Box className='w-full mt-9'>
+        <Typography className="text-black text-lg font-medium">생활관 정보</Typography>
+        <FormControl>
+          <RadioGroup row onChange={(e) => setDormitory(parseInt(e.target.value))} className='flex flex-col'>
+            <Box>
+              <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">308관 2인실</Typography>} />
+              <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">308관 4인실</Typography>} />
+            </Box>
+            <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">309관 2인실</Typography>} />
+          </RadioGroup>
+        </FormControl>
+      </Box>
     </Box>
   );
 }
