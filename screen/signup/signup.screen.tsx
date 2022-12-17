@@ -49,7 +49,9 @@ export const SignUpScreen: NextPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (gender === -1) alert('성별을 선택해주세요.');
+    if (name === '') alert('이름을 입력해주세요.');
+    else if (gender === -1) alert('성별을 선택해주세요.');
+    else if (kakao === '') alert('카카오톡 아이디를 입력해주세요.');
     else if (dormitory === -1) alert('기숙사를 선택해주세요.');
     else {
       const formData = new FormData();
