@@ -74,10 +74,6 @@ export const SignUpScreen: NextPage = () => {
         )
       );
 
-      formData.forEach((v) => {
-        console.log(v)
-      })
-
       const url = '/api/join';
       const headers = { headers: { 'Content-Type': 'multipart/form-data' } };
 
