@@ -1,8 +1,15 @@
 import Link from "next/link";
+import Router from "next/router";
+import { deleteCookie } from "cookies-next";
 
 import { Box, Typography } from "@mui/material";
 
 const MyPageMenu = () => {
+  const onClick = () => {
+    deleteCookie('OMNM');
+    Router.push('/');
+  }
+
   return (
     <Box className='border border-solid border-gray0 rounded-[1.25rem] px-14 py-10 mt-6'>
       <Typography className='text-blak text-base font-medium'>룸메 신청 내역</Typography>
@@ -51,7 +58,7 @@ const MyPageMenu = () => {
         </a>
       </Link>
       <Link href='/mypage'>
-        <a>
+        <a onClick={onClick}>
           <Typography className="text-black text-base font-regular mt-4">로그아웃</Typography>
         </a>
       </Link>
