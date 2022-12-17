@@ -1,11 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
-import axios from "axios";
-import { getCookie } from "cookies-next";
 
 import { NextPage } from "next";
 import Image from "next/image";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import basicProfile from "../../public/basicProfile.png";
 import check from "../../public/check.png";
@@ -64,47 +62,8 @@ const fakeData = {
 }
 
 export const MyPageScreen: NextPage = () => {
-  const [kakaoId, setKaKaoId] = useState('');
-  const [name, setName] = useState('');
-  const [dormitory, setDormitory] = useState('');
-  const [profile, setProfile] = useState('');
-
   const receiveFirstKey = Object.keys(fakeData)[0];
   const receiveSecondKey = Object.keys(fakeData)[1];
-
-  const applicationHistory = ['신청 받은 리스트', '신청 보낸 리스트', '찜한 룸메 리스트'];
-  const survey = ['나의 성향 설문조사', '룸메 성향 설문조사'];
-  const settings = ['개인정보 수정', '비밀번호 변경', '회원 탈퇴', '로그아웃'];
-
-  useEffect(() => {
-    const getMyData = async () => {
-      const url = '/api/myInfo';
-      const token = getCookie('OMNM');
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
-
-      await axios.get(url, headers)
-        .then((res) => {
-          console.log(res.data);
-          setKaKaoId(res.data.kakaoId);
-          setName(res.data.name);
-          setProfile(res.data.profileUrl);
-
-          res.data.dormitory === 0 ? setDormitory('308관 2인실') :
-            res.data.dormitory === 1 ? setDormitory('308관 4인실') :
-              setDormitory('309관 2인실');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    getMyData();
-  }, [])
 
   return (
     <>
