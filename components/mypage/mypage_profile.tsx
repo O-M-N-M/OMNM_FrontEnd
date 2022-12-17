@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import Image from "next/image";
 import Router from "next/router";
@@ -9,7 +9,7 @@ import axios from "axios";
 
 import basicProfile from "../../public/basicProfile.png";
 
-import MyPageToggle from '../../components/mypage/mypage_toggle';
+import MyPageToggle from './mypage_toggle';
 
 const MyPageProfile = () => {
   const [kakaoId, setKaKaoId] = useState('');
