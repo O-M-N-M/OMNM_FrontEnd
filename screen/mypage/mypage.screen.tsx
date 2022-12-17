@@ -1,1604 +1,262 @@
 import { Box, Button, Typography } from "@mui/material";
-import { flexbox } from "@mui/system";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+
 import { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 
-import group from "../../public/Group1.png";
+import React, { useEffect, useState } from "react";
+
 import basicProfile from "../../public/basicProfile.png";
 import check from "../../public/check.png";
-import logo from "../../public/logo2.png";
-import logorights from "../../public/logorights.png";
 
-import MyPageLeft from "./components/mypage_left";
+import MyPageLeft from '../../components/mypage/mypage_left';
+import Footer from '../../components/footer';
+import Link from "next/link";
+
+const fakeData = {
+  '09.24': [
+    {
+      'userId': 99,
+      'name': '김민지',
+      'age': 24,
+      'profileUrl': null,
+      'percent': 78.0
+    },
+    {
+      'userId': 99,
+      'name': '김민지',
+      'age': 24,
+      'profileUrl': null,
+      'percent': 78.0
+    }
+  ],
+  '09.18': [
+    {
+      'userId': 99,
+      'name': '김민지',
+      'age': 24,
+      'profileUrl': null,
+      'percent': 78.0
+    },
+    {
+      'userId': 99,
+      'name': '김민지',
+      'age': 24,
+      'profileUrl': null,
+      'percent': 78.0
+    },
+    {
+      'userId': 99,
+      'name': '김민지',
+      'age': 24,
+      'profileUrl': null,
+      'percent': 78.0
+    },
+    {
+      'userId': 99,
+      'name': '김민지',
+      'age': 24,
+      'profileUrl': null,
+      'percent': 78.0
+    }
+  ]
+}
 
 export const MyPageScreen: NextPage = () => {
+  const [kakaoId, setKaKaoId] = useState('');
+  const [name, setName] = useState('');
+  const [dormitory, setDormitory] = useState('');
+  const [profile, setProfile] = useState('');
+
+  const receiveFirstKey = Object.keys(fakeData)[0];
+  const receiveSecondKey = Object.keys(fakeData)[1];
+
+  const applicationHistory = ['신청 받은 리스트', '신청 보낸 리스트', '찜한 룸메 리스트'];
+  const survey = ['나의 성향 설문조사', '룸메 성향 설문조사'];
+  const settings = ['개인정보 수정', '비밀번호 변경', '회원 탈퇴', '로그아웃'];
+
+  useEffect(() => {
+    const getMyData = async () => {
+      const url = '/api/myInfo';
+      const token = getCookie('OMNM');
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          console.log(res.data);
+          setKaKaoId(res.data.kakaoId);
+          setName(res.data.name);
+          setProfile(res.data.profileUrl);
+
+          res.data.dormitory === 0 ? setDormitory('308관 2인실') :
+            res.data.dormitory === 1 ? setDormitory('308관 4인실') :
+              setDormitory('309관 2인실');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    getMyData();
+  }, [])
+
   return (
-    <Box
-      sx={{
-        backgroundColor: "#FFFFFF",
-        width: "100%",
-        height: "50px",
-        position: "absolute",
-        fontFamily: "Spoqa Han Sans Neo",
-        fontsx: "normal",
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: "#FFFFFF",
-          width: "100%",
-          height: "100%",
-          display: 'flex',
-          paddingLeft: "360px",
-          paddingRight: "360px",
-          borderBottom: 1,
-          borderColor: "#DBDBDB",
-        }}
-      >
-        <Link href="/">
-          <Box
-            sx={{
-              width: "50%",
-              float: "left",
-              textAlign: "left",
-              paddingTop: "10px",
-            }}
-          >
-            <Image src={logo} width={115} height={20} />
+    <>
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] my-[5%]'>
+        <Box>
+          <MyPageLeft />
+        </Box>
+
+        <Box className='border border-solid border-gray0 rounded-[1.25rem] w-fit h-fit px-[3.75rem] py-16 ml-6'>
+          <Box>
+            <Box className='flex flex-row items-center'>
+              <Typography className='text-black text-xl font-medium'>룸메 신청 받은 리스트</Typography>
+              <Link href='/'>
+                <a className='ml-auto'>
+                  <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
+                </a>
+              </Link>
+            </Box>
+
+            <Box className='flex flex-row'>
+              <Box>
+                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
+                <>
+                  {
+                    fakeData[receiveFirstKey as keyof typeof fakeData].map((v) => {
+                      return (
+                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-[23rem] h-fit mt-4 mb-1.5 px-6 py-3'>
+                          {
+                            v.profileUrl === null ?
+                              <Image src={basicProfile} width={24} height={24} />
+                              :
+                              <Image src={basicProfile} width={24} height={24} />
+                          }
+                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
+                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
+                          <Box className='ml-7'>
+                            <Image src={check} width={14} height={14} />
+                          </Box>
+                          <Typography className='text-black text-sm font-regular ml-2'>{v.percent}%</Typography>
+                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-12'>
+                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
+                          </Button>
+                        </Box>
+                      )
+                    })
+                  }
+                </>
+              </Box>
+              <Box className='ml-7'>
+                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
+                <>
+                  {
+                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v) => {
+                      return (
+                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-[23rem] h-fit mt-4 mb-1.5 px-6 py-3'>
+                          {
+                            v.profileUrl === null ?
+                              <Image src={basicProfile} width={24} height={24} />
+                              :
+                              <Image src={basicProfile} width={24} height={24} />
+                          }
+                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
+                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
+                          <Box className='ml-7'>
+                            <Image src={check} width={14} height={14} />
+                          </Box>
+                          <Typography className='text-black text-sm font-regular ml-2'>{v.percent}%</Typography>
+                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-12'>
+                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
+                          </Button>
+                        </Box>
+                      )
+                    })
+                  }
+                </>
+              </Box>
+            </Box>
           </Box>
-        </Link>
-        <Box
-          sx={{
-            width: "50%",
-            float: "right",
-            textAlign: "right",
-            paddingTop: "10px",
-          }}
-        >
-          <Image src={group} width={26} height={26} />
+
+          <Box className='mt-14'>
+            <Box className='flex flex-row items-center'>
+              <Typography className='text-black text-xl font-medium'>룸메 신청 보낸 리스트</Typography>
+              <Link href='/'>
+                <a className='ml-auto'>
+                  <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
+                </a>
+              </Link>
+            </Box>
+
+            <Box className='flex flex-row'>
+              <Box>
+                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
+                <>
+                  {
+                    fakeData[receiveFirstKey as keyof typeof fakeData].map((v) => {
+                      return (
+                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-[23rem] h-fit mt-4 mb-1.5 px-6 py-3'>
+                          {
+                            v.profileUrl === null ?
+                              <Image src={basicProfile} width={24} height={24} />
+                              :
+                              <Image src={basicProfile} width={24} height={24} />
+                          }
+                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
+                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
+                          <Box className='ml-7'>
+                            <Image src={check} width={14} height={14} />
+                          </Box>
+                          <Typography className='text-black text-sm font-regular ml-2'>{v.percent}%</Typography>
+                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-12'>
+                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
+                          </Button>
+                        </Box>
+                      )
+                    })
+                  }
+                </>
+              </Box>
+              <Box className='ml-7'>
+                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
+                <>
+                  {
+                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v) => {
+                      return (
+                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-[23rem] h-fit mt-4 mb-1.5 px-6 py-3'>
+                          {
+                            v.profileUrl === null ?
+                              <Image src={basicProfile} width={24} height={24} />
+                              :
+                              <Image src={basicProfile} width={24} height={24} />
+                          }
+                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
+                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
+                          <Box className='ml-7'>
+                            <Image src={check} width={14} height={14} />
+                          </Box>
+                          <Typography className='text-black text-sm font-regular ml-2'>{v.percent}%</Typography>
+                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-12'>
+                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
+                          </Button>
+                        </Box>
+                      )
+                    })
+                  }
+                </>
+              </Box>
+            </Box>
+          </Box>
         </Box>
       </Box>
 
-      <Box
-        sx={{
-          width: "100%",
-          paddingLeft: "360px",
-          paddingRight: "360px",
-          marginTop: "120px",
-          marginBottom: "120px",
-        }}
-      >
-        <MyPageLeft></MyPageLeft>
-
-        {/* main content */}
-        <Box
-          sx={{
-            width: "894px",
-            marginLeft: "306px",
-            border: "1px solid #DBDBDB",
-            borderRadius: "20px",
-            padding: "64px 60px",
-          }}
-        >
-          <Box sx={{ height: "400px" }}>
-            <Box sx={{ height: "25px" }}>
-              <Typography
-                sx={{
-                  float: "left",
-                  fontSize: "20px",
-                  fontWeight: "500",
-                  lineHeight: "25px",
-                }}
-              >
-                룸메 신청 받은 리스트
-              </Typography>
-              <Typography
-                sx={{
-                  float: "right",
-                  fontSize: "12px",
-                  fontWeight: "500",
-                  lineHeight: "15px",
-                  color: "#9B9EA1",
-                }}
-              >
-                더보기
-              </Typography>
-            </Box>
-            <Box sx={{ marginTop: "24px" }}>
-              <Box sx={{ float: "left" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      height: "15px",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      lineHeight: "15px",
-                      color: "#9B9EA1",
-                    }}
-                  >
-                    9.24
-                  </Typography>
-                </Box>
-                <Box sx={{ marginTop: "6px" }}>
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-              <Box sx={{ float: "right" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      height: "15px",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      lineHeight: "15px",
-                      color: "#9B9EA1",
-                    }}
-                  >
-                    9.24
-                  </Typography>
-                </Box>
-                <Box sx={{ marginTop: "6px" }}>
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-
-          <Box sx={{ height: "400px", marginTop: "56px" }}>
-            <Box sx={{ height: "25px" }}>
-              <Typography
-                sx={{
-                  float: "left",
-                  fontSize: "20px",
-                  fontWeight: "500",
-                  lineHeight: "25px",
-                }}
-              >
-                룸메 신청 보낸 리스트
-              </Typography>
-              <Typography
-                sx={{
-                  float: "right",
-                  fontSize: "12px",
-                  fontWeight: "500",
-                  lineHeight: "15px",
-                  color: "#9B9EA1",
-                }}
-              >
-                더보기
-              </Typography>
-            </Box>
-            <Box sx={{ marginTop: "24px" }}>
-              <Box sx={{ float: "left" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      height: "15px",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      lineHeight: "15px",
-                      color: "#9B9EA1",
-                    }}
-                  >
-                    9.24
-                  </Typography>
-                </Box>
-                <Box sx={{ marginTop: "6px" }}>
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-              <Box sx={{ float: "right" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      height: "15px",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      lineHeight: "15px",
-                      color: "#9B9EA1",
-                    }}
-                  >
-                    9.24
-                  </Typography>
-                </Box>
-                <Box sx={{ marginTop: "6px" }}>
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      marginTop: "10px",
-                      width: "372px",
-                      height: "48px",
-                      border: "1px solid #DBDBDB",
-                      borderRadius: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box sx={{ float: "left", marginTop: "4px" }}>
-                      <Image src={basicProfile} width={24} height={24} />
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "12px" }}>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        이기태
-                      </Typography>
-                      <Typography
-                        sx={{
-                          height: "15px",
-                          fontSize: "12px",
-                          fontWeight: "400",
-                          lineHeight: "15px",
-                          color: "#9B9EA1",
-                          marginLeft: "4px",
-                        }}
-                      >
-                        · 24
-                      </Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "28px" }}>
-                      <Image src={check} width={14} height={14} />
-                      <Typography sx={{ marginLeft: "8px" }}>78%</Typography>
-                    </Box>
-                    <Box sx={{ float: "left", marginLeft: "48px" }}>
-                      <Button
-                        type="submit"
-                        sx={{
-                          background: "#FFFFFF",
-                          borderRadius: "200px",
-                          width: "84px",
-                          height: "24px",
-                          color: "#4B99EB",
-                          border: "1px solid #4B99EB",
-                          fontFamily: "Spoqa Han Sans Neo",
-                          fontsx: "normal",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          lineHeight: "15px",
-                          letterSpacing: "-0.3px",
-                        }}
-                      >
-                        프로필 보기
-                      </Button>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-
-          <Box></Box>
-        </Box>
-      </Box>
-
-      <Box
-        sx={{
-          backgroundColor: "#FBFBFB;",
-          width: "1920px",
-          height: "180px",
-          position: "absolute",
-          fontFamily: "Spoqa Han Sans Neo",
-          fontsx: "normal",
-          paddingLeft: "360px",
-          paddingRight: "360px",
-          borderBottom: 0,
-        }}
-      >
-        <Link href="/">
-          <Box
-            sx={{
-              width: "50%",
-              float: "left",
-              textAlign: "left",
-              paddingTop: "30px",
-            }}
-          >
-            <Image src={logorights} width={234} height={91} />
-          </Box>
-        </Link>
-        <Box
-          sx={{
-            width: "50%",
-            float: "right",
-            textAlign: "right",
-            paddingTop: "30px",
-          }}
-        >
-          <Box sx={{ height: "30px" }}>
-            <Typography
-              sx={{
-                marginLeft: "150px",
-                float: "left",
-                fontSize: "16px",
-                fontWeight: "500",
-              }}
-            >
-              메인
-            </Typography>
-            <Typography
-              sx={{ float: "right", fontSize: "16px", fontWeight: "500" }}
-            >
-              마이페이지
-            </Typography>
-          </Box>
-          <Box sx={{ height: "30px" }}>
-            <Typography
-              sx={{ float: "right", fontSize: "14px", fontWeight: "400" }}
-            >
-              룸메 신청 내역
-            </Typography>
-          </Box>
-          <Box sx={{ height: "30px" }}>
-            <Typography
-              sx={{ float: "right", fontSize: "14px", fontWeight: "400" }}
-            >
-              성향 설문조사
-            </Typography>
-          </Box>
-          <Box sx={{ height: "30px" }}>
-            <Typography
-              sx={{ float: "right", fontSize: "14px", fontWeight: "400" }}
-            >
-              설정
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+      <Footer />
+    </>
   );
 };
