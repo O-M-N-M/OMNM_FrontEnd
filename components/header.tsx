@@ -50,17 +50,19 @@ const Header = () => {
               </a>
             </Link>
 
-            <a className="ml-auto mr-[15%] mt-1">
-              {
-                profile === null ? (
-                  <Image src={MyPageIcon} width={26} height={26} />
-                ) : (
-                  <Box className='border border-gray1 border-solid rounded-full w-[26px] h-[26px]'>
-                    <Image loader={() => profile} src={profile} width={26} height={26} className='rounded-full' />
-                  </Box>
-                )
-              }
-            </a>
+            <Link href='/mypage'>
+              <a className="ml-auto mr-[15%] mt-1">
+                {
+                  profile === null ? (
+                    <Image src={MyPageIcon} width={26} height={26} />
+                  ) : (
+                    <Box className='border border-gray1 border-solid rounded-full w-[26px] h-[26px]'>
+                      <Image loader={() => profile} src={profile} width={26} height={26} className='rounded-full' />
+                    </Box>
+                  )
+                }
+              </a>
+            </Link>
           </>
         ) : (
           <>
