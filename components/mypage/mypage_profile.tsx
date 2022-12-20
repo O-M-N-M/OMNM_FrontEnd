@@ -50,7 +50,7 @@ const MyPageProfile = () => {
   }, []);
 
   return (
-    <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] min-w-[15rem] px-7 py-10'>
+    <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] min-w-[18rem] px-7 py-10'>
       {
         profile === null ? (
           <Image src={basicProfile} width={100} height={100} />

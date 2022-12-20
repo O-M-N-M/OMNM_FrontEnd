@@ -10,12 +10,12 @@ export const MyPageWithdrawalScreen = () => {
 
   return (
     <>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] my-[5%]'>
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] mx-[15%] my-[5%]'>
         <Box>
           <MyPageLeft />
         </Box>
 
-        <form className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-fit h-fit px-72 py-20 ml-6'>
+        <form className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
           <Typography className='text-black text-xl font-medium text-center w-full'>회원 탈퇴</Typography>
 
           <Box className='mt-10'>
@@ -42,9 +42,11 @@ export const MyPageWithdrawalScreen = () => {
               required />
           </Box>
 
-          <Button className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
-            <Typography className='text-white text-sm font-medium'>확인</Typography>
-          </Button>
+          <Box className='flex w-80'>
+            <Button className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
+              <Typography className='text-white text-sm font-medium'>확인</Typography>
+            </Button>
+          </Box>
         </form>
       </Box>
 

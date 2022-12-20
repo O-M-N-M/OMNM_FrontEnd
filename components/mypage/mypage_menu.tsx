@@ -30,7 +30,7 @@ const MyPageMenu = () => {
       </Link>
 
       <Typography className='text-blak text-base font-medium mt-9'>성향 설문조사</Typography>
-      <Link href='/mypage'>
+      <Link href='/mypage_surveyme'>
         <a>
           <Typography className="text-black text-base font-regular mt-4">나의 성향 설문조사</Typography>
         </a>
