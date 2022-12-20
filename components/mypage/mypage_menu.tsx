@@ -37,7 +37,7 @@ const MyPageMenu = () => {
       </Link>
       <Link href='/mypage'>
         <a>
-          <Typography className="text-black text-base font-regular mt-4">룸메 성향 설문조사</Typography>
+          <Typography className="text-black text-base font-regular mt-3">룸메 성향 설문조사</Typography>
         </a>
       </Link>
 
@@ -49,17 +49,17 @@ const MyPageMenu = () => {
       </Link>
       <Link href='/mypage_changepw'>
         <a>
-          <Typography className="text-black text-base font-regular mt-4">비밀번호 변경</Typography>
+          <Typography className="text-black text-base font-regular mt-3">비밀번호 변경</Typography>
         </a>
       </Link>
       <Link href='/mypage_withdrawal'>
         <a>
-          <Typography className="text-black text-base font-regular mt-4">회원 탈퇴</Typography>
+          <Typography className="text-black text-base font-regular mt-3">회원 탈퇴</Typography>
         </a>
       </Link>
       <Link href='/mypage'>
         <a onClick={onClick}>
-          <Typography className="text-black text-base font-regular mt-4">로그아웃</Typography>
+          <Typography className="text-black text-base font-regular mt-3">로그아웃</Typography>
         </a>
       </Link>
     </Box>

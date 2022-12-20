@@ -50,7 +50,7 @@ const MyPageProfile = () => {
   }, []);
 
   return (
-    <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] px-7 py-10'>
+    <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] min-w-[15rem] px-7 py-10'>
       {
         profile === null ? (
           <Image src={basicProfile} width={100} height={100} />
@@ -63,19 +63,19 @@ const MyPageProfile = () => {
 
       <Typography className='text-black text-2xl font-medium mt-5'>{name}</Typography>
 
-      <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl min-w-[14rem] px-7 py-3 mt-6'>
+      <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl px-7 py-3 mt-6'>
         <Typography className='text-black text-sm font-regular'>룸메이트 매칭 완료</Typography>
-        <MyPageToggle className='ml-auto' />
+        <MyPageToggle className='ml-5' />
       </Box>
 
-      <Box className='border border-solid border-gray0 rounded-xl min-w-[14rem] px-7 py-6 mt-2'>
+      <Box className='border border-solid border-gray0 rounded-xl px-7 py-6 mt-2'>
         <Box className='flex flex-row'>
           <Typography className='text-black text-sm font-regular'>카카오톡 ID</Typography>
           <Typography className='text-black text-sm font-medium ml-auto'>{kakaoId}</Typography>
         </Box>
         <Box className='flex flex-row mt-5'>
           <Typography className='text-black text-sm font-regular'>생활관 정보</Typography>
-          <Typography className='text-black text-sm font-medium ml-auto'>{dormitoryTitle[dormitory]}</Typography>
+          <Typography className='text-black text-sm font-medium ml-7'>{dormitoryTitle[dormitory]}</Typography>
         </Box>
       </Box>
     </Box>
