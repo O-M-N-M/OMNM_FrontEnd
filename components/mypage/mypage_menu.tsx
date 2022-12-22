@@ -35,7 +35,7 @@ const MyPageMenu = () => {
           <Typography className="text-black text-base font-regular mt-4">나의 성향 설문조사</Typography>
         </a>
       </Link>
-      <Link href='/mypage'>
+      <Link href='/mypage_surveymate'>
         <a>
           <Typography className="text-black text-base font-regular mt-3">룸메 성향 설문조사</Typography>
         </a>
