@@ -16,6 +16,14 @@ export const MyPageSurveyMeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState('');
 
+  const mbti = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'];
+  const isSmoking = ['흡연', '비흡연'];
+  const lifeCycle = ['아침형', '저녁형'];
+  const sleepingPattern = ['코골이', '이갈이', '몸부림', '수면패턴 없음'];
+  const isCleaning = ['주 5회 이상 청소', '주 2-3회 청소', '주 1회 청소', '월 1회 청소'];
+  const nationality = ['내국인', '외국인'];
+  const armyService = ['군필', '미필'];
+
   useEffect(() => {
     setLoading(true);
 
@@ -36,30 +44,22 @@ export const MyPageSurveyMeScreen = () => {
           answers.push(res.data.age);
           answers.push(res.data.mbti);
 
-          answers.push(res.data.isSmoking === 0 ? '흡연' : '비흡연');
+          answers.push(isSmoking[res.data.isSmoking]);
           answers.push(res.data.department);
-          answers.push(res.data.lifeCycle === 0 ? '아침형' : '저녁형');
+          answers.push(lifeCycle[res.data.lifeCycle]);
 
           const sp = res.data.sleepingPattern.replace(/[{}]/g, '').split(',');
-          if (sp.length === 0) answers.push('수면패턴 없음');
+          if (sp[0] === '3') answers.push(sleepingPattern[3]);
           else {
-            let newSP: String[] = [];
-            sp.forEach((v: string) => {
-              if (v === '0') newSP.push('코골이');
-              else if (v === '1') newSP.push('이갈이');
-              else newSP.push('몸부림');
-            });
+            let newSP: string[] = [];
 
+            sp.forEach((v: string) => sleepingPattern[parseInt(v)]);
             answers.push(newSP.join(' / '));
           }
 
-          res.data.isCleaning === 0 ? answers.push('주 5회 이상 청소') :
-            res.data.isCleaning === 1 ? answers.push('주 2-3회 청소') :
-              res.data.isCleaning === 2 ? answers.push('주 1회 청소') :
-                answers.push('월 1회 청소');
-
-          answers.push(res.data.nationality);
-          answers.push(res.data.armyService === 0 ? '군필' : '미필');
+          answers.push(isCleaning[res.data.cleaning])
+          answers.push(nationality[res.data.nationality]);
+          answers.push(armyService[res.data.armyService]);
 
           setIntroduction(res.data.introduction);
         })
