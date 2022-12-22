@@ -1,15 +1,89 @@
 import Image from "next/image";
 
-import { Box, Typography } from "@mui/material"
+import { Box, CircularProgress, Typography } from "@mui/material"
 
 import EditIcon from '../../public/edit.png';
 import MyPageLeft from "@/components/mypage/mypage_left"
 import Footer from "@/components/footer"
+import { useEffect, useState } from "react";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 
-const questions = ['선호하는 룸메의 나이', '선호하는 룸메의 MBTI', '선호하는 룸메의 흡연 여부', '선호하는 룸메의 학과', '선호하는 룸메의 생활 패턴', '선호하는 룸메의 방 청소 빈도', '선호하는 룸메의 국적', '선호하는 룸메의 군복무 여부'];
-const answers = [['20대 초반', '20대 후반', '20대 중반'], ['ENFJ', 'ENTJ', 'INFP'], ['비흡연'], ['상관없음'], '']
+const questions = [
+  '선호하는 룸메의 나이',
+  '선호하는 룸메의 MBTI',
+  '선호하는 룸메의 흡연 여부',
+  '선호하는 룸메의 학과',
+  '선호하는 룸메의 생활 패턴',
+  '선호하는 룸메의 방 청소 빈도',
+  '선호하는 룸메의 국적',
+  '선호하는 룸메의 군복무 여부'
+];
+let answers: any[] = [];
 
 export const MyPageSurveyMateScreen = () => {
+  const [loading, setLoading] = useState(false);
+
+  const doNotCare = '상관없음';
+
+  const age = ['20대 초반', '20대 중반', '20대 후반', '30대 후반', doNotCare];
+  const mbti = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'];
+  const isSmoking = ['흡연', '비흡연', doNotCare];
+  const department = ['같은 학과', '다른 학과', doNotCare];
+  const lifeCycle = ['아침형', '저녁형', doNotCare];
+  const isCleaning = ['주 5회 이상 청소', '주 2-3회 청소', '주 1회 청소', '월 1회 청소', doNotCare];
+  const nationality = ['대한민국', doNotCare];
+  const armyService = ['군필', '미필', doNotCare];
+
+  useEffect(() => {
+    setLoading(true);
+
+    const getSurveyMate = async () => {
+      const url = '/api/yourPersonality';
+      const token = getCookie('OMNM');
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          answers = [];
+
+          const ages = res.data.age.replace(/[{}]/g, '').split(',');
+          if (ages[0] === '4') answers.push(age[4]);
+          else {
+            let newAge: string[] = [];
+
+            ages.forEach((v: string) => newAge.push(age[parseInt(v)]));
+            answers.push(newAge.join(' / '));
+          }
+
+          const mbtis = res.data.mbti.replace(/[{}]/g, '').split(',');
+          if (mbtis[0] === 'ALL') answers.push(doNotCare);
+          else {
+            let newMbti: string[] = [];
+
+            mbtis.forEach((v: string) => newMbti.push(mbti[parseInt(v)]));
+            answers.push(newMbti.join(' / '));
+          }
+
+          answers.push(isSmoking[res.data.isSmoking]);
+          answers.push(department[res.data.department]);
+          answers.push(lifeCycle[res.data.lifeCycle]);
+          answers.push(isCleaning[res.data.cleaning]);
+          answers.push(nationality[res.data.nationality]);
+          answers.push(armyService[res.data.armyService]);
+        })
+
+      setLoading(false);
+    };
+
+    getSurveyMate();
+  }, [])
+
   return (
     <>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] mx-[15%] my-[5%]'>
@@ -19,22 +93,32 @@ export const MyPageSurveyMateScreen = () => {
 
         <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>
           <Box className='flex flex-row items-center mb-4'>
-            <Typography className='text-black text-xl font-medium'>나의 성향 설문조사</Typography>
+            <Typography className='text-black text-xl font-medium'>룸메 성향 설문조사</Typography>
             <Box className='ml-auto'>
               <Image src={EditIcon} width={20} height={20} />
             </Box>
           </Box>
 
           {
-            questions.map((v, idx) => {
-              return (
-                <Box className='flex flex-row border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
-                  <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {idx + 1}</Typography>
-                  <Typography className='text-black text-base font-medium ml-3'>{v}</Typography>
-                  <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 ml-auto'>ㅁㅁ</Typography>
-                </Box>
-              )
-            })
+            loading ? (
+              <Box className='flex justify-center items-center w-full h-full'>
+                <CircularProgress color="inherit" />
+              </Box>
+            ) : (
+              <>
+                {
+                  questions.map((v, idx) => {
+                    return (
+                      <Box className='flex flex-row border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
+                        <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {idx + 1}</Typography>
+                        <Typography className='text-black text-base font-medium ml-3'>{v}</Typography>
+                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 max-w-[50%] ml-auto'>{answers[idx]}</Typography>
+                      </Box>
+                    )
+                  })
+                }
+              </>
+            )
           }
         </Box>
       </Box>
