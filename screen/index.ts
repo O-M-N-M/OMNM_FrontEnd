@@ -5,3 +5,4 @@ export * from "./findpw";
 export * from "./signup";
 export * from "./mypage";
 export * from "./main";
+export * from "./surveyme";
