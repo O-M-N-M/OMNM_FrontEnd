@@ -6,13 +6,13 @@ import { Box, Button, Typography } from "@mui/material";
 
 import SurveyIcon from '../../public/Component10.png';
 import FirstComponent from "@/components/surveymate/first";
-import SecondComponent from "@/components/surveymate/second";
-import ThirdComponent from "@/components/surveymate/third";
-import FourthComponent from "@/components/surveymate/fourth";
-import FifthComponent from "@/components/surveymate/fifth";
-import SixthComponent from "@/components/surveymate/sixth";
-import SeventhComponent from "@/components/surveymate/seventh";
-import EighthComponent from "@/components/surveymate/eighth";
+// import SecondComponent from "@/components/surveymate/second";
+// import ThirdComponent from "@/components/surveymate/third";
+// import FourthComponent from "@/components/surveymate/fourth";
+// import FifthComponent from "@/components/surveymate/fifth";
+// import SixthComponent from "@/components/surveymate/sixth";
+// import SeventhComponent from "@/components/surveymate/seventh";
+// import EighthComponent from "@/components/surveymate/eighth";
 
 import { useState } from "react";
 import axios from "axios";
@@ -140,14 +140,14 @@ export const SurveyMateScreen: NextPage = () => {
               <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
 
               {
-                index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
-                  index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
-                    index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
-                      index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
-                        index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
-                          index === 5 ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning }} /> :
-                            index === 6 ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality }} /> :
-                              index === 7 && <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService }} />
+                index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> : <></>
+                // index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
+                //   index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
+                //     index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
+                //       index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
+                //         index === 5 ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning }} /> :
+                //           index === 6 ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality }} /> :
+                //             index === 7 && <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService }} />
               }
             </Box>
           )
