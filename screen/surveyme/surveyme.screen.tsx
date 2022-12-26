@@ -8,7 +8,7 @@ import { Box, Button, Typography } from "@mui/material";
 
 import SurveyIcon from '../../public/Component10.png';
 import FirstComponent from "@/components/surveyme/first";
-// import SecondComponent from "@/components/surveyme/second";
+import SecondComponent from "@/components/surveyme/second";
 // // import ThirdComponent from "@/components/surveyme/third";
 // import FourthComponent from "@/components/surveyme/fourth";
 // import FifthComponent from "@/components/surveyme/fifth";
@@ -114,8 +114,8 @@ export const SurveyMeScreen: NextPage = () => {
               <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
 
               {
-                index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> : <></>
-                // index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
+                index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
+                  index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> : <></>
                 //   // index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
                 //   index === 2 ? <></> :
                 //     index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
