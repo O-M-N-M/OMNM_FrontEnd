@@ -10,6 +10,8 @@ interface SixthComponentProps {
   setSleepingPattern: Dispatch<SetStateAction<object>>;
 }
 
+const items = ['코골이', '이갈이', '몸부림'];
+
 const SixthComponent = ({ props }: { props: SixthComponentProps }) => {
   const onChangeEach = (e: ChangeEvent<HTMLInputElement>) => {
     props.setSleepingPattern((prevState) => {
@@ -34,51 +36,31 @@ const SixthComponent = ({ props }: { props: SixthComponentProps }) => {
     });
 
     e.target.checked = true;
-
-    console.log(props.sleepingPattern);
   }
 
   return (
     <FormControl className='flex flex-row ml-auto'>
-      <FormControlLabel
-        value={'0' || ''}
-        control={
-          <Checkbox
-            checked={props.sleepingPattern['0' as keyof typeof props.sleepingPattern]}
-            onChange={(e) => onChangeEach(e)}
-            icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
-            checkedIcon={<CheckCircleIcon />}
-            size="small"
-          />
-        }
-        label={<Typography className="text-black text-lg font-regular">코골이</Typography>}
-      />
-      <FormControlLabel
-        value={'1' || ''}
-        control={
-          <Checkbox
-            checked={props.sleepingPattern['1' as keyof typeof props.sleepingPattern]}
-            onChange={(e) => onChangeEach(e)}
-            icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
-            checkedIcon={<CheckCircleIcon />}
-            size="small"
-          />
-        }
-        label={<Typography className="text-black text-lg font-regular">이갈이</Typography>}
-      />
-      <FormControlLabel
-        value={'2' || ''}
-        control={
-          <Checkbox
-            checked={props.sleepingPattern['2' as keyof typeof props.sleepingPattern]}
-            onChange={(e) => onChangeEach(e)}
-            icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
-            checkedIcon={<CheckCircleIcon />}
-            size="small"
-          />
-        }
-        label={<Typography className="text-black text-lg font-regular">몸부림</Typography>}
-      />
+      {
+        items.map((v, index) => {
+          return (
+            <FormControlLabel
+              key={index}
+              value={index}
+              control={
+                <Checkbox
+                  checked={props.sleepingPattern[index as keyof typeof props.sleepingPattern]}
+                  onChange={(e) => onChangeEach(e)}
+                  icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
+                  checkedIcon={<CheckCircleIcon />}
+                  size="small"
+                />
+              }
+              label={<Typography className="text-black text-lg font-regular">{v}</Typography>}
+            />
+          )
+        })
+      }
+
       <FormControlLabel
         value={'3' || ''}
         control={

@@ -58,28 +58,38 @@ export const SurveyMeScreen: NextPage = () => {
   const [introduction, setIntroduction] = useState<string | undefined>('');
 
   const onClick = async () => {
+    const selectedSleepingPattern = `{${Object.keys(sleepingPattern).filter((v) => sleepingPattern[v as keyof typeof sleepingPattern]).join(',')}}`;
+    const data = {
+      age: age,
+      mbti: mbti,
+      isSmoking: isSmoking,
+      department: department,
+      lifeCycle: lifeCycle,
+      sleepingPattern: selectedSleepingPattern,
+      cleaning: isCleaning,
+      nationality: nationality,
+      armyService: armyService,
+      introduction: introduction
+    }
+
+    const formData = new FormData();
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(data)],
+        { type: "application/json" }
+      )
+    )
+
     const url = '/api/myPersonality';
     const token = getCookie('OMNM');
     const headers = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "multipart/form-data",
         'OMNM': `${token}`
       }
     };
-    const formData = {
-      age: age,
-      mbti: `${mbti}`,
-      isSmoking: isSmoking,
-      department: `${department}`,
-      lifeCycle: lifeCycle,
-      sleepingPattern: `${sleepingPattern}`,
-      cleaning: isCleaning,
-      nationality: `${nationality}`,
-      armyService: armyService,
-      introduction: `${introduction}`
-    }
 
-    await axios.post(url, JSON.stringify(formData), headers)
+    await axios.post(url, data, headers)
       .then((res) => {
         console.log(res.data);
       })
