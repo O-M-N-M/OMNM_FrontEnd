@@ -12,7 +12,7 @@ import SecondComponent from "@/components/surveyme/second";
 import ThirdComponent from "@/components/surveyme/third";
 import FourthComponent from "@/components/surveyme/fourth";
 import FifthComponent from "@/components/surveyme/fifth";
-// import SixthComponent from "@/components/surveyme/sixth";
+import SixthComponent from "@/components/surveyme/sixth";
 // import SeventhComponent from "@/components/surveyme/seventh";
 // import EighthComponent from "@/components/surveyme/eighth";
 // import NinethComponent from "@/components/surveyme/nineth";
@@ -118,8 +118,8 @@ export const SurveyMeScreen: NextPage = () => {
                   index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
                     index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
                       index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
-                        index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> : <></>
-                //         index === 5 ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern }} /> :
+                        index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
+                          index === 5 ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern }} /> : <></>
                 //           index === 6 ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning }} /> :
                 //             index === 7 ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality }} /> :
                 //               index === 8 && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService }} />
