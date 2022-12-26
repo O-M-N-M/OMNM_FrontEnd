@@ -9,7 +9,7 @@ import { Box, Button, Typography } from "@mui/material";
 import SurveyIcon from '../../public/Component10.png';
 import FirstComponent from "@/components/surveyme/first";
 import SecondComponent from "@/components/surveyme/second";
-// // import ThirdComponent from "@/components/surveyme/third";
+import ThirdComponent from "@/components/surveyme/third";
 // import FourthComponent from "@/components/surveyme/fourth";
 // import FifthComponent from "@/components/surveyme/fifth";
 // import SixthComponent from "@/components/surveyme/sixth";
@@ -115,9 +115,8 @@ export const SurveyMeScreen: NextPage = () => {
 
               {
                 index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
-                  index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> : <></>
-                //   // index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
-                //   index === 2 ? <></> :
+                  index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
+                    index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> : <></>
                 //     index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
                 //       index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
                 //         index === 5 ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern }} /> :
