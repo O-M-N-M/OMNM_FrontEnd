@@ -1,21 +1,21 @@
-import { NextPage } from "next";
 import { useState } from "react";
-import Image from 'next/image';
+import { NextPage } from "next";
 import { getCookie } from "cookies-next";
+import Image from 'next/image';
+import axios from "axios";
 
 import { Box, Button, Typography } from "@mui/material";
 
 import SurveyIcon from '../../public/Component10.png';
 import FirstComponent from "@/components/surveyme/first";
 import SecondComponent from "@/components/surveyme/second";
-import ThirdComponent from "@/components/surveyme/third";
+// import ThirdComponent from "@/components/surveyme/third";
+import FourthComponent from "@/components/surveyme/fourth";
 import FifthComponent from "@/components/surveyme/fifth";
 import SixthComponent from "@/components/surveyme/sixth";
 import SeventhComponent from "@/components/surveyme/seventh";
 import EighthComponent from "@/components/surveyme/eighth";
 import NinethComponent from "@/components/surveyme/nineth";
-import axios from "axios";
-import FourthComponent from "@/components/surveyme/fourth";
 
 const questions = [
   '당신의 나이를 적어 주세요.',
@@ -113,7 +113,7 @@ export const SurveyMeScreen: NextPage = () => {
       {
         questions.map((v, index) => {
           return (
-            <Box className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-[4.5rem] py-10 mt-7'>
+            <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-[4.5rem] py-10 mt-7'>
               <Box className='bg-accent2 rounded-full w-fit h-fit px-3 py-0.5'>
                 <Typography className='text-white text-base font-bold'>문항 {index + 1}</Typography>
               </Box>
@@ -124,7 +124,8 @@ export const SurveyMeScreen: NextPage = () => {
               {
                 index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
                   index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
-                    index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
+                    // index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
+                    index === 2 ? <></> :
                       index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
                         index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
                           index === 5 ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern }} /> :
