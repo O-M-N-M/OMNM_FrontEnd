@@ -64,10 +64,7 @@ export const MyPageSurveyMateScreen = () => {
           const mbtis = res.data.mbti.replace(/[{}]/g, '').split(',');
           if (mbtis[0] === 'ALL') answers.push(doNotCare);
           else {
-            let newMbti: string[] = [];
-
-            mbtis.forEach((v: string) => newMbti.push(mbti[parseInt(v)]));
-            answers.push(newMbti.join(' / '));
+            answers.push(mbtis.join(' / '));
           }
 
           answers.push(isSmoking[res.data.isSmoking]);
