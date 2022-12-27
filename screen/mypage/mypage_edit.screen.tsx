@@ -35,14 +35,7 @@ export const MyPageEditScreen = () => {
       formData.append('file', profile);
     }
     else if (image !== null) {
-      // const response = await fetch(image);
-      // const data = await response.blob();
-      // const ext = image.split('.').pop();
-      // const fileName = image.split('/').pop();
-      // const metadata = { type: `image/${ext}` };
-
-      // formData.append('file', new File([data], fileName!, metadata));
-      formData.append('file', image);
+      formData.append('file', null!);
     }
 
     formData.append(
