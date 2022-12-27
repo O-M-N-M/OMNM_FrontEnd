@@ -29,7 +29,7 @@ export const LoginScreen: NextPage = () => {
         if (res.data === '비밀번호 틀림' || res.data === '아이디 없음') {
           setFail(true);
         } else {
-          setCookie('OMNM', res.data);
+          setCookie('OMNM', res.data['accessToken']);
           document.location = '/main';
         }
       })
