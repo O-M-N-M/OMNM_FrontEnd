@@ -6,8 +6,6 @@ import Image from "next/image";
 import React from "react";
 
 import basicProfile from "../../public/basicProfile.png";
-import check from "../../public/check.png";
-
 import MyPageLeft from '../../components/mypage/mypage_left';
 import Footer from '../../components/footer';
 import Link from "next/link";
@@ -87,9 +85,9 @@ export const MyPageScreen: NextPage = () => {
               <Box className='mx-3.5'>
                 <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
                 {
-                  fakeData[receiveFirstKey as keyof typeof fakeData].map((v) => {
+                  fakeData[receiveFirstKey as keyof typeof fakeData].map((v, index) => {
                     return (
-                      <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
+                      <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
                         {
                           v.profileUrl === null ?
                             <Image src={basicProfile} width={24} height={24} />
@@ -110,9 +108,9 @@ export const MyPageScreen: NextPage = () => {
                 <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
                 <>
                   {
-                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v) => {
+                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v, index) => {
                       return (
-                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
+                        <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
                           {
                             v.profileUrl === null ?
                               <Image src={basicProfile} width={24} height={24} />
@@ -148,9 +146,9 @@ export const MyPageScreen: NextPage = () => {
                 <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
                 <>
                   {
-                    fakeData[receiveFirstKey as keyof typeof fakeData].map((v) => {
+                    fakeData[receiveFirstKey as keyof typeof fakeData].map((v, index) => {
                       return (
-                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
+                        <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
                           {
                             v.profileUrl === null ?
                               <Image src={basicProfile} width={24} height={24} />
@@ -172,9 +170,9 @@ export const MyPageScreen: NextPage = () => {
                 <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
                 <>
                   {
-                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v) => {
+                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v, index) => {
                       return (
-                        <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
+                        <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
                           {
                             v.profileUrl === null ?
                               <Image src={basicProfile} width={24} height={24} />

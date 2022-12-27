@@ -18,30 +18,50 @@ export const MyPageEditScreen = () => {
   const [profile, setProfile] = useState<File | null>(null);
   const [image, setImage] = useState<string | null>(null);
   const [kakaoId, setKakaoId] = useState('');
-  const [dormitory, setDormitory] = useState('');
+  const [dormitory, setDormitory] = useState(-1);
 
   const dormitoryTitle = ['308관 2인실', '308관 4인실', '309관 2인실'];
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (profile === null) {
-      alert('변경된 사항이 없습니다.');
-    } else {
-      const formData = new FormData();
+    const formData = new FormData();
+    const userDto = {
+      kakaoId: `${kakaoId}`,
+      dormitory: dormitory
+    };
+
+    if (profile !== null) {
       formData.append('file', profile);
     }
+    else if (image !== null) {
+      // const response = await fetch(image);
+      // const data = await response.blob();
+      // const ext = image.split('.').pop();
+      // const fileName = image.split('/').pop();
+      // const metadata = { type: `image/${ext}` };
 
-    const url = `/users/${userId}/changeProfile`;
+      // formData.append('file', new File([data], fileName!, metadata));
+      formData.append('file', image);
+    }
+
+    formData.append(
+      'key',
+      new Blob([JSON.stringify(userDto)],
+        { type: "application/json" }
+      )
+    );
+
+    const url = `/api/users/${userId}/modifyInfo`;
     const token = getCookie('OMNM');
     const headers = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'multipart/form-data',
         'OMNM': `${token}`
       }
     };
 
-    await axios.patch(url, headers)
+    await axios.patch(url, formData, headers)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   }
@@ -62,7 +82,7 @@ export const MyPageEditScreen = () => {
           setUserId(res.data.userId);
           setKakaoId(res.data.kakaoId);
           setImage(res.data.profileUrl);
-          setDormitory(res.data.dormitory.toString());
+          setDormitory(res.data.dormitory);
         })
         .catch((err) => {
           console.log(err);
@@ -124,18 +144,18 @@ export const MyPageEditScreen = () => {
           <Box className='w-80'>
             <Typography className='text-black text-base font-medium mt-7'>생활관 정보</Typography>
             <FormControl>
-              <RadioGroup row onChange={(e) => setDormitory(e.target.value)} className='flex flex-col'>
+              <RadioGroup row onChange={(e) => setDormitory(parseInt(e.target.value))} className='flex flex-col'>
                 <Box>
-                  <FormControlLabel value="0" control={<Radio checked={dormitory === '0'} icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">{dormitoryTitle[0]}</Typography>} />
-                  <FormControlLabel value="1" control={<Radio checked={dormitory === '1'} icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">{dormitoryTitle[1]}</Typography>} />
+                  <FormControlLabel value={0} control={<Radio checked={dormitory === 0} icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">{dormitoryTitle[0]}</Typography>} />
+                  <FormControlLabel value={1} control={<Radio checked={dormitory === 1} icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">{dormitoryTitle[1]}</Typography>} />
                 </Box>
-                <FormControlLabel value="2" control={<Radio checked={dormitory === '2'} icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">{dormitoryTitle[2]}</Typography>} />
+                <FormControlLabel value={2} control={<Radio checked={dormitory === 2} icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-base font-regular">{dormitoryTitle[2]}</Typography>} />
               </RadioGroup>
             </FormControl>
           </Box>
 
           <Box className='flex w-80'>
-            <Button className='bg-accent1 rounded-full mt-6 px-8 py-2.5 text-right ml-auto'>
+            <Button type='submit' className='bg-accent1 rounded-full mt-6 px-8 py-2.5 text-right ml-auto'>
               <Typography className='text-white text-sm font-medium'>완료</Typography>
             </Button>
           </Box>

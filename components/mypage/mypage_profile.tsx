@@ -56,7 +56,7 @@ const MyPageProfile = () => {
           <Image src={basicProfile} width={100} height={100} />
         ) : (
           <Box className='border border-gray1 border-solid rounded-full w-[100px] h-[100px]'>
-            <Image loader={() => profile} src={profile} width={100} height={100} className='rounded-full' />
+            {profile && <Image loader={() => profile} src={profile} width={100} height={100} className='rounded-full' />}
           </Box>
         )
       }
