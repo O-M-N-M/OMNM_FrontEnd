@@ -30,6 +30,7 @@ export const LoginScreen: NextPage = () => {
           setFail(true);
         } else {
           setCookie('OMNM', res.data['accessToken']);
+          setCookie('refreshToken', res.data['refreshToken']);
           document.location = '/main';
         }
       })

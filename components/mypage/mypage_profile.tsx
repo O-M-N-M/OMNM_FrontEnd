@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 import Image from "next/image";
 import Router from "next/router";
-import { deleteCookie, getCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -39,9 +39,26 @@ const MyPageProfile = () => {
         })
         .catch((err) => {
           if (err.response.status === 403) {
+            checkRefreshToken();
+          }
+          else {
+            console.error()
+          }
+        });
+    }
+
+    const checkRefreshToken = async () => {
+      const url = '/api/token';
+      const body = `accessToken=${getCookie('OMNM')}&refreshToken=${getCookie('refreshToken')}`;
+      await axios.post(url, body)
+        .then((res) => {
+          if (res.data === '재로그인 요청') {
             deleteCookie('OMNM');
             alert('세션이 만료되었습니다.\n로그인을 다시해주세요.');
             Router.push('/login');
+          }
+          else {
+            setCookie('OMNM', res.data);
           }
         });
     }
