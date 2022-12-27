@@ -55,7 +55,7 @@ export const MyPageEditScreen = () => {
     };
 
     await axios.patch(url, formData, headers)
-      .then((res) => console.log(res.data))
+      .then((res) => document.location = '/mypage_edit')
       .catch((err) => console.log(err));
   }
 
