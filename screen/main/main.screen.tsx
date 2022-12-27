@@ -9,7 +9,7 @@ import profile2 from '../../public/reverseProfile.png';
 import percent from '../../public/percentIcon.png';
 import displayNone from '../../public/displayNone.png';
 
-import { Box, Button, CircularProgress, FormControl, IconButton, MenuItem, Modal, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, FormControl, IconButton, MenuItem, Modal, Select, SelectChangeEvent, Tooltip, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import { Pagination, Navigation } from 'swiper';
@@ -62,7 +62,7 @@ export const MainScreen: NextPage = () => {
       .then((res) => {
         setName(res.data.name);
         setAge(res.data.age);
-        setNationality(res.data.nationality);
+        setNationality(res.data.nationality === 0 ? '내국인' : '외국인');
         setMatchPercent(res.data.percent);
         res.data.profileUrl === null ? setDetailProfile(null) : setDetailProfile(res.data.profileUrl);
         res.data.dormitory === 0 ? setDormitory('308관 2인실') :
@@ -310,7 +310,11 @@ export const MainScreen: NextPage = () => {
                       <Box sx={{ border: 'solid 1px #DBDBDB', borderRadius: '10px', width: '50%', height: 'fit-content', padding: '1.5rem', marginTop: '0.75rem' }}>
                         <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                           <Typography sx={{ color: '#383838', fontSize: '0.875rem', fontWeight: '400', marginRight: 'auto' }}>카카오톡 ID</Typography>
-                          <Image src={displayNone} width={18} height={18} />
+                          <Tooltip title='룸메를 신청해야 볼 수 있습니다.' sx={{ padding: '0px' }}>
+                            <IconButton>
+                              <Image src={displayNone} width={18} height={18} />
+                            </IconButton>
+                          </Tooltip>
                         </Box>
 
                         <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginTop: '1rem' }}>
