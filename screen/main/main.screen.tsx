@@ -250,7 +250,9 @@ export const MainScreen: NextPage = () => {
                             roomMate.profileUrl === null ? (
                               <Image src={profile} width={100} height={100} />
                             ) : (
-                              <Image src={roomMate.profileUrl} width={100} height={100} />
+                              <Box className='border border-gray1 border-solid rounded-full w-[100px] h-[100px]'>
+                                <Image src={roomMate.profileUrl} width={100} height={100} className='rounded-full' />
+                              </Box>
                             )
                           }
                           <Box className="ml-14">
@@ -301,7 +303,9 @@ export const MainScreen: NextPage = () => {
                         detailProfile === null ? (
                           <Image src={profile} width={80} height={80} />
                         ) : (
-                          <Image src={detailProfile} width={80} height={80} />
+                          <Box sx={{ border: '1px solid #9B9EA1', borderRadius: '100%', width: '80px', height: '80px' }} >
+                            <Image src={detailProfile} width={80} height={80} style={{ borderRadius: '100%' }} />
+                          </Box>
                         )
                       }
                       <Typography sx={{ color: '#383838', fontSize: '1.25rem', fontWeight: '500', marginTop: '0.75rem' }}>{name}</Typography>
