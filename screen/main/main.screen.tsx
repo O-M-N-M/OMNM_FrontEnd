@@ -63,7 +63,7 @@ export const MainScreen: NextPage = () => {
     setLoading(true);
 
     setMatchingId(list[index].userId)
-    const url = `/api/main/${matchingId}`;
+    const url = `/api/main/${list[index].userId}`;
     const headers = {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
