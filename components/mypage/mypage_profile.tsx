@@ -11,18 +11,32 @@ import basicProfile from "../../public/basicProfile.png";
 
 import MyPageToggle from './mypage_toggle';
 
+const token = getCookie('OMNM');
+
 const MyPageProfile = () => {
+  const [userId, setUserId] = useState('');
   const [kakaoId, setKaKaoId] = useState('');
   const [name, setName] = useState('');
   const [dormitory, setDormitory] = useState(-1);
   const [profile, setProfile] = useState('');
+
+  const onClick = async () => {
+    const url = `/api/users/${userId}/matching`;
+    const headers = {
+      headers: {
+        'OMNM': `${token}`
+      }
+    };
+
+    await axios.patch(url, {}, headers)
+      .then((res) => console.log(res));
+  }
 
   const dormitoryTitle = ['308관 2인실', '308관 4인실', '309관 2인실'];
 
   useEffect(() => {
     const getMyData = async () => {
       const url = '/api/myInfo';
-      const token = getCookie('OMNM');
       const headers = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -36,6 +50,7 @@ const MyPageProfile = () => {
           setName(res.data.name);
           setProfile(res.data.profileUrl);
           setDormitory(res.data.dormitory.toString());
+          setUserId(res.data.userId);
         })
         .catch((err) => {
           if (err.response.status === 403) {
@@ -82,7 +97,7 @@ const MyPageProfile = () => {
 
       <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl px-7 py-3 mt-6'>
         <Typography className='text-black text-sm font-regular'>룸메이트 매칭 완료</Typography>
-        <MyPageToggle className='ml-5' />
+        <MyPageToggle onClick={onClick} className='ml-5' />
       </Box>
 
       <Box className='border border-solid border-gray0 rounded-xl px-7 py-6 mt-2'>
