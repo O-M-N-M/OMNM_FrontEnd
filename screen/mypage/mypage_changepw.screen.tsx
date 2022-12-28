@@ -1,17 +1,70 @@
 import { Box, Button, Typography } from "@mui/material";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 
 import Footer from "../../components/footer";
 import MyPageLeft from "../../components/mypage/mypage_left";
 
 export const MyPageChangePwScreen = () => {
+  const [userId, setUserId] = useState('');
   const [nowPw, setNowPw] = useState('');
   const [newPw, setNewPw] = useState('');
   const [checkNewPw, setCheckNewPw] = useState('');
 
-  useEffect(() => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  }, [newPw, checkNewPw])
+    let pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,12}$/;
+
+    if (nowPw === newPw) {
+      alert('현재 비밀번호와 변경하고 싶은 비밀번호가 같습니다.');
+    }
+    else if (!pwReg.test(newPw)) {
+      alert('6~12자 이내의 영문과 숫자, 특수문자를 조합해 입력해주세요.');
+    }
+    else if (newPw !== checkNewPw) {
+      alert('비밀번호가 일치하지 않습니다.');
+    }
+    else {
+      const url = `/api/users/${userId}/resetPassword`;
+      const token = getCookie('OMNM');
+      const data = `originalPassword=${nowPw}&newPassword=${newPw}`;
+      const headers = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.patch(url, data, headers)
+        .then((res) => console.log(res.status))
+        .then((err) => console.log(err));
+    }
+  }
+
+  useEffect(() => {
+    const getMyData = async () => {
+      const url = '/api/myInfo';
+      const token = getCookie('OMNM');
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setUserId(res.data.userId);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    getMyData();
+  }, [])
 
   return (
     <>
@@ -20,7 +73,7 @@ export const MyPageChangePwScreen = () => {
           <MyPageLeft />
         </Box>
 
-        <form className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
+        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
           <Typography className='text-black text-xl font-medium text-center w-full'>비밀번호 변경</Typography>
 
           <Box className='mt-10'>
@@ -63,7 +116,7 @@ export const MyPageChangePwScreen = () => {
           </Box>
 
           <Box className='flex w-80'>
-            <Button className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
+            <Button type='submit' className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
               <Typography className='text-white text-sm font-medium'>확인</Typography>
             </Button>
           </Box>
