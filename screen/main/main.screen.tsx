@@ -23,6 +23,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export const MainScreen: NextPage = () => {
+  const [matchingId, setMatchingId] = useState('');
   const [userName, setUserName] = useState('');
   const [count, setCount] = useState('4');
   const [open, setOpen] = useState(false);
@@ -46,11 +47,23 @@ export const MainScreen: NextPage = () => {
 
   const token = getCookie('OMNM');
 
+  const applyMate = async () => {
+    const url = `/api/main/propose/${matchingId}`;
+    const headers = {
+      headers: {
+        'OMNM': `${token}`
+      }
+    };
+
+    await axios.post(url, {}, headers)
+      .then((res) => console.log(res.data));
+  }
+
   const onClick = async (index: number) => {
     setLoading(true);
 
-    const userId = list[index].userId;
-    const url = `/api/main/${userId}`;
+    setMatchingId(list[index].userId)
+    const url = `/api/main/${matchingId}`;
     const headers = {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -346,7 +359,7 @@ export const MainScreen: NextPage = () => {
                         </Box>
                       </Box>
 
-                      <Button sx={{ backgroundColor: '#4B99EB !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: '1rem', paddingY: '0.625rem' }}>룸메 신청하기</Button>
+                      <Button onClick={applyMate} sx={{ backgroundColor: '#4B99EB !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: '1rem', paddingY: '0.625rem' }}>룸메 신청하기</Button>
 
                       <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
                         <Typography sx={{ color: '#383838', fontSize: '1rem', fontWeight: '500' }}>{userName}님과 {name}님의 성향은&nbsp;</Typography>
