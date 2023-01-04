@@ -132,12 +132,7 @@ export const SignUpScreen: NextPage = () => {
 
         {
           three && (
-            <>
-              {Router.push({
-                pathname: '/signup_success',
-                query: { userName: name }
-              })}
-            </>
+            document.location = '/signup_success'
           )
         }
       </Box>

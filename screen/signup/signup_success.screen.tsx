@@ -2,16 +2,13 @@ import { Box, Button, Typography } from "@mui/material";
 
 import { NextPage } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 import signupSuccess from '../../public/signupSuccess.png';
 import logo from '../../public/logo.png';
 
 export const SignUpSuccessScreen: NextPage = () => {
-  const router = useRouter();
-
   const onClick = () => {
-    router.push('/login');
+    document.location = '/login';
   }
 
   return (
@@ -29,7 +26,7 @@ export const SignUpSuccessScreen: NextPage = () => {
         </Box>
 
         <Box className="mt-4">
-          <Typography className="text-base text-black font-regular">{router.query.userName}님 회원가입을 축하합니다.</Typography>
+          <Typography className="text-base text-black font-regular">회원가입을 축하합니다.</Typography>
           <Typography className="text-base text-black font-regular">로그인한 후 룸메 찾기를 위한 설문조사를 진행해주세요.</Typography>
         </Box>
 
