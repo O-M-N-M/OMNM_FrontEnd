@@ -67,7 +67,10 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
           value={id}
           onChange={(e) => setId(e.target.value)}
           className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
-        <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button>
+        {
+          pass ? <Button disabled className="border border-solid border-gray1 bg-white rounded-full text-gray0 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button> :
+            <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button>
+        }
       </form>
       {
         resultId === 1 ? <Typography className='text-red text-xs font-regular mt-1 ml-1'>6~12자 이내의 영문과 숫자를 조합해 입력해주세요.</Typography> :
