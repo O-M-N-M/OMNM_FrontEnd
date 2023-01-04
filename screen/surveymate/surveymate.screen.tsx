@@ -14,7 +14,7 @@ import SixthComponent from "@/components/surveymate/sixth";
 import SeventhComponent from "@/components/surveymate/seventh";
 import EighthComponent from "@/components/surveymate/eighth";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const questions = [
@@ -38,15 +38,6 @@ const infos = [
   '여성일 경우 미필 선택'
 ];
 
-type mbtiType = {
-  'ENFJ': boolean, 'ENFP': boolean, 'ENTJ': boolean, 'ENTP': boolean, 'ESFJ': boolean, 'ESFP': boolean, 'ESTJ': boolean, 'ESTP': boolean,
-  'INFJ': boolean, 'INFP': boolean, 'INTJ': boolean, 'INTP': boolean, 'ISFJ': boolean, 'ISFP': boolean, 'ISTJ': boolean, 'ISTP': boolean,
-  'ALL': boolean
-}
-
-type ageType = {
-  '0': boolean, '1': boolean, '2': boolean, '3': boolean, '4': boolean
-}
 const initialAge = {
   '0': false, '1': false, '2': false, '3': false, '4': false
 }
@@ -57,25 +48,27 @@ const initialMbti = {
 }
 
 export const SurveyMateScreen: NextPage = () => {
-  const [age, setAge] = useState<ageType>(initialAge);
-  const [mbti, setMbti] = useState<mbtiType>(initialMbti);
-  const [isSmoking, setIsSmoking] = useState<number | undefined>(-1);
-  const [department, setDepartment] = useState<number | undefined>(-1);
-  const [lifeCycle, setLifeCycle] = useState<number | undefined>(-1);
-  const [isCleaning, setIsCleaning] = useState<number | undefined>(-1);
-  const [nationality, setNationality] = useState<number | undefined>(-1);
-  const [armyService, setArmyService] = useState<number | undefined>(-1);
+  const [tf, setTf] = useState(false);
+
+  const [age, setAge] = useState<object>(initialAge);
+  const [mbti, setMbti] = useState<object>(initialMbti);
+  const [isSmoking, setIsSmoking] = useState<number | undefined>();
+  const [department, setDepartment] = useState<number | undefined>();
+  const [lifeCycle, setLifeCycle] = useState<number | undefined>();
+  const [isCleaning, setIsCleaning] = useState<number | undefined>();
+  const [nationality, setNationality] = useState<number | undefined>();
+  const [armyService, setArmyService] = useState<number | undefined>();
 
   const onClick = async () => {
     if (
       age === initialAge ||
       mbti === initialMbti ||
-      isSmoking === -1 ||
-      department === -1 ||
-      lifeCycle === -1 ||
-      isCleaning === -1 ||
-      nationality === -1 ||
-      armyService === -1
+      typeof isSmoking === 'undefined' ||
+      typeof department === 'undefined' ||
+      typeof lifeCycle === 'undefined' ||
+      typeof isCleaning === 'undefined' ||
+      typeof nationality === 'undefined' ||
+      typeof armyService === 'undefined'
     ) alert('모두 선택해주세요.');
 
     else {
@@ -109,10 +102,78 @@ export const SurveyMateScreen: NextPage = () => {
         }
       };
 
-      await axios.post(url, data, headers)
-        .then((res) => console.log(res.data));
+      if (tf) {
+        await axios.patch(url, data, headers)
+          .then((res) => {
+            if (res.data === '상대 성향 설문 수정 완료') {
+              document.location = '/mypage_surveymate';
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+      else {
+        await axios.post(url, data, headers)
+          .then((res) => {
+            if (res.data === '상대 성향 설문 등록 완료') {
+              document.location = '/mypage_surveymate';
+            }
+          });
+      }
     }
   };
+
+  useEffect(() => {
+    const checkSurvey = async () => {
+      const url = '/api/yourPersonality';
+      const token = getCookie('OMNM');
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          if (res.data) {
+            const arrAge = res.data.age.replace(/[{}]/g, '').split(',');
+            setAge({
+              '0': arrAge.includes('0'),
+              '1': arrAge.includes('1'),
+              '2': arrAge.includes('2'),
+              '3': arrAge.includes('3'),
+              '4': arrAge.includes('4')
+            });
+
+            const arrMbti = res.data.mbti.replace(/[{}]/g, '').split(',');
+            console.log(arrMbti);
+            setMbti({
+              'ENFJ': arrMbti.includes('ENFJ'), 'ENFP': arrMbti.includes('ENFP'),
+              'ENTJ': arrMbti.includes('ENTJ'), 'ENTP': arrMbti.includes('ENTP'),
+              'ESFJ': arrMbti.includes('ESFJ'), 'ESFP': arrMbti.includes('ESFP'),
+              'ESTJ': arrMbti.includes('ESTJ'), 'ESTP': arrMbti.includes('ESTP'),
+              'INFJ': arrMbti.includes('INFJ'), 'INFP': arrMbti.includes('INFP'),
+              'INTJ': arrMbti.includes('INTJ'), 'INTP': arrMbti.includes('INTP'),
+              'ISFJ': arrMbti.includes('ISFJ'), 'ISFP': arrMbti.includes('ISFP'),
+              'ISTJ': arrMbti.includes('ISTJ'), 'ISTP': arrMbti.includes('ISTP'),
+              'ALL': arrMbti.includes('ALL')
+            });
+
+            setIsSmoking(+res.data.isSmoking);
+            setDepartment(+res.data.department);
+            setLifeCycle(+res.data.lifeCycle);
+            setIsCleaning(+res.data.cleaning);
+            setNationality(+res.data.nationality);
+            setArmyService(+res.data.armyService);
+            setTf(true);
+          }
+        });
+
+      console.log('초기', mbti);
+    }
+
+    checkSurvey();
+  }, [])
 
   return (
     <Box className='w-full h-fit min-h-[calc(100vh-50px)] px-[15%] my-[5%]'>
@@ -140,14 +201,22 @@ export const SurveyMateScreen: NextPage = () => {
               <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
 
               {
-                index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
-                  index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
-                    index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
-                      index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
-                        index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
-                          index === 5 ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning }} /> :
-                            index === 6 ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality }} /> :
-                              index === 7 && <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService }} />
+                (index === 0 && tf) ? <FirstComponent props={{ age: age, setAge: setAge, tf: true }} /> :
+                  (index === 0 && !tf) ? <FirstComponent props={{ age: age, setAge: setAge, tf: false }} /> :
+                    (index === 1 && tf) ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti, tf: true }} /> :
+                      (index === 1 && !tf) ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti, tf: false }} /> :
+                        (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
+                          (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
+                            (index === 3 && tf) ? <FourthComponent props={{ department: department, setDepartment: setDepartment, tf: true }} /> :
+                              (index === 3 && !tf) ? <FourthComponent props={{ department: department, setDepartment: setDepartment, tf: false }} /> :
+                                (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
+                                  (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
+                                    (index === 5 && tf) ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
+                                      (index === 5 && !tf) ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
+                                        (index === 6 && tf) ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
+                                          (index === 6 && !tf) ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
+                                            (index === 7 && tf) ? <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
+                                              (index === 7 && !tf) && <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
               }
             </Box>
           )
