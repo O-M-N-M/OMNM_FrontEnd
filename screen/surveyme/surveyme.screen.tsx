@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { getCookie } from "cookies-next";
 import Image from 'next/image';
@@ -40,53 +40,124 @@ const infos = [
   '여성일 경우 미필 선택'
 ];
 
+const initialSleepingPattern = {
+  '0': false, '1': false, '2': false, '3': false
+}
+
 export const SurveyMeScreen: NextPage = () => {
+  const [tf, setTf] = useState(false);
+
   const [age, setAge] = useState<number | string>();
   const [mbti, setMbti] = useState<string | undefined>('');
   const [isSmoking, setIsSmoking] = useState<number | undefined>();
   const [department, setDepartment] = useState<string>('');
   const [lifeCycle, setLifeCycle] = useState<number | undefined>();
-  const [sleepingPattern, setSleepingPattern] = useState<object>({
-    '0': false,
-    '1': false,
-    '2': false,
-    '3': false
-  });
+  const [sleepingPattern, setSleepingPattern] = useState<object>(initialSleepingPattern);
   const [isCleaning, setIsCleaning] = useState<number | undefined>();
   const [nationality, setNationality] = useState<number | undefined>();
   const [armyService, setArmyService] = useState<number | undefined>();
   const [introduction, setIntroduction] = useState<string | undefined>('');
 
   const onClick = async () => {
-    const selectedSleepingPattern = `{${Object.keys(sleepingPattern).filter((v) => sleepingPattern[v as keyof typeof sleepingPattern]).join(',')}}`;
-    const data = {
-      age: age,
-      mbti: mbti,
-      isSmoking: isSmoking,
-      department: department,
-      lifeCycle: lifeCycle,
-      sleepingPattern: selectedSleepingPattern,
-      cleaning: isCleaning,
-      nationality: nationality,
-      armyService: armyService,
-      introduction: introduction
+    if (
+      sleepingPattern === initialSleepingPattern ||
+      mbti === '' ||
+      department === '' ||
+      introduction === '' ||
+      typeof age === 'undefined' ||
+      typeof isSmoking === 'undefined' ||
+      typeof lifeCycle === 'undefined' ||
+      typeof isCleaning === 'undefined' ||
+      typeof nationality === 'undefined' ||
+      typeof armyService === 'undefined'
+    ) alert('모두 선택해주세요');
+
+    else {
+      const selectedSleepingPattern = `{${Object.keys(sleepingPattern).filter((v) => sleepingPattern[v as keyof typeof sleepingPattern]).join(',')}}`;
+      const data = {
+        age: age,
+        mbti: mbti,
+        isSmoking: isSmoking,
+        department: department,
+        lifeCycle: lifeCycle,
+        sleepingPattern: selectedSleepingPattern,
+        cleaning: isCleaning,
+        nationality: nationality,
+        armyService: armyService,
+        introduction: introduction
+      }
+
+      const url = '/api/myPersonality';
+      const token = getCookie('OMNM');
+      const headers = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          'OMNM': `${token}`
+        }
+      };
+
+      if (tf) {
+        await axios.patch(url, data, headers)
+          .then((res) => {
+            if (res.data === '나의 성향 설문 수정 완료') {
+              document.location = '/mypage_surveyme';
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+      else {
+        await axios.post(url, data, headers)
+          .then((res) => {
+            if (res.data === '나의 성향 설문 등록 완료') {
+              document.location = '/mypage_surveyme';
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+
+    }
+  };
+
+  useEffect(() => {
+    const checkSurvey = async () => {
+      const url = '/api/myPersonality';
+      const token = getCookie('OMNM');
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          if (res.data) {
+            setAge(res.data.age);
+            setMbti(res.data.mbti);
+            setIsSmoking(+res.data.isSmoking);
+            setDepartment(res.data.department);
+            setLifeCycle(+res.data.lifeCycle);
+
+            const arrSp = res.data.sleepingPattern.replace(/[{}]/g, '').split(',');
+            setSleepingPattern({
+              '0': arrSp.includes('0'),
+              '1': arrSp.includes('1'),
+              '2': arrSp.includes('2'),
+              '3': arrSp.includes('3'),
+            })
+
+            console.log('처음 보내는', sleepingPattern);
+            setIsCleaning(+res.data.cleaning);
+            setNationality(+res.data.nationality);
+            setArmyService(+res.data.armyService);
+            setIntroduction(res.data.introduction);
+            setTf(true);
+          }
+        });
     }
 
-    const url = '/api/myPersonality';
-    const token = getCookie('OMNM');
-    const headers = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        'OMNM': `${token}`
-      }
-    };
-
-    await axios.post(url, data, headers)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
+    checkSurvey();
+  }, [])
 
   return (
     <Box className='w-full h-fit min-h-[calc(100vh-50px)] px-[15%] my-[5%]'>
@@ -116,13 +187,19 @@ export const SurveyMeScreen: NextPage = () => {
               {
                 index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
                   index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
-                    index === 2 ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking }} /> :
-                      index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
-                        index === 4 ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle }} /> :
-                          index === 5 ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern }} /> :
-                            index === 6 ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning }} /> :
-                              index === 7 ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality }} /> :
-                                index === 8 && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService }} />
+                    (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
+                      (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
+                        index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
+                          (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
+                            (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
+                              (index === 5 && tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: true }} /> :
+                                (index === 5 && !tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: false }} /> :
+                                  (index === 6 && tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
+                                    (index === 6 && !tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
+                                      (index === 7 && tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
+                                        (index === 7 && !tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
+                                          (index === 8 && tf) ? <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
+                                            (index === 8 && !tf) && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
               }
             </Box>
           )
