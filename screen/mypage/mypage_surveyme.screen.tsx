@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Box, CircularProgress, Typography } from "@mui/material"
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material"
 
 import EditIcon from '../../public/edit.png';
 import MyPageLeft from "@/components/mypage/mypage_left"
@@ -16,13 +16,17 @@ export const MyPageSurveyMeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState('');
 
-  const mbti = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'];
+  // const mbti = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'];
   const isSmoking = ['흡연', '비흡연'];
   const lifeCycle = ['아침형', '저녁형'];
   const sleepingPattern = ['코골이', '이갈이', '몸부림', '수면패턴 없음'];
   const isCleaning = ['주 5회 이상 청소', '주 2-3회 청소', '주 1회 청소', '월 1회 청소'];
   const nationality = ['내국인', '외국인'];
   const armyService = ['군필', '미필'];
+
+  const onClick = () => {
+    document.location = '/surveyme';
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -53,7 +57,7 @@ export const MyPageSurveyMeScreen = () => {
           else {
             let newSP: string[] = [];
 
-            sp.forEach((v: string) => sleepingPattern[parseInt(v)]);
+            sp.forEach((v: string) => newSP.push(sleepingPattern[parseInt(v)]));
             answers.push(newSP.join(' / '));
           }
 
@@ -80,9 +84,9 @@ export const MyPageSurveyMeScreen = () => {
         <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>
           <Box className='flex flex-row items-center mb-4'>
             <Typography className='text-black text-xl font-medium'>나의 성향 설문조사</Typography>
-            <Box className='ml-auto'>
+            <IconButton onClick={onClick} className='ml-auto'>
               <Image src={EditIcon} width={20} height={20} />
-            </Box>
+            </IconButton>
           </Box>
 
           {

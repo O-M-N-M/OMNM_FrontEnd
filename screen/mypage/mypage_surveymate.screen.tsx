@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Box, CircularProgress, Typography } from "@mui/material"
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material"
 
 import EditIcon from '../../public/edit.png';
 import MyPageLeft from "@/components/mypage/mypage_left"
@@ -34,6 +34,10 @@ export const MyPageSurveyMateScreen = () => {
   const isCleaning = ['주 5회 이상 청소', '주 2-3회 청소', '주 1회 청소', '월 1회 청소', doNotCare];
   const nationality = ['대한민국', doNotCare];
   const armyService = ['군필', '미필', doNotCare];
+
+  const onClick = () => {
+    document.location = '/surveymate';
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -91,9 +95,9 @@ export const MyPageSurveyMateScreen = () => {
         <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>
           <Box className='flex flex-row items-center mb-4'>
             <Typography className='text-black text-xl font-medium'>룸메 성향 설문조사</Typography>
-            <Box className='ml-auto'>
+            <IconButton onClick={onClick} className='ml-auto'>
               <Image src={EditIcon} width={20} height={20} />
-            </Box>
+            </IconButton>
           </Box>
 
           {
