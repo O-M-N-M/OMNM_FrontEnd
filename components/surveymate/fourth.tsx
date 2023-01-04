@@ -3,8 +3,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Props } from "next/script";
-
 
 interface FourthComponentProps {
   department: number | undefined;
