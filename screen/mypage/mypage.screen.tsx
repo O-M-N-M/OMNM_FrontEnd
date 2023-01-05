@@ -1,67 +1,79 @@
 import { Box, Button, Typography } from "@mui/material";
 
 import { NextPage } from "next";
-import Image from "next/image";
-
-import React from "react";
-
-import basicProfile from "../../public/basicProfile.png";
-import MyPageLeft from '../../components/mypage/mypage_left';
-import Footer from '../../components/footer';
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 
-const fakeData = {
-  '09.24': [
-    {
-      'userId': 99,
-      'name': '김민지',
-      'age': 24,
-      'profileUrl': null,
-      'percent': 78.0
-    },
-    {
-      'userId': 99,
-      'name': '김민지',
-      'age': 24,
-      'profileUrl': null,
-      'percent': 78.0
-    }
-  ],
-  '09.18': [
-    {
-      'userId': 99,
-      'name': '김민지',
-      'age': 24,
-      'profileUrl': null,
-      'percent': 78.0
-    },
-    {
-      'userId': 99,
-      'name': '김민지',
-      'age': 24,
-      'profileUrl': null,
-      'percent': 78.0
-    },
-    {
-      'userId': 99,
-      'name': '김민지',
-      'age': 24,
-      'profileUrl': null,
-      'percent': 78.0
-    },
-    {
-      'userId': 99,
-      'name': '김민지',
-      'age': 24,
-      'profileUrl': null,
-      'percent': 78.0
-    }
-  ]
-}
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+import Footer from '../../components/footer';
+import MyPageLeft from '../../components/mypage/mypage_left';
+import MyPageList from "../../components/mypage/mypage_list";
 
 export const MyPageScreen: NextPage = () => {
-  const receiveFirstKey = Object.keys(fakeData)[0];
-  const receiveSecondKey = Object.keys(fakeData)[1];
+  const [userId, setUserId] = useState('');
+
+  const [receiveFirstData, setReceiveFirstData] = useState<any[]>([]);
+  const [receiveSecondData, setReceiveSecondData] = useState<any[]>([]);
+  const [receiveFirstKey, setReceiveFirstKey] = useState('');
+  const [receiveSecondKey, setReceiveSecondKey] = useState('');
+
+  const [sendFirstData, setSendFirstData] = useState<any[]>([]);
+  const [sendSecondData, setSendSecondData] = useState<any[]>([]);
+  const [sendFirstKey, setSendFirstKey] = useState('');
+  const [sendSecondKey, setSendSecondKey] = useState('');
+
+  useEffect(() => {
+    const token = getCookie('OMNM');
+    const headers = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'OMNM': `${token}`
+      }
+    };
+
+    const getMyData = async () => {
+      const url = '/api/myInfo';
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setUserId(res.data.userId);
+          getReceiveData();
+          getSendData();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    const getReceiveData = async () => {
+      const url = `/api/users/${userId}/connection`;
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setReceiveFirstData(res.data[Object.keys(res.data)[0]]);
+          setReceiveSecondData(res.data[Object.keys(res.data)[1]]);
+          setReceiveFirstKey(Object.keys(res.data)[0]);
+          setReceiveSecondKey(Object.keys(res.data)[1]);
+        })
+    };
+
+    const getSendData = async () => {
+      const url = `/api/users/${userId}/propose`;
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setSendFirstData(res.data[Object.keys(res.data)[0]]);
+          setSendSecondData(res.data[Object.keys(res.data)[1]]);
+          setSendFirstKey(Object.keys(res.data)[0]);
+          setSendSecondKey(Object.keys(res.data)[1]);
+        })
+    };
+
+    getMyData();
+    console.log(receiveFirstData[receiveFirstKey as keyof typeof receiveFirstData]);
+  }, [userId]);
 
   return (
     <Box>
@@ -74,61 +86,41 @@ export const MyPageScreen: NextPage = () => {
           <Box>
             <Box className='flex flex-row items-center mx-3.5'>
               <Typography className='text-black text-xl font-medium'>룸메 신청 받은 리스트</Typography>
-              <Link href='/'>
+              <Link href='/mypage_receivelist'>
                 <a className='ml-auto'>
                   <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
                 </a>
               </Link>
             </Box>
 
-            <Box className='flex flex-wrap'>
-              <Box className='mx-3.5'>
-                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
-                {
-                  fakeData[receiveFirstKey as keyof typeof fakeData].map((v, index) => {
-                    return (
-                      <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
-                        {
-                          v.profileUrl === null ?
-                            <Image src={basicProfile} width={24} height={24} />
-                            :
-                            <Image src={basicProfile} width={24} height={24} />
-                        }
-                        <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
-                        <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
-                        <Button className='bg-white border border-solid border-accent1 rounded-full ml-32'>
-                          <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
-                        </Button>
-                      </Box>
-                    )
-                  })
-                }
-              </Box>
-              <Box className='mx-3.5'>
-                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
-                <>
-                  {
-                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v, index) => {
-                      return (
-                        <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
-                          {
-                            v.profileUrl === null ?
-                              <Image src={basicProfile} width={24} height={24} />
-                              :
-                              <Image src={basicProfile} width={24} height={24} />
-                          }
-                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
-                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
-                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-32'>
-                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
-                          </Button>
-                        </Box>
-                      )
-                    })
-                  }
-                </>
-              </Box>
-            </Box>
+            {
+              Object.keys(receiveFirstData).length !== 0 && (
+                <Box className='flex flex-wrap'>
+                  <Box className='mx-3.5'>
+                    <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
+                    {
+                      receiveFirstData.map((v: any, index: number) => {
+                        return (
+                          <MyPageList props={{ v: v, index: index }} />
+                        )
+                      })
+                    }
+                  </Box>
+                  <Box className='mx-3.5'>
+                    <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
+                    <>
+                      {
+                        receiveSecondData.map((v: any, index: number) => {
+                          return (
+                            <MyPageList props={{ v: v, index: index }} />
+                          )
+                        })
+                      }
+                    </>
+                  </Box>
+                </Box>
+              )
+            }
           </Box>
 
           <Box className='mt-14'>
@@ -143,48 +135,24 @@ export const MyPageScreen: NextPage = () => {
 
             <Box className='flex flex-wrap'>
               <Box className='mx-3.5'>
-                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
+                <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
                 <>
                   {
-                    fakeData[receiveFirstKey as keyof typeof fakeData].map((v, index) => {
+                    sendFirstData.map((v: any, index: number) => {
                       return (
-                        <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
-                          {
-                            v.profileUrl === null ?
-                              <Image src={basicProfile} width={24} height={24} />
-                              :
-                              <Image src={basicProfile} width={24} height={24} />
-                          }
-                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
-                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
-                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-32'>
-                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
-                          </Button>
-                        </Box>
+                        <MyPageList props={{ v: v, index: index }} />
                       )
                     })
                   }
                 </>
               </Box>
               <Box className='mx-3.5'>
-                <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
+                <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
                 <>
                   {
-                    fakeData[receiveSecondKey as keyof typeof fakeData].map((v, index) => {
+                    sendSecondData.map((v: any, index: number) => {
                       return (
-                        <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-fit h-fit mt-4 mb-1.5 px-6 py-3'>
-                          {
-                            v.profileUrl === null ?
-                              <Image src={basicProfile} width={24} height={24} />
-                              :
-                              <Image src={basicProfile} width={24} height={24} />
-                          }
-                          <Typography className='text-black text-base font-medium ml-3'>{v.name}</Typography>
-                          <Typography className='text-gray1 text-xs font-regular ml-1'>· {v.age}</Typography>
-                          <Button className='bg-white border border-solid border-accent1 rounded-full ml-32'>
-                            <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
-                          </Button>
-                        </Box>
+                        <MyPageList props={{ v: v, index: index }} />
                       )
                     })
                   }
