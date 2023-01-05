@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import { NextPage } from "next";
 import { getCookie } from "cookies-next";
@@ -94,7 +94,11 @@ export const MyPageScreen: NextPage = () => {
             </Box>
 
             {
-              Object.keys(receiveFirstData).length !== 0 && (
+              Object.keys(receiveFirstData).length === 0 ? (
+                <Box className='flex justify-center items-center w-full h-full mt-10'>
+                  <CircularProgress color="inherit" />
+                </Box>
+              ) : (
                 <Box className='flex flex-wrap'>
                   <Box className='mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
@@ -133,32 +137,40 @@ export const MyPageScreen: NextPage = () => {
               </Link>
             </Box>
 
-            <Box className='flex flex-wrap'>
-              <Box className='mx-3.5'>
-                <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
-                <>
-                  {
-                    sendFirstData.map((v: any, index: number) => {
-                      return (
-                        <MyPageList props={{ v: v, index: index }} />
-                      )
-                    })
-                  }
-                </>
-              </Box>
-              <Box className='mx-3.5'>
-                <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
-                <>
-                  {
-                    sendSecondData.map((v: any, index: number) => {
-                      return (
-                        <MyPageList props={{ v: v, index: index }} />
-                      )
-                    })
-                  }
-                </>
-              </Box>
-            </Box>
+            {
+              Object.keys(sendFirstData).length === 0 ? (
+                <Box className='flex justify-center items-center w-full h-full mt-10'>
+                  <CircularProgress color="inherit" />
+                </Box>
+              ) : (
+                <Box className='flex flex-wrap'>
+                  <Box className='mx-3.5'>
+                    <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
+                    <>
+                      {
+                        sendFirstData.map((v: any, index: number) => {
+                          return (
+                            <MyPageList props={{ v: v, index: index }} />
+                          )
+                        })
+                      }
+                    </>
+                  </Box>
+                  <Box className='mx-3.5'>
+                    <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
+                    <>
+                      {
+                        sendSecondData.map((v: any, index: number) => {
+                          return (
+                            <MyPageList props={{ v: v, index: index }} />
+                          )
+                        })
+                      }
+                    </>
+                  </Box>
+                </Box>
+              )
+            }
           </Box>
         </Box>
       </Box>
