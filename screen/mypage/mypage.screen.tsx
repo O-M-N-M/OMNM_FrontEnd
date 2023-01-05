@@ -39,6 +39,7 @@ export const MyPageScreen: NextPage = () => {
       await axios.get(url, headers)
         .then((res) => {
           setUserId(res.data.userId);
+
           getReceiveData();
           getSendData();
         })
@@ -71,8 +72,27 @@ export const MyPageScreen: NextPage = () => {
         })
     };
 
-    getMyData();
-    console.log(receiveFirstData[receiveFirstKey as keyof typeof receiveFirstData]);
+    const isSurvey = async () => {
+      const url = '/api/yourPersonality';
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          if (Object.keys(res.data).length !== 0) getMyData();
+          else {
+            alert('설문조사를 진행해 주세요.');
+            document.location = '/surveyme';
+          }
+        })
+        .catch((err) => console.log(err));
+    };
+
+    isSurvey();
   }, [userId]);
 
   return (

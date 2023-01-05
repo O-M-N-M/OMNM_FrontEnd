@@ -17,21 +17,47 @@ export const LoginScreen: NextPage = () => {
   const [pw, setPw] = useState('');
   const [fail, setFail] = useState(false);
 
+  const isSurvey = async (token: string) => {
+    const url = '/api/yourPersonality';
+    const headers = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'OMNM': `${token}`
+      }
+    };
+
+    await axios.get(url, headers)
+      .then((res) => {
+        if (Object.keys(res.data).length !== 0) movePage(true);
+        else {
+          alert('설문조사를 진행해 주세요.');
+          movePage(false);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const movePage = (tf: boolean) => {
+    if (tf) document.location = '/main';
+    else document.location = '/surveyme';
+  }
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const url = '/api/login';
     const body = `loginId=${id}&password=${pw}`;
-    const headers = { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+    const headers = { headers: { "Content-Type": "application/x-www-form-urlencoded" } };
 
     await axios.post(url, body, headers)
-      .then(res => {
+      .then((res) => {
         if (res.data === '비밀번호 틀림' || res.data === '아이디 없음') {
           setFail(true);
         } else {
           setCookie('OMNM', res.data['accessToken']);
           setCookie('refreshToken', res.data['refreshToken']);
-          document.location = '/main';
+
+          isSurvey(res.data['accessToken']);
         }
       })
       .catch(err => console.log(err.response));

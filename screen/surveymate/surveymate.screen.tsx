@@ -115,7 +115,7 @@ export const SurveyMateScreen: NextPage = () => {
         await axios.post(url, data, headers)
           .then((res) => {
             if (res.data === '상대 성향 설문 등록 완료') {
-              document.location = '/mypage_surveymate';
+              document.location = '/main';
             }
           });
       }

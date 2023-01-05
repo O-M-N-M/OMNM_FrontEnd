@@ -46,6 +46,7 @@ const initialSleepingPattern = {
 
 export const SurveyMeScreen: NextPage = () => {
   const [tf, setTf] = useState(false);
+  const [isNext, setIsNext] = useState(false);
 
   const [age, setAge] = useState<number | string>();
   const [mbti, setMbti] = useState<string | undefined>('');
@@ -100,7 +101,8 @@ export const SurveyMeScreen: NextPage = () => {
         await axios.patch(url, data, headers)
           .then((res) => {
             if (res.data === '나의 성향 설문 수정 완료') {
-              document.location = '/mypage_surveyme';
+              if (isNext) document.location = '/mypage_surveyme';
+              else document.location = '/surveymate';
             }
           })
           .catch((err) => console.log(err));
@@ -109,7 +111,7 @@ export const SurveyMeScreen: NextPage = () => {
         await axios.post(url, data, headers)
           .then((res) => {
             if (res.data === '나의 성향 설문 등록 완료') {
-              document.location = '/mypage_surveyme';
+              document.location = '/surveymate';
             }
           })
           .catch((err) => console.log(err));
@@ -119,9 +121,10 @@ export const SurveyMeScreen: NextPage = () => {
   };
 
   useEffect(() => {
+    const token = getCookie('OMNM');
+
     const checkSurvey = async () => {
       const url = '/api/myPersonality';
-      const token = getCookie('OMNM');
       const headers = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -154,8 +157,26 @@ export const SurveyMeScreen: NextPage = () => {
             setTf(true);
           }
         });
-    }
+    };
 
+    const checkNextSurvey = async () => {
+      const url = '/api/yourPersonality';
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          if (Object.keys(res.data).length !== 0) setIsNext(true);
+          else setIsNext(false);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    checkNextSurvey();
     checkSurvey();
   }, [])
 

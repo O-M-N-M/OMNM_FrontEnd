@@ -175,10 +175,36 @@ export const MainScreen: NextPage = () => {
             setCookie('OMNM', res.data);
           }
         });
+    };
+
+    const isSurvey = async () => {
+      const url = '/api/yourPersonality';
+      const headers = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          'OMNM': `${token}`
+        }
+      };
+
+      await axios.get(url, headers)
+        .then((res) => {
+          if (Object.keys(res.data).length !== 0) {
+            loadRecommandList();
+            getUserId();
+          }
+          else {
+            alert('설문조사를 진행해 주세요.');
+            movePage(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    };
+
+    const movePage = (tf: boolean) => {
+      if (!tf) document.location = '/surveyme';
     }
 
-    loadRecommandList();
-    getUserId();
+    isSurvey();
   }, [count, open])
 
   return (
