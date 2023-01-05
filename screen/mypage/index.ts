@@ -5,3 +5,4 @@ export * from './mypage_edit.screen';
 export * from './mypage_surveyme.screen';
 export * from './mypage_surveymate.screen';
 export * from './mypage_receivelist.screen';
+export * from './mypage_sendlist.screen';

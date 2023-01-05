@@ -17,7 +17,7 @@ const MyPageMenu = () => {
           <Typography className="text-black text-base font-regular mt-4">신청 받은 리스트</Typography>
         </a>
       </Link>
-      <Link href='/mypage'>
+      <Link href='/mypage_sendlist'>
         <a>
           <Typography className="text-black text-base font-regular mt-3">신청 보낸 리스트</Typography>
         </a>
