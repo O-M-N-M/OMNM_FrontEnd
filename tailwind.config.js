@@ -49,8 +49,9 @@ module.exports = {
       width: {
         '100': '26rem'
       },
-      backgroundImage: theme => ({
+      backgroundImage: (theme) => ({
         'main-background': "url('/mainBackground.png')",
+        'main-move-background': "url('/mainBackground.gif')",
         'landing-last-background': "url('/landingLastBackground.png')"
       })
     },
