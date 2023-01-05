@@ -1,13 +1,12 @@
 import Link from "next/link";
-import Router from "next/router";
 import { deleteCookie } from "cookies-next";
 
 import { Box, Typography } from "@mui/material";
 
 const MyPageMenu = () => {
   const onClick = () => {
+    document.location = '/login';
     deleteCookie('OMNM');
-    Router.push('/');
   }
 
   return (
