@@ -14,6 +14,8 @@ import MyPageToggle from './mypage_toggle';
 const token = getCookie('OMNM');
 
 const MyPageProfile = () => {
+  const [state, setState] = useState<boolean>();
+
   const [userId, setUserId] = useState('');
   const [kakaoId, setKaKaoId] = useState('');
   const [name, setName] = useState('');
@@ -29,7 +31,13 @@ const MyPageProfile = () => {
     };
 
     await axios.patch(url, {}, headers)
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data === '룸메이트 구하는 중') {
+          setState(false);
+        } else {
+          setState(true);
+        }
+      });
   }
 
   const dormitoryTitle = ['308관 2인실', '308관 4인실', '309관 2인실'];
@@ -96,8 +104,19 @@ const MyPageProfile = () => {
       <Typography className='text-black text-2xl font-medium mt-5'>{name}</Typography>
 
       <Box className='flex flex-row items-center border border-solid border-gray0 rounded-xl px-7 py-3 mt-6'>
-        <Typography className='text-black text-sm font-regular'>룸메이트 매칭 완료</Typography>
-        <MyPageToggle onClick={onClick} className='ml-5' />
+        {
+          state ? (
+            <>
+              <Typography className='text-black text-sm font-regular'>룸메이트 매칭 완료</Typography>
+              <MyPageToggle defaultChecked onClick={onClick} className='ml-5' />
+            </>
+          ) : (
+            <>
+              <Typography className='text-black text-sm font-regular'>룸메이트 구하는 중</Typography>
+              <MyPageToggle onClick={onClick} className='ml-5' />
+            </>
+          )
+        }
       </Box>
 
       <Box className='border border-solid border-gray0 rounded-xl px-7 py-6 mt-2'>
