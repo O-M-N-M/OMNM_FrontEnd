@@ -22,11 +22,6 @@ const MyPageMenu = () => {
           <Typography className="text-black text-base font-regular mt-3">신청 보낸 리스트</Typography>
         </a>
       </Link>
-      <Link href='/mypage'>
-        <a>
-          <Typography className="text-black text-base font-regular mt-3">찜한 룸메 리스트</Typography>
-        </a>
-      </Link>
 
       <Typography className='text-blak text-base font-medium mt-9'>성향 설문조사</Typography>
       <Link href='/mypage_surveyme'>
