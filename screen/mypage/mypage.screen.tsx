@@ -116,7 +116,7 @@ export const MyPageScreen: NextPage = () => {
             </Box>
 
             {
-              Object.keys(receiveFirstData).length === 0 ? (
+              (Array.isArray(receiveFirstData) && receiveFirstData.length === 0) ? (
                 <Box className='flex justify-center items-center w-full h-full mt-10'>
                   <CircularProgress color="inherit" />
                 </Box>
@@ -125,7 +125,7 @@ export const MyPageScreen: NextPage = () => {
                   <Box className='mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
                     {
-                      receiveFirstData.map((v: any, index: number) => {
+                      receiveFirstData && receiveFirstData.map((v: any, index: number) => {
                         return (
                           <MyPageList props={{ v: v, index: index, userName: userName }} />
                         )
@@ -136,7 +136,7 @@ export const MyPageScreen: NextPage = () => {
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
                     <>
                       {
-                        receiveSecondData.map((v: any, index: number) => {
+                        receiveSecondData && receiveSecondData.map((v: any, index: number) => {
                           return (
                             <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
@@ -160,7 +160,7 @@ export const MyPageScreen: NextPage = () => {
             </Box>
 
             {
-              Object.keys(sendFirstData).length === 0 ? (
+              (Array.isArray(receiveSecondData) && receiveSecondData.length === 0) ? (
                 <Box className='flex justify-center items-center w-full h-full mt-10'>
                   <CircularProgress color="inherit" />
                 </Box>
@@ -170,7 +170,7 @@ export const MyPageScreen: NextPage = () => {
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
                     <>
                       {
-                        sendFirstData.map((v: any, index: number) => {
+                        sendFirstData && sendFirstData.map((v: any, index: number) => {
                           return (
                             <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
@@ -182,7 +182,7 @@ export const MyPageScreen: NextPage = () => {
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
                     <>
                       {
-                        sendSecondData.map((v: any, index: number) => {
+                        sendSecondData && sendSecondData.map((v: any, index: number) => {
                           return (
                             <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
