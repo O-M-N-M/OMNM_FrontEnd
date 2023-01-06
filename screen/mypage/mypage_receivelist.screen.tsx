@@ -6,7 +6,6 @@ import { Box, IconButton, Pagination, PaginationItem, Typography } from "@mui/ma
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import basicProfile from "../../public/basicProfile.png";
 import DeleteIcon from '../../public/deleteIcon.png';
 import Footer from "@/components/footer";
 import MyPageLeft from "@/components/mypage/mypage_left";

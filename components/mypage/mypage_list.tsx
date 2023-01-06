@@ -4,7 +4,7 @@ import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Box, Button, CircularProgress, IconButton, Modal, Tooltip, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, IconButton, Modal, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import profile from '../../public/basicProfile.png';
