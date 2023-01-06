@@ -76,12 +76,6 @@ export const MyPageScreen: NextPage = () => {
 
     const isSurvey = async () => {
       const url = '/api/yourPersonality';
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.get(url, headers)
         .then((res) => {
