@@ -13,6 +13,7 @@ import MyPageList from "../../components/mypage/mypage_list";
 
 export const MyPageScreen: NextPage = () => {
   const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
 
   const [receiveFirstData, setReceiveFirstData] = useState<any[]>([]);
   const [receiveSecondData, setReceiveSecondData] = useState<any[]>([]);
@@ -39,6 +40,7 @@ export const MyPageScreen: NextPage = () => {
       await axios.get(url, headers)
         .then((res) => {
           setUserId(res.data.userId);
+          setUserName(res.data.name);
 
           getReceiveData();
           getSendData();
@@ -97,12 +99,12 @@ export const MyPageScreen: NextPage = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] w-screen my-[5%]'>
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] mx-[15%] my-[5%]'>
         <Box>
           <MyPageLeft />
         </Box>
 
-        <Box className='border border-solid border-gray0 rounded-[1.25rem] px-[2.875rem] py-16 ml-6'>
+        <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full px-[2.875rem] py-16 ml-6'>
           <Box>
             <Box className='flex flex-row items-center mx-3.5'>
               <Typography className='text-black text-xl font-medium'>룸메 신청 받은 리스트</Typography>
@@ -120,23 +122,23 @@ export const MyPageScreen: NextPage = () => {
                 </Box>
               ) : (
                 <Box className='flex flex-wrap'>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[46%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
                     {
                       receiveFirstData.map((v: any, index: number) => {
                         return (
-                          <MyPageList props={{ v: v, index: index }} />
+                          <MyPageList props={{ v: v, index: index, userName: userName }} />
                         )
                       })
                     }
                   </Box>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[46%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
                     <>
                       {
                         receiveSecondData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index }} />
+                            <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
                         })
                       }
@@ -150,7 +152,7 @@ export const MyPageScreen: NextPage = () => {
           <Box className='mt-14'>
             <Box className='flex flex-row items-center mx-3.5'>
               <Typography className='text-black text-xl font-medium'>룸메 신청 보낸 리스트</Typography>
-              <Link href='/'>
+              <Link href='/mypage_sendlist'>
                 <a className='ml-auto'>
                   <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
                 </a>
@@ -164,25 +166,25 @@ export const MyPageScreen: NextPage = () => {
                 </Box>
               ) : (
                 <Box className='flex flex-wrap'>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[46%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
                     <>
                       {
                         sendFirstData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index }} />
+                            <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
                         })
                       }
                     </>
                   </Box>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[46%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
                     <>
                       {
                         sendSecondData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index }} />
+                            <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
                         })
                       }
