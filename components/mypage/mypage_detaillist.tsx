@@ -1,8 +1,4 @@
 import Image from 'next/image';
-import { getCookie } from 'cookies-next';
-
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import { Box, Button, CircularProgress, IconButton, Modal, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,16 +6,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import profile from '../../public/basicProfile.png';
 import basicProfile from "../../public/basicProfile.png";
 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { getCookie } from 'cookies-next';
+
 interface ComponentProps {
   v: any;
   index: number;
   userName: string;
 }
 
-const MyPageList = ({ props }: { props: ComponentProps }) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [userId, setUserId] = useState<number>();
-  const [loading, setLoading] = useState<boolean>(false);
+const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
+  const [open, setOpen] = useState(false);
+  const [userId, setUserId] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [age, setAge] = useState(-1);
   const [matchPercent, setMatchPercent] = useState(-1.1);
@@ -111,15 +111,29 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
 
   return (
     <>
-      <Box key={props.index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 mb-1.5 px-6 py-3'>
-        {
-          props.v.profileUrl === null ?
-            <Image src={basicProfile} width={24} height={24} />
-            :
-            <Image loader={() => props.v.profileUrl} src={props.v.profileUrl} width={24} height={24} />
-        }
+      <Box key={props.index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 px-6 py-3'>
+        <Box className='border border-solid border-gray1 rounded-full px-1 py-0.5'>
+          {
+            props.v.time[5] === '0' ? (
+              <Typography className='text-gray1 text-xs font-medium text-center min-w-[2rem]'>{props.v.time.slice(6, 7)}.{props.v.time.slice(8, 10)}</Typography>
+            ) : (
+              <Typography className='text-gray1 text-xs font-medium text-center min-w-[2rem]'>{props.v.time.slice(5, 7)}.{props.v.time.slice(8, 10)}</Typography>
+            )
+          }
+        </Box>
+
+        <Box className='ml-8'>
+          {
+            props.v.profileUrl === null ?
+              <Image src={basicProfile} width={24} height={24} />
+              :
+              <Image loader={() => props.v.profileUrl} src={props.v.profileUrl} width={24} height={24} />
+          }
+        </Box>
+
         <Typography className='text-black text-base font-medium ml-3 w-16'>{props.v.name}</Typography>
-        <Typography className='text-gray1 text-xs font-regular ml-1'>· {props.v.age}</Typography>
+        <Typography className='text-gray1 text-xs font-regular ml-2'>· {props.v.age}</Typography>
+        <Typography className='text-black text-xs font-regular ml-5 w-8'>{props.v.mbti}</Typography>
         <Button onClick={() => { onClick(); handleOpen(); }} className='bg-white border border-solid border-accent1 rounded-full ml-auto'>
           <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
         </Button>
@@ -204,7 +218,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
         </Modal>
       }
     </>
-  );
-}
+  )
+};
 
-export default MyPageList;
+export default MyPageDetailList;

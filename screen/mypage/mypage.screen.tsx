@@ -13,6 +13,7 @@ import MyPageList from "../../components/mypage/mypage_list";
 
 export const MyPageScreen: NextPage = () => {
   const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
 
   const [receiveFirstData, setReceiveFirstData] = useState<any[]>([]);
   const [receiveSecondData, setReceiveSecondData] = useState<any[]>([]);
@@ -39,6 +40,7 @@ export const MyPageScreen: NextPage = () => {
       await axios.get(url, headers)
         .then((res) => {
           setUserId(res.data.userId);
+          setUserName(res.data.userName);
 
           getReceiveData();
           getSendData();
@@ -125,7 +127,7 @@ export const MyPageScreen: NextPage = () => {
                     {
                       receiveFirstData.map((v: any, index: number) => {
                         return (
-                          <MyPageList props={{ v: v, index: index }} />
+                          <MyPageList props={{ v: v, index: index, userName: userName }} />
                         )
                       })
                     }
@@ -136,7 +138,7 @@ export const MyPageScreen: NextPage = () => {
                       {
                         receiveSecondData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index }} />
+                            <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
                         })
                       }
@@ -170,7 +172,7 @@ export const MyPageScreen: NextPage = () => {
                       {
                         sendFirstData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index }} />
+                            <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
                         })
                       }
@@ -182,7 +184,7 @@ export const MyPageScreen: NextPage = () => {
                       {
                         sendSecondData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index }} />
+                            <MyPageList props={{ v: v, index: index, userName: userName }} />
                           )
                         })
                       }
