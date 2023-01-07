@@ -1,5 +1,5 @@
 import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NextPage } from "next";
 
 import Image from "next/image";
@@ -10,7 +10,6 @@ import { EmailBox } from './email';
 import { ProfileBox } from './profile';
 
 import axios from "axios";
-import Router from "next/router";
 
 const steps = [
   '계정 생성',
@@ -90,6 +89,10 @@ export const SignUpScreen: NextPage = () => {
     }
   }
 
+  useEffect(() => {
+    if (three) document.location = '/signup_success';
+  }, [three]);
+
   return (
     <Box className="flex justify-center items-center min-h-[calc(100vh-50px)]">
       <Box className="flex flex-col items-center my-[5%]">
@@ -98,13 +101,15 @@ export const SignUpScreen: NextPage = () => {
 
         <Box className="border border-solid border-gray0 rounded-2xl px-20 py-14 mt-6 w-full">
           <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>
-                  <Typography className="text-black text-xs font-medium">{label}</Typography>
-                </StepLabel>
-              </Step>
-            ))}
+            {
+              steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>
+                    <Typography className="text-black text-xs font-medium">{label}</Typography>
+                  </StepLabel>
+                </Step>
+              ))
+            }
           </Stepper>
 
           {
@@ -129,12 +134,6 @@ export const SignUpScreen: NextPage = () => {
             }
           </Box>
         </Box>
-
-        {
-          three && (
-            document.location = '/signup_success'
-          )
-        }
       </Box>
     </Box>
   );
