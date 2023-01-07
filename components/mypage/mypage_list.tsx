@@ -112,12 +112,15 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
   return (
     <>
       <Box key={props.index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 mb-1.5 px-6 py-3'>
-        {
-          props.v.profileUrl === null ?
-            <Image src={basicProfile} width={24} height={24} />
-            :
-            <Image loader={() => props.v.profileUrl} src={props.v.profileUrl} width={24} height={24} />
-        }
+        <Box className='flex items-center'>
+          {
+            props.v.profileUrl === null ?
+              <Image src={basicProfile} width={24} height={24} />
+              :
+              <Image loader={() => props.v.profileUrl} src={props.v.profileUrl} width={24} height={24} className='rounded-full' />
+          }
+        </Box>
+
         <Typography className='text-black text-base font-medium ml-3 w-16'>{props.v.name}</Typography>
         <Typography className='text-gray1 text-xs font-regular ml-1'>· {props.v.age}</Typography>
         <Button onClick={() => { onClick(); handleOpen(); }} className='bg-white border border-solid border-accent1 rounded-full ml-auto'>

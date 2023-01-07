@@ -91,12 +91,12 @@ export const MyPageScreen: NextPage = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] w-screen my-[5%]'>
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] mx-[15%] my-[5%]'>
         <Box>
           <MyPageLeft />
         </Box>
 
-        <Box className='border border-solid border-gray0 rounded-[1.25rem] px-[2.875rem] py-16 ml-6'>
+        <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full px-[2.875rem] py-16 ml-6'>
           <Box>
             <Box className='flex flex-row items-center mx-3.5'>
               <Typography className='text-black text-xl font-medium'>룸메 신청 받은 리스트</Typography>
@@ -114,7 +114,7 @@ export const MyPageScreen: NextPage = () => {
                 </Box>
               ) : (
                 <Box className='flex flex-wrap'>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[45%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
                     {
                       receiveFirstData && receiveFirstData.map((v: any, index: number) => {
@@ -124,7 +124,7 @@ export const MyPageScreen: NextPage = () => {
                       })
                     }
                   </Box>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[45%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
                     <>
                       {
@@ -158,7 +158,7 @@ export const MyPageScreen: NextPage = () => {
                 </Box>
               ) : (
                 <Box className='flex flex-wrap'>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[45%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
                     <>
                       {
@@ -170,7 +170,7 @@ export const MyPageScreen: NextPage = () => {
                       }
                     </>
                   </Box>
-                  <Box className='mx-3.5'>
+                  <Box className='w-[45%] mx-3.5'>
                     <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
                     <>
                       {

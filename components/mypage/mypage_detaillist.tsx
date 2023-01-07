@@ -122,12 +122,12 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
           }
         </Box>
 
-        <Box className='ml-8'>
+        <Box className='flex items-center ml-8'>
           {
             props.v.profileUrl === null ?
               <Image src={basicProfile} width={24} height={24} />
               :
-              <Image loader={() => props.v.profileUrl} src={props.v.profileUrl} width={24} height={24} />
+              <Image loader={() => props.v.profileUrl} src={props.v.profileUrl} width={24} height={24} className='rounded-full' />
           }
         </Box>
 
