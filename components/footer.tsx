@@ -26,17 +26,17 @@ const Footer = () => {
             </a>
           </Link>
 
-          <Link href='/'>
+          <Link href='/mypage'>
             <a>
               <Typography className="font-regular text-xs mb-2">룸메 신청 내역</Typography>
             </a>
           </Link>
-          <Link href='/'>
+          <Link href='/mypage_surveyme'>
             <a>
               <Typography className="font-regular text-xs mb-2">성향 설문조사</Typography>
             </a>
           </Link>
-          <Link href='/'>
+          <Link href='/mypage_edit'>
             <a>
               <Typography className="font-regular text-xs">설정</Typography>
             </a>
