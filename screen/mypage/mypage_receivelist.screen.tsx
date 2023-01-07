@@ -1,25 +1,23 @@
 import Image from 'next/image';
 import { getCookie } from 'cookies-next';
 
-import { Box, IconButton, Pagination, PaginationItem, Typography } from "@mui/material";
+import { Box, Button, IconButton, Pagination, PaginationItem, Typography } from "@mui/material";
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import basicProfile from "../../public/basicProfile.png";
 import DeleteIcon from '../../public/deleteIcon.png';
 import Footer from "@/components/footer";
 import MyPageLeft from "@/components/mypage/mypage_left";
-import MyPageDetailList from '@/components/mypage/mypage_detaillist';
 
 export const MyPageReceiveListScreen = () => {
   const [userId, setUserId] = useState('');
-  const [userName, setUserName] = useState('');
-
   const [totalCount, setTotalCount] = useState<number>(0);
   const [data, setData] = useState<object[]>([]);
   const [index, setIndex] = useState<number>(0);
 
-  const handleChange = (_: any, p: any) => {
+  const handleChange = (e: any, p: any) => {
     setIndex(p - 1);
   }
 
@@ -38,8 +36,6 @@ export const MyPageReceiveListScreen = () => {
       await axios.get(url, headers)
         .then((res) => {
           setUserId(res.data.userId);
-          setUserName(res.data.userName);
-
           getPageData();
         })
         .catch((err) => console.log(err));
@@ -89,7 +85,33 @@ export const MyPageReceiveListScreen = () => {
               {
                 data.map((v: any, index: number) => {
                   return (
-                    <MyPageDetailList props={{ v: v, index: index, userName: userName }} />
+                    <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 px-6 py-3'>
+                      <Box className='border border-solid border-gray1 rounded-full px-1 py-0.5'>
+                        {
+                          v.time[5] === '0' ? (
+                            <Typography className='text-gray1 text-xs font-medium text-center min-w-[2rem]'>{v.time.slice(6, 7)}.{v.time.slice(8, 10)}</Typography>
+                          ) : (
+                            <Typography className='text-gray1 text-xs font-medium text-center min-w-[2rem]'>{v.time.slice(5, 7)}.{v.time.slice(8, 10)}</Typography>
+                          )
+                        }
+                      </Box>
+
+                      <Box className='ml-8'>
+                        {
+                          v.profileUrl === null ?
+                            <Image src={basicProfile} width={24} height={24} />
+                            :
+                            <Image loader={() => v.profileUrl} src={v.profileUrl} width={24} height={24} />
+                        }
+                      </Box>
+
+                      <Typography className='text-black text-base font-medium ml-3 w-16'>{v.name}</Typography>
+                      <Typography className='text-gray1 text-xs font-regular ml-2'>· {v.age}</Typography>
+                      <Typography className='text-black text-xs font-regular ml-5 w-8'>{v.mbti}</Typography>
+                      <Button className='bg-white border border-solid border-accent1 rounded-full ml-auto'>
+                        <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
+                      </Button>
+                    </Box>
                   )
                 })
               }
