@@ -41,13 +41,11 @@ export const MyPageScreen: NextPage = () => {
         .then((res) => {
           setUserId(res.data.userId);
           setUserName(res.data.userName);
-
-          getReceiveData();
-          getSendData();
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
+
+      getReceiveData();
+      getSendData();
     };
 
     const getReceiveData = async () => {

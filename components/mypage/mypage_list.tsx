@@ -86,7 +86,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
         const sp = res.data.sleepingPattern.replace(/[{}]/g, '').split(',');
         if (sp.length === 0) setSleepingPattern(['수면패턴 없음']);
         else {
-          let newSP: String[] = [];
+          const newSP: String[] = [];
           sp.forEach((v: string) => {
             if (v === '0') newSP.push('코골이');
             else if (v === '1') newSP.push('이갈이');
