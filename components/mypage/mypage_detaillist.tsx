@@ -3,7 +3,9 @@ import Image from 'next/image';
 import { Box, Button, CircularProgress, IconButton, Modal, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
+import nightIcon from '../../public/nightIcon.png';
 import profile from '../../public/basicProfile.png';
+import morningIcon from '../../public/morningIcon.png';
 import basicProfile from "../../public/basicProfile.png";
 
 import { useEffect, useState } from 'react';
@@ -106,6 +108,7 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
   };
 
   useEffect(() => {
+    console.log(props.v);
     setUserId(props.v.userId);
   }, [userId]);
 
@@ -134,6 +137,19 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
         <Typography className='text-black text-base font-medium ml-3 w-16'>{props.v.name}</Typography>
         <Typography className='text-gray1 text-xs font-regular ml-2'>· {props.v.age}</Typography>
         <Typography className='text-black text-xs font-regular ml-5 w-8'>{props.v.mbti}</Typography>
+        {
+          props.v.lifeCycle === 0 ? (
+            <Box className='flex flex-row ml-5'>
+              <Image src={morningIcon} width={14} height={14} />
+              <Typography className='text-black text-xs font-regular ml-1.5'>아침형 인간</Typography>
+            </Box>
+          ) : (
+            <Box className='flex flex-row ml-5'>
+              <Image src={nightIcon} width={14} height={14} />
+              <Typography className='text-black text-xs font-regular ml-1.5'>저녁형 인간</Typography>
+            </Box>
+          )
+        }
         <Button onClick={() => { onClick(); handleOpen(); }} className='bg-white border border-solid border-accent1 rounded-full ml-auto'>
           <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
         </Button>
