@@ -87,7 +87,7 @@ export const MyPageSendListScreen = () => {
           <Box className='flex flex-col items-center mt-9'>
             <Box className='w-full min-h-[44rem]'>
               {
-                data.map((v: any, index: number) => {
+                data && data.map((v: any, index: number) => {
                   return (
                     <MyPageDetailList props={{ v: v, index: index, userName: userName }} />
                   )
