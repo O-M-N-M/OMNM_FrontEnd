@@ -297,7 +297,7 @@ export const MainScreen: NextPage = () => {
                         </Box>
                       </SwiperSlide>
                       :
-                      <SwiperSlide onClick={() => { onClick(index); handleOpen() }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full">
+                      <SwiperSlide onClick={() => { onClick(index); handleOpen() }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
                         <Box className="flex flex-col justify-center items-center bg-white rounded-lg w-[22rem] h-64">
                           <Box className="flex flex-row justify-center items-center">
                             {
