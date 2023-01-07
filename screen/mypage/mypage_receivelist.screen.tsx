@@ -19,7 +19,7 @@ export const MyPageReceiveListScreen = () => {
   const [data, setData] = useState<object[]>([]);
   const [index, setIndex] = useState<number>(0);
 
-  const handleChange = (e: any, p: any) => {
+  const handleChange = (_: any, p: any) => {
     setIndex(p - 1);
   }
 

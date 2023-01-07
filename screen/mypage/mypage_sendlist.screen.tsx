@@ -14,11 +14,12 @@ import MyPageDetailList from '@/components/mypage/mypage_detaillist';
 export const MyPageSendListScreen = () => {
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
+
   const [totalCount, setTotalCount] = useState<number>(0);
   const [data, setData] = useState<object[]>([]);
   const [index, setIndex] = useState<number>(0);
 
-  const handleChange = (e: any, p: any) => {
+  const handleChange = (_: any, p: any) => {
     setIndex(p - 1);
   }
 
