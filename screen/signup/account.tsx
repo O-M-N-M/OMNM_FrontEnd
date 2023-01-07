@@ -60,16 +60,31 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
         <Typography className="text-gray1 text-xs font-regular ml-2">6~12자 이내 영문과 숫자 모두 포함</Typography>
       </Box>
       <form onSubmit={onSubmit} className="flex items-center">
-        <input
-          type="text"
-          name="id"
-          placeholder="아이디 입력"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
         {
-          pass ? <Button disabled className="border border-solid border-gray1 bg-white rounded-full text-gray0 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button> :
-            <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button>
+          pass ? (
+            <>
+              <input
+                disabled
+                type="text"
+                name="id"
+                placeholder="아이디 입력"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
+              <Button disabled className="border border-solid border-gray1 bg-white rounded-full text-gray0 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button> :
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                name="id"
+                placeholder="아이디 입력"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
+              <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">중복확인</Button>
+            </>
+          )
         }
       </form>
       {
