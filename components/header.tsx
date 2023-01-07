@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
+// import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 
 import { Box, Typography } from "@mui/material";
 
@@ -9,30 +10,31 @@ import MyPageIcon from '../public/Group1.ico';
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 const Header = () => {
   const [isCookie, setIsCookie] = useState(false);
   const [profile, setProfile] = useState<string | null>(null);
 
-  const checkRefreshToken = async () => {
-    const url = '/api/token';
-    const body = `accessToken=${getCookie('OMNM')}&refreshToken=${getCookie('refreshToken')}`;
-    await axios.post(url, body)
-      .then((res) => {
-        if (res.data === '재로그인 요청') {
-          alert('세션이 만료되었습니다.\n로그인을 다시해주세요.');
-          deleteCookie('OMNM');
-          document.location = '/login';
-        }
-        else {
-          setCookie('OMNM', res.data);
+  // const checkRefreshToken = async () => {
+  //   const url = '/api/token';
+  //   let body = `accessToken=${getCookie('OMNM')}&refreshToken=${getCookie('refreshToken')}`;
 
-          const router = useRouter();
-          router.replace(router.asPath);
-        }
-      });
-  };
+  //   await axios.post(url, body)
+  //     .then((res) => {
+  //       if (res.data === '재로그인 요청') {
+  //         alert('세션이 만료되었습니다.\n로그인을 다시해주세요.');
+
+  //         deleteCookie('OMNM');
+  //         document.location = '/login';
+  //       }
+  //       else {
+  //         setCookie('OMNM', res.data);
+
+  //         document.location = window.location.pathname;
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -46,17 +48,33 @@ const Header = () => {
 
       axios.get(url, headers)
         .then((res) => setProfile(res.data.profileUrl))
-        .catch((err) => {
-          if (err.response.status === 403) {
-            checkRefreshToken();
-          }
-        })
+        .catch((err) => console.log(err));
+      // .catch((err) => {
+      //   if (err.response.status === 403) checkRefreshToken();
+      // })
     };
+
+    // const loadProfile = async () => {
+    //   const url = '/api/myInfo';
+    //   const token = getCookie('OMNM');
+
+    //   const config: AxiosRequestConfig = {
+    //     method: 'get',
+    //     url: url,
+    //     headers: {
+    //       'OMNM': `${token}`
+    //     }
+    //   }
+
+    //   const response: AxiosResponse = await axios(config);
+    //   setProfile(response.data.profileUrl);
+    // };
 
     if (hasCookie('OMNM')) {
       setIsCookie(true);
       loadProfile();
-    } else {
+    }
+    else {
       setIsCookie(false);
     }
   })
