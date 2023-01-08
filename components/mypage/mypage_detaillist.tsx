@@ -108,7 +108,6 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
   };
 
   useEffect(() => {
-    console.log(props.v);
     setUserId(props.v.userId);
   }, [userId]);
 

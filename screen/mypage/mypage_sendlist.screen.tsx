@@ -38,7 +38,7 @@ export const MyPageSendListScreen = () => {
       await axios.get(url, headers)
         .then((res) => {
           setUserId(res.data.userId);
-          setUserName(res.data.userName);
+          setUserName(res.data.name);
 
           getPageData();
         })
