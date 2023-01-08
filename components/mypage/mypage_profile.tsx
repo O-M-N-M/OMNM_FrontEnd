@@ -1,13 +1,12 @@
 import { Box, Typography } from "@mui/material";
 
-import Image from "next/image";
 import { getCookie } from "cookies-next";
+import Image from "next/image";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import basicProfile from "../../public/basicProfile.png";
-
 import MyPageToggle from './mypage_toggle';
 
 const token = getCookie('OMNM');
@@ -42,14 +41,15 @@ const MyPageProfile = () => {
   const dormitoryTitle = ['308관 2인실', '308관 4인실', '309관 2인실'];
 
   useEffect(() => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'OMNM': `${token}`
+      }
+    };
+
     const getMyData = async () => {
       const url = '/api/myInfo';
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.get(url, headers)
         .then((res) => {
@@ -62,7 +62,18 @@ const MyPageProfile = () => {
         .catch((err) => console.log(err));
     }
 
+    const getState = async () => {
+      const url = '/api/myInfo/isMatched';
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setState(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+
     getMyData();
+    getState();
   }, []);
 
   return (
@@ -84,7 +95,7 @@ const MyPageProfile = () => {
           state ? (
             <>
               <Typography className='text-black text-sm font-regular'>룸메이트 매칭 완료</Typography>
-              <MyPageToggle defaultChecked onClick={onClick} className='ml-5' />
+              <MyPageToggle checked onClick={onClick} className='ml-5' />
             </>
           ) : (
             <>
