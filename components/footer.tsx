@@ -9,7 +9,7 @@ const Footer = () => {
     <Box className="flex items-center bg-gray5 w-full h-[180px]">
       <Box className="ml-[15%]">
         <Image src={logo} width={60} height={61} />
-        <Typography className="text-gray4 text-xs font-regular mt-1">ⓒ 2022. omnm. All rights reserved.</Typography>
+        <Typography className="text-gray4 text-xs font-regular mt-1">ⓒ 2023. omnm. All rights reserved.</Typography>
       </Box>
 
       <Box className="flex flex-row ml-auto mr-[15%]">
