@@ -144,7 +144,7 @@ export const MyPageScreen: NextPage = () => {
           <Box className='mt-14'>
             <Box className='flex flex-row items-center mx-3.5'>
               <Typography className='text-black text-xl font-medium'>룸메 신청 보낸 리스트</Typography>
-              <Link href='/'>
+              <Link href='/mypage_sendlist'>
                 <a className='ml-auto'>
                   <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
                 </a>
