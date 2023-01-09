@@ -71,7 +71,7 @@ export const MyPageReceiveListScreen = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-50px)] mx-[15%] my-[5%]'>
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
           <MyPageLeft />
         </Box>

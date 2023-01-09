@@ -187,7 +187,7 @@ export const SurveyMateScreen: NextPage = () => {
   }, [])
 
   return (
-    <Box className='w-full h-fit min-h-[calc(100vh-50px)] px-[15%] my-[5%]'>
+    <Box className='w-full h-fit min-h-[calc(100vh-70px)] px-[15%] my-[5%]'>
       <Box className='flex flex-row items-center mb-3'>
         <Image src={SurveyIcon} width={57} height={72} />
 

@@ -137,7 +137,7 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
         </Box>
 
         <Typography className='text-black text-base font-medium ml-3 w-16'>{props.v.name}</Typography>
-        <Typography className='text-gray1 text-xs font-regular ml-2'>· {props.v.age}</Typography>
+        <Typography className='text-gray1 text-xs font-regular ml-2'>{props.v.age}세</Typography>
         <Typography className='text-black text-xs font-regular ml-5 w-8'>{props.v.mbti}</Typography>
         {
           props.v.lifeCycle === 0 ? (

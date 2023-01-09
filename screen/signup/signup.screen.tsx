@@ -94,7 +94,7 @@ export const SignUpScreen: NextPage = () => {
   }, [three]);
 
   return (
-    <Box className="flex justify-center items-center min-h-[calc(100vh-50px)]">
+    <Box className="flex justify-center items-center min-h-[calc(100vh-70px)]">
       <Box className="flex flex-col items-center my-[5%]">
         <Image src={logo} width={60} height={61} />
         <Typography className="text-black text-2xl font-medium mt-5">회원가입</Typography>

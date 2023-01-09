@@ -64,13 +64,13 @@ const Header = () => {
   })
 
   return (
-    <Box className="flex items-center bg-white border-gray0 border-0 border-b border-solid w-auto h-[50px]">
+    <Box className="flex items-center bg-white border-gray0 border-0 border-b border-solid w-auto h-[70px]">
       {
         isCookie ? (
           <>
             <Link href='/main'>
               <a className="ml-[15%]">
-                <Image src={logo} width={115} height={20} />
+                <Image src={logo} width={161} height={28} />
               </a>
             </Link>
 
@@ -78,10 +78,10 @@ const Header = () => {
               <a className="ml-auto mr-[15%] mt-1">
                 {
                   profile === null ? (
-                    <Image src={MyPageIcon} width={26} height={26} />
+                    <Image src={MyPageIcon} width={30} height={30} />
                   ) : (
-                    <Box className='border border-gray1 border-solid rounded-full w-[26px] h-[26px]'>
-                      <Image loader={() => profile} src={profile} width={26} height={26} className='rounded-full' />
+                    <Box className='border border-gray1 border-solid rounded-full w-[30px] h-[30px]'>
+                      <Image loader={() => profile} src={profile} width={30} height={30} className='rounded-full' />
                     </Box>
                   )
                 }

@@ -210,15 +210,15 @@ export const MainScreen: NextPage = () => {
   return (
     <>
       <Box className="bg-main-move-background bg-cover">
-        <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-50px)] py-28">
+        <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-70px)] py-28">
           <Box className="flex flex-row">
-            <Typography className="text-accent1 text-5xl font-bold ml-[15%]">
+            <Typography className="text-accent1 text-4xl font-bold ml-[15%]">
               {userName}
-              <Typography component='span' className='text-black text-5xl font-bold'>님을 위한</Typography>
+              <Typography component='span' className='text-black text-4xl font-bold'>님을 위한</Typography>
             </Typography>
 
             <Box className="flex flex-row ml-auto mr-[15%]">
-              <Typography className="text-xs text-accent1 font-medium mt-3 mr-2">성향 일치 개수</Typography>
+              <Typography className="text-accent1 text-base font-medium mt-2 mr-5">성향 일치 개수</Typography>
               <FormControl size="small">
                 <Select
                   value={count}
@@ -247,19 +247,19 @@ export const MainScreen: NextPage = () => {
                       borderWidth: '1.5px'
                     }
                   }}
-                  className="w-28 h-10 round rounded-xl text-accent1 text-sm"
+                  className="w-28 h-10 round rounded-xl text-accent1 text-base"
                 >
-                  <MenuItem value={'4'} className="text-xs">4개 이상</MenuItem>
-                  <MenuItem value={'5'} className="text-xs">5개 이상</MenuItem>
-                  <MenuItem value={'6'} className="text-xs">6개 이상</MenuItem>
-                  <MenuItem value={'7'} className="text-xs">7개 이상</MenuItem>
-                  <MenuItem value={'8'} className="text-xs">8개</MenuItem>
+                  <MenuItem value={'4'} className="text-base">4개 이상</MenuItem>
+                  <MenuItem value={'5'} className="text-base">5개 이상</MenuItem>
+                  <MenuItem value={'6'} className="text-base">6개 이상</MenuItem>
+                  <MenuItem value={'7'} className="text-base">7개 이상</MenuItem>
+                  <MenuItem value={'8'} className="text-base">8개</MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </Box>
-          <Typography className="text-5xl font-bold px-[15%] mt-1">추천 룸메 리스트</Typography>
-          <Typography className="text-2xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메들을 선별한 리스트입니다.</Typography>
+          <Typography className="text-black text-4xl font-bold px-[15%] mt-2">추천 룸메 리스트</Typography>
+          <Typography className="text-black text-xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메들을 선별한 리스트입니다.</Typography>
 
           <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
             <Swiper
@@ -301,7 +301,7 @@ export const MainScreen: NextPage = () => {
                       </SwiperSlide>
                       :
                       <SwiperSlide onClick={() => { onClick(index); handleOpen() }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
-                        <Box className="flex flex-col justify-center items-center bg-white rounded-lg w-[22rem] h-64">
+                        <Box className="flex flex-col justify-center items-center bg-white rounded-[1.25rem] w-[22rem] h-64">
                           <Box className="flex flex-row justify-center items-center">
                             {
                               roomMate.profileUrl === null ? (
@@ -315,19 +315,19 @@ export const MainScreen: NextPage = () => {
                             <Box className="ml-14">
                               <Box className="flex flex-row items-center">
                                 <Typography className="text-black text-2xl font-bold">{roomMate.name}</Typography>
-                                <Typography className="text-gray1 text-xl font-regular">&nbsp;· {roomMate.age}</Typography>
+                                <Typography className="text-gray1 text-base font-regular ml-3">{roomMate.age}세</Typography>
                               </Box>
                               <Box className="flex flex-row justify-center items-center mt-2">
                                 <Typography className="text-black text-base font-medium mr-auto">{roomMate.mbti}</Typography>
                                 <>
                                   <Image src={percent} width={16} height={16} />
-                                  <Typography className="text-black text-base font-medium ml-2">{roomMate.percent}%</Typography>
+                                  <Typography className="text-black text-base font-bold ml-1">{roomMate.percent}%</Typography>
                                 </>
                               </Box>
                             </Box>
                           </Box>
-                          <Box className="w-full ml-[25%] mt-6">
-                            <Typography className="text-xs font-regular">{roomMate.introduction}</Typography>
+                          <Box className="w-[75%] mt-6">
+                            <Typography className="text-black text-base font-regular">{roomMate.introduction}</Typography>
                           </Box>
                         </Box>
                       </SwiperSlide>

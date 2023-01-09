@@ -37,7 +37,7 @@ export const FindIdScreen: NextPage = () => {
   };
 
   return (
-    <Box className="flex items-center justify-center min-h-[calc(100vh-50px)]">
+    <Box className="flex items-center justify-center min-h-[calc(100vh-70px)]">
       <Box className="flex flex-col items-center my-[5%]">
         <Image src={logo} width={60} height={61} />
 

@@ -124,7 +124,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
         </Box>
 
         <Typography className='text-black text-base font-medium ml-3 w-16'>{props.v.name}</Typography>
-        <Typography className='text-gray1 text-xs font-regular ml-1'>· {props.v.age}</Typography>
+        <Typography className='text-gray1 text-xs font-regular ml-1'>{props.v.age}세</Typography>
         <Button onClick={() => { onClick(); handleOpen(); }} className='bg-white border border-solid border-accent1 rounded-full ml-auto'>
           <Typography className='text-accent1 text-xs font-regular'>프로필 보기</Typography>
         </Button>

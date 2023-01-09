@@ -28,7 +28,7 @@ export const LadingScreen: NextPage = () => {
 
   return (
     <>
-      <Box className='flex flex-row justify-center items-center min-h-[calc(100vh-50px)]'>
+      <Box className='flex flex-row justify-center items-center min-h-[calc(100vh-70px)]'>
         <Box className="ml-[15%]">
           <Typography className="text-[3.3rem] font-bold">
             {`오늘 만나고 내일 만나는\n기숙사 `}

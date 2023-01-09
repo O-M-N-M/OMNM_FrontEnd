@@ -25,8 +25,8 @@ a {
 }
 
 .swiper-button-prev {
-  width: 12.63px !important;
-  height: 21.63px !important;
+  width: 45px !important;
+  height: 45px !important;
   color: transparent !important;
   background-image: url('../public/arrowPrevActive.png');
 
@@ -34,8 +34,8 @@ a {
 }
 
 .swiper-button-next {
-  width: 12.63px !important;
-  height: 21.63px !important;
+  width: 45px !important;
+  height: 45px !important;
   color: transparent !important;
   background-image: url('../public/arrowNextActive.png');
 
@@ -47,13 +47,15 @@ a {
 }
 
 .swiper-pagination-bullet {
-  background-color: #76ccfb !important;
+  background-color: white !important;
   width: 2rem !important;
   height: 0.75rem !important;
   border-radius: 30px !important;
+  opacity: 0.9 !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08) !important;
   /* transform: translate(0, 20px) !important; */
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #38BDF8 !important;
+  background-color: rgba(75, 153, 235, 1) !important;
 }
