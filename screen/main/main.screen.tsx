@@ -343,7 +343,7 @@ export const MainScreen: NextPage = () => {
               open={open}
               onClose={handleClose}
             >
-              <DetailProfile props={{ name: name, mbti: mbti, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, setOpen: setOpen }} />
+              <DetailProfile props={{ name: name, mbti: mbti, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: '', setOpen: setOpen }} />
             </Modal>
           }
         </Box>

@@ -21,12 +21,13 @@ interface ComponentProps {
   isCleaning: string;
   nationality: string;
   age: number;
-  matchingId: string;
+  matchingId: string | number | undefined;
   matchPercent: number;
   loading: boolean;
   sleepingPattern: String[];
   detailProfile: any | null;
-  armyService: string | null;
+  armyService: string | null | undefined;
+  kakaoId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -96,11 +97,17 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
               <Box sx={{ border: 'solid 1px #DBDBDB', borderRadius: '10px', width: '50%', height: 'fit-content', padding: '1.5rem', marginTop: '0.75rem' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                   <Typography sx={{ color: '#383838', fontSize: '0.875rem', fontWeight: '400', marginRight: 'auto' }}>카카오톡 ID</Typography>
-                  <Tooltip title='룸메를 신청해야 볼 수 있습니다.' sx={{ padding: '0px' }}>
-                    <IconButton>
-                      <Image src={displayNone} width={18} height={18} />
-                    </IconButton>
-                  </Tooltip>
+                  {
+                    props.kakaoId === '' ? (
+                      <Tooltip title='룸메를 신청해야 볼 수 있습니다.' sx={{ padding: '0px' }}>
+                        <IconButton>
+                          <Image src={displayNone} width={18} height={18} />
+                        </IconButton>
+                      </Tooltip>
+                    ) : (
+                      <Typography sx={{ color: '#383838', fontSize: '0.875rem', fontWeight: '500' }}>{props.kakaoId}</Typography>
+                    )
+                  }
                 </Box>
 
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginTop: '1rem' }}>
@@ -139,7 +146,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                   })
                 }
                 <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#308CED', fontSize: '1rem', fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.isSmoking}</Typography>
-                <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#2DD4BF', fontSize: '1rem', fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.armyService}</Typography>
+                {props.armyService && <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#2DD4BF', fontSize: '1rem', fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.armyService}</Typography>}
               </Box>
             </Box>
           </>
