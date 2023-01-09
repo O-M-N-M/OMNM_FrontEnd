@@ -1,6 +1,6 @@
-import { getCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,9 +13,16 @@ export const MyPageWithdrawalScreen = () => {
   const [open, setOpen] = useState(false);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [tf, setTf] = useState(false);
 
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const onClick = () => {
+    deleteCookie('OMNM');
+    deleteCookie('refreshToken');
+    document.location = '/';
+  }
 
   const onSubmit = async () => {
     const url = `/api/users/${userId}`;
@@ -42,7 +49,9 @@ export const MyPageWithdrawalScreen = () => {
     )
 
     await axios.post(url, body, headers)
-      .then(() => document.location = '/landing')
+      .then(() => {
+        setTf(true);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -62,8 +71,8 @@ export const MyPageWithdrawalScreen = () => {
         .catch((err) => console.log(err));
     }
 
-    getMyData();
-  }, []);
+    if (!tf) getMyData();
+  }, [tf]);
 
   return (
     <>
@@ -72,8 +81,7 @@ export const MyPageWithdrawalScreen = () => {
           <MyPageLeft />
         </Box>
 
-        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
-          {/* <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'> */}
+        <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
           <Typography className='text-black text-xl font-medium text-center w-full'>회원 탈퇴</Typography>
 
           <Box className='mt-10'>
@@ -101,28 +109,40 @@ export const MyPageWithdrawalScreen = () => {
           </Box>
 
           <Box className='flex w-80'>
-            <Button type='submit' className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
-              {/* <Button onClick={onSubmit} className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'> */}
+            <Button onClick={handleOpen} className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
               <Typography className='text-white text-sm font-medium'>확인</Typography>
             </Button>
           </Box>
 
-          {/* {
+          {
             open &&
             <Modal
               open={open}
               onClose={handleClose}
             >
-              <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', minWidth: '400px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
-                <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>회원을 탈퇴하시겠습니까?</Typography>
-                <Typography sx={{ color: '#E33A3A', fontSize: '0.875rem', fontWeight: '400' }}>(회원 탈퇴 시, 모든 개인정보가 영구 삭제됩니다.)</Typography>
-                <Button onClick={onSubmit}>예</Button>
-                <Button onClick={handleClose}>아니오</Button>
+              <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                  {
+                    tf ? (
+                      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>회원 탈퇴를 완료하였습니다.</Typography>
+                        <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+                      </Box>
+                    ) : (
+                      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>회원을 탈퇴하시겠습니까?</Typography>
+                        <Typography sx={{ color: '#E33A3A', fontSize: '0.875rem', fontWeight: '400', marginTop: '8px' }}>(회원 탈퇴 시, 모든 개인정보가 영구 삭제됩니다.)</Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '24px' }}>
+                          <Button onClick={onSubmit} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px' }}>예</Button>
+                          <Button onClick={handleClose} sx={{ backgroundColor: '#9B9EA1 !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginLeft: '24px' }}>아니오</Button>
+                        </Box>
+                      </Box>)
+                  }
+                </Box>
               </Box>
             </Modal>
-          } */}
-        </form>
-        {/* </Box> */}
+          }
+        </Box>
       </Box>
 
       <Footer />
