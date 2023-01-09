@@ -21,7 +21,7 @@ a {
 }
 
 .swiper {
-  min-height: 20rem;
+  min-height: 23rem;
 }
 
 .swiper-button-prev {
@@ -42,9 +42,16 @@ a {
   /* transform: translate(-20rem, 10rem); */
 }
 
+.swiper-pagination-horizontal {
+  margin-top: 10px;
+}
+
 .swiper-pagination-bullet {
   background-color: #76ccfb !important;
-  /* transform: translate(0, 10px) !important; */
+  width: 2rem !important;
+  height: 0.75rem !important;
+  border-radius: 30px !important;
+  /* transform: translate(0, 20px) !important; */
 }
 
 .swiper-pagination-bullet-active {
