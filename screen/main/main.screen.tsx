@@ -212,7 +212,10 @@ export const MainScreen: NextPage = () => {
       <Box className="bg-main-move-background bg-cover">
         <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-50px)] py-28">
           <Box className="flex flex-row">
-            <Typography className="text-5xl font-bold ml-[15%]">{userName}님을 위한</Typography>
+            <Typography className="text-accent1 text-5xl font-bold ml-[15%]">
+              {userName}
+              <Typography component='span' className='text-black text-5xl font-bold'>님을 위한</Typography>
+            </Typography>
 
             <Box className="flex flex-row ml-auto mr-[15%]">
               <Typography className="text-xs text-accent1 font-medium mt-3 mr-2">성향 일치 개수</Typography>
