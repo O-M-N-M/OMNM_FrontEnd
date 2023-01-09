@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Box, Button, FormControl, FormControlLabel, IconButton, Radio, RadioGroup, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup, Typography } from '@mui/material'
 import { PhotoCamera } from "@mui/icons-material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -14,13 +14,21 @@ import MyPageLeft from '../../components/mypage/mypage_left'
 import basicProfile from '../../public/basicProfile.png';
 
 export const MyPageEditScreen = () => {
-  const [userId, setUserId] = useState(-1);
-  const [profile, setProfile] = useState<File | null>(null);
-  const [image, setImage] = useState<string | null>(null);
   const [kakaoId, setKakaoId] = useState('');
+  const [userId, setUserId] = useState(-1);
   const [dormitory, setDormitory] = useState(-1);
+  const [open, setOpen] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
+  const [profile, setProfile] = useState<File | null>(null);
 
   const dormitoryTitle = ['308관 2인실', '308관 4인실', '309관 2인실'];
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const onClick = () => {
+    document.location = '/mypage_edit';
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +63,7 @@ export const MyPageEditScreen = () => {
     };
 
     await axios.patch(url, formData, headers)
-      .then((res) => document.location = '/mypage_edit')
+      .then(() => handleOpen())
       .catch((err) => console.log(err));
   }
 
@@ -153,7 +161,24 @@ export const MyPageEditScreen = () => {
             </Button>
           </Box>
         </form>
+
+        {
+          open &&
+          <Modal
+            open={open}
+            onClose={handleClose}
+          >
+            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>개인정보가 수정되었습니다.</Typography>
+                <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+              </Box>
+            </Box>
+          </Modal>
+        }
+
       </Box>
+
       <Footer />
     </>
   )
