@@ -59,7 +59,7 @@ export const LadingScreen: NextPage = () => {
         <Box className='my-36 ml-[15%]'>
           <Typography className="text-black text-2xl">지금까지</Typography>
 
-          <Box className="flex flex-row mt-3">
+          <Box className="flex flex-row items-center mt-3">
             <Image src={LogoString2} width={195.73} height={33.52} />
             <Typography className="text-accent1 text-4xl font-bold ml-6">누적 가입자 수</Typography>
             <Typography className="text-black text-4xl font-bold">는?</Typography>
