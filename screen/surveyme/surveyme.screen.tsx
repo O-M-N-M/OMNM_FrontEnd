@@ -184,7 +184,10 @@ export const SurveyMeScreen: NextPage = () => {
       const url = '/api/myInfo/isMale';
 
       await axios.get(url, headers)
-        .then((res) => setIsMale(res.data))
+        .then((res) => {
+          setIsMale(res.data);
+          setArmyService(1);
+        })
         .catch((err) => console.log(err));
     }
 
