@@ -1,6 +1,9 @@
 import { NextPage } from "next";
-import Image from 'next/image';
 import { getCookie } from "cookies-next";
+import Image from 'next/image';
+
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import { Box, Button, Typography } from "@mui/material";
 
@@ -14,8 +17,6 @@ import SixthComponent from "@/components/surveymate/sixth";
 import SeventhComponent from "@/components/surveymate/seventh";
 import EighthComponent from "@/components/surveymate/eighth";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const questions = [
   '선호하는 룸메의 나이를 선택해주세요.',
@@ -49,6 +50,7 @@ const initialMbti = {
 
 export const SurveyMateScreen: NextPage = () => {
   const [tf, setTf] = useState(false);
+  const [isMale, setIsMale] = useState<boolean>();
 
   const [age, setAge] = useState<object>(initialAge);
   const [mbti, setMbti] = useState<object>(initialMbti);
@@ -57,7 +59,7 @@ export const SurveyMateScreen: NextPage = () => {
   const [lifeCycle, setLifeCycle] = useState<number | undefined>();
   const [isCleaning, setIsCleaning] = useState<number | undefined>();
   const [nationality, setNationality] = useState<number | undefined>();
-  const [armyService, setArmyService] = useState<number | undefined>();
+  const [armyService, setArmyService] = useState<number | undefined | null>();
 
   const onClick = async () => {
     if (
@@ -123,15 +125,16 @@ export const SurveyMateScreen: NextPage = () => {
   };
 
   useEffect(() => {
+    const token = getCookie('OMNM');
+    const headers = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'OMNM': `${token}`
+      }
+    };
+
     const checkSurvey = async () => {
       const url = '/api/yourPersonality';
-      const token = getCookie('OMNM');
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.get(url, headers)
         .then((res) => {
@@ -146,7 +149,6 @@ export const SurveyMateScreen: NextPage = () => {
             });
 
             const arrMbti = res.data.mbti.replace(/[{}]/g, '').split(',');
-            console.log(arrMbti);
             setMbti({
               'ENFJ': arrMbti.includes('ENFJ'), 'ENFP': arrMbti.includes('ENFP'),
               'ENTJ': arrMbti.includes('ENTJ'), 'ENTP': arrMbti.includes('ENTP'),
@@ -164,15 +166,24 @@ export const SurveyMateScreen: NextPage = () => {
             setLifeCycle(+res.data.lifeCycle);
             setIsCleaning(+res.data.cleaning);
             setNationality(+res.data.nationality);
-            setArmyService(+res.data.armyService);
+
+            setArmyService(res.data.armyService === null ? 1 : +res.data.armyService);
+
             setTf(true);
           }
         });
+    };
 
-      console.log('초기', mbti);
+    const checkIsMale = async () => {
+      const url = '/api/myInfo/isMale';
+
+      await axios.get(url, headers)
+        .then((res) => setIsMale(res.data))
+        .catch((err) => console.log(err));
     }
 
     checkSurvey();
+    checkIsMale();
   }, [])
 
   return (
@@ -192,33 +203,34 @@ export const SurveyMateScreen: NextPage = () => {
       {
         questions.map((v, index) => {
           return (
-            <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-[4.5rem] py-10 mt-7'>
-              <Box className='bg-accent2 rounded-full w-fit h-fit px-3 py-0.5'>
-                <Typography className='text-white text-base font-bold'>문항 {index + 1}</Typography>
+            (!isMale && index === 7) ? <></> :
+              <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-[4.5rem] py-10 mt-7'>
+                <Box className='bg-accent2 rounded-full w-fit h-fit px-3 py-0.5'>
+                  <Typography className='text-white text-base font-bold'>문항 {index + 1}</Typography>
+                </Box>
+
+                <Typography className='text-black text-xl font-medium ml-5'>{v}</Typography>
+                <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
+
+                {
+                  (index === 0 && tf) ? <FirstComponent props={{ age: age, setAge: setAge, tf: true }} /> :
+                    (index === 0 && !tf) ? <FirstComponent props={{ age: age, setAge: setAge, tf: false }} /> :
+                      (index === 1 && tf) ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti, tf: true }} /> :
+                        (index === 1 && !tf) ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti, tf: false }} /> :
+                          (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
+                            (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
+                              (index === 3 && tf) ? <FourthComponent props={{ department: department, setDepartment: setDepartment, tf: true }} /> :
+                                (index === 3 && !tf) ? <FourthComponent props={{ department: department, setDepartment: setDepartment, tf: false }} /> :
+                                  (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
+                                    (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
+                                      (index === 5 && tf) ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
+                                        (index === 5 && !tf) ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
+                                          (index === 6 && tf) ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
+                                            (index === 6 && !tf) ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
+                                              (index === 7 && tf) ? <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
+                                                (index === 7 && !tf) && <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
+                }
               </Box>
-
-              <Typography className='text-black text-xl font-medium ml-5'>{v}</Typography>
-              <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
-
-              {
-                (index === 0 && tf) ? <FirstComponent props={{ age: age, setAge: setAge, tf: true }} /> :
-                  (index === 0 && !tf) ? <FirstComponent props={{ age: age, setAge: setAge, tf: false }} /> :
-                    (index === 1 && tf) ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti, tf: true }} /> :
-                      (index === 1 && !tf) ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti, tf: false }} /> :
-                        (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
-                          (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
-                            (index === 3 && tf) ? <FourthComponent props={{ department: department, setDepartment: setDepartment, tf: true }} /> :
-                              (index === 3 && !tf) ? <FourthComponent props={{ department: department, setDepartment: setDepartment, tf: false }} /> :
-                                (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
-                                  (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
-                                    (index === 5 && tf) ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
-                                      (index === 5 && !tf) ? <SixthComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
-                                        (index === 6 && tf) ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
-                                          (index === 6 && !tf) ? <SeventhComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
-                                            (index === 7 && tf) ? <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
-                                              (index === 7 && !tf) && <EighthComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
-              }
-            </Box>
           )
         })
       }

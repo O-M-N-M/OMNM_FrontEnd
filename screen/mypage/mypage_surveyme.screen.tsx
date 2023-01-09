@@ -16,7 +16,6 @@ export const MyPageSurveyMeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState('');
 
-  // const mbti = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'];
   const isSmoking = ['흡연', '비흡연'];
   const lifeCycle = ['아침형', '저녁형'];
   const sleepingPattern = ['코골이', '이갈이', '몸부림', '수면패턴 없음'];
@@ -63,7 +62,7 @@ export const MyPageSurveyMeScreen = () => {
 
           answers.push(isCleaning[res.data.cleaning])
           answers.push(nationality[res.data.nationality]);
-          answers.push(armyService[res.data.armyService]);
+          if (res.data.armyService !== null) answers.push(armyService[res.data.armyService]);
 
           setIntroduction(res.data.introduction);
         })
@@ -97,12 +96,12 @@ export const MyPageSurveyMeScreen = () => {
             ) : (
               <>
                 {
-                  questions.map((v, idx) => {
+                  answers.map((v: any, index: number) => {
                     return (
-                      <Box key={idx} className='flex flex-row border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
-                        <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {idx + 1}</Typography>
-                        <Typography className='text-black text-base font-medium ml-3'>{v}</Typography>
-                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 ml-auto'>{answers[idx]}</Typography>
+                      <Box key={index} className='flex flex-row border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
+                        <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {index + 1}</Typography>
+                        <Typography className='text-black text-base font-medium ml-3'>{questions[index]}</Typography>
+                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 ml-auto'>{v}</Typography>
                       </Box>
                     )
                   })

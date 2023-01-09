@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { getCookie } from "cookies-next";
 import Image from 'next/image';
+
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Box, Button, Typography } from "@mui/material";
@@ -47,6 +48,7 @@ const initialSleepingPattern = {
 export const SurveyMeScreen: NextPage = () => {
   const [tf, setTf] = useState(false);
   const [isNext, setIsNext] = useState(false);
+  const [isMale, setIsMale] = useState<boolean>();
 
   const [age, setAge] = useState<number | string>();
   const [mbti, setMbti] = useState<string | undefined>('');
@@ -56,7 +58,7 @@ export const SurveyMeScreen: NextPage = () => {
   const [sleepingPattern, setSleepingPattern] = useState<object>(initialSleepingPattern);
   const [isCleaning, setIsCleaning] = useState<number | undefined>();
   const [nationality, setNationality] = useState<number | undefined>();
-  const [armyService, setArmyService] = useState<number | undefined>();
+  const [armyService, setArmyService] = useState<number | undefined | null>();
   const [introduction, setIntroduction] = useState<string | undefined>('');
 
   const onClick = async () => {
@@ -122,15 +124,15 @@ export const SurveyMeScreen: NextPage = () => {
 
   useEffect(() => {
     const token = getCookie('OMNM');
+    const headers = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        'OMNM': `${token}`
+      }
+    };
 
     const checkSurvey = async () => {
       const url = '/api/myPersonality';
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.get(url, headers)
         .then((res) => {
@@ -152,8 +154,10 @@ export const SurveyMeScreen: NextPage = () => {
             console.log('처음 보내는', sleepingPattern);
             setIsCleaning(+res.data.cleaning);
             setNationality(+res.data.nationality);
-            setArmyService(+res.data.armyService);
             setIntroduction(res.data.introduction);
+
+            setArmyService(res.data.armyService === null ? 1 : +res.data.armyService);
+
             setTf(true);
           }
         });
@@ -176,8 +180,17 @@ export const SurveyMeScreen: NextPage = () => {
         .catch((err) => console.log(err));
     };
 
+    const checkIsMale = async () => {
+      const url = '/api/myInfo/isMale';
+
+      await axios.get(url, headers)
+        .then((res) => setIsMale(res.data))
+        .catch((err) => console.log(err));
+    }
+
     checkNextSurvey();
     checkSurvey();
+    checkIsMale();
   }, [])
 
   return (
@@ -197,32 +210,33 @@ export const SurveyMeScreen: NextPage = () => {
       {
         questions.map((v, index) => {
           return (
-            <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-[4.5rem] py-10 mt-7'>
-              <Box className='bg-accent2 rounded-full w-fit h-fit px-3 py-0.5'>
-                <Typography className='text-white text-base font-bold'>문항 {index + 1}</Typography>
+            (!isMale && index === 8) ? <></> :
+              <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-[4.5rem] py-10 mt-7'>
+                <Box className='bg-accent2 rounded-full w-fit h-fit px-3 py-0.5'>
+                  <Typography className='text-white text-base font-bold'>문항 {index + 1}</Typography>
+                </Box>
+
+                <Typography className='text-black text-xl font-medium ml-5'>{v}</Typography>
+                <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
+
+                {
+                  index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
+                    index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
+                      (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
+                        (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
+                          index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
+                            (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
+                              (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
+                                (index === 5 && tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: true }} /> :
+                                  (index === 5 && !tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: false }} /> :
+                                    (index === 6 && tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
+                                      (index === 6 && !tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
+                                        (index === 7 && tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
+                                          (index === 7 && !tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
+                                            (index === 8 && tf) ? <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
+                                              (index === 8 && !tf) && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
+                }
               </Box>
-
-              <Typography className='text-black text-xl font-medium ml-5'>{v}</Typography>
-              <Typography className='text-gray1 text-base font-medium ml-5'>{infos[index]}</Typography>
-
-              {
-                index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
-                  index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
-                    (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
-                      (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
-                        index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
-                          (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
-                            (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
-                              (index === 5 && tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: true }} /> :
-                                (index === 5 && !tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: false }} /> :
-                                  (index === 6 && tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
-                                    (index === 6 && !tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
-                                      (index === 7 && tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
-                                        (index === 7 && !tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
-                                          (index === 8 && tf) ? <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
-                                            (index === 8 && !tf) && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
-              }
-            </Box>
           )
         })
       }

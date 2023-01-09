@@ -6,8 +6,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
 interface NinethComponentProps {
-  armyService: number | undefined;
-  setArmyService: Dispatch<SetStateAction<number | undefined>>;
+  armyService: number | undefined | null;
+  setArmyService: Dispatch<SetStateAction<number | undefined | null>>;
   tf: boolean;
 }
 

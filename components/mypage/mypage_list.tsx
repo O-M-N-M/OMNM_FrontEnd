@@ -31,7 +31,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
   const [dormitory, setDormitory] = useState('');
   const [department, setDepartment] = useState('');
   const [isCleaning, setIsCleaning] = useState('');
-  const [armyService, setArmyService] = useState('');
+  const [armyService, setArmyService] = useState<string | null>();
   const [nationality, setNationality] = useState('');
   const [sleepingPattern, setSleepingPattern] = useState<String[]>([]);
   const [detailProfile, setDetailProfile] = useState<any | null>(null);
@@ -75,9 +75,12 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
 
         res.data.isSmoking === 0 ? setIsSmoking('흡연') : setIsSmoking('비흡연');
         res.data.lifeCycle === 0 ? setLifeCycle('아침형') : setLifeCycle('저녁형');
-        res.data.armyService === 0 ? setArmyService('군필') : setArmyService('미필');
         res.data.nationality === 0 ? setNationality('내국인') : setNationality('외국인');
         res.data.profileUrl === null ? setDetailProfile(null) : setDetailProfile(res.data.profileUrl);
+
+        res.data.armyService === null ? setArmyService(null) :
+          res.data.armyService === 0 ? setArmyService('군필') :
+            setArmyService('미필');
 
         res.data.dormitory === 0 ? setDormitory('308관 2인실') :
           res.data.dormitory === 1 ? setDormitory('308관 4인실') :
@@ -197,7 +200,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
                         })
                       }
                       <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#308CED', fontSize: '1rem', fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{isSmoking}</Typography>
-                      <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#2DD4BF', fontSize: '1rem', fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{armyService}</Typography>
+                      {armyService && <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#2DD4BF', fontSize: '1rem', fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{armyService}</Typography>}
                     </Box>
                   </Box>
                 </>

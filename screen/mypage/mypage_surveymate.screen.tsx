@@ -27,7 +27,6 @@ export const MyPageSurveyMateScreen = () => {
   const doNotCare = '상관없음';
 
   const age = ['20대 초반', '20대 중반', '20대 후반', '30대 후반', doNotCare];
-  const mbti = ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'];
   const isSmoking = ['흡연', '비흡연', doNotCare];
   const department = ['같은 학과', '다른 학과', doNotCare];
   const lifeCycle = ['아침형', '저녁형', doNotCare];
@@ -76,7 +75,7 @@ export const MyPageSurveyMateScreen = () => {
           answers.push(lifeCycle[res.data.lifeCycle]);
           answers.push(isCleaning[res.data.cleaning]);
           answers.push(nationality[res.data.nationality]);
-          answers.push(armyService[res.data.armyService]);
+          if (res.data.armyService !== null) answers.push(armyService[res.data.armyService]);
         })
 
       setLoading(false);
@@ -108,12 +107,12 @@ export const MyPageSurveyMateScreen = () => {
             ) : (
               <>
                 {
-                  questions.map((v, idx) => {
+                  answers.map((v: any, index: number) => {
                     return (
                       <Box className='flex flex-row border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
-                        <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {idx + 1}</Typography>
-                        <Typography className='text-black text-base font-medium ml-3'>{v}</Typography>
-                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 max-w-[50%] ml-auto'>{answers[idx]}</Typography>
+                        <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {index + 1}</Typography>
+                        <Typography className='text-black text-base font-medium ml-3'>{questions[index]}</Typography>
+                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 max-w-[50%] ml-auto'>{v}</Typography>
                       </Box>
                     )
                   })
