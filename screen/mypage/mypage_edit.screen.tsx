@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getCookie } from "cookies-next";
+import Image from "next/image";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -63,7 +63,9 @@ export const MyPageEditScreen = () => {
     };
 
     await axios.patch(url, formData, headers)
-      .then(() => handleOpen())
+      .then((res) => {
+        if (res.data === '회원정보 수정 완료') handleOpen();
+      })
       .catch((err) => console.log(err));
   }
 

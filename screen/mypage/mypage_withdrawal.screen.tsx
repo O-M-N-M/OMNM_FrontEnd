@@ -52,7 +52,12 @@ export const MyPageWithdrawalScreen = () => {
       .then(() => {
         setTf(true);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        if (err.response.data === '회원 정보가 올바르지 않습니다') {
+          handleClose();
+          alert('회원 정보가 올바르지 않습니다');
+        }
+      });
   };
 
   useEffect(() => {
