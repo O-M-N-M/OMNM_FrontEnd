@@ -1,16 +1,25 @@
-import { Box, Button, Typography } from "@mui/material";
-import axios from "axios";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
+import axios from "axios";
+
+import { Box, Button, Modal, Typography } from "@mui/material";
 
 import Footer from "../../components/footer";
 import MyPageLeft from "../../components/mypage/mypage_left";
 
 export const MyPageChangePwScreen = () => {
-  const [userId, setUserId] = useState('');
+  const [open, setOpen] = useState(false);
   const [nowPw, setNowPw] = useState('');
   const [newPw, setNewPw] = useState('');
+  const [userId, setUserId] = useState('');
   const [checkNewPw, setCheckNewPw] = useState('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const onClick = () => {
+    document.location = '/mypage_changepw';
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,8 +47,12 @@ export const MyPageChangePwScreen = () => {
       };
 
       await axios.patch(url, data, headers)
-        .then((res) => console.log(res.status))
-        .then((err) => console.log(err));
+        .then((res) => {
+          if (res.data === '비밀번호 변경 완료') handleOpen();
+        })
+        .catch((err) => {
+          if (err.response.data === '회원정보가 올바르지 않습니다') alert('현재 비밀번호가 올바르지 않습니다.');
+        });
     }
   }
 
@@ -122,6 +135,21 @@ export const MyPageChangePwScreen = () => {
           </Box>
         </form>
       </Box>
+
+      {
+        open &&
+        <Modal
+          open={open}
+          onClose={handleClose}
+        >
+          <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>비밀번호가 새롭게 변경되었습니다.</Typography>
+              <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+            </Box>
+          </Box>
+        </Modal>
+      }
 
       <Footer />
     </>
