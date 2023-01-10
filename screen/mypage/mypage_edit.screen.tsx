@@ -124,8 +124,10 @@ export const MyPageEditScreen = () => {
                 accept="image/*"
                 type="file"
                 onChange={(e) => {
-                  if (e.target.files !== null) {
+                  if (e.target.files !== null && typeof e.target.files[0] !== 'undefined') {
                     setProfile(e.target.files[0]);
+                  } else {
+                    setProfile(profile);
                   }
                 }} />
               <PhotoCamera fontSize="small" />

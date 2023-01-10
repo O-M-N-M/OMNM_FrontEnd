@@ -1,10 +1,12 @@
-import { Box, Typography, FormControlLabel, Radio, RadioGroup, FormControl, IconButton, } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
-import basicProfile from '../../public/basicProfile.png';
+
+import { Box, Typography, FormControlLabel, Radio, RadioGroup, FormControl, IconButton, } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
+import basicProfile from '../../public/basicProfile.png';
 
 interface props {
   image: File | null;
@@ -38,8 +40,10 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
             accept="image/*"
             type="file"
             onChange={(e) => {
-              if (e.target.files !== null) {
+              if (e.target.files !== null && typeof e.target.files[0] !== 'undefined') {
                 setImage(e.target.files[0]);
+              } else {
+                setImage(image);
               }
             }} />
           <PhotoCamera fontSize="small" />
