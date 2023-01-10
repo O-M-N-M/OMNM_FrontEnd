@@ -58,7 +58,7 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
     <Box className="mt-10">
       <Box className="flex items-center">
         <Typography className="text-black text-lg font-medium">재학중인 학교명</Typography>
-        <Typography className="text-gray1 text-xs font-regular ml-2">ex. 중앙대학교</Typography>
+        {/* <Typography className="text-gray1 text-xs font-regular ml-2">ex. 중앙대학교</Typography> */}
       </Box>
       <input
         disabled
