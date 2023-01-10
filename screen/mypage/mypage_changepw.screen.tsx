@@ -144,7 +144,7 @@ export const MyPageChangePwScreen = () => {
         >
           <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>비밀번호가 새롭게 변경되었습니다.</Typography>
+              <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>새로운 비밀번호가 설정되었습니다.</Typography>
               <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
             </Box>
           </Box>
