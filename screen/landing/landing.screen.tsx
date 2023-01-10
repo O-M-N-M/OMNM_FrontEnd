@@ -11,9 +11,11 @@ import LogoBoth from '../../public/logo.png';
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { hasCookie } from "cookies-next";
 
 export const LadingScreen: NextPage = () => {
   const [totalUser, setTotalUser] = useState(0);
+  const [isCookie, setIsCookie] = useState<boolean>();
 
   useEffect(() => {
     const getTotalUser = async () => {
@@ -23,7 +25,13 @@ export const LadingScreen: NextPage = () => {
       });
     }
 
+    const getIsCookie = async () => {
+      if (hasCookie('OMNM')) setIsCookie(true);
+      else setIsCookie(false);
+    }
+
     getTotalUser();
+    getIsCookie();
   }, [totalUser])
 
   return (
@@ -43,11 +51,21 @@ export const LadingScreen: NextPage = () => {
             {` 에서 나와 잘맞는 룸메를 찾아보세요.`}
           </Typography>
 
-          <Link href='/login'>
-            <Button className='bg-accent1 w-40 h-[4.5rem] rounded-full text-white text-xl mt-16'>
-              시작하기
-            </Button>
-          </Link>
+          {
+            isCookie ? (
+              <Link href='/main'>
+                <Button className='bg-accent1 w-40 h-[4.5rem] rounded-full text-white text-xl mt-16'>
+                  시작하기
+                </Button>
+              </Link>
+            ) : (
+              <Link href='/login'>
+                <Button className='bg-accent1 w-40 h-[4.5rem] rounded-full text-white text-xl mt-16'>
+                  시작하기
+                </Button>
+              </Link>
+            )
+          }
         </Box>
 
         <Box className="ml-auto mr-[15%]">

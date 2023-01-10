@@ -1,15 +1,16 @@
-import { Box, Button, Stack, Divider, Typography, IconButton } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
-
-import axios from "axios";
-import { setCookie } from "cookies-next";
-
-import Link from 'next/link';
+import { deleteCookie, setCookie } from "cookies-next";
 import { NextPage } from "next";
 import Image from "next/image";
-import logo from '../../public/logo.png';
+import Link from 'next/link';
+
+import { Box, Button, Stack, Divider, Typography, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import failIcon from '../../public/failIcon.png';
+import logo from '../../public/logo.png';
 
 
 export const LoginScreen: NextPage = () => {
@@ -62,6 +63,11 @@ export const LoginScreen: NextPage = () => {
       })
       .catch(err => console.log(err.response));
   }
+
+  useEffect(() => {
+    deleteCookie('OMNM');
+    deleteCookie('refreshToken');
+  }, []);
 
   return (
     <Box className="flex justify-center items-center min-h-[calc(100vh-70px)]">
