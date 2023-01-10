@@ -134,6 +134,10 @@ export const MyPageEditScreen = () => {
             </IconButton>
           </Box>
 
+          <Box className='bg-gray11 rounded-lg px-3 py-1.5 mt-4'>
+            <Typography className='text-gray1 text-xs font-medium'>정방향 프로필 사진을 추천드려요</Typography>
+          </Box>
+
           <Box>
             <Typography className='text-black text-base font-medium mt-10'>카카오톡 ID</Typography>
             <input
