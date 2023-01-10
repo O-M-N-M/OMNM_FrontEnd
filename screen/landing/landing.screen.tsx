@@ -5,17 +5,19 @@ import Link from "next/link";
 import { Box, Typography, Button } from "@mui/material";
 
 import landingMiddleContent from '../../public/landingMiddleContent.jpg';
+import landingMiddleContentMobile from '../../public/landingMiddleContentMobile.png';
 import LogoString1 from '../../public/logo3.png';
 import LogoString2 from '../../public/logo4.png';
 import LogoBoth from '../../public/logo.png';
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { hasCookie } from "cookies-next";
+import axios from "axios";
 
 export const LadingScreen: NextPage = () => {
   const [totalUser, setTotalUser] = useState(0);
   const [isCookie, setIsCookie] = useState<boolean>();
+  const [innerWidth, setInnerWidth] = useState(typeof window !== 'undefined' && window.innerWidth);
 
   useEffect(() => {
     const getTotalUser = async () => {
@@ -30,13 +32,18 @@ export const LadingScreen: NextPage = () => {
       else setIsCookie(false);
     }
 
+    const resizeListener = () => {
+      setInnerWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", resizeListener);
+
     getTotalUser();
     getIsCookie();
-  }, [totalUser])
+  }, [totalUser, innerWidth])
 
   return (
     <>
-      <Box className='flex flex-row justify-center items-center min-h-[calc(100vh-70px)]'>
+      <Box className='flex flex-row flex-wrap-reverse justify-center items-center min-h-[calc(100vh-70px)]'>
         <Box className="ml-[15%]">
           <Typography className="text-[3.3rem] font-bold">
             {`오늘 만나고 내일 만나는\n기숙사 `}
@@ -73,7 +80,7 @@ export const LadingScreen: NextPage = () => {
         </Box>
       </Box>
 
-      <Box className="flex flex-row">
+      <Box className="flex flex-row flex-wrap">
         <Box className='my-36 ml-[15%]'>
           <Typography className="text-black text-2xl">지금까지</Typography>
 
@@ -89,11 +96,17 @@ export const LadingScreen: NextPage = () => {
         </Box>
       </Box>
 
-      <Box>
-        <Image src={landingMiddleContent} />
+      <Box className='flex justify-center items-center'>
+        {
+          innerWidth < 768 ? (
+            <Image src={landingMiddleContentMobile} />
+          ) : (
+            <Image src={landingMiddleContent} />
+          )
+        }
       </Box>
 
-      <Box className='bg-landing-last-background flex flex-col justify-center items-center py-24'>
+      <Box className='bg-landing-last-background flex flex-col justify-center items-center py-24 mt-56'>
         <Typography className='text-black text-3xl font-regular'>가장 간편한 기숙사 룸메이트 매칭 서비스</Typography>
 
         <Box className='flex flex-row justify-center items-center mt-6'>
