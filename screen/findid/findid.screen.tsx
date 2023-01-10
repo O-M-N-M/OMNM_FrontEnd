@@ -1,11 +1,14 @@
 import { Box, Typography, Button, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+
+import React, { useState } from "react";
 import axios from "axios";
+
 import { NextPage } from "next";
 import Image from "next/image";
-import magnifying from '../../public/magnifying.png';
 import Link from "next/link";
-import React, { useState } from "react";
+
+import magnifying from '../../public/magnifying.png';
 import logo from '../../public/logo.png';
 
 export const FindIdScreen: NextPage = () => {
@@ -18,7 +21,7 @@ export const FindIdScreen: NextPage = () => {
     e.preventDefault();
 
     const url = '/api/find/loginId';
-    const body = `name=${name}&email=${email}@cau.ac.kr`;
+    const body = `name=${name}&email=${email}@naver.com`;
     const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
 
     await axios.post(url, body, headers)

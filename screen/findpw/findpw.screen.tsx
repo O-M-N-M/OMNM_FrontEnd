@@ -1,10 +1,12 @@
 import { Box, Typography, Button, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+
 import React, { useState } from "react";
 
 import { NextPage } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+
 import emailIcon from '../../public/emailIcon.png';
 import failIcon from '../../public/failIcon.png';
 import logo from '../../public/logo.png';
@@ -21,7 +23,7 @@ export const FindPwScreen: NextPage = () => {
     try {
       await fetch(`/api/find/loginPw`, {
         method: 'POST',
-        body: `email=${email}@cau.ac.kr&loginId=${id}`,
+        body: `email=${email}@naver.com&loginId=${id}`,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -41,10 +43,6 @@ export const FindPwScreen: NextPage = () => {
     } catch (err) {
       console.log(err);
     }
-  }
-
-  const noEmailClick = () => {
-    setNoEmail(false);
   }
 
   return (
@@ -75,7 +73,7 @@ export const FindPwScreen: NextPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-4 focus:outline-none" required />
-            <Typography className="text-black text-sm font-regular ml-5 mt-2">@cau.ac.kr</Typography>
+            <Typography className="text-black text-sm font-regular ml-5 mt-2">@naver.com</Typography>
           </Box>
 
           <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-full h-12 p-2.5 mt-10">확인</Button>
