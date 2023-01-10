@@ -6,7 +6,7 @@ import { Box, IconButton, Pagination, PaginationItem, Typography } from "@mui/ma
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import DeleteIcon from '../../public/deleteIcon.png';
+import PrevButton from '../../public/prevButton.png';
 import Footer from "@/components/footer";
 import MyPageLeft from "@/components/mypage/mypage_left";
 import MyPageDetailList from '@/components/mypage/mypage_detaillist';
@@ -78,10 +78,10 @@ export const MyPageReceiveListScreen = () => {
 
         <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6'>
           <Box className='flex flex-row items-center'>
-            <Typography className='text-black text-xl font-medium'>룸메 신청 받은 리스트</Typography>
-            <IconButton className='ml-auto'>
-              <Image src={DeleteIcon} width={20} height={20} />
+            <IconButton onClick={() => document.location = '/mypage'}>
+              <Image src={PrevButton} width={11.44} height={18.48} />
             </IconButton>
+            <Typography className='text-black text-xl font-medium ml-3.5'>룸메 신청 받은 리스트</Typography>
           </Box>
 
           <Box className='flex flex-col items-center mt-5'>
