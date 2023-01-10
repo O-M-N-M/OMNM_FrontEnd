@@ -258,6 +258,7 @@ export const SurveyMeScreen: NextPage = () => {
           name='introduction'
           placeholder='자기소개 입력'
           value={introduction}
+          maxLength={50}
           onChange={(e) => setIntroduction(e.target.value)}
           style={{ fontFamily: 'Spoqa Han Sans Neo' }}
           className='border border-solid border-accent2 rounded-[1.25rem] text-gray1 text-lg font-regular min-w-[100%] max-w-[100%] min-h-[90px] max-h-[90px] px-5 py-4 mt-5 focus:outline-none'
