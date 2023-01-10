@@ -81,7 +81,7 @@ export const MyPageSendListScreen = () => {
             <IconButton onClick={() => document.location = '/mypage'}>
               <Image src={PrevButton} width={11.44} height={18.48} />
             </IconButton>
-            <Typography className='text-black text-xl font-medium ml-3.5'>룸메 신청 보낸 리스트</Typography>
+            <Typography className='text-black text-xl font-medium ml-3.5'>룸메이트 신청 보낸 리스트</Typography>
           </Box>
 
           <Box className='flex flex-col items-center mt-9'>

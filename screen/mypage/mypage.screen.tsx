@@ -99,7 +99,7 @@ export const MyPageScreen: NextPage = () => {
         <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full px-[2.875rem] py-16 ml-6'>
           <Box>
             <Box className='flex flex-row items-center mx-3.5'>
-              <Typography className='text-black text-xl font-medium'>룸메 신청 받은 리스트</Typography>
+              <Typography className='text-black text-xl font-medium'>룸메이트 신청 받은 리스트</Typography>
               <Link href='/mypage_receivelist'>
                 <a className='ml-auto'>
                   <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
@@ -143,7 +143,7 @@ export const MyPageScreen: NextPage = () => {
 
           <Box className='mt-14'>
             <Box className='flex flex-row items-center mx-3.5'>
-              <Typography className='text-black text-xl font-medium'>룸메 신청 보낸 리스트</Typography>
+              <Typography className='text-black text-xl font-medium'>룸메이트 신청 보낸 리스트</Typography>
               <Link href='/mypage_sendlist'>
                 <a className='ml-auto'>
                   <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>

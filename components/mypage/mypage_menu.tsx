@@ -11,7 +11,7 @@ const MyPageMenu = () => {
 
   return (
     <Box className='border border-solid border-gray0 rounded-[1.25rem] px-14 py-10 mt-6'>
-      <Typography className='text-blak text-base font-medium'>룸메 신청 내역</Typography>
+      <Typography className='text-blak text-base font-medium'>룸메이트 신청 내역</Typography>
       <Link href='/mypage_receivelist'>
         <a>
           <Typography className="text-black text-base font-regular mt-4">신청 받은 리스트</Typography>
@@ -31,7 +31,7 @@ const MyPageMenu = () => {
       </Link>
       <Link href='/mypage_surveymate'>
         <a>
-          <Typography className="text-black text-base font-regular mt-3">룸메 성향 설문조사</Typography>
+          <Typography className="text-black text-base font-regular mt-3">룸메이트 성향 설문조사</Typography>
         </a>
       </Link>
 

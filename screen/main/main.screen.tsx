@@ -244,8 +244,8 @@ export const MainScreen: NextPage = () => {
               </FormControl>
             </Box>
           </Box>
-          <Typography className="text-black text-4xl font-bold px-[15%] mt-2">추천 룸메 리스트</Typography>
-          <Typography className="text-black text-xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메들을 선별한 리스트입니다.</Typography>
+          <Typography className="text-black text-4xl font-bold px-[15%] mt-2">추천 룸메이트 리스트</Typography>
+          <Typography className="text-black text-xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메이트들을 선별한 리스트입니다.</Typography>
 
           <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
             <Swiper
@@ -282,8 +282,8 @@ export const MainScreen: NextPage = () => {
                       <SwiperSlide key={index} className="flex flex-row justify-center items-center bg-transparent w-full">
                         <Box className="flex flex-col justify-center items-center bg-white rounded-lg w-[22rem] h-64">
                           <Image src={profile2} width={100} height={100} />
-                          <Typography className='text-black text-base font-medium mt-6'>딱 맞는 룸메가 없어요!</Typography>
-                          <Typography className='text-black text-base font-regular mt-1'>최적의 룸메만 선별해 보여드릴게요</Typography>
+                          <Typography className='text-black text-base font-medium mt-6'>딱 맞는 룸메이트가 없어요!</Typography>
+                          <Typography className='text-black text-base font-regular mt-1'>최적의 룸메이트만 선별해 보여드릴게요</Typography>
                         </Box>
                       </SwiperSlide>
                       :
