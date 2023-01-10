@@ -37,27 +37,14 @@ export const MainScreen: NextPage = () => {
   const [lifeCycle, setLifeCycle] = useState('');
   const [sleepingPattern, setSleepingPattern] = useState<String[]>([]);
   const [isCleaning, setIsCleaning] = useState('');
-  const [armyService, setArmyService] = useState('');
+  const [armyService, setArmyService] = useState<string | null>('');
   const [dormitory, setDormitory] = useState('');
   const [detailProfile, setDetailProfile] = useState<any | null>(null);
   const [matchPercent, setMatchPercent] = useState(-1.1);
   const [mbti, setMbti] = useState('');
   const [department, setDepartment] = useState('');
 
-
   const token = getCookie('OMNM');
-
-  const applyMate = async () => {
-    const url = `/api/main/propose/${matchingId}`;
-    const headers = {
-      headers: {
-        'OMNM': `${token}`
-      }
-    };
-
-    await axios.post(url, {}, headers)
-      .then((res) => console.log(res.data));
-  }
 
   const onClick = async (index: number) => {
     setLoading(true);
@@ -87,20 +74,19 @@ export const MainScreen: NextPage = () => {
 
         res.data.isSmoking === 0 ? setIsSmoking('흡연') : setIsSmoking('비흡연');
         res.data.lifeCycle === 0 ? setLifeCycle('아침형') : setLifeCycle('저녁형');
-        res.data.armyService === 0 ? setArmyService('군필') : setArmyService('미필');
+        res.data.armyService === null ? setArmyService(null) :
+          res.data.armyService === 0 ? setArmyService('군필') : setArmyService('미필');
 
         const sp = res.data.sleepingPattern.replace(/[{}]/g, '').split(',');
-        if (sp.length === 0) setSleepingPattern(['수면패턴 없음']);
-        else {
-          let newSP: String[] = [];
-          sp.forEach((v: string) => {
-            if (v === '0') newSP.push('코골이');
-            else if (v === '1') newSP.push('이갈이');
-            else newSP.push('몸부림');
-          });
+        let newSP: String[] = [];
+        sp.forEach((v: string) => {
+          if (v === '0') newSP.push('코골이');
+          else if (v === '1') newSP.push('이갈이');
+          else if (v === '2') newSP.push('몸부림');
+          else if (v === '3') newSP.push('수면패턴 없음');
+        });
 
-          setSleepingPattern(newSP);
-        }
+        setSleepingPattern(newSP);
 
         res.data.isCleaning === 0 ? setIsCleaning('주 5회 이상 청소') :
           res.data.isCleaning === 1 ? setIsCleaning('주 2-3회 청소') :
@@ -301,7 +287,7 @@ export const MainScreen: NextPage = () => {
                         </Box>
                       </SwiperSlide>
                       :
-                      <SwiperSlide onClick={() => { onClick(index); handleOpen() }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
+                      <SwiperSlide onClick={() => { onClick(index); handleOpen(); }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
                         <Box className="flex flex-col justify-center items-center bg-white rounded-[1.25rem] w-[22rem] h-64">
                           <Box className="flex flex-row justify-center items-center">
                             {
