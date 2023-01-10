@@ -31,7 +31,6 @@ export const LoginScreen: NextPage = () => {
       .then((res) => {
         if (Object.keys(res.data).length !== 0) movePage(true);
         else {
-          alert('설문조사를 진행해 주세요.');
           movePage(false);
         }
       })
