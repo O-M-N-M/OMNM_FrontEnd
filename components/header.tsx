@@ -60,6 +60,10 @@ const Header = () => {
     }
     else {
       setIsCookie(false);
+
+      if (!['/', '/login', '/findid', '/findpw', '/signup', '/signup_success'].includes(window.location.pathname)) {
+        document.location = '/login';
+      }
     }
   })
 
