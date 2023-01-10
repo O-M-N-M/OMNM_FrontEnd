@@ -61,11 +61,12 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
         <Typography className="text-gray1 text-xs font-regular ml-2">ex. 중앙대학교</Typography>
       </Box>
       <input
+        disabled
         type="text"
         name="id"
-        placeholder="학교명 입력"
+        placeholder="중앙대학교"
         value={school}
-        onChange={(e) => setSchool(e.target.value)}
+        onChange={(e) => setSchool('중앙대학교')}
         className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
 
       <Typography className="text-black text-lg font-medium mt-9">학교 이메일 인증</Typography>
