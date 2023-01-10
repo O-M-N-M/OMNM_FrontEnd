@@ -1,6 +1,7 @@
 import { Box, Typography, Button, CircularProgress } from "@mui/material";
+
+import React, { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface props {
   school: string;
@@ -47,12 +48,12 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
         .then(res => {
           if (res.data === '인증번호가 일치합니다.') {
             setPass(true);
-          } else {
+          } else if (res.data === '인증번호가 일치하지 않습니다.') {
             setPass(false);
           }
         });
     }
-  }
+  };
 
   return (
     <Box className="mt-10">
@@ -81,22 +82,15 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
             className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
           <Typography className="text-black text-sm font-regular mt-2 ml-4">@naver.com</Typography>
         </Box>
-        {
-          send ? (
-            <Button disabled className="border border-solid border-gray1 bg-white rounded-full p-2.5 mt-4 w-full h-12">
-              <Typography className='text-gray0 text-sm font-medium'>학교 이메일로 인증번호 전송하기</Typography>
-            </Button>
-          ) : (
-            <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full p-2.5 mt-4 w-full h-12">
-              {
-                loading ?
-                  <CircularProgress color="inherit" size={20} />
-                  :
-                  <Typography className='text-accent1 text-sm font-medium'>학교 이메일로 인증번호 전송하기</Typography>
-              }
-            </Button>
-          )
-        }
+
+        <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full p-2.5 mt-4 w-full h-12">
+          {
+            loading ?
+              <CircularProgress color="inherit" size={20} />
+              :
+              <Typography className='text-accent1 text-sm font-medium'>학교 이메일로 인증번호 전송하기</Typography>
+          }
+        </Button>
       </form>
 
       <Typography className="text-black text-lg font-medium mt-9">인증번호 확인</Typography>
@@ -109,10 +103,7 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
             value={num}
             onChange={(e) => setNum(parseInt(e.target.value) || '')}
             className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
-          {
-            pass === -1 || !pass ? <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">인증하기</Button> :
-              <Button disabled className="border border-solid border-gray1 bg-white rounded-full text-gray0 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">인증하기</Button>
-          }
+          <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">인증하기</Button>
         </Box>
       </form>
       {

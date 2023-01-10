@@ -41,9 +41,13 @@ export const SignUpScreen: NextPage = () => {
     else if (activeStep === 0 && !pwReg.test(pw)) alert('올바른 비밀번호가 아닙니다.');
     else if (activeStep === 0 && pw !== pwCheck) alert('비밀번호가 같지 않습니다.');
 
-    else if (activeStep === 1 && !two) alert('이메일 인증을 완료해주세요');
+    else if (activeStep === 1 && (!two || two === -1)) alert('이메일 인증을 완료해주세요');
     else setActiveStep(activeStep + 1);
-  }
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -117,21 +121,30 @@ export const SignUpScreen: NextPage = () => {
               activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} pass={two} setPass={setTwo} />) :
                 (<ProfileBox image={image} setImage={setImage} name={name} setName={setName} gender={gender} setGender={setGender} kakao={kakao} setKakao={setKakao} dormitory={dormitory} setDormitory={setDormitory} />)
           }
-
-          <Box className="flex justify-end mt-10">
-            {activeStep !== 2 ?
-              (<Button onClick={handleNext} className="bg-accent1 rounded-full text-white text-base font-medium block px-8 py-3.5">
-                다음
-              </Button>)
-              :
-              (
-                <form onSubmit={onSubmit} >
-                  <Button type="submit" className="bg-accent1 rounded-full text-white text-base font-medium block px-8 py-3.5">
-                    완료
-                  </Button>
-                </form>
+          <Box className='flex flex-row w-full'>
+            {
+              activeStep !== 0 && (
+                <Box className='mt-10'>
+                  <Button onClick={handleBack}>이전</Button>
+                </Box>
               )
             }
+
+            <Box className="ml-auto mt-10">
+              {activeStep !== 2 ?
+                (<Button onClick={handleNext} className="bg-accent1 rounded-full text-white text-base font-medium block px-8 py-3.5">
+                  다음
+                </Button>)
+                :
+                (
+                  <form onSubmit={onSubmit} >
+                    <Button type="submit" className="bg-accent1 rounded-full text-white text-base font-medium block px-8 py-3.5">
+                      완료
+                    </Button>
+                  </form>
+                )
+              }
+            </Box>
           </Box>
         </Box>
       </Box>
