@@ -34,7 +34,8 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
               </Box>
             )
         }
-        <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-[-15px] bg-white border border-solid border-gray1">
+
+        <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-[35px] bg-white border border-solid border-gray1">
           <input
             hidden
             accept="image/*"
@@ -48,6 +49,10 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
             }} />
           <PhotoCamera fontSize="small" />
         </IconButton>
+
+        <Box className='bg-gray11 rounded-lg px-3 py-1.5 mt-4'>
+          <Typography className='text-gray1 text-xs font-medium'>정방향 프로필 사진을 추천드려요</Typography>
+        </Box>
       </Box>
 
       <Box className='w-full mt-10'>

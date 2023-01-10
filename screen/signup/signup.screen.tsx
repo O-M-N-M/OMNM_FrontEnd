@@ -125,7 +125,7 @@ export const SignUpScreen: NextPage = () => {
             {
               activeStep !== 0 && (
                 <Box className='mt-10'>
-                  <Button onClick={handleBack}>이전</Button>
+                  <Button onClick={handleBack} className='bg-gray1 rounded-full text-white text-base font-medium block px-8 py-3.5'>이전</Button>
                 </Box>
               )
             }
