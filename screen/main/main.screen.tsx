@@ -263,6 +263,7 @@ export const MainScreen: NextPage = () => {
 
           <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
             <Swiper
+              initialSlide={0}
               navigation={true}
               pagination={{
                 clickable: true,

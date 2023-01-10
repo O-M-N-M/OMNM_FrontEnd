@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Box, Button, CircularProgress, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, IconButton, Modal, Tooltip, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import profile from '../public/basicProfile.png';
@@ -35,6 +35,14 @@ const token = getCookie('OMNM');
 
 const DetailProfile = ({ props }: { props: ComponentProps }) => {
   const [isProposed, setIsProposed] = useState<boolean>();
+  const [secondOpen, setSecondOpen] = useState(false);
+  const [thirdOpen, setThirdOpen] = useState(false);
+
+  const handleOpen = () => setSecondOpen(true);
+  const handleClose = () => setSecondOpen(false);
+
+  const handleOpen2 = () => setThirdOpen(true);
+  const handleClose2 = () => setThirdOpen(false);
 
   const applyMate = async () => {
     const url = `/api/main/propose/${props.matchingId}`;
@@ -46,7 +54,11 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
     };
 
     await axios.post(url, {}, headers)
-      .then((res) => setIsProposed(true));
+      .then((res) => {
+        setIsProposed(true);
+        handleClose();
+        handleOpen2();
+      });
   };
 
   useEffect(() => {
@@ -124,7 +136,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
               {
                 isProposed ?
                   <Button disabled sx={{ backgroundColor: '#9B9EA1 !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white !important', marginTop: '1rem', paddingY: '0.625rem' }}>이미 신청한 상대입니다</Button> :
-                  <Button onClick={applyMate} sx={{ backgroundColor: '#4B99EB !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: '1rem', paddingY: '0.625rem' }}>룸메 신청하기</Button>
+                  <Button onClick={handleOpen} sx={{ backgroundColor: '#4B99EB !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: '1rem', paddingY: '0.625rem' }}>룸메 신청하기</Button>
               }
 
               <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>
@@ -151,6 +163,49 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
             </Box>
           </>
         )
+      }
+
+      {
+        secondOpen &&
+        <Modal
+          open={secondOpen}
+          onClose={handleClose}
+        >
+          <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <Typography sx={{ color: '#4B99EB', fontSize: '1.125rem', fontWeight: '400' }}>
+                {props.name}
+                <Typography component='span' sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>님에게 룸메이트 신청을 하겠습니까?</Typography>
+              </Typography>
+
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                <Button onClick={applyMate} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>예</Button>
+                <Button onClick={handleClose} sx={{ backgroundColor: '#9B9EA1 !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px', marginLeft: '16px' }}>아니오</Button>
+              </Box>
+            </Box>
+          </Box>
+        </Modal>
+      }
+      {
+        thirdOpen &&
+        <Modal
+          open={thirdOpen}
+          onClose={handleClose2}
+        >
+          <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <Typography sx={{ color: '#4B99EB', fontSize: '1.125rem', fontWeight: '400' }}>
+                {props.name}
+                <Typography component='span' sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>님에게 룸메이트 신청이 완료되었습니다.</Typography>
+              </Typography>
+
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                <Button onClick={handleClose2} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+              </Box>
+            </Box>
+          </Box>
+        </Modal>
+
       }
     </Box>
   )
