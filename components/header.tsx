@@ -78,10 +78,10 @@ const Header = () => {
               <a className="ml-auto mr-[15%] mt-1">
                 {
                   profile === null ? (
-                    <Image src={MyPageIcon} width={30} height={30} />
+                    <Image src={MyPageIcon} width={36} height={36} />
                   ) : (
-                    <Box className='border border-gray1 border-solid rounded-full w-[30px] h-[30px]'>
-                      <Image loader={() => profile} src={profile} width={30} height={30} className='rounded-full' />
+                    <Box className='border border-gray1 border-solid rounded-full w-[36px] h-[36px]'>
+                      <Image loader={() => profile} src={profile} width={36} height={36} className='rounded-full' />
                     </Box>
                   )
                 }
