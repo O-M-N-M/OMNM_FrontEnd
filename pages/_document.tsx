@@ -9,7 +9,6 @@ export default function Document() {
           rel='stylesheet'
           type='text/css'
         />
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
       </Head>
       <body>
         <Main />
