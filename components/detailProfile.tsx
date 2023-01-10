@@ -104,7 +104,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                 )
               }
               <Typography sx={{ color: '#383838', fontSize: '1.25rem', fontWeight: '500', marginTop: '0.75rem' }}>{props.name}</Typography>
-              <Typography sx={{ color: '#9B9EA1', fontSize: '0.75rem', fontWeight: '500', marginTop: '0.25rem' }}>{props.age}</Typography>
+              <Typography sx={{ color: '#9B9EA1', fontSize: '1rem', fontWeight: '400', marginTop: '0.25rem' }}>{props.age}세</Typography>
 
               <Box sx={{ border: 'solid 1px #DBDBDB', borderRadius: '10px', width: '50%', height: 'fit-content', padding: '1.5rem', marginTop: '0.75rem' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
