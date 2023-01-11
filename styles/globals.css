@@ -49,10 +49,10 @@ a {
 
 .swiper-pagination-bullet {
   background-color: white !important;
-  width: 2rem !important;
-  height: 0.75rem !important;
+  width: 36px !important;
+  height: 10px !important;
   border-radius: 30px !important;
-  opacity: 0.9 !important;
+  opacity: 0.7 !important;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08) !important;
   /* transform: translate(0, 20px) !important; */
 }

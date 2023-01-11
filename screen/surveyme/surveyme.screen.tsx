@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { Box, Button, Typography } from "@mui/material";
 
-import SurveyIcon from '../../public/Component10.png';
+import SurveyIcon from '../../public/signupSuccess.png';
 import FirstComponent from "@/components/surveyme/first";
 import SecondComponent from "@/components/surveyme/second";
 import ThirdComponent from "@/components/surveyme/third";
@@ -199,7 +199,7 @@ export const SurveyMeScreen: NextPage = () => {
   return (
     <Box className='w-full h-fit min-h-[calc(100vh-70px)] px-[15%] my-[5%]'>
       <Box className='flex flex-row items-center mb-3'>
-        <Image src={SurveyIcon} width={57} height={72} />
+        <Image src={SurveyIcon} width={68} height={68} />
 
         <Box className='flex flex-col ml-5'>
           <Typography className='text-black text-xl font-regular'>딱 맞는 룸메이트 찾기를 위한 성향 조사</Typography>

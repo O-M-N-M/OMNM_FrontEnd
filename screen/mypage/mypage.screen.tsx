@@ -132,7 +132,13 @@ export const MyPageScreen: NextPage = () => {
                       ) : (
                         <Box className='flex flex-wrap'>
                           <Box className='w-[45%] mx-3.5'>
-                            <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveFirstKey}</Typography>
+                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
+                              {
+                                receiveFirstKey[0] === '0' ?
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveFirstKey[1]}.{receiveFirstKey.slice(3)}</Typography> :
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveFirstKey.slice(0, 2)}.{receiveFirstKey.slice(3)}</Typography>
+                              }
+                            </Box>
                             {
                               receiveFirstData && receiveFirstData.map((v: any, index: number) => {
                                 return (
@@ -142,16 +148,20 @@ export const MyPageScreen: NextPage = () => {
                             }
                           </Box>
                           <Box className='w-[45%] mx-3.5'>
-                            <Typography className='text-gray1 text-xs font-regular mt-6'>{receiveSecondKey}</Typography>
-                            <>
+                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
                               {
-                                receiveSecondData && receiveSecondData.map((v: any, index: number) => {
-                                  return (
-                                    <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: true }} />
-                                  )
-                                })
+                                receiveSecondKey[0] === '0' ?
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveSecondKey[1]}.{receiveSecondKey.slice(3)}</Typography> :
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveSecondKey.slice(0, 2)}.{receiveSecondKey.slice(3)}</Typography>
                               }
-                            </>
+                            </Box>
+                            {
+                              receiveSecondData && receiveSecondData.map((v: any, index: number) => {
+                                return (
+                                  <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: true }} />
+                                )
+                              })
+                            }
                           </Box>
                         </Box>
                       )
@@ -177,28 +187,35 @@ export const MyPageScreen: NextPage = () => {
                       ) : (
                         <Box className='flex flex-wrap'>
                           <Box className='w-[45%] mx-3.5'>
-                            <Typography className='text-gray1 text-xs font-regular mt-6'>{sendFirstKey}</Typography>
-                            <>
+                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
                               {
-                                sendFirstData && sendFirstData.map((v: any, index: number) => {
-                                  return (
-                                    <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
-                                  )
-                                })
+                                sendFirstKey[0] === '0' ?
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendFirstKey[1]}.{sendFirstKey.slice(3)}</Typography> :
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendFirstKey.slice(0, 2)}.{sendFirstKey.slice(3)}</Typography>
                               }
-                            </>
+                            </Box>
+                            {
+                              sendFirstData && sendFirstData.map((v: any, index: number) => {
+                                return (
+                                  <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
+                                )
+                              })
+                            }
                           </Box>
                           <Box className='w-[45%] mx-3.5'>
-                            <Typography className='text-gray1 text-xs font-regular mt-6'>{sendSecondKey}</Typography>
-                            <>
+                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
                               {
-                                sendSecondData && sendSecondData.map((v: any, index: number) => {
-                                  return (
-                                    <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
-                                  )
-                                })
+                                sendSecondKey[0] === '0' ?
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendSecondKey[1]}.{sendSecondKey.slice(3)}</Typography> :
+                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendSecondKey.slice(0, 2)}.{sendSecondKey.slice(3)}</Typography>
                               }
-                            </>
+                            </Box>                              {
+                              sendSecondData && sendSecondData.map((v: any, index: number) => {
+                                return (
+                                  <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
+                                )
+                              })
+                            }
                           </Box>
                         </Box>
                       )
