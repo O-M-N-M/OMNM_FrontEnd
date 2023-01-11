@@ -202,7 +202,7 @@ export const SurveyMeScreen: NextPage = () => {
         <Image src={SurveyIcon} width={57} height={72} />
 
         <Box className='flex flex-col ml-5'>
-          <Typography className='text-black text-xl font-regular'>딱 맞는 룸메 찾기를 위한 성향 조사</Typography>
+          <Typography className='text-black text-xl font-regular'>딱 맞는 룸메이트 찾기를 위한 성향 조사</Typography>
           <Typography className='text-accent1 text-4xl font-medium'>
             당신
             <Typography component='span' className='text-black text-4xl font-medium'>을 소개해주세요.</Typography>

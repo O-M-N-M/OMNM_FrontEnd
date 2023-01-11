@@ -10,14 +10,14 @@ import { getCookie } from "cookies-next";
 import axios from "axios";
 
 const questions = [
-  '선호하는 룸메의 나이',
-  '선호하는 룸메의 MBTI',
-  '선호하는 룸메의 흡연 여부',
-  '선호하는 룸메의 학과',
-  '선호하는 룸메의 생활 패턴',
-  '선호하는 룸메의 방 청소 빈도',
-  '선호하는 룸메의 국적',
-  '선호하는 룸메의 군복무 여부'
+  '선호하는 룸메이트의 나이',
+  '선호하는 룸메이트의 MBTI',
+  '선호하는 룸메이트의 흡연 여부',
+  '선호하는 룸메이트의 학과',
+  '선호하는 룸메이트의 생활 패턴',
+  '선호하는 룸메이트의 방 청소 빈도',
+  '선호하는 룸메이트의 국적',
+  '선호하는 룸메이트의 군복무 여부'
 ];
 let answers: any[] = [];
 
@@ -93,7 +93,7 @@ export const MyPageSurveyMateScreen = () => {
 
         <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>
           <Box className='flex flex-row items-center mb-4'>
-            <Typography className='text-black text-xl font-medium'>룸메 성향 설문조사</Typography>
+            <Typography className='text-black text-xl font-medium'>룸메이트 성향 설문조사</Typography>
             <IconButton onClick={onClick} className='ml-auto'>
               <Image src={EditIcon} width={20} height={20} />
             </IconButton>

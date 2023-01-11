@@ -136,7 +136,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
               {
                 isProposed ?
                   <Button disabled sx={{ backgroundColor: '#9B9EA1 !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white !important', marginTop: '1rem', paddingY: '0.625rem' }}>이미 신청한 상대입니다</Button> :
-                  <Button onClick={handleOpen} sx={{ backgroundColor: '#4B99EB !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: '1rem', paddingY: '0.625rem' }}>룸메 신청하기</Button>
+                  <Button onClick={handleOpen} sx={{ backgroundColor: '#4B99EB !important', width: '50%', height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: '1rem', paddingY: '0.625rem' }}>룸메이트 신청하기</Button>
               }
 
               <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '2rem' }}>

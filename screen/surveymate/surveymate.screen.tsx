@@ -19,14 +19,14 @@ import EighthComponent from "@/components/surveymate/eighth";
 
 
 const questions = [
-  '선호하는 룸메의 나이를 선택해주세요.',
-  '선호하는 룸메의 MBTI를 선택해주세요.',
-  '선호하는 룸메의 흡연 여부를 선택해주세요.',
-  '선호하는 룸메의 학과를 선택해주세요.',
-  '선호하는 룸메의 생활패턴을 선택해주세요.',
-  '선호하는 룸메의 방 청소 빈도를 선택해주세요.',
-  '선호하는 룸메의 국적을 선택해주세요',
-  '선호하는 룸메의 군복무 여부를 선택해주세요.',
+  '선호하는 룸메이트의 나이를 선택해주세요.',
+  '선호하는 룸메이트의 MBTI를 선택해주세요.',
+  '선호하는 룸메이트의 흡연 여부를 선택해주세요.',
+  '선호하는 룸메이트의 학과를 선택해주세요.',
+  '선호하는 룸메이트의 생활패턴을 선택해주세요.',
+  '선호하는 룸메이트의 방 청소 빈도를 선택해주세요.',
+  '선호하는 룸메이트의 국적을 선택해주세요',
+  '선호하는 룸메이트의 군복무 여부를 선택해주세요.',
 ];
 const infos = [
   '중복 선택 가능',
@@ -195,9 +195,9 @@ export const SurveyMateScreen: NextPage = () => {
         <Image src={SurveyIcon} width={57} height={72} />
 
         <Box className='flex flex-col ml-5'>
-          <Typography className='text-black text-xl font-regular'>딱 맞는 룸메 찾기를 위한 성향 조사</Typography>
+          <Typography className='text-black text-xl font-regular'>딱 맞는 룸메이트 찾기를 위한 성향 조사</Typography>
           <Typography className='text-accent1 text-4xl font-medium'>
-            선호하는 룸메
+            선호하는 룸메이트
             <Typography component='span' className='text-black text-4xl font-medium'>을 소개해주세요.</Typography>
           </Typography>
         </Box>

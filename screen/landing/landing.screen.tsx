@@ -48,7 +48,7 @@ export const LadingScreen: NextPage = () => {
           <Typography className="text-[3.3rem] font-bold">
             {`오늘 만나고 내일 만나는\n기숙사 `}
             <Typography component="span" className="text-accent1 text-[3.3rem] font-bold">
-              룸메 매칭
+              룸메이트 매칭
             </Typography>
             {" 서비스"}
           </Typography>
