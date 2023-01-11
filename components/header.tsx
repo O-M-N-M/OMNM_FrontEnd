@@ -5,7 +5,9 @@ import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
 import { Box, Typography } from "@mui/material";
 
 import logo from '../public/logo2.png';
-import MyPageIcon from '../public/Group1.ico';
+import LogoutIcon from '../public/logoutIcon.png';
+import SettingIcon from '../public/settingIcon.png';
+import profileIcon from '../public/basicProfile.png';
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,6 +15,11 @@ import axios from "axios";
 const Header = () => {
   const [isCookie, setIsCookie] = useState(false);
   const [profile, setProfile] = useState<string | null>(null);
+
+  const onClick = () => {
+    deleteCookie('OMNM');
+    deleteCookie('refreshToken');
+  }
 
   const checkRefreshToken = async () => {
     const url = '/api/token';
@@ -22,17 +29,9 @@ const Header = () => {
 
     await axios.post(url, body)
       .then((res) => {
-        // if (res.data === '재로그인 요청') {
-        //   alert('세션이 만료되었습니다.\n로그인을 다시해주세요.');
-
-        //   deleteCookie('OMNM');
-        //   document.location = '/login';
-        // }
-        // else {
         setCookie('OMNM', res.data);
 
         document.location = window.location.pathname;
-        // }
       })
       .catch((err) => {
         if (err.response.status === 403) {
@@ -85,19 +84,31 @@ const Header = () => {
               </a>
             </Link>
 
-            <Link href='/mypage'>
-              <a className="ml-auto mr-[15%] mt-1">
-                {
-                  profile === null ? (
-                    <Image src={MyPageIcon} width={36} height={36} />
-                  ) : (
-                    <Box className='border border-gray1 border-solid rounded-full w-[36px] h-[36px]'>
-                      <Image loader={() => profile} src={profile} width={36} height={36} className='rounded-full' />
-                    </Box>
-                  )
-                }
-              </a>
-            </Link>
+            <Box className="flex flex-row items-center ml-auto mr-[15%] mt-1">
+              <Link href='/mypage_edit'>
+                <a className='ml-8'>
+                  <Image src={SettingIcon} width={24} height={24} />
+                </a>
+              </Link>
+              <Link href='/login'>
+                <a onClick={onClick} className='ml-8'>
+                  <Image src={LogoutIcon} width={24} height={24} className='ml-8' />
+                </a>
+              </Link>
+              <Link href='/mypage'>
+                <a className='ml-8'>
+                  {
+                    profile === null ? (
+                      <Image src={profileIcon} width={36} height={36} />
+                    ) : (
+                      <Box className='border border-gray1 border-solid rounded-full w-[36px] h-[36px]'>
+                        <Image loader={() => profile} src={profile} width={36} height={36} className='rounded-full' />
+                      </Box>
+                    )
+                  }
+                </a>
+              </Link>
+            </Box>
           </>
         ) : (
           <>
