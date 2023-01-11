@@ -119,7 +119,7 @@ export const MyPageScreen: NextPage = () => {
                     {
                       receiveFirstData && receiveFirstData.map((v: any, index: number) => {
                         return (
-                          <MyPageList props={{ v: v, index: index, userName: userName }} />
+                          <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: true }} />
                         )
                       })
                     }
@@ -130,7 +130,7 @@ export const MyPageScreen: NextPage = () => {
                       {
                         receiveSecondData && receiveSecondData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index, userName: userName }} />
+                            <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: true }} />
                           )
                         })
                       }
@@ -164,7 +164,7 @@ export const MyPageScreen: NextPage = () => {
                       {
                         sendFirstData && sendFirstData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index, userName: userName }} />
+                            <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
                           )
                         })
                       }
@@ -176,7 +176,7 @@ export const MyPageScreen: NextPage = () => {
                       {
                         sendSecondData && sendSecondData.map((v: any, index: number) => {
                           return (
-                            <MyPageList props={{ v: v, index: index, userName: userName }} />
+                            <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
                           )
                         })
                       }

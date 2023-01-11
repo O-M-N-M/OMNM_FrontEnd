@@ -111,7 +111,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                   <Typography sx={{ color: '#383838', fontSize: '0.875rem', fontWeight: '400', marginRight: 'auto' }}>카카오톡 ID</Typography>
                   {
                     props.kakaoId === '' ? (
-                      <Tooltip title='룸메를 신청해야 볼 수 있습니다.' sx={{ padding: '0px' }}>
+                      <Tooltip title='름메 신청을 받으면 마이페이지에서 볼 수 있습니다.' sx={{ padding: '0px' }}>
                         <IconButton>
                           <Image src={displayNone} width={18} height={18} />
                         </IconButton>

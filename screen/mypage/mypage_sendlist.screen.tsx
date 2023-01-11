@@ -89,7 +89,7 @@ export const MyPageSendListScreen = () => {
               {
                 data && data.map((v: any, index: number) => {
                   return (
-                    <MyPageDetailList props={{ v: v, index: index, userName: userName }} />
+                    <MyPageDetailList props={{ v: v, index: index, userName: userName, isReceive: false }} />
                   )
                 })
               }

@@ -89,7 +89,7 @@ export const MyPageReceiveListScreen = () => {
               {
                 data && data.map((v: any, index: number) => {
                   return (
-                    <MyPageDetailList props={{ v: v, index: index, userName: userName }} />
+                    <MyPageDetailList props={{ v: v, index: index, userName: userName, isReceive: true }} />
                   )
                 })
               }

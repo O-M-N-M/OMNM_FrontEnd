@@ -16,6 +16,7 @@ interface ComponentProps {
   v: any;
   index: number;
   userName: string;
+  isReceive: boolean;
 }
 
 const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
@@ -41,19 +42,6 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const applyMate = async () => {
-    const url = `/api/main/propose/${userId}`;
-    const token = getCookie('OMNM');
-    const headers = {
-      headers: {
-        'OMNM': `${token}`
-      }
-    };
-
-    await axios.post(url, {}, headers)
-      .then((res) => console.log(res.data));
-  };
-
   const onClick = async () => {
     setLoading(true);
 
@@ -71,9 +59,10 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
         setAge(res.data.age);
         setName(res.data.name);
         setMbti(res.data.mbti);
-        setKakaoId(res.data.kakaoId);
         setMatchPercent(res.data.percent);
         setDepartment(res.data.department);
+
+        props.isReceive ? setKakaoId(res.data.kakaoId) : setKakaoId('');
 
         res.data.isSmoking === 0 ? setIsSmoking('흡연') : setIsSmoking('비흡연');
         res.data.lifeCycle === 0 ? setLifeCycle('아침형') : setLifeCycle('저녁형');
