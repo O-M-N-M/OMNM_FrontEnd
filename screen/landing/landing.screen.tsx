@@ -17,7 +17,7 @@ import axios from "axios";
 export const LadingScreen: NextPage = () => {
   const [totalUser, setTotalUser] = useState(0);
   const [isCookie, setIsCookie] = useState<boolean>();
-  const [innerWidth, setInnerWidth] = useState(typeof window !== 'undefined' && window.innerWidth);
+  const [innerWidth, setInnerWidth] = useState<number | undefined>();
 
   useEffect(() => {
     const getTotalUser = async () => {
@@ -32,14 +32,18 @@ export const LadingScreen: NextPage = () => {
       else setIsCookie(false);
     }
 
+    setInnerWidth(window.innerWidth);
+    getTotalUser();
+    getIsCookie();
+  }, [totalUser]);
+
+  useEffect(() => {
     const resizeListener = () => {
       setInnerWidth(window.innerWidth);
     };
-    window.addEventListener("resize", resizeListener);
 
-    getTotalUser();
-    getIsCookie();
-  }, [totalUser, innerWidth])
+    window.addEventListener("resize", resizeListener);
+  }, [innerWidth]);
 
   return (
     <>
@@ -96,13 +100,14 @@ export const LadingScreen: NextPage = () => {
         </Box>
       </Box>
 
-      <Box className='flex justify-center items-center'>
+      <Box>
         {
-          innerWidth < 768 ? (
-            <Image src={landingMiddleContentMobile} />
-          ) : (
-            <Image src={landingMiddleContent} />
-          )
+          typeof innerWidth === 'undefined' ? <></> :
+            innerWidth >= 768 ? (
+              <Image src={landingMiddleContent} />
+            ) : (
+              <Image src={landingMiddleContentMobile} />
+            )
         }
       </Box>
 
