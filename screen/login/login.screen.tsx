@@ -130,7 +130,7 @@ export const LoginScreen: NextPage = () => {
               </Box>
 
               <Box className="text-center">
-                <Image src={failIcon} />
+                <Image src={failIcon} width={72} height={72} />
               </Box>
 
               <Box className="text-center">

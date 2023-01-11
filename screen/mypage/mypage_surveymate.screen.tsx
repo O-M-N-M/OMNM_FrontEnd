@@ -109,7 +109,7 @@ export const MyPageSurveyMateScreen = () => {
                 {
                   answers.map((v: any, index: number) => {
                     return (
-                      <Box className='flex flex-row border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
+                      <Box className='flex flex-row items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
                         <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {index + 1}</Typography>
                         <Typography className='text-black text-base font-medium ml-3'>{questions[index]}</Typography>
                         <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 max-w-[50%] ml-auto'>{v}</Typography>
