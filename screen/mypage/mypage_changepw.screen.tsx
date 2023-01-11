@@ -14,6 +14,10 @@ export const MyPageChangePwScreen = () => {
   const [userId, setUserId] = useState('');
   const [checkNewPw, setCheckNewPw] = useState('');
 
+  const [resultNowPw, setResultNowPw] = useState(true);
+  const [resultNewPw, setResultNewPw] = useState(true);
+  const [resultCheckNewPw, setResultCheckNewPw] = useState(true);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -30,10 +34,10 @@ export const MyPageChangePwScreen = () => {
       alert('현재 비밀번호와 변경하고 싶은 비밀번호가 같습니다.');
     }
     else if (!pwReg.test(newPw)) {
-      alert('6~12자 이내의 영문과 숫자, 특수문자를 조합해 입력해주세요.');
+      setResultNewPw(false);
     }
     else if (newPw !== checkNewPw) {
-      alert('비밀번호가 일치하지 않습니다.');
+      setResultCheckNewPw(false);
     }
     else {
       const url = `/api/users/${userId}/resetPassword`;
@@ -51,7 +55,7 @@ export const MyPageChangePwScreen = () => {
           if (res.data === '비밀번호 변경 완료') handleOpen();
         })
         .catch((err) => {
-          if (err.response.data === '회원정보가 올바르지 않습니다') alert('현재 비밀번호가 올바르지 않습니다.');
+          if (err.response.data === '회원정보가 올바르지 않습니다') setResultNowPw(false);
         });
     }
   }
@@ -77,7 +81,19 @@ export const MyPageChangePwScreen = () => {
     }
 
     getMyData();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    let pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,12}$/;
+
+    setResultNowPw(true);
+
+    if (newPw === '' || pwReg.test(newPw)) setResultNewPw(true);
+    else if (!pwReg.test(newPw)) setResultNewPw(false);
+
+    if (checkNewPw === '' || newPw === checkNewPw) setResultCheckNewPw(true);
+    else if (newPw !== checkNewPw) setResultCheckNewPw(false);
+  }, [nowPw, newPw, checkNewPw]);
 
   return (
     <>
@@ -99,6 +115,9 @@ export const MyPageChangePwScreen = () => {
               onChange={(e) => setNowPw(e.target.value)}
               className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
               required />
+            {
+              !resultNowPw && <Typography className='text-red text-xs font-regular mt-2 ml-1'>현재 비밀번호가 올바르지 않습니다.</Typography>
+            }
           </Box>
 
           <Box className='mt-7'>
@@ -114,6 +133,10 @@ export const MyPageChangePwScreen = () => {
               onChange={(e) => setNewPw(e.target.value)}
               className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
               required />
+            {
+              !resultNewPw && <Typography className='text-red text-xs font-regular mt-2 ml-1'>6~12자 이내의 영문과 숫자, 특수문자를 조합해 입력해주세요.</Typography>
+            }
+
           </Box>
 
           <Box className='mt-7'>
@@ -126,6 +149,9 @@ export const MyPageChangePwScreen = () => {
               onChange={(e) => setCheckNewPw(e.target.value)}
               className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
               required />
+            {
+              !resultCheckNewPw && <Typography className='text-red text-xs font-regular mt-2 ml-1'>비밀번호가 일치하지 않습니다.</Typography>
+            }
           </Box>
 
           <Box className='flex w-80'>
