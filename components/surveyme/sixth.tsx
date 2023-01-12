@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface SixthComponentProps {
   sleepingPattern: object;
   setSleepingPattern: Dispatch<SetStateAction<object>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const items = ['코골이', '이갈이', '몸부림'];
@@ -49,7 +49,7 @@ const SixthComponent = ({ props }: { props: SixthComponentProps }) => {
   return (
     <FormControl className='flex flex-row ml-auto'>
       {
-        ((!loading && props.tf) || (!props.tf)) && (
+        ((!loading && props.isPatch) || (!props.isPatch)) && (
           items.map((v, index) => {
             return (
               <FormControlLabel
@@ -72,7 +72,7 @@ const SixthComponent = ({ props }: { props: SixthComponentProps }) => {
       }
 
       {
-        ((!loading && props.tf) || (!props.tf)) && (
+        ((!loading && props.isPatch) || (!props.isPatch)) && (
           <FormControlLabel
             value={'3' || ''}
             control={

@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface SeventhComponentProps {
   isCleaning: number | undefined;
   setIsCleaning: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean
+  isPatch: boolean
 }
 
 const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
@@ -23,7 +23,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedIc !== '') ? (
+        (props.isPatch && checkedIc !== '') ? (
           <RadioGroup row defaultValue={checkedIc} onChange={(e) => props.setIsCleaning(parseInt(e.target.value))}>
             <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 5회 이상</Typography>} />
             <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 2~3회</Typography>} />
@@ -31,7 +31,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
             <FormControlLabel value="3" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">월 1회</Typography>} />
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setIsCleaning(parseInt(e.target.value))}>
               <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 5회 이상</Typography>} />
               <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 2~3회</Typography>} />

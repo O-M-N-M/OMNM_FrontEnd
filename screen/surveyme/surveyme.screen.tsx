@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 
 import SurveyIcon from '../../public/signupSuccess.png';
 import FirstComponent from "@/components/surveyme/first";
@@ -46,9 +46,10 @@ const initialSleepingPattern = {
 }
 
 export const SurveyMeScreen: NextPage = () => {
-  const [tf, setTf] = useState(false);
-  const [isNext, setIsNext] = useState(false);
+  const [isPatch, setIsPatch] = useState<boolean>(false);
   const [isMale, setIsMale] = useState<boolean>();
+  const [open, setOpen] = useState<boolean>(false);
+  const [isNext, setIsNext] = useState<boolean>(false);
 
   const [age, setAge] = useState<number | string>();
   const [mbti, setMbti] = useState<string | undefined>('');
@@ -60,6 +61,9 @@ export const SurveyMeScreen: NextPage = () => {
   const [nationality, setNationality] = useState<number | undefined>();
   const [armyService, setArmyService] = useState<number | undefined | null>();
   const [introduction, setIntroduction] = useState<string | undefined>('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onClick = async () => {
     if (
@@ -99,7 +103,7 @@ export const SurveyMeScreen: NextPage = () => {
         }
       };
 
-      if (tf) {
+      if (isPatch) {
         await axios.patch(url, data, headers)
           .then((res) => {
             if (res.data === '나의 성향 설문 수정 완료') {
@@ -158,7 +162,7 @@ export const SurveyMeScreen: NextPage = () => {
 
             setArmyService(res.data.armyService === null ? 1 : +res.data.armyService);
 
-            setTf(true);
+            setIsPatch(true);
           }
         });
     };
@@ -225,19 +229,19 @@ export const SurveyMeScreen: NextPage = () => {
                 {
                   index === 0 ? <FirstComponent props={{ age: age, setAge: setAge }} /> :
                     index === 1 ? <SecondComponent props={{ mbti: mbti, setMbti: setMbti }} /> :
-                      (index === 2 && tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: true }} /> :
-                        (index === 2 && !tf) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, tf: false }} /> :
+                      (index === 2 && isPatch) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, isPatch: true }} /> :
+                        (index === 2 && !isPatch) ? <ThirdComponent props={{ isSmoking: isSmoking, setIsSmoking: setIsSmoking, isPatch: false }} /> :
                           index === 3 ? <FourthComponent props={{ department: department, setDepartment: setDepartment }} /> :
-                            (index === 4 && tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: true }} /> :
-                              (index === 4 && !tf) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, tf: false }} /> :
-                                (index === 5 && tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: true }} /> :
-                                  (index === 5 && !tf) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, tf: false }} /> :
-                                    (index === 6 && tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: true }} /> :
-                                      (index === 6 && !tf) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, tf: false }} /> :
-                                        (index === 7 && tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: true }} /> :
-                                          (index === 7 && !tf) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, tf: false }} /> :
-                                            (index === 8 && tf) ? <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: true }} /> :
-                                              (index === 8 && !tf) && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, tf: false }} />
+                            (index === 4 && isPatch) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, isPatch: true }} /> :
+                              (index === 4 && !isPatch) ? <FifthComponent props={{ lifeCycle: lifeCycle, setLifeCycle: setLifeCycle, isPatch: false }} /> :
+                                (index === 5 && isPatch) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, isPatch: true }} /> :
+                                  (index === 5 && !isPatch) ? <SixthComponent props={{ sleepingPattern: sleepingPattern, setSleepingPattern: setSleepingPattern, isPatch: false }} /> :
+                                    (index === 6 && isPatch) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, isPatch: true }} /> :
+                                      (index === 6 && !isPatch) ? <SeventhComponent props={{ isCleaning: isCleaning, setIsCleaning: setIsCleaning, isPatch: false }} /> :
+                                        (index === 7 && isPatch) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, isPatch: true }} /> :
+                                          (index === 7 && !isPatch) ? <EighthComponent props={{ nationality: nationality, setNationality: setNationality, isPatch: false }} /> :
+                                            (index === 8 && isPatch) ? <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, isPatch: true }} /> :
+                                              (index === 8 && !isPatch) && <NinethComponent props={{ armyService: armyService, setArmyService: setArmyService, isPatch: false }} />
                 }
               </Box>
           )
@@ -266,10 +270,27 @@ export const SurveyMeScreen: NextPage = () => {
       </Box>
 
       <Box className='flex w-full justify-end'>
-        <Button onClick={onClick} className='bg-accent1 rounded-full px-10 py-3.5 mt-10'>
+        <Button onClick={handleOpen} className='bg-accent1 rounded-full px-10 py-3.5 mt-10'>
           <Typography className='text-white text-base font-medium'>완료</Typography>
         </Button>
       </Box>
+
+      {
+        open &&
+        <Modal
+          open={open}
+          onClose={handleClose}
+        >
+          <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '30%', minWidth: '530px', height: '20%', minHeight: '220px', outline: 'none' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }} >
+              <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '400' }}>설문조사 수정을 완료하였습니다</Typography>
+              <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', paddingX: '37px', paddingY: '11px', marginTop: '24px' }}>
+                <Typography sx={{ color: 'white', fontSize: '14px', fontWeight: '500', textAlign: 'center' }}>확인</Typography>
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+      }
     </Box>
   )
 }

@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface FifthComponentProps {
   lifeCycle: number | undefined;
   setLifeCycle: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean
+  isPatch: boolean
 }
 
 const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
@@ -23,13 +23,13 @@ const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedLc !== '') ? (
+        (props.isPatch && checkedLc !== '') ? (
           <RadioGroup row defaultValue={checkedLc} onChange={(e) => props.setLifeCycle(parseInt(e.target.value))} >
             <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">아침형</Typography>} />
             <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">저녁형</Typography>} />
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setLifeCycle(parseInt(e.target.value))} >
               <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">아침형</Typography>} />
               <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">저녁형</Typography>} />

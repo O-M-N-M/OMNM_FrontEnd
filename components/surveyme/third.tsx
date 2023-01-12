@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface ThirdComponentProps {
   isSmoking: number | undefined;
   setIsSmoking: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean
+  isPatch: boolean
 }
 
 const ThirdComponent = ({ props }: { props: ThirdComponentProps }) => {
@@ -23,13 +23,13 @@ const ThirdComponent = ({ props }: { props: ThirdComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedIs !== '') ? (
+        (props.isPatch && checkedIs !== '') ? (
           <RadioGroup row defaultValue={checkedIs} onChange={(e) => props.setIsSmoking(parseInt(e.target.value))}>
             <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">흡연</Typography>} />
             <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">비흡연</Typography>} />
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setIsSmoking(parseInt(e.target.value))}>
               <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">흡연</Typography>} />
               <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">비흡연</Typography>} />

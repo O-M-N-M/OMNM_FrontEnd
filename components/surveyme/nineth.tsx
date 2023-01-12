@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface NinethComponentProps {
   armyService: number | undefined | null;
   setArmyService: Dispatch<SetStateAction<number | undefined | null>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const NinethComponent = ({ props }: { props: NinethComponentProps }) => {
@@ -25,13 +25,13 @@ const NinethComponent = ({ props }: { props: NinethComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedAs !== '') ? (
+        (props.isPatch && checkedAs !== '') ? (
           <RadioGroup row defaultValue={checkedAs} onChange={(e) => props.setArmyService(parseInt(e.target.value))}>
             <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">군필</Typography>} />
             <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">미필</Typography>} />
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setArmyService(parseInt(e.target.value))}>
               <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">군필</Typography>} />
               <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">미필</Typography>} />
