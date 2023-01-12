@@ -72,6 +72,8 @@ const Header = () => {
         document.location = '/login';
       }
     }
+
+    setInnerWidth(window.innerWidth);
   })
 
   useEffect(() => {

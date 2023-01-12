@@ -19,23 +19,23 @@ export const LadingScreen: NextPage = () => {
   const [isCookie, setIsCookie] = useState<boolean>();
   const [innerWidth, setInnerWidth] = useState<number | undefined>();
 
-  // useEffect(() => {
-  //   const getTotalUser = async () => {
-  //     const url = '/api/home';
-  //     await axios.get(url).then((res) => {
-  //       setTotalUser(res.data.userCount);
-  //     });
-  //   }
+  useEffect(() => {
+    const getTotalUser = async () => {
+      const url = '/api/home';
+      await axios.get(url).then((res) => {
+        setTotalUser(res.data.userCount);
+      });
+    }
 
-  //   const getIsCookie = async () => {
-  //     if (hasCookie('OMNM')) setIsCookie(true);
-  //     else setIsCookie(false);
-  //   }
+    const getIsCookie = async () => {
+      if (hasCookie('OMNM')) setIsCookie(true);
+      else setIsCookie(false);
+    }
 
-  //   setInnerWidth(window.innerWidth);
-  //   getTotalUser();
-  //   getIsCookie();
-  // }, [totalUser]);
+    setInnerWidth(window.innerWidth);
+    getTotalUser();
+    getIsCookie();
+  }, [totalUser]);
 
   useEffect(() => {
     const resizeListener = () => {
