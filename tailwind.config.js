@@ -53,7 +53,8 @@ module.exports = {
       backgroundImage: (theme) => ({
         'main-background': "url('/mainBackground.png')",
         'main-move-background': "url('/mainBackground.gif')",
-        'landing-last-background': "url('/landingLastBackground.png')"
+        'landing-last-background': "url('/landingLastBackground.png')",
+        'landing-last-backgrund-mobile': "url('/landingLastBackgroundMobile.png')"
       })
     },
   },
