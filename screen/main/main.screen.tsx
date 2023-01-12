@@ -191,7 +191,7 @@ export const MainScreen: NextPage = () => {
     }
 
     isSurvey();
-  }, [count, open])
+  }, [count])
 
   return (
     <>
