@@ -13,8 +13,14 @@ const Footer = () => {
       </Box>
 
       <Box className="flex flex-row ml-auto mr-[15%]">
-        <Link href='/main'>
+        <Link href='/'>
           <a>
+            <Typography className="font-medium text-base">서비스 소개</Typography>
+          </a>
+        </Link>
+
+        <Link href='/main'>
+          <a className="ml-14">
             <Typography className="font-medium text-base">메인</Typography>
           </a>
         </Link>
