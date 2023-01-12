@@ -209,8 +209,8 @@ export const MainScreen: NextPage = () => {
     <>
       {
         isSplash ? (
-          <Box className='bg-sky0 flex flex-col justify-center items-center'>
-            <Image src={splash} />
+          <Box className='bg-sky0 flex flex-col justify-center items-center w-full h-[calc(100vh-70px)]'>
+            <Image src={splash} layout="intrinsic" />
           </Box>
         ) : (
           <>
