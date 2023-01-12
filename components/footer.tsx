@@ -21,7 +21,7 @@ const Footer = () => {
 
         <Link href='/main'>
           <a className="ml-14">
-            <Typography className="font-medium text-base">메인</Typography>
+            <Typography className="font-medium text-base">메인페이지</Typography>
           </a>
         </Link>
 
