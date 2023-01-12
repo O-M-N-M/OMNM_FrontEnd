@@ -90,7 +90,7 @@ const MyPageProfile = () => {
 
       <Typography className='text-black text-2xl font-medium mt-5'>{name}</Typography>
 
-      <Box className='bg-[#E3FBF5] opacity-100 rounded-lg px-2.5 py-1.5 mt-6'>
+      <Box className='bg-[#E3FBF5] rounded-lg px-2.5 py-1.5 mt-6'>
         <Typography className='text-accent2 text-xs font-medium'>룸메 매칭 후 매칭 상태를 꼭 전환해주세요</Typography>
       </Box>
 

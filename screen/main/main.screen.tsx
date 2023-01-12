@@ -31,6 +31,7 @@ export const MainScreen: NextPage = () => {
   const [list, setList] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [isSplash, setIsSplash] = useState<boolean>(true);
+  const [isMatched, setIsMatched] = useState<boolean>();
 
   const [name, setName] = useState('');
   const [age, setAge] = useState(-1);
@@ -47,6 +48,12 @@ export const MainScreen: NextPage = () => {
   const [department, setDepartment] = useState('');
 
   const token = getCookie('OMNM');
+  const headers = {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      'OMNM': `${token}`
+    }
+  };
 
   const onClick = async (index: number) => {
     setLoading(true);
@@ -109,12 +116,6 @@ export const MainScreen: NextPage = () => {
   useEffect(() => {
     const getUserId = async () => {
       const url = '/api/myInfo';
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.get(url, headers)
         .then((res) => {
@@ -128,12 +129,6 @@ export const MainScreen: NextPage = () => {
     const loadRecommandList = async () => {
       const url = '/api/main';
       const body = `criteria=${parseInt(count)}`;
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.post(url, body, headers)
         .then((res) => {
@@ -142,37 +137,11 @@ export const MainScreen: NextPage = () => {
           }
           setList(res.data);
         })
-        .catch((err) => {
-          if (err.response.status === 403) {
-            checkRefreshToken();
-          }
-        });
+        .catch((err) => console.log(err));
     }
-
-    const checkRefreshToken = async () => {
-      const url = '/api/token';
-      const body = `accessToken=${getCookie('OMNM')}&refreshToken=${getCookie('refreshToken')}`;
-      await axios.post(url, body)
-        .then((res) => {
-          if (res.data === '재로그인 요청') {
-            deleteCookie('OMNM');
-            alert('세션이 만료되었습니다.\n로그인을 다시해주세요.');
-            Router.push('/login');
-          }
-          else {
-            setCookie('OMNM', res.data);
-          }
-        });
-    };
 
     const isSurvey = async () => {
       const url = '/api/yourPersonality';
-      const headers = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          'OMNM': `${token}`
-        }
-      };
 
       await axios.get(url, headers)
         .then((res) => {
@@ -195,22 +164,51 @@ export const MainScreen: NextPage = () => {
     isSurvey();
   }, [count]);
 
-  const showSplash = () => {
-    setTimeout(() => {
-      setIsSplash(false);
-    }, 3000);
-  };
+  useEffect(() => {
+    const showSplash = () => {
+      setTimeout(() => {
+        setIsSplash(false);
+      }, 3000);
+    };
+
+    showSplash();
+  }, []);
 
   useEffect(() => {
-    showSplash();
-  });
+    const getIsMatched = async () => {
+      const url = '/api/myInfo/isMatched';
+
+      await axios.get(url, headers)
+        .then((res) => {
+          setIsMatched(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    getIsMatched();
+  }, [isMatched]);
 
   return (
     <>
       {
-        isSplash ? (
+        (isSplash) ? (
           <Box className='bg-sky0 flex flex-col justify-center items-center w-full h-[calc(100vh-70px)]'>
-            <Image src={splash} layout="intrinsic" />
+            <Image src={splash} width={400} height={400} />
+          </Box>
+        ) : (typeof isMatched !== 'undefined' && isMatched) ? (
+          <Box className="bg-main-move-background bg-cover">
+            <Box className="flex flex-col justify-center items-center w-full h-[calc(100vh-70px)] py-28">
+              <Box className='flex flex-col justify-center items-center bg-white2 rounded-full w-fit px-60 py-28'>
+                <Typography className='text-accent1 text-4xl font-medium'>
+                  {userName}
+                  <Typography component='span' className='text-black text-4xl font-medium'>님은 이미 딱 맞는 룸메이트를 구하셨군요!</Typography>
+                </Typography>
+
+                <Box className='bg-sky1 rounded-xl px-6 py-2 mt-8'>
+                  <Typography className='text-accent1 text-xl font-medium'>룸메이트를 다시 구하고 싶다면 마이페이지에서 매칭 상태 버튼을 전환해주세요</Typography>
+                </Box>
+              </Box>
+            </Box>
           </Box>
         ) : (
           <>
