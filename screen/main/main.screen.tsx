@@ -3,15 +3,16 @@ import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import Image from "next/image";
 import Router from "next/router";
 
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 import Footer from '../../components/footer';
 import DetailProfile from "../../components/detailProfile";
 
+import splash from '../../public/splash.gif';
+import percent from '../../public/percentIcon.png';
 import profile from '../../public/basicProfile.png';
 import profile2 from '../../public/reverseProfile.png';
-import percent from '../../public/percentIcon.png';
 
 import { Box, FormControl, MenuItem, Modal, Select, SelectChangeEvent, Typography } from "@mui/material";
 
@@ -29,6 +30,7 @@ export const MainScreen: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isSplash, setIsSplash] = useState<boolean>(true);
 
   const [name, setName] = useState('');
   const [age, setAge] = useState(-1);
@@ -191,150 +193,169 @@ export const MainScreen: NextPage = () => {
     }
 
     isSurvey();
-  }, [count])
+  }, [count]);
+
+  const showSplash = () => {
+    setTimeout(() => {
+      setIsSplash(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    showSplash();
+  });
 
   return (
     <>
-      <Box className="bg-main-move-background bg-cover">
-        <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-70px)] py-28">
-          <Box className="flex flex-row">
-            <Typography className="text-accent1 text-4xl font-bold ml-[15%]">
-              {userName}
-              <Typography component='span' className='text-black text-4xl font-bold'>님을 위한</Typography>
-            </Typography>
-
-            <Box className="flex flex-row ml-auto mr-[15%]">
-              <Typography className="text-accent1 text-base font-medium mt-2 mr-5">성향 일치 개수</Typography>
-              <FormControl size="small">
-                <Select
-                  value={count}
-                  displayEmpty
-                  onChange={handleChange}
-                  MenuProps={{
-                    disablePortal: true,
-                    PaperProps: {
-                      sx: {
-                        color: '#9B9EA1',
-                        borderColor: 'white',
-                        marginTop: '10px',
-                        boxShadow: 'none',
-                        border: 'solid 1px #DBDBDB',
-                      }
-                    }
-                  }}
-                  sx={{
-                    "&:hover": {
-                      "&& fieldset": {
-                        borderColor: "#4B99EB"
-                      }
-                    },
-                    '.MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#4B99EB',
-                      borderWidth: '1.5px'
-                    }
-                  }}
-                  className="w-28 h-10 round rounded-xl text-accent1 text-base"
-                >
-                  <MenuItem value={'4'} className="text-base">4개 이상</MenuItem>
-                  <MenuItem value={'5'} className="text-base">5개 이상</MenuItem>
-                  <MenuItem value={'6'} className="text-base">6개 이상</MenuItem>
-                  <MenuItem value={'7'} className="text-base">7개 이상</MenuItem>
-                  <MenuItem value={'8'} className="text-base">8개</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+      {
+        isSplash ? (
+          <Box className='bg-sky0 flex flex-col justify-center items-center w-full h-[calc(100vh-50px)]'>
+            <Image src={splash} />
           </Box>
-          <Typography className="text-black text-4xl font-bold px-[15%] mt-2">추천 룸메이트 리스트</Typography>
-          <Typography className="text-black text-xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메이트들을 선별한 리스트입니다.</Typography>
+        ) : (
+          <>
+            <Box className="bg-main-move-background bg-cover">
+              <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-70px)] py-28">
+                <Box className="flex flex-row">
+                  <Typography className="text-accent1 text-4xl font-bold ml-[15%]">
+                    {userName}
+                    <Typography component='span' className='text-black text-4xl font-bold'>님을 위한</Typography>
+                  </Typography>
 
-          <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
-            <Swiper
-              initialSlide={0}
-              navigation={true}
-              pagination={{
-                clickable: true,
-              }}
-              breakpoints={{
-                "@0.10": {
-                  slidesPerView: 1,
-                  slidesPerGroup: 1,
-                  spaceBetween: 10,
-                },
-                "@0.95": {
-                  slidesPerView: 2,
-                  slidesPerGroup: 2,
-                  spaceBetween: 20,
-                },
-                "@1.50": {
-                  slidesPerView: 3,
-                  slidesPerGroup: 3,
-                  spaceBetween: 30,
-                }
-              }}
-              modules={[Pagination, Navigation]}
-
-              className="flex flex-row flex-wrap items-center"
-            >
-              {
-                list.map((roomMate: any, index: number): any => {
-                  {
-                    return Object.keys(roomMate).length === 0 ?
-                      <SwiperSlide key={index} className="flex flex-row justify-center items-center bg-transparent w-full">
-                        <Box className="flex flex-col justify-center items-center bg-white rounded-lg w-[22rem] h-64">
-                          <Image src={profile2} width={100} height={100} />
-                          <Typography className='text-black text-base font-medium mt-6'>딱 맞는 룸메이트가 없어요!</Typography>
-                          <Typography className='text-black text-base font-regular mt-1'>최적의 룸메이트만 선별해 보여드릴게요</Typography>
-                        </Box>
-                      </SwiperSlide>
-                      :
-                      <SwiperSlide onClick={() => { onClick(index); handleOpen(); }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
-                        <Box className="flex flex-col justify-center items-center bg-white rounded-[1.25rem] w-[22rem] h-64">
-                          <Box className="flex flex-row justify-center items-center">
-                            {
-                              roomMate.profileUrl === null ? (
-                                <Image src={profile} width={100} height={100} />
-                              ) : (
-                                <Box className='border border-gray1 border-solid rounded-full w-[100px] h-[100px]'>
-                                  <Image src={roomMate.profileUrl} width={100} height={100} className='rounded-full' />
-                                </Box>
-                              )
+                  <Box className="flex flex-row ml-auto mr-[15%]">
+                    <Typography className="text-accent1 text-base font-medium mt-2 mr-5">성향 일치 개수</Typography>
+                    <FormControl size="small">
+                      <Select
+                        value={count}
+                        displayEmpty
+                        onChange={handleChange}
+                        MenuProps={{
+                          disablePortal: true,
+                          PaperProps: {
+                            sx: {
+                              color: '#9B9EA1',
+                              borderColor: 'white',
+                              marginTop: '10px',
+                              boxShadow: 'none',
+                              border: 'solid 1px #DBDBDB',
                             }
-                            <Box className="ml-14">
-                              <Box className="flex flex-row items-center">
-                                <Typography className="text-black text-2xl font-bold">{roomMate.name}</Typography>
-                                <Typography className="text-gray1 text-base font-regular ml-3">{roomMate.age}세</Typography>
-                              </Box>
-                              <Box className="flex flex-row justify-center items-center mt-2">
-                                <Typography className="text-black text-base font-medium mr-auto">{roomMate.mbti}</Typography>
-                                <>
-                                  <Image src={percent} width={16} height={16} />
-                                  <Typography className="text-black text-base font-bold ml-1">{roomMate.percent}%</Typography>
-                                </>
-                              </Box>
-                            </Box>
-                          </Box>
-                          <Box className="w-[75%] mt-6">
-                            <Typography className="text-black text-base font-regular">{roomMate.introduction}</Typography>
-                          </Box>
-                        </Box>
-                      </SwiperSlide>
-                  }
-                })
-              }
-            </Swiper>
-          </Box>
+                          }
+                        }}
+                        sx={{
+                          "&:hover": {
+                            "&& fieldset": {
+                              borderColor: "#4B99EB"
+                            }
+                          },
+                          '.MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#4B99EB',
+                            borderWidth: '1.5px'
+                          }
+                        }}
+                        className="w-28 h-10 round rounded-xl text-accent1 text-base"
+                      >
+                        <MenuItem value={'4'} className="text-base">4개 이상</MenuItem>
+                        <MenuItem value={'5'} className="text-base">5개 이상</MenuItem>
+                        <MenuItem value={'6'} className="text-base">6개 이상</MenuItem>
+                        <MenuItem value={'7'} className="text-base">7개 이상</MenuItem>
+                        <MenuItem value={'8'} className="text-base">8개</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+                <Typography className="text-black text-4xl font-bold px-[15%] mt-2">추천 룸메이트 리스트</Typography>
+                <Typography className="text-black text-xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메이트들을 선별한 리스트입니다.</Typography>
 
-          {
-            open &&
-            <Modal
-              open={open}
-              onClose={handleClose}
-            >
-              <DetailProfile props={{ name: name, mbti: mbti, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: '', setOpen: setOpen }} />
-            </Modal>
-          }
-        </Box>
-      </Box >
+                <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
+                  <Swiper
+                    initialSlide={0}
+                    navigation={true}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    breakpoints={{
+                      "@0.10": {
+                        slidesPerView: 1,
+                        slidesPerGroup: 1,
+                        spaceBetween: 10,
+                      },
+                      "@0.95": {
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                        spaceBetween: 20,
+                      },
+                      "@1.50": {
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                        spaceBetween: 30,
+                      }
+                    }}
+                    modules={[Pagination, Navigation]}
+
+                    className="flex flex-row flex-wrap items-center"
+                  >
+                    {
+                      list.map((roomMate: any, index: number): any => {
+                        {
+                          return Object.keys(roomMate).length === 0 ?
+                            <SwiperSlide key={index} className="flex flex-row justify-center items-center bg-transparent w-full">
+                              <Box className="flex flex-col justify-center items-center bg-white rounded-lg w-[22rem] h-64">
+                                <Image src={profile2} width={100} height={100} />
+                                <Typography className='text-black text-base font-medium mt-6'>딱 맞는 룸메이트가 없어요!</Typography>
+                                <Typography className='text-black text-base font-regular mt-1'>최적의 룸메이트만 선별해 보여드릴게요</Typography>
+                              </Box>
+                            </SwiperSlide>
+                            :
+                            <SwiperSlide onClick={() => { onClick(index); handleOpen(); }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
+                              <Box className="flex flex-col justify-center items-center bg-white rounded-[1.25rem] w-[22rem] h-64">
+                                <Box className="flex flex-row justify-center items-center">
+                                  {
+                                    roomMate.profileUrl === null ? (
+                                      <Image src={profile} width={100} height={100} />
+                                    ) : (
+                                      <Box className='border border-gray1 border-solid rounded-full w-[100px] h-[100px]'>
+                                        <Image src={roomMate.profileUrl} width={100} height={100} className='rounded-full' />
+                                      </Box>
+                                    )
+                                  }
+                                  <Box className="ml-14">
+                                    <Box className="flex flex-row items-center">
+                                      <Typography className="text-black text-2xl font-bold">{roomMate.name}</Typography>
+                                      <Typography className="text-gray1 text-base font-regular ml-3">{roomMate.age}세</Typography>
+                                    </Box>
+                                    <Box className="flex flex-row justify-center items-center mt-2">
+                                      <Typography className="text-black text-base font-medium mr-auto">{roomMate.mbti}</Typography>
+                                      <>
+                                        <Image src={percent} width={16} height={16} />
+                                        <Typography className="text-black text-base font-bold ml-1">{roomMate.percent}%</Typography>
+                                      </>
+                                    </Box>
+                                  </Box>
+                                </Box>
+                                <Box className="w-[75%] mt-6">
+                                  <Typography className="text-black text-base font-regular">{roomMate.introduction}</Typography>
+                                </Box>
+                              </Box>
+                            </SwiperSlide>
+                        }
+                      })
+                    }
+                  </Swiper>
+                </Box>
+
+                {
+                  open &&
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <DetailProfile props={{ name: name, mbti: mbti, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: '', setOpen: setOpen }} />
+                  </Modal>
+                }
+              </Box>
+            </Box >
+          </>)
+      }
 
       <Footer />
     </>
