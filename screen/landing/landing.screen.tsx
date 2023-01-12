@@ -126,16 +126,16 @@ export const LadingScreen: NextPage = () => {
             <Box className='flex flex-col justify-center items-center min-h-[calc(100vh-70px)] py-20'>
               <Image src={LogoBoth} width={70} height={71.27} />
 
-              <Typography className='text-black text-2xl font-regular mt-12'>오늘 만나고 내일 만나는</Typography>
-              <Typography className='text-black text-2xl font-bold'>
+              <Typography className='text-black text-[1.75rem] font-regular mt-12'>오늘 만나고 내일 만나는</Typography>
+              <Typography className='text-black text-[1.75rem] font-bold'>
                 기숙사 &nbsp;
-                <Typography component='span' className='text-accent1 text-2xl font-bold'>룸메 매칭&nbsp;</Typography>
+                <Typography component='span' className='text-accent1 text-[1.75rem] font-bold'>룸메 매칭&nbsp;</Typography>
                 서비스
               </Typography>
 
               <Box className='flex flex-row items-center mt-4'>
                 <Image src={LogoString1} width={65.24} height={11.23} />
-                <Typography className='text-black text-sm font-medium'>에서 나와 딱 맞는 룸메를 만나보세요</Typography>
+                <Typography className='text-black text-sm font-medium ml-1'>에서 나와 딱 맞는 룸메를 만나보세요</Typography>
               </Box>
 
               <Button onClick={() => document.location = '/login'} className='bg-accent1 rounded-full px-7 py-3 mt-12'>
@@ -145,12 +145,12 @@ export const LadingScreen: NextPage = () => {
 
             <Box className='flex flex-col justify-center items-center py-14'>
               <Box className='flex flex-row justify-center items-center'>
-                <Typography className='text-black text-sm font-medium'>
+                <Typography className='text-black text-lg font-medium'>
                   지금까지&nbsp;
                   <Box component='span'>
                     <Image src={LogoString2} width={67} height={12} />
                   </Box>
-                  <Typography component='span' className='text-accent1 text-sm font-bold'>&nbsp;누적 가입자 수</Typography>
+                  <Typography component='span' className='text-accent1 text-lg font-bold'>&nbsp;누적 가입자 수</Typography>
                   는?
                 </Typography>
               </Box>
