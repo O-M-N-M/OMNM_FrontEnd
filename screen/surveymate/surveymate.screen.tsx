@@ -87,14 +87,6 @@ export const SurveyMateScreen: NextPage = () => {
         armyService: armyService
       }
 
-      const formData = new FormData();
-      formData.append(
-        'data',
-        new Blob([JSON.stringify(data)],
-          { type: "application/json" }
-        )
-      )
-
       const url = '/api/yourPersonality';
       const token = getCookie('OMNM');
       const headers = {

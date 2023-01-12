@@ -27,7 +27,6 @@ export const MyPageWithdrawalScreen = () => {
   const onSubmit = async () => {
     const url = `/api/users/${userId}`;
     const body = `loginId=${id}&password=${pw}`;
-
     const token = getCookie('OMNM');
     const headers = {
       headers: {
@@ -35,18 +34,6 @@ export const MyPageWithdrawalScreen = () => {
         'OMNM': `${token}`
       }
     };
-    const userDto = {
-      loginId: `${id}`,
-      password: `${pw}`
-    };
-
-    const formData = new FormData();
-    formData.append(
-      'key',
-      new Blob([JSON.stringify(userDto)],
-        { type: "application/json" }
-      )
-    )
 
     await axios.post(url, body, headers)
       .then(() => {
