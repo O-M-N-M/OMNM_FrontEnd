@@ -9,6 +9,8 @@ export default function Document() {
           rel='stylesheet'
           type='text/css'
         />
+        <title>omnm</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <body>
         <Main />
