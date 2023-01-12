@@ -123,7 +123,7 @@ export const LadingScreen: NextPage = () => {
           </>
         ) : (
           <>
-            <Box className='flex flex-col justify-center items-center min-h-[calc(100vh-70px)] py-20'>
+            <Box className='flex flex-col justify-center items-center min-h-[calc(100vh-49px)] py-20'>
               <Image src={LogoBoth} width={70} height={71.27} />
 
               <Typography className='text-black text-[1.75rem] font-regular mt-12'>오늘 만나고 내일 만나는</Typography>
@@ -138,8 +138,8 @@ export const LadingScreen: NextPage = () => {
                 <Typography className='text-black text-sm font-medium ml-1'>에서 나와 딱 맞는 룸메를 만나보세요</Typography>
               </Box>
 
-              <Button onClick={() => document.location = '/login'} className='bg-accent1 rounded-full px-7 py-3 mt-12'>
-                <Typography className='text-white text-xs font-regular'>시작하기</Typography>
+              <Button onClick={() => document.location = '/login'} className='bg-accent1 rounded-full px-8 py-3.5 mt-12'>
+                <Typography className='text-white text-lg font-regular'>시작하기</Typography>
               </Button>
             </Box>
 
