@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface ThirdComponentProps {
   isSmoking: number | undefined;
   setIsSmoking: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const items = ['흡연', '비흡연', '상관없음'];
@@ -25,7 +25,7 @@ const ThirdComponent = ({ props }: { props: ThirdComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedIs !== '') ? (
+        (props.isPatch && checkedIs !== '') ? (
           <RadioGroup row defaultValue={checkedIs} onChange={(e) => props.setIsSmoking(parseInt(e.target.value))}>
             {
               items.map((v, index) => {
@@ -46,7 +46,7 @@ const ThirdComponent = ({ props }: { props: ThirdComponentProps }) => {
             }
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setIsSmoking(parseInt(e.target.value))}>
               {
                 items.map((v, index) => {

@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface SeventhComponentProps {
   nationality: number | undefined;
   setNationality: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const items = ['대한민국', '상관없음'];
@@ -25,7 +25,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedNat !== '') ? (
+        (props.isPatch && checkedNat !== '') ? (
           <RadioGroup row defaultValue={checkedNat} onChange={(e) => props.setNationality(parseInt(e.target.value))}>
             {
               items.map((v, index) => {
@@ -46,7 +46,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
             }
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setNationality(parseInt(e.target.value))}>
               {
                 items.map((v, index) => {

@@ -7,7 +7,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface FourthComponentProps {
   department: number | undefined;
   setDepartment: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const items = ['같은 학과', '다른 학과', '상관없음'];
@@ -24,7 +24,7 @@ const FourthComponent = ({ props }: { props: FourthComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedDep !== '') ? (
+        (props.isPatch && checkedDep !== '') ? (
           <RadioGroup row defaultValue={checkedDep} onChange={(e) => props.setDepartment(parseInt(e.target.value))}>
             {
               items.map((v, index) => {
@@ -45,7 +45,7 @@ const FourthComponent = ({ props }: { props: FourthComponentProps }) => {
             }
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setDepartment(parseInt(e.target.value))}>
               {
                 items.map((v, index) => {

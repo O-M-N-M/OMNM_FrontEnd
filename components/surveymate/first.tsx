@@ -7,7 +7,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface FirstComponentProps {
   age: object;
   setAge: Dispatch<SetStateAction<object>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const items = ['20대 초반', '20대 중반', '20대 후반', '30대 후반'];
@@ -48,7 +48,7 @@ const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
   return (
     <FormControl className='flex flex-row ml-auto'>
       {
-        ((!loading && props.tf) || (!props.tf)) && (
+        ((!loading && props.isPatch) || (!props.isPatch)) && (
           items.map((v, index) => {
             return (
               <FormControlLabel
@@ -71,7 +71,7 @@ const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
       }
 
       {
-        ((!loading && props.tf) || (!props.tf)) && (
+        ((!loading && props.isPatch) || (!props.isPatch)) && (
           <FormControlLabel
             value={'4' || ''}
             control={

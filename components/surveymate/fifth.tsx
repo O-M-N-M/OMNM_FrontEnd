@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface FifthComponentProps {
   lifeCycle: number | undefined;
   setLifeCycle: Dispatch<SetStateAction<number | undefined>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const items = ['아침형', '저녁형', '상관없음'];
@@ -25,7 +25,7 @@ const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
   return (
     <FormControl className='ml-auto'>
       {
-        (props.tf && checkedLc !== '') ? (
+        (props.isPatch && checkedLc !== '') ? (
           <RadioGroup row defaultValue={checkedLc} onChange={(e) => props.setLifeCycle(parseInt(e.target.value))}>
             {
               items.map((v, index) => {
@@ -46,7 +46,7 @@ const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
             }
           </RadioGroup>
         ) :
-          (!props.tf) && (
+          (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setLifeCycle(parseInt(e.target.value))}>
               {
                 items.map((v, index) => {

@@ -7,7 +7,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface SecondComponentProps {
   mbti: object;
   setMbti: Dispatch<SetStateAction<object>>;
-  tf: boolean;
+  isPatch: boolean;
 }
 
 const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
@@ -40,7 +40,7 @@ const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
   return (
     <>
       {
-        ((!loading && props.tf) || (!props.tf)) && (
+        ((!loading && props.isPatch) || (!props.isPatch)) && (
           <Box className='flex flex-wrap ml-24 mt-1'>
             {
               Object.keys(props.mbti).map((v, index) => {
@@ -67,7 +67,7 @@ const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
       }
 
       {
-        ((!loading && props.tf) || (!props.tf)) && (
+        ((!loading && props.isPatch) || (!props.isPatch)) && (
           <FormControlLabel
             value={'상관없음' || ''}
             control={
