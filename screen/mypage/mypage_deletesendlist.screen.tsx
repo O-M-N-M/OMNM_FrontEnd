@@ -29,11 +29,21 @@ export const MyPageDeleteSendListScreen = () => {
   const [userName, setUserName] = useState('');
   const [totalCount, setTotalCount] = useState<number>(0);
   const [isSelected, setIsSelected] = useState<object>({});
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [allSelected, setAllSelected] = useState<object>({});
   const [initialSelected, setInitialSelected] = useState<object>({});
 
   const handleChange = (_: any, p: any) => setIndex(p - 1);
 
-  const onChangeAll = () => setIsSelected(initialSelected);
+  const onChangeAll = () => setIsSelected(allSelected);
+  const onChangeEach = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsSelected((prevState) => {
+      return {
+        ...prevState,
+        [e.target.value]: !isSelected[e.target.value as keyof typeof isSelected]
+      }
+    });
+  };
 
   const onClick = async () => {
     let selectedUsers = [];
@@ -52,15 +62,6 @@ export const MyPageDeleteSendListScreen = () => {
         }
       })
       .catch((err) => console.error(err));
-  }
-
-  const onChangeEach = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsSelected((prevState) => {
-      return {
-        ...prevState,
-        [e.target.value]: !isSelected[e.target.value as keyof typeof isSelected]
-      }
-    });
   };
 
   const getPageData = async () => {
@@ -78,12 +79,19 @@ export const MyPageDeleteSendListScreen = () => {
             }
           });
 
-          setInitialSelected((prevState) => {
+          setAllSelected((prevState) => {
             return {
               ...prevState,
               [res.data[key].userId]: true
             }
-          })
+          });
+
+          setInitialSelected((prevState) => {
+            return {
+              ...prevState,
+              [res.data[key].userId]: false
+            }
+          });
         }
       })
       .catch((err) => console.log(err));
@@ -117,6 +125,18 @@ export const MyPageDeleteSendListScreen = () => {
     getMyData();
   }, [userId, index]);
 
+  useEffect(() => {
+    const getIsDisabled = () => {
+      if (JSON.stringify(isSelected) === JSON.stringify(initialSelected)) {
+        setIsDisabled(true);
+      } else {
+        setIsDisabled(false);
+      }
+    }
+
+    getIsDisabled();
+  }, [isSelected]);
+
   return (
     <Box>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
@@ -135,7 +155,11 @@ export const MyPageDeleteSendListScreen = () => {
 
             <Box className='flex flex-row items-center ml-auto'>
               <Button onClick={onChangeAll} className='rounded-full text-gray1 text-base font-regular'>모두 선택</Button>
-              <Button onClick={onClick} className='rounded-full text-gray1 text-base font-regular ml-6'>삭제</Button>
+              {
+                isDisabled ?
+                  <Button disabled className='rounded-full text-gray0 text-base font-regular ml-6'>삭제</Button> :
+                  <Button onClick={onClick} className='rounded-full text-gray1 text-base font-regular ml-6'>삭제</Button>
+              }
               <Button onClick={() => document.location = '/mypage_sendlist'} className='bg-accent1 rounded-full w-fit h-fit px-4 py-1.5 ml-7'>
                 <Typography className=' text-white text-base font-regular'>완료</Typography>
               </Button>
