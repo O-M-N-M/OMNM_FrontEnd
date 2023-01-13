@@ -75,17 +75,15 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
             setDormitory('309관 2인실');
 
         const sp = res.data.sleepingPattern.replace(/[{}]/g, '').split(',');
-        if (sp.length === 0) setSleepingPattern(['수면패턴 없음']);
-        else {
-          const newSP: String[] = [];
-          sp.forEach((v: string) => {
-            if (v === '0') newSP.push('코골이');
-            else if (v === '1') newSP.push('이갈이');
-            else newSP.push('몸부림');
-          });
+        let newSP: String[] = [];
+        sp.forEach((v: string) => {
+          if (v === '0') newSP.push('코골이');
+          else if (v === '1') newSP.push('이갈이');
+          else if (v === '2') newSP.push('몸부림');
+          else if (v === '3') newSP.push('수면패턴 없음');
+        });
 
-          setSleepingPattern(newSP);
-        }
+        setSleepingPattern(newSP);
 
         res.data.isCleaning === 0 ? setIsCleaning('주 5회 이상 청소') :
           res.data.isCleaning === 1 ? setIsCleaning('주 2-3회 청소') :
