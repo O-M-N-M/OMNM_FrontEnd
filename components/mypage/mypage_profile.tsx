@@ -99,12 +99,12 @@ const MyPageProfile = () => {
           state ? (
             <>
               <Typography className='text-black text-sm font-regular'>룸메이트 매칭 완료</Typography>
-              <MyPageToggle onClick={onClick} className='ml-5' />
+              <MyPageToggle onClick={onClick} className='ml-4' />
             </>
           ) : (
             <>
               <Typography className='text-black text-sm font-regular'>룸메이트 구하는 중</Typography>
-              <MyPageToggle checked onClick={onClick} className='ml-5' />
+              <MyPageToggle checked onClick={onClick} className='ml-4' />
             </>
           )
         }
