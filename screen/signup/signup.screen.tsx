@@ -29,6 +29,7 @@ export const SignUpScreen: NextPage = () => {
   const [gender, setGender] = useState(-1);
   const [kakao, setKakao] = useState('');
   const [dormitory, setDormitory] = useState(-1);
+  const [isAgree, setIsAgree] = useState(false);
 
   const [one, setOne] = useState(false);
   const [two, setTwo] = useState<boolean | number>(-1);
@@ -37,9 +38,10 @@ export const SignUpScreen: NextPage = () => {
   const handleNext = () => {
     let pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,12}$/;
 
-    if (activeStep === 0 && !one) alert('아이디 중복확인을 해주세요');
-    else if (activeStep === 0 && !pwReg.test(pw)) alert('올바른 비밀번호가 아닙니다.');
-    else if (activeStep === 0 && pw !== pwCheck) alert('비밀번호가 같지 않습니다.');
+    if (activeStep === 0 && !isAgree) alert('개인정보 수집 및 이용 동의를 선택해주세요');
+    else if (activeStep === 0 && !one) alert('아이디 중복확인을 해주세요');
+    else if (activeStep === 0 && !pwReg.test(pw)) alert('올바른 비밀번호가 아닙니다');
+    else if (activeStep === 0 && pw !== pwCheck) alert('비밀번호가 같지 않습니다');
 
     else if (activeStep === 1 && (!two || two === -1)) alert('이메일 인증을 완료해주세요');
     else setActiveStep(activeStep + 1);
@@ -117,7 +119,7 @@ export const SignUpScreen: NextPage = () => {
           </Stepper>
 
           {
-            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} pwCheck={pwCheck} setPwCheck={setPwCheck} pass={one} setPass={setOne} />) :
+            activeStep === 0 ? (<AccountBox id={id} setId={setId} pw={pw} setPw={setPw} pwCheck={pwCheck} setPwCheck={setPwCheck} isAgree={isAgree} setIsAgree={setIsAgree} pass={one} setPass={setOne} />) :
               activeStep === 1 ? (<EmailBox school={school} setSchool={setSchool} email={email} setEmail={setEmail} pass={two} setPass={setTwo} />) :
                 (<ProfileBox image={image} setImage={setImage} name={name} setName={setName} gender={gender} setGender={setGender} kakao={kakao} setKakao={setKakao} dormitory={dormitory} setDormitory={setDormitory} />)
           }
