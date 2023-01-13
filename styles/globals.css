@@ -59,3 +59,13 @@ a {
 .swiper-pagination-bullet-active {
   background-color: rgba(75, 153, 235, 1) !important;
 }
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background: white;
+  }
+}
