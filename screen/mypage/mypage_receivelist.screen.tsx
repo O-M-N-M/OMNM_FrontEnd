@@ -81,8 +81,8 @@ export const MyPageReceiveListScreen = () => {
 
         <Box className='flex flex-col w-full'>
           <Box className='flex flex-row border border-solid border-accent2 rounded-[14px] w-full h-fit px-4 py-4 ml-6'>
-            <Typography className='text-accent2 text-base font-regular'>서비스 이용방법</Typography>
-            <Typography className='text-black text-base font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
+            <Typography className='text-accent2 text-sm font-regular'>서비스 이용방법</Typography>
+            <Typography className='text-black text-sm font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
           </Box>
 
           <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6 mt-3'>
