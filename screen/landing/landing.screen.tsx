@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Box, Typography, Button } from "@mui/material";
 
-import landingMiddleContent from '../../public/landingMiddleContent.jpg';
+import landingMiddleContent from '../../public/landingMiddleContent.png';
 import landingMiddleContentMobile from '../../public/landingMiddleContentMobile.png';
 import LogoString1 from '../../public/logo3.png';
 import LogoString2 from '../../public/logo4.png';
