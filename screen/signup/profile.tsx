@@ -27,12 +27,8 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
       <Box className="relative text-center">
         {
           image === null ?
-            <Image src={basicProfile} width={90} height={90} className="absolute rounded-full" />
-            : (
-              <Box className='border border-gray1 border-solid rounded-full w-[90px] h-[90px]'>
-                <Image src={URL.createObjectURL(image)} width={90} height={90} className="absolute rounded-full" />
-              </Box>
-            )
+            <Image src={basicProfile} width={90} height={90} className="absolute rounded-full" /> :
+            <Image src={URL.createObjectURL(image)} width={90} height={90} className="absolute rounded-full" />
         }
 
         <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-[35px] bg-white border border-solid border-gray1">

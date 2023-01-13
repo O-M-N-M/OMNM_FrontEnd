@@ -11,6 +11,8 @@ export default function Document() {
         />
         <title>omnm</title>
         <link rel="icon" href="/favicon.png" />
+
+        <meta content='omnm' property='og:title' />
       </Head>
       <body>
         <Main />
