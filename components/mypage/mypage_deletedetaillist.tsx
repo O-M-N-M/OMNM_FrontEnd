@@ -78,7 +78,7 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
             setDormitory('309관 2인실');
 
         const sp = res.data.sleepingPattern.replace(/[{}]/g, '').split(',');
-        let newSP: String[] = [];
+        const newSP: String[] = [];
         sp.forEach((v: string) => {
           if (v === '0') newSP.push('코골이');
           else if (v === '1') newSP.push('이갈이');
