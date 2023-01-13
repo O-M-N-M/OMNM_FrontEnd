@@ -79,8 +79,8 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
             placeholder="학교 이메일 입력"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
-          <Typography className="text-black text-sm font-regular mt-2 ml-4">@cau.ac.kr</Typography>
+            className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[65%] h-12 p-2.5 mt-2 focus:outline-none" required />
+          <Typography className="text-black text-sm font-regular mt-2 ml-4">@ cau.ac.kr</Typography>
         </Box>
 
         <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full p-2.5 mt-4 w-full h-12">
