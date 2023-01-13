@@ -81,12 +81,12 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
               disabled
               checked={isAgree}
               icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
-              checkedIcon={<CheckCircleIcon />}
+              checkedIcon={<CheckCircleIcon sx={{ color: '#4B99EB !important' }} />}
               size="small" />
           }
           label={undefined}
         />
-        <Typography className='text-black text-base font-regular'>개인정보 수집 및 이용 동의</Typography>
+        <Typography className='text-black text-sm font-regular'>개인정보 수집 및 이용 동의</Typography>
         <Box className='flex items-center ml-auto'>
           <Image src={AgreeIcon} width={20} height={20} />
         </Box>
@@ -169,11 +169,11 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
             <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', justifyContent: 'center', paddingX: '48px', paddingY: '36px' }} >
               <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <Image src={Logo} width={92.92} height={15.9} />
-                <Typography sx={{ color: '#383838', fontSize: '20px', fontWeight: '500', marginLeft: '8px' }}>개인정보 수집 및 이용 동의서</Typography>
+                <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '500', marginLeft: '8px' }}>개인정보 수집 및 이용 동의서</Typography>
               </Box>
 
               <Box sx={{ border: '1px solid #DBDBDB', borderRadius: '10px', width: '100%', height: '100%', overflow: 'auto', paddingX: '32px', paddingY: '30px', marginTop: '24px' }}>
-                <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '700' }}>
+                <Typography sx={{ color: '#383838', fontSize: '16px', fontWeight: '400' }}>
                   {`개인정보보호법에 따라 이하 omnm에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 
 1. 수집하는 개인정보
@@ -217,7 +217,7 @@ omnm은 원칙적으로 이용자의 개인정보를 회원 탈퇴 시 지체없
                       checkedIcon={<CheckCircleIcon />}
                       size="small" />
                   }
-                  label={<Typography sx={{ color: '#383838', fontSize: '20px', fontWeight: '500' }}>위에 적힌 내용을 모두 읽고 개인정보 수집 및 이용에 동의합니다</Typography>}
+                  label={<Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '500' }}>위에 적힌 내용을 모두 읽고 개인정보 수집 및 이용에 동의합니다</Typography>}
                 />
               </Box>
             </Box>
