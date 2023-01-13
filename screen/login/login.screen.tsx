@@ -158,7 +158,7 @@ export const LoginScreen: NextPage = () => {
             <Image src={logo} width={115} height={118} />
             <Typography className='text-black text-lg font-regular mt-7'>모바일 버전은 준비중이에요!</Typography>
             <Typography className='text-black text-lg font-medium mt-1'>
-              현재
+              현재&nbsp;
               <Typography component='span' className='text-accent1 text-lg font-medium'>PC</Typography>
               로만 접속이 가능합니다</Typography>
 

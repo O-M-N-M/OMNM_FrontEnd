@@ -132,13 +132,17 @@ export const MyPageScreen: NextPage = () => {
                       ) : (
                         <Box className='flex flex-wrap'>
                           <Box className='w-[45%] mx-3.5'>
-                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
-                              {
-                                typeof receiveFirstKey !== 'undefined' && (receiveFirstKey[0] === '0' ?
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveFirstKey[1]}.{receiveFirstKey.slice(3)}</Typography> :
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveFirstKey.slice(0, 2)}.{receiveFirstKey.slice(3)}</Typography>)
-                              }
-                            </Box>
+                            {
+                              typeof receiveFirstKey !== 'undefined' && (
+                                <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
+                                  {
+                                    receiveFirstKey[0] === '0' ?
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveFirstKey[1]}.{receiveFirstKey.slice(3)}</Typography> :
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveFirstKey.slice(0, 2)}.{receiveFirstKey.slice(3)}</Typography>
+                                  }
+                                </Box>
+                              )
+                            }
                             {
                               receiveFirstData && receiveFirstData.map((v: any, index: number) => {
                                 return (
@@ -148,13 +152,17 @@ export const MyPageScreen: NextPage = () => {
                             }
                           </Box>
                           <Box className='w-[45%] mx-3.5'>
-                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
-                              {
-                                typeof receiveSecondKey !== 'undefined' && (receiveSecondKey[0] === '0' ?
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveSecondKey[1]}.{receiveSecondKey.slice(3)}</Typography> :
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveSecondKey.slice(0, 2)}.{receiveSecondKey.slice(3)}</Typography>)
-                              }
-                            </Box>
+                            {
+                              typeof receiveSecondKey !== 'undefined' && (
+                                <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
+                                  {
+                                    receiveSecondKey[0] === '0' ?
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveSecondKey[1]}.{receiveSecondKey.slice(3)}</Typography> :
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{receiveSecondKey.slice(0, 2)}.{receiveSecondKey.slice(3)}</Typography>
+
+                                  }
+                                </Box>)
+                            }
                             {
                               receiveSecondData && receiveSecondData.map((v: any, index: number) => {
                                 return (
@@ -187,13 +195,17 @@ export const MyPageScreen: NextPage = () => {
                       ) : (
                         <Box className='flex flex-wrap'>
                           <Box className='w-[45%] mx-3.5'>
-                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
-                              {
-                                typeof sendFirstKey !== 'undefined' && (sendFirstKey[0] === '0' ?
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendFirstKey[1]}.{sendFirstKey.slice(3)}</Typography> :
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendFirstKey.slice(0, 2)}.{sendFirstKey.slice(3)}</Typography>)
-                              }
-                            </Box>
+                            {
+                              typeof sendFirstKey !== 'undefined' && (
+                                <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
+                                  {
+                                    sendFirstKey[0] === '0' ?
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendFirstKey[1]}.{sendFirstKey.slice(3)}</Typography> :
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendFirstKey.slice(0, 2)}.{sendFirstKey.slice(3)}</Typography>
+                                  }
+                                </Box>
+                              )
+                            }
                             {
                               sendFirstData && sendFirstData.map((v: any, index: number) => {
                                 return (
@@ -203,13 +215,18 @@ export const MyPageScreen: NextPage = () => {
                             }
                           </Box>
                           <Box className='w-[45%] mx-3.5'>
-                            <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
-                              {
-                                typeof sendSecondKey !== 'undefined' && (sendSecondKey[0] === '0' ?
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendSecondKey[1]}.{sendSecondKey.slice(3)}</Typography> :
-                                  <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendSecondKey.slice(0, 2)}.{sendSecondKey.slice(3)}</Typography>)
-                              }
-                            </Box>                              {
+                            {
+                              typeof sendSecondKey !== 'undefined' && (
+                                <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
+                                  {
+                                    sendSecondKey[0] === '0' ?
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendSecondKey[1]}.{sendSecondKey.slice(3)}</Typography> :
+                                      <Typography className='text-gray1 text-xs font-regular text-center min-w-[2rem]'>{sendSecondKey.slice(0, 2)}.{sendSecondKey.slice(3)}</Typography>
+                                  }
+                                </Box>
+                              )
+                            }
+                            {
                               sendSecondData && sendSecondData.map((v: any, index: number) => {
                                 return (
                                   <MyPageList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
