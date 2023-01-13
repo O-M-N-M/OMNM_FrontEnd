@@ -94,8 +94,7 @@ export const MainScreen: NextPage = () => {
           sp.forEach((v: string) => {
             if (v === '0') newSP.push('코골이');
             else if (v === '1') newSP.push('이갈이');
-            else if (v === '2') newSP.push('몸부림');
-            else if (v === '3') newSP.push('수면패턴 없음');
+            else newSP.push('몸부림');
           });
 
           setSleepingPattern(newSP);
