@@ -234,9 +234,17 @@ export const SurveyMateScreen: NextPage = () => {
       }
 
       <Box className='flex w-full justify-end'>
-        <Button onClick={handleOpen} className='bg-accent1 rounded-full px-10 py-3.5 mt-10'>
-          <Typography className='text-white text-base font-medium'>완료</Typography>
-        </Button>
+        {
+          isPatch ? (
+            <Button onClick={handleOpen} className='bg-accent1 rounded-full px-10 py-3.5 mt-10'>
+              <Typography className='text-white text-base font-medium'>완료</Typography>
+            </Button>
+          ) : (
+            <Button onClick={onClick} className='bg-accent1 rounded-full px-10 py-3.5 mt-10'>
+              <Typography className='text-white text-base font-medium'>완료</Typography>
+            </Button>
+          )
+        }
       </Box>
 
       {

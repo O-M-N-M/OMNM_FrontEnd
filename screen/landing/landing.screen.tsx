@@ -169,7 +169,7 @@ export const LadingScreen: NextPage = () => {
 
               <Box className='flex flex-row items-center mt-5'>
                 <Typography className='text-accent1 text-lg font-medium mr-2'>너도?</Typography>
-                <Typography className='text-accent2 text-lg font-medium mr-2'>나도?</Typography>
+                <Typography className='text-accent2 text-lg font-medium mr-2'>나도!</Typography>
                 <Image src={LogoString1} width={103.79} height={17.77} />
               </Box>
 
