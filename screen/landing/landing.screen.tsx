@@ -50,7 +50,7 @@ export const LadingScreen: NextPage = () => {
       {
         (typeof innerWidth !== 'undefined' && innerWidth >= 768) ? (
           <>
-            <Box className='flex flex-row flex-wrap-reverse justify-center items-center min-h-[calc(100vh-70px)]'>
+            <Box className='bg-white flex flex-row flex-wrap-reverse justify-center items-center min-h-[calc(100vh-70px)]'>
               <Box className="ml-[15%]">
                 <Typography className="text-[3.3rem] font-bold">
                   {`오늘 만나고 내일 만나는\n기숙사 `}
@@ -87,7 +87,7 @@ export const LadingScreen: NextPage = () => {
               </Box>
             </Box>
 
-            <Box className="flex flex-row flex-wrap">
+            <Box className="bg-white flex flex-row flex-wrap">
               <Box className='my-36 ml-[15%]'>
                 <Typography className="text-black text-2xl">지금까지</Typography>
 
