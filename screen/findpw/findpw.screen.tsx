@@ -23,7 +23,7 @@ export const FindPwScreen: NextPage = () => {
     try {
       await fetch(`/api/find/loginPw`, {
         method: 'POST',
-        body: `email=${email}@naver.com&loginId=${id}`,
+        body: `email=${email}@cau.ac.kr&loginId=${id}`,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -73,7 +73,7 @@ export const FindPwScreen: NextPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-4 focus:outline-none" required />
-            <Typography className="text-black text-sm font-regular ml-5 mt-2">@naver.com</Typography>
+            <Typography className="text-black text-sm font-regular ml-5 mt-2">@cau.ac.kr</Typography>
           </Box>
 
           <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-full h-12 p-2.5 mt-10">확인</Button>

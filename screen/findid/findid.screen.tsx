@@ -21,7 +21,7 @@ export const FindIdScreen: NextPage = () => {
     e.preventDefault();
 
     const url = '/api/find/loginId';
-    const body = `name=${name}&email=${email}@naver.com`;
+    const body = `name=${name}&email=${email}@cau.ac.kr`;
     const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
 
     await axios.post(url, body, headers)
@@ -63,7 +63,7 @@ export const FindIdScreen: NextPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-2 focus:outline-none" required />
-            <Typography className=" text-black text-sm font-regular ml-5 mt-2">@naver.com</Typography>
+            <Typography className=" text-black text-sm font-regular ml-5 mt-2">@cau.ac.kr</Typography>
           </Box>
           <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-full h-12 p-2.5 mt-10">확인</Button>
         </form>

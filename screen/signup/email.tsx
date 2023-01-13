@@ -21,7 +21,7 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
     e.preventDefault();
 
     const url = '/api/join/emailValidation';
-    const body = `email=${email}@naver.com`;
+    const body = `email=${email}@cau.ac.kr`;
     const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
     setLoading(true);
     await axios.post(url, body, headers)
@@ -41,7 +41,7 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
     if (!send) alert('인증번호를 전송하지 않았습니다.');
     else {
       const url = '/api/join/emailValidation/checkNumber';
-      const body = `email=${email}@naver.com&userValidationNumber=${num}`;
+      const body = `email=${email}@cau.ac.kr&userValidationNumber=${num}`;
       const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
 
       await axios.post(url, body, headers)
@@ -80,7 +80,7 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
-          <Typography className="text-black text-sm font-regular mt-2 ml-4">@naver.com</Typography>
+          <Typography className="text-black text-sm font-regular mt-2 ml-4">@cau.ac.kr</Typography>
         </Box>
 
         <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full p-2.5 mt-4 w-full h-12">
