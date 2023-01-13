@@ -18,8 +18,6 @@ const NinethComponent = ({ props }: { props: NinethComponentProps }) => {
     if (typeof props.armyService === 'number') {
       setCheckedAs(props.armyService.toString());
     }
-
-    console.log(checkedAs);
   }, [props.armyService]);
 
   return (

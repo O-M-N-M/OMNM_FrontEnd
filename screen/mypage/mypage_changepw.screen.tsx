@@ -75,9 +75,7 @@ export const MyPageChangePwScreen = () => {
         .then((res) => {
           setUserId(res.data.userId);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }
 
     getMyData();

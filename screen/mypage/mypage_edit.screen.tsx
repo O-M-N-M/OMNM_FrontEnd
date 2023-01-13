@@ -87,9 +87,7 @@ export const MyPageEditScreen = () => {
           setImage(res.data.profileUrl);
           setDormitory(res.data.dormitory);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }
 
     getMyData();

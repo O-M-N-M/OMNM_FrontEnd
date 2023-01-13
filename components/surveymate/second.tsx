@@ -31,10 +31,8 @@ const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
 
   useEffect(() => {
     if (Object.values(props.mbti).includes(true)) {
-      console.log(props.mbti);
       setLoading(false);
     }
-    console.log(props.mbti);
   }, [Object.values(props.mbti)]);
 
   return (

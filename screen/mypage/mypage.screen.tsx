@@ -55,7 +55,6 @@ export const MyPageScreen: NextPage = () => {
 
       await axios.get(url, headers)
         .then((res) => {
-          console.log(res.data);
           setReceiveFirstData(res.data[Object.keys(res.data)[0]]);
           setReceiveSecondData(res.data[Object.keys(res.data)[1]]);
           setReceiveFirstKey(Object.keys(res.data)[0]);
@@ -68,7 +67,6 @@ export const MyPageScreen: NextPage = () => {
 
       await axios.get(url, headers)
         .then((res) => {
-          console.log(res.data);
           setSendFirstData(res.data[Object.keys(res.data)[0]]);
           setSendSecondData(res.data[Object.keys(res.data)[1]]);
           setSendFirstKey(Object.keys(res.data)[0]);

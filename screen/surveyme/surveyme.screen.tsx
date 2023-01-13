@@ -155,7 +155,6 @@ export const SurveyMeScreen: NextPage = () => {
               '3': arrSp.includes('3'),
             })
 
-            console.log('처음 보내는', sleepingPattern);
             setIsCleaning(+res.data.cleaning);
             setNationality(+res.data.nationality);
             setIntroduction(res.data.introduction);

@@ -121,9 +121,7 @@ export const MainScreen: NextPage = () => {
         .then((res) => {
           setUserName(res.data.name);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }
 
     const loadRecommandList = async () => {

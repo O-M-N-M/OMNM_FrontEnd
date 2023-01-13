@@ -39,19 +39,6 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const applyMate = async () => {
-    const url = `/api/main/propose/${userId}`;
-    const token = getCookie('OMNM');
-    const headers = {
-      headers: {
-        'OMNM': `${token}`
-      }
-    };
-
-    await axios.post(url, {}, headers)
-      .then((res) => console.log(res.data));
-  };
-
   const onClick = async () => {
     setLoading(true);
 
