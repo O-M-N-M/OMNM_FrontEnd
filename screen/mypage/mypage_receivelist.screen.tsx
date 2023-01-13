@@ -79,54 +79,61 @@ export const MyPageReceiveListScreen = () => {
           <MyPageLeft />
         </Box>
 
-        <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6'>
-          <Box className='flex flex-row items-center'>
-            <IconButton onClick={() => document.location = '/mypage'}>
-              <Image src={PrevButton} width={18.44} height={23.48} />
-            </IconButton>
-            <Typography className='text-black text-xl font-medium ml-3'>룸메이트 신청 받은 리스트</Typography>
-            {
-              (totalCount > 0) && (
-                <IconButton onClick={() => document.location = '/mypage_deletereceivelist'} className='ml-auto'>
-                  <Image src={DeleteIcon} width={20} height={20} />
-                </IconButton>
-              )
-            }
+        <Box className='flex flex-col w-full'>
+          <Box className='flex flex-row border border-solid border-accent2 rounded-[14px] w-full h-fit px-4 py-4 ml-6'>
+            <Typography className='text-accent2 text-base font-regular'>서비스 이용방법</Typography>
+            <Typography className='text-black text-base font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
           </Box>
 
-          <Box className='flex flex-col items-center mt-5'>
-            <Box className='w-full min-h-[44rem]'>
+          <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6 mt-3'>
+            <Box className='flex flex-row items-center'>
+              <IconButton onClick={() => document.location = '/mypage'}>
+                <Image src={PrevButton} width={18.44} height={23.48} />
+              </IconButton>
+              <Typography className='text-black text-xl font-medium ml-3'>룸메이트 신청 받은 리스트</Typography>
               {
-                (totalCount > 0) ? data.map((v: any, index: number) => {
-                  return (
-                    <MyPageDetailList props={{ v: v, index: index, userName: userName, isReceive: true }} />
-                  )
-                }) : (
-                  <Box className='flex flex-col justify-center items-center w-full h-[786px]'>
-                    <Image src={NoListIcon} width={44} height={55} />
-                    <Typography className='text-gray0 text-base font-regular mt-4'>신청 받은 룸메이트가 없습니다</Typography>
-                  </Box>
+                (totalCount > 0) && (
+                  <IconButton onClick={() => document.location = '/mypage_deletereceivelist'} className='ml-auto'>
+                    <Image src={DeleteIcon} width={20} height={20} />
+                  </IconButton>
                 )
               }
             </Box>
 
-            <Pagination
-              count={Math.ceil(totalCount / 10)}
-              onChange={handleChange}
-              renderItem={(item) => (
-                <PaginationItem
-                  {...item}
-                  sx={{
-                    color: '#9B9EA1',
-                    fontSize: '0.875rem',
-                    fontWeight: '500'
-                  }}
-                />
-              )}
-              sx={{
-                marginTop: '2.5rem'
-              }}
-            />
+            <Box className='flex flex-col items-center mt-5'>
+              <Box className='w-full min-h-[44rem]'>
+                {
+                  (totalCount > 0) ? data.map((v: any, index: number) => {
+                    return (
+                      <MyPageDetailList props={{ v: v, index: index, userName: userName, isReceive: true }} />
+                    )
+                  }) : (
+                    <Box className='flex flex-col justify-center items-center w-full h-[786px]'>
+                      <Image src={NoListIcon} width={44} height={55} />
+                      <Typography className='text-gray0 text-base font-regular mt-4'>신청 받은 룸메이트가 없습니다</Typography>
+                    </Box>
+                  )
+                }
+              </Box>
+
+              <Pagination
+                count={Math.ceil(totalCount / 10)}
+                onChange={handleChange}
+                renderItem={(item) => (
+                  <PaginationItem
+                    {...item}
+                    sx={{
+                      color: '#9B9EA1',
+                      fontSize: '0.875rem',
+                      fontWeight: '500'
+                    }}
+                  />
+                )}
+                sx={{
+                  marginTop: '2.5rem'
+                }}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>
