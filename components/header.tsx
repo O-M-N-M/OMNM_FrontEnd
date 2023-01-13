@@ -20,6 +20,8 @@ const Header = () => {
   const onClick = () => {
     deleteCookie('OMNM');
     deleteCookie('refreshToken');
+
+    document.location = '/login';
   }
 
   const checkRefreshToken = async () => {
@@ -104,11 +106,9 @@ const Header = () => {
                         <Image src={SettingIcon} width={24} height={24} />
                       </a>
                     </Link>
-                    <Link href='/login'>
-                      <a onClick={onClick} className='ml-8'>
-                        <Image src={LogoutIcon} width={24} height={24} className='ml-8' />
-                      </a>
-                    </Link>
+                    <a onClick={onClick} className='ml-8 cursor-pointer'>
+                      <Image src={LogoutIcon} width={24} height={24} className='ml-8' />
+                    </a>
                     <Link href='/mypage'>
                       <a className='ml-8'>
                         {
