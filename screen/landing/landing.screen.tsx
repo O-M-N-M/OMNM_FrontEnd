@@ -160,7 +160,9 @@ export const LadingScreen: NextPage = () => {
               </Box>
             </Box>
 
-            <Image src={landingMiddleContentMobile} />
+            <Box className='my-32'>
+              <Image src={landingMiddleContentMobile} />
+            </Box>
 
             <Box className='bg-landing-last-backgrund-mobile bg-cover flex flex-col justify-center items-center py-16'>
               <Typography className='text-black text-sm font-regular'>가장 간편한 기숙사 룸메이트 매칭 서비스</Typography>
