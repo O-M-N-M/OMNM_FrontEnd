@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { getCookie } from 'cookies-next';
+import Image from 'next/image';
 
 import { Box, IconButton, Pagination, PaginationItem, Typography } from "@mui/material";
 
@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import PrevButton from '../../public/prevButton.png';
+
 import Footer from "@/components/footer";
 import MyPageLeft from "@/components/mypage/mypage_left";
 import MyPageDetailList from '@/components/mypage/mypage_detaillist';
@@ -89,7 +90,7 @@ export const MyPageSendListScreen = () => {
               {
                 data && data.map((v: any, index: number) => {
                   return (
-                    <MyPageDetailList props={{ v: v, index: index, userName: userName, isReceive: false }} />
+                    <MyPageDetailList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
                   )
                 })
               }

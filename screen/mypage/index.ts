@@ -6,3 +6,5 @@ export * from './mypage_surveyme.screen';
 export * from './mypage_surveymate.screen';
 export * from './mypage_receivelist.screen';
 export * from './mypage_sendlist.screen';
+export * from './mypage_deletereceivelist.screen';
+export * from './mypage_deletesendlist.screen';
