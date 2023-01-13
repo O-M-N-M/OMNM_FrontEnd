@@ -74,7 +74,7 @@ const Header = () => {
     }
 
     setInnerWidth(window.innerWidth);
-  })
+  }, [profile])
 
   useEffect(() => {
     const resizeListener = () => {
