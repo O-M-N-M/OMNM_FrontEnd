@@ -318,20 +318,20 @@ export const MainScreen: NextPage = () => {
                                   }
                                   <Box className="ml-14">
                                     <Box className="flex flex-row items-center">
-                                      <Typography className="text-black text-2xl font-bold">{roomMate.name}</Typography>
+                                      <Typography className="text-black text-2xl font-bold w-[6rem]">{roomMate.name}</Typography>
                                       <Typography className="text-gray1 text-base font-regular ml-3">{roomMate.age}세</Typography>
                                     </Box>
                                     <Box className="flex flex-row justify-center items-center mt-2">
-                                      <Typography className="text-black text-base font-medium mr-auto">{roomMate.mbti}</Typography>
+                                      <Typography className="text-black text-base font-medium mr-auto w-10">{roomMate.mbti}</Typography>
                                       <>
                                         <Image src={percent} width={16} height={16} />
-                                        <Typography className="text-black text-base font-bold ml-1">{roomMate.percent}%</Typography>
+                                        <Typography className="text-black text-base font-bold ml-2">{roomMate.percent}%</Typography>
                                       </>
                                     </Box>
                                   </Box>
                                 </Box>
                                 <Box className="w-[75%] mt-6">
-                                  <Typography className="text-black text-base font-regular">{roomMate.introduction}</Typography>
+                                  <Typography className="text-black text-base font-regular h-12">{roomMate.introduction}</Typography>
                                 </Box>
                               </Box>
                             </SwiperSlide>
