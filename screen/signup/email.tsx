@@ -102,8 +102,8 @@ export const EmailBox: React.FunctionComponent<props> = ({ school, setSchool, em
             placeholder="인증번호 입력"
             value={num}
             onChange={(e) => setNum(parseInt(e.target.value) || '')}
-            className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[70%] h-12 p-2.5 mt-2 focus:outline-none" required />
-          <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[30%] h-12 p-2.5 mt-2 ml-5">인증하기</Button>
+            className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[65%] h-12 p-2.5 mt-2 focus:outline-none" required />
+          <Button type="submit" className="border border-solid border-accent1 bg-white rounded-full text-accent1 text-sm font-medium w-[35%] h-12 p-2.5 mt-2 ml-5">인증하기</Button>
         </Box>
       </form>
       {
