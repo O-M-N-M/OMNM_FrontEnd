@@ -10,7 +10,7 @@ interface FirstComponentProps {
   isPatch: boolean;
 }
 
-const items = ['20대 초반', '20대 중반', '20대 후반', '30대 후반'];
+const items = ['20대 초반', '20대 중반', '20대 후반', '30대'];
 
 const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
   const [loading, setLoading] = useState(true);
