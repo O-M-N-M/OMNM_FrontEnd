@@ -1,7 +1,6 @@
 import { NextPage } from "next";
-import { deleteCookie, getCookie, setCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import Image from "next/image";
-import Router from "next/router";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -18,6 +17,7 @@ import { Box, FormControl, MenuItem, Modal, Select, SelectChangeEvent, Typograph
 
 import { Pagination, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper';
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -32,6 +32,7 @@ export const MainScreen: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [isSplash, setIsSplash] = useState<boolean>(true);
   const [isMatched, setIsMatched] = useState<boolean>();
+  const [swiper, setSwiper] = useState<SwiperCore>();
 
   const [name, setName] = useState('');
   const [age, setAge] = useState(-1);
@@ -134,6 +135,8 @@ export const MainScreen: NextPage = () => {
             res.data.push({});
           }
           setList(res.data);
+
+          if (swiper) swiper.slideTo(1);
         })
         .catch((err) => console.log(err));
     }
@@ -264,7 +267,8 @@ export const MainScreen: NextPage = () => {
 
                 <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
                   <Swiper
-                    initialSlide={0}
+                    onSwiper={setSwiper}
+                    initialSlide={1}
                     navigation={true}
                     pagination={{
                       clickable: true,
