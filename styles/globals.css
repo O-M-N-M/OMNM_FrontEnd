@@ -65,4 +65,8 @@ a {
     color-scheme: light;
   }
 
+  body {
+    background: white;
+    color: #383838;
+  }
 }
