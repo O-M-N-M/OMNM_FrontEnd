@@ -281,12 +281,12 @@ export const MainScreen: NextPage = () => {
                         slidesPerGroup: 1,
                         spaceBetween: 10,
                       },
-                      "@1.50": {
+                      "@0.90": {
                         slidesPerView: 2,
                         slidesPerGroup: 2,
                         spaceBetween: 20,
                       },
-                      "@2.00": {
+                      "@1.50": {
                         slidesPerView: 3,
                         slidesPerGroup: 3,
                         spaceBetween: 30,

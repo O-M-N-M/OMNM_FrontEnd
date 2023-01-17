@@ -84,7 +84,10 @@ export const MyPageSendListScreen = () => {
             <IconButton onClick={() => document.location = '/mypage'}>
               <Image src={PrevButton} width={18.44} height={23.48} />
             </IconButton>
-            <Typography className='text-black text-xl font-medium ml-3'>룸메이트 신청 보낸 리스트</Typography>
+            <Typography className='text-black text-xl font-medium ml-3'>
+              룸메이트 신청 보낸 리스트&nbsp;
+              <Typography component='span' className='text-gray1 text-xl font-medium'>({totalCount})</Typography>
+            </Typography>
             {
               (totalCount > 0) && (
                 <IconButton onClick={() => document.location = '/mypage_deletesendlist'} className='ml-auto'>
