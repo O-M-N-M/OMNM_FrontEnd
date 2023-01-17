@@ -277,17 +277,17 @@ export const MainScreen: NextPage = () => {
                       clickable: true,
                     }}
                     breakpoints={{
-                      "@0.10": {
+                      0: {
                         slidesPerView: 1,
                         slidesPerGroup: 1,
                         spaceBetween: 10,
                       },
-                      "@0.90": {
+                      1200: {
                         slidesPerView: 2,
                         slidesPerGroup: 2,
                         spaceBetween: 20,
                       },
-                      "@1.50": {
+                      1500: {
                         slidesPerView: 3,
                         slidesPerGroup: 3,
                         spaceBetween: 30,
@@ -295,7 +295,7 @@ export const MainScreen: NextPage = () => {
                     }}
                     modules={[Pagination, Navigation]}
 
-                    className="flex flex-row flex-wrap items-center"
+                    className="flex flex-row flex-wrap justify-center items-center"
                   >
                     {
                       list.map((roomMate: any, index: number): any => {
@@ -309,7 +309,7 @@ export const MainScreen: NextPage = () => {
                               </Box>
                             </SwiperSlide>
                             :
-                            <SwiperSlide onClick={() => { onClick(index); handleOpen(); }} key={index} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
+                            <SwiperSlide key={index} onClick={() => { onClick(index); handleOpen(); }} className="flex flex-row justify-center items-center bg-transparent w-full cursor-pointer drop-shadow-lg">
                               <Box className="flex flex-col justify-center items-center bg-white rounded-[1.25rem] w-[22rem] h-64">
                                 <Box className="flex flex-row justify-center items-center">
                                   {
