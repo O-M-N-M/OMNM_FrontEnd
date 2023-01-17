@@ -193,7 +193,7 @@ export const SurveyMateScreen: NextPage = () => {
           <Typography className='text-black text-xl font-regular'>딱 맞는 룸메이트 찾기를 위한 성향 조사</Typography>
           <Typography className='text-accent1 text-4xl font-medium'>
             선호하는 룸메이트
-            <Typography component='span' className='text-black text-4xl font-medium'>을 소개해주세요.</Typography>
+            <Typography component='span' className='text-black text-4xl font-medium'>를 소개해주세요.</Typography>
           </Typography>
         </Box>
       </Box>

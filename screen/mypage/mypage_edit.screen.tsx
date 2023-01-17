@@ -14,6 +14,7 @@ import MyPageLeft from '../../components/mypage/mypage_left'
 import basicProfile from '../../public/basicProfile.png';
 
 export const MyPageEditScreen = () => {
+  const [name, setName] = useState('');
   const [kakaoId, setKakaoId] = useState('');
   const [userId, setUserId] = useState(-1);
   const [dormitory, setDormitory] = useState(-1);
@@ -35,6 +36,7 @@ export const MyPageEditScreen = () => {
 
     const formData = new FormData();
     const userDto = {
+      name: `${name}`,
       kakaoId: `${kakaoId}`,
       dormitory: dormitory
     };
@@ -86,6 +88,7 @@ export const MyPageEditScreen = () => {
           setKakaoId(res.data.kakaoId);
           setImage(res.data.profileUrl);
           setDormitory(res.data.dormitory);
+          setName(res.data.name);
         })
         .catch((err) => console.log(err));
     }
@@ -109,12 +112,8 @@ export const MyPageEditScreen = () => {
                 <Image src={URL.createObjectURL(profile)} width={90} height={90} className="absolute rounded-full" />
                 :
                 image === null ?
-                  <Image src={basicProfile} width={90} height={90} className="absolute rounded-full" />
-                  : (
-                    <Box className='border border-gray1 border-solid rounded-full w-[90px] h-[90px]'>
-                      <Image loader={() => image} src={image} width={90} height={90} className="absolute rounded-full" />
-                    </Box>
-                  )
+                  <Image src={basicProfile} width={90} height={90} className="absolute rounded-full" /> :
+                  <Image loader={() => image} src={image} width={90} height={90} className="absolute rounded-full" />
             }
             <IconButton aria-label="upload picture" component="label" className="absolute top-14 right-[-15px] bg-white border border-solid border-gray1">
               <input
@@ -133,11 +132,27 @@ export const MyPageEditScreen = () => {
           </Box>
 
           <Box className='bg-gray11 rounded-lg px-3 py-1.5 mt-4'>
-            <Typography className='text-gray1 text-xs font-medium'>정방향 프로필 사진을 추천드려요</Typography>
+            <Typography className='text-gray1 text-xs font-medium'>정방형 프로필 사진을 추천드려요</Typography>
           </Box>
 
           <Box>
-            <Typography className='text-black text-base font-medium mt-10'>카카오톡 ID</Typography>
+            <Box className='flex flex-row items-center mt-10'>
+              <Typography className='text-black text-base font-medium'>이름</Typography>
+              <Typography className='text-gray1 text-xs font-regular ml-2'>실명을 기입해주세요</Typography>
+            </Box>
+            <input
+              type="text"
+              name="name"
+              placeholder={name}
+              value={name}
+              maxLength={5}
+              onChange={(e) => setName(e.target.value)}
+              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
+              required />
+          </Box>
+
+          <Box>
+            <Typography className='text-black text-base font-medium mt-7'>카카오톡 ID</Typography>
             <input
               type="text"
               name="id"

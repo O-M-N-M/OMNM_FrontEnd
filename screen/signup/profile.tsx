@@ -47,17 +47,21 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
         </IconButton>
 
         <Box className='bg-gray11 rounded-lg px-3 py-1.5 mt-4'>
-          <Typography className='text-gray1 text-xs font-medium'>정방향 프로필 사진을 추천드려요</Typography>
+          <Typography className='text-gray1 text-xs font-medium'>정방형 프로필 사진을 추천드려요</Typography>
         </Box>
       </Box>
 
       <Box className='w-full mt-10'>
-        <Typography className="text-black text-lg font-medium">이름</Typography>
+        <Box className='flex flex-row items-center mt-10'>
+          <Typography className='text-black text-base font-medium'>이름</Typography>
+          <Typography className='text-gray1 text-xs font-regular ml-2'>실명을 기입해주세요</Typography>
+        </Box>
         <input
           type="text"
           name="name"
           placeholder="이름 입력"
           value={name}
+          maxLength={5}
           onChange={(e) => setName(e.target.value)}
           className="rounded-full text-gray1 text-sm font-regular border border-solid border-gray0 block w-[75%] h-12 p-2.5 mt-2 focus:outline-none" required />
       </Box>
