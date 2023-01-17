@@ -88,7 +88,7 @@ export const MyPageReceiveListScreen = () => {
           <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6 mt-3'>
             <Box className='flex flex-row items-center'>
               <IconButton onClick={() => document.location = '/mypage'}>
-                <Image src={PrevButton} width={18.44} height={23.48} />
+                <Image src={PrevButton} width={24} height={24} />
               </IconButton>
               <Typography className='text-black text-xl font-medium ml-3'>
                 룸메이트 신청 받은 리스트&nbsp;
