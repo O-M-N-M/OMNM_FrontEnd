@@ -79,6 +79,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
         else {
           const newSP: String[] = [];
           sp.forEach((v: string) => {
+            console.log(v);
             if (v === '0') newSP.push('코골이');
             else if (v === '1') newSP.push('이갈이');
             else if (v === '2') newSP.push('몸부림');
