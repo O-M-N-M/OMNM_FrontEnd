@@ -1,11 +1,28 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { createTheme, FormControl, MenuItem, Select, SelectChangeEvent, ThemeProvider } from "@mui/material";
 
 interface FourthComponentProps {
   department: string;
   setDepartment: Dispatch<SetStateAction<string>>;
 }
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1024,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Spoqa Han Sans Neo'
+    ].join(',')
+  }
+});
 
 const departments = [
   'AI학과', '간호학과', '건축학부', '경영학부(경영학)', '경영학부(글로벌금융)', '경제학부', '공간연출전공',
@@ -23,61 +40,63 @@ const FourthComponent = ({ props }: { props: FourthComponentProps }) => {
   }
 
   return (
-    <FormControl size='small' className='ml-auto'>
-      <Select
-        value={props.department}
-        displayEmpty
-        onChange={onChange}
-        MenuProps={{
-          disablePortal: true,
-          PaperProps: {
-            sx: {
-              color: '#9B9EA1',
-              fontSize: '18px',
-              border: 'solid 1px #DBDBDB',
-              boxShadow: 'none',
-              width: 'fit',
-              maxHeight: '500px',
-              marginTop: '10px',
-              borderRadius: '16px'
+    <FormControl size='small' className='labtop:ml-auto mobile:ml-6 mobile:mt-2'>
+      <ThemeProvider theme={theme}>
+        <Select
+          value={props.department}
+          displayEmpty
+          onChange={onChange}
+          MenuProps={{
+            disablePortal: true,
+            PaperProps: {
+              sx: {
+                color: '#9B9EA1',
+                fontSize: { xs: '16px', md: '18px' },
+                border: 'solid 1px #DBDBDB',
+                boxShadow: 'none',
+                width: 'fit',
+                maxHeight: '500px',
+                marginTop: '10px',
+                borderRadius: '16px'
+              }
             }
-          }
-        }}
-        sx={{
-          minWidth: '250px',
-          "&:hover": {
-            "&& fieldset": {
-              borderColor: "#1CDDAD",
+          }}
+          sx={{
+            minWidth: '250px',
+            "&:hover": {
+              "&& fieldset": {
+                borderColor: "#1CDDAD",
+                borderRadius: '16px',
+              }
+            },
+            '.MuiOutlinedInput-notchedOutline': {
+              borderColor: '#1CDDAD',
               borderRadius: '16px',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#1CDDAD',
+              borderRadius: '16px',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#1CDDAD',
+              borderRadius: '16px',
+            },
+            '.MuiSvgIcon-root ': {
+              fill: '#1CDDAD !important',
             }
-          },
-          '.MuiOutlinedInput-notchedOutline': {
-            borderColor: '#1CDDAD',
-            borderRadius: '16px',
-          },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#1CDDAD',
-            borderRadius: '16px',
-          },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#1CDDAD',
-            borderRadius: '16px',
-          },
-          '.MuiSvgIcon-root ': {
-            fill: '#1CDDAD !important',
+          }}
+          className='text-gray1 labtop:text-lg mobile:text-base font-regular w-40 text-center'
+        >
+          <MenuItem value='' className="labtop:text-lg mobile:text-base">학과명 선택</MenuItem>
+          {
+            departments.map((v, index) => {
+              return (
+                <MenuItem key={index} value={v} className='labtop:text-lg mobile:text-base'>{v}</MenuItem>
+              )
+            })
           }
-        }}
-        className='text-gray1 text-lg font-regular w-40 text-center'
-      >
-        <MenuItem value='' className="text-lg">학과명 선택</MenuItem>
-        {
-          departments.map((v, index) => {
-            return (
-              <MenuItem key={index} value={v} className='text-lg'>{v}</MenuItem>
-            )
-          })
-        }
-      </Select>
+        </Select>
+      </ThemeProvider>
     </FormControl>
   );
 };

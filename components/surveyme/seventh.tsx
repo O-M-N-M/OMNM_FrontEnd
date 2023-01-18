@@ -21,22 +21,22 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
   }, [props.isCleaning]);
 
   return (
-    <FormControl className='ml-auto'>
+    <FormControl className='flex flex-row flex-wrap labtop:ml-auto mobile:ml-6 mobile:mt-2'>
       {
         (props.isPatch && checkedIc !== '') ? (
           <RadioGroup row defaultValue={checkedIc} onChange={(e) => props.setIsCleaning(parseInt(e.target.value))}>
-            <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 5회 이상</Typography>} />
-            <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 2~3회</Typography>} />
-            <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 1회</Typography>} />
-            <FormControlLabel value="3" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">월 1회</Typography>} />
+            <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">주 5회 이상</Typography>} />
+            <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">주 2~3회</Typography>} />
+            <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">주 1회</Typography>} />
+            <FormControlLabel value="3" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">월 1회</Typography>} />
           </RadioGroup>
         ) :
           (!props.isPatch) && (
             <RadioGroup row onChange={(e) => props.setIsCleaning(parseInt(e.target.value))}>
-              <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 5회 이상</Typography>} />
-              <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 2~3회</Typography>} />
-              <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">주 1회</Typography>} />
-              <FormControlLabel value="3" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black text-lg font-regular">월 1회</Typography>} />
+              <FormControlLabel value="0" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">주 5회 이상</Typography>} />
+              <FormControlLabel value="1" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">주 2~3회</Typography>} />
+              <FormControlLabel value="2" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">주 1회</Typography>} />
+              <FormControlLabel value="3" control={<Radio icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />} checkedIcon={<CheckCircleIcon />} size="small" />} label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">월 1회</Typography>} />
             </RadioGroup>
           )
       }

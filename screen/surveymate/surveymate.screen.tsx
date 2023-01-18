@@ -236,7 +236,7 @@ export const SurveyMateScreen: NextPage = () => {
         questions.map((v, index) => {
           return (
             (!isMale && index === 7) ? <></> :
-              <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full labtop:px-[4.5rem] mobile:px-2 labtop:py-10 mobile:py-5 labtop:mt-7 mobile:mt-4'>
+              <Box key={index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-[1.25rem] w-full labtop:px-[4.5rem] mobile:px-3 labtop:py-10 mobile:py-5 labtop:mt-7 mobile:mt-4'>
                 <Box className='bg-accent2 rounded-full w-fit h-fit labtop:px-3 mobile:px-2 py-0.5'>
                   {
                     isLabtop ?

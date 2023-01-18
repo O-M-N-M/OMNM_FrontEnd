@@ -18,7 +18,7 @@ const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
           props.setAge('') :
           props.setAge(parseInt(e.target.value))
       }}
-      className='border-b border-t-0 border-l-0 border-r-0 border-solid border-accent2 text-gray1 text-lg font-regular text-center w-16 ml-auto focus:outline-none'
+      className='border-b border-t-0 border-l-0 border-r-0 border-solid border-accent2 text-gray1 labtop:text-lg mobile:text-base font-regular text-center labtop:w-16 mobile:w-12 ml-auto focus:outline-none'
     />
   )
 }
