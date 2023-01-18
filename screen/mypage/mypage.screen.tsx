@@ -93,7 +93,7 @@ export const MyPageScreen: NextPage = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
+      <Box className='flex flex-row labtop:flex-nowrap mobile:flex-wrap justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
         <Box>
           <MyPageLeft />
         </Box>
