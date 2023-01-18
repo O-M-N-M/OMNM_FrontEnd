@@ -22,7 +22,7 @@ const FourthComponent = ({ props }: { props: FourthComponentProps }) => {
   }, [props.department]);
 
   return (
-    <FormControl className='ml-auto'>
+    <FormControl className='flex flex-row flex-wrap labtop:ml-auto mobile:ml-6 mobile:mt-2'>
       {
         (props.isPatch && checkedDep !== '') ? (
           <RadioGroup row defaultValue={checkedDep} onChange={(e) => props.setDepartment(parseInt(e.target.value))}>
@@ -39,7 +39,7 @@ const FourthComponent = ({ props }: { props: FourthComponentProps }) => {
                         size="small"
                       />
                     }
-                    label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                    label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                 )
               })
             }
@@ -60,7 +60,7 @@ const FourthComponent = ({ props }: { props: FourthComponentProps }) => {
                           size="small"
                         />
                       }
-                      label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                      label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                   )
                 })
               }

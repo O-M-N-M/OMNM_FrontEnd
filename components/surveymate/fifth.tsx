@@ -23,7 +23,7 @@ const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
   }, [props.lifeCycle]);
 
   return (
-    <FormControl className='ml-auto'>
+    <FormControl className='flex flex-row flex-wrap labtop:ml-auto mobile:ml-6 mobile:mt-2'>
       {
         (props.isPatch && checkedLc !== '') ? (
           <RadioGroup row defaultValue={checkedLc} onChange={(e) => props.setLifeCycle(parseInt(e.target.value))}>
@@ -40,7 +40,7 @@ const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
                         size="small"
                       />
                     }
-                    label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                    label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                 )
               })
             }
@@ -61,7 +61,7 @@ const FifthComponent = ({ props }: { props: FifthComponentProps }) => {
                           size="small"
                         />
                       }
-                      label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                      label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                   )
                 })
               }

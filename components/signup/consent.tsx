@@ -13,7 +13,7 @@ interface ConsentProps {
 }
 
 const Consent = ({ props }: { props: ConsentProps }) => {
-  const isLabtop: boolean = useMediaQuery('(min-width:1920px)');
+  const isLabtop: boolean = useMediaQuery('(min-width:1024px)');
 
   return (
     <>

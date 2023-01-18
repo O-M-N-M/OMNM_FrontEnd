@@ -39,7 +39,7 @@ const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
     <>
       {
         ((!loading && props.isPatch) || (!props.isPatch)) && (
-          <Box className='flex flex-wrap ml-24 mt-1'>
+          <Box className='flex flex-wrap labtop:justify-start mobile:justify-center labtop:ml-24 mt-1'>
             {
               Object.keys(props.mbti).map((v, index) => {
                 return (
@@ -47,12 +47,12 @@ const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
                     {
                       v === 'ALL' ? <></> :
                         props.mbti[v as keyof typeof props.mbti] ? (
-                          <Button onClick={() => onClick(v)} className='bg-accent1 rounded-full mx-4 mt-5 w-[5.5rem]'>
-                            <Typography className='text-white text-lg font-regular'>{v}</Typography>
+                          <Button onClick={() => onClick(v)} className='border border-solid border-accent1 bg-accent1 rounded-full labtop:mx-4 mobile:mr-2 labtop:mt-5 mobile:mt-2 labtop:w-[5.5rem] mobile:w-16'>
+                            <Typography className='text-white labtop:text-lg mobile:text-sm font-regular'>{v}</Typography>
                           </Button>
                         ) : (
-                          <Button onClick={() => onClick(v)} className='border-2 border-solid border-gray1 rounded-full mx-4 mt-5 w-[5.5rem]'>
-                            <Typography className='text-gray1 text-lg font-regular'>{v}</Typography>
+                          <Button onClick={() => onClick(v)} className='border border-solid border-gray1 rounded-full labtop:mx-4 mobile:mr-2 labtop:mt-5 mobile:mt-2 labtop:w-[5.5rem] mobile:w-16'>
+                            <Typography className='text-gray1 labtop:text-lg mobile:text-sm font-regular'>{v}</Typography>
                           </Button>
                         )
                     }
@@ -77,7 +77,7 @@ const SecondComponent = ({ props }: { props: SecondComponentProps }) => {
                 size="small"
               />
             }
-            label={<Typography className="text-black text-lg font-regular">상관없음</Typography>}
+            label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">상관없음</Typography>}
             className='ml-auto mt-4'
           />
         )

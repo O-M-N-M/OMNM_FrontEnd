@@ -8,8 +8,8 @@ module.exports = {
   important: "#__next",
   theme: {
     screens: {
-      'mobile': '375px',
-      'labtop': '1280px',
+      'mobile': '0px',
+      'labtop': '1024px',
     },
     extend: {
       colors: {

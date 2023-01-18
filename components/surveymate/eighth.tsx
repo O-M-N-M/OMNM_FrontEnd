@@ -23,7 +23,7 @@ const EighthComponent = ({ props }: { props: EighthComponentProps }) => {
   }, [props.armyService]);
 
   return (
-    <FormControl className='ml-auto'>
+    <FormControl className='flex flex-row flex-wrap labtop:ml-auto mobile:ml-6 mobile:mt-2'>
       {
         (props.isPatch && checkedAs !== '') ? (
           <RadioGroup row defaultValue={checkedAs} onChange={(e) => props.setArmyService(parseInt(e.target.value))}>
@@ -40,7 +40,7 @@ const EighthComponent = ({ props }: { props: EighthComponentProps }) => {
                         size="small"
                       />
                     }
-                    label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                    label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                 )
               })
             }
@@ -61,7 +61,7 @@ const EighthComponent = ({ props }: { props: EighthComponentProps }) => {
                           size="small"
                         />
                       }
-                      label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                      label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                   )
                 })
               }

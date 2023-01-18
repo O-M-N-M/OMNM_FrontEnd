@@ -23,7 +23,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
   }, [props.nationality]);
 
   return (
-    <FormControl className='ml-auto'>
+    <FormControl className='flex flex-row flex-wrap labtop:ml-auto mobile:ml-6 mobile:mt-2'>
       {
         (props.isPatch && checkedNat !== '') ? (
           <RadioGroup row defaultValue={checkedNat} onChange={(e) => props.setNationality(parseInt(e.target.value))}>
@@ -40,7 +40,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
                         size="small"
                       />
                     }
-                    label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                    label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                 )
               })
             }
@@ -61,7 +61,7 @@ const SeventhComponent = ({ props }: { props: SeventhComponentProps }) => {
                           size="small"
                         />
                       }
-                      label={<Typography className="text-black text-lg font-regular">{v}</Typography>} />
+                      label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>} />
                   )
                 })
               }

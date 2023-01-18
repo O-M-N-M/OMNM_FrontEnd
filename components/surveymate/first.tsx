@@ -46,7 +46,7 @@ const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
   }, [Object.values(props.age)]);
 
   return (
-    <FormControl className='flex flex-row ml-auto'>
+    <FormControl className='flex flex-row flex-wrap labtop:ml-auto mobile:ml-6 mobile:mt-2'>
       {
         ((!loading && props.isPatch) || (!props.isPatch)) && (
           items.map((v, index) => {
@@ -63,7 +63,7 @@ const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
                     size="small"
                   />
                 }
-                label={<Typography className="text-black text-lg font-regular">{v}</Typography>}
+                label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">{v}</Typography>}
               />
             )
           })
@@ -83,7 +83,7 @@ const FirstComponent = ({ props }: { props: FirstComponentProps }) => {
                 size="small"
               />
             }
-            label={<Typography className="text-black text-lg font-regular">상관없음</Typography>}
+            label={<Typography className="text-black labtop:text-lg mobile:text-base font-regular">상관없음</Typography>}
           />
         )
       }
