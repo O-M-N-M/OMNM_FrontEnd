@@ -105,7 +105,7 @@ export const SignUpScreen: NextPage = () => {
         <Image src={logo} width={60} height={61} />
         <Typography className="text-black text-2xl font-medium mt-5">회원가입</Typography>
 
-        <Box className="border border-solid border-gray0 rounded-2xl px-20 py-14 mt-6 w-full">
+        <Box className="border border-solid border-gray0 rounded-2xl labtop:w-full mobile:w-[355px] labtop:px-20 mobile:px-3 py-14 mt-6">
           <Stepper activeStep={activeStep} alternativeLabel>
             {
               steps.map((label) => (

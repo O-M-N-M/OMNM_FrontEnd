@@ -52,7 +52,7 @@ export const ProfileBox: React.FunctionComponent<props> = ({ image, setImage, na
       </Box>
 
       <Box className='w-full mt-10'>
-        <Box className='flex flex-row items-center mt-10'>
+        <Box className='flex flex-row items-center'>
           <Typography className='text-black text-base font-medium'>이름</Typography>
           <Typography className='text-gray1 text-xs font-regular ml-2'>실명을 기입해주세요</Typography>
         </Box>

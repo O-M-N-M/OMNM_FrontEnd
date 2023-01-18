@@ -7,6 +7,10 @@ module.exports = {
   ],
   important: "#__next",
   theme: {
+    screens: {
+      'mobile': '375px',
+      'labtop': '1280px',
+    },
     extend: {
       colors: {
         white: "#FFFFFF",
