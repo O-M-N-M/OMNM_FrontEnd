@@ -93,6 +93,7 @@ export const LoginScreen: NextPage = () => {
                     placeholder="아이디 입력"
                     value={id}
                     onChange={(e) => setId(e.target.value)}
+                    autoComplete="off"
                     className="text-gray1 text-sm font-regular rounded-full border border-solid border-gray0 block w-[19rem] h-12 p-4 mt-9 focus:outline-none" required />
                   <input
                     type="password"
@@ -100,6 +101,7 @@ export const LoginScreen: NextPage = () => {
                     placeholder="비밀번호 입력"
                     value={pw}
                     onChange={(e) => setPw(e.target.value)}
+                    autoComplete="off"
                     className="text-gray1 text-sm font-regular rounded-full border border-solid border-gray0 block w-[19rem] h-12 p-4 mt-4 focus:outline-none" required />
                   <Button type="submit" className="bg-accent1 rounded-full border border-gray2 text-white text-base font-medium block w-[19rem] p-4 mt-4">로그인</Button>
                 </Stack>
