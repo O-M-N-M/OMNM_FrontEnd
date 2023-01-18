@@ -29,8 +29,7 @@ a {
   height: 45px !important;
   color: transparent !important;
   background-image: url('../public/arrowPrevActive.png');
-
-  /* transform: translate(20rem, 10rem); */
+  left: 0px !important;
 }
 
 .swiper-button-next {
@@ -38,8 +37,6 @@ a {
   height: 45px !important;
   color: transparent !important;
   background-image: url('../public/arrowNextActive.png');
-
-  /* transform: translate(-20rem, 10rem); */
 }
 
 .swiper-pagination-horizontal {
@@ -53,7 +50,6 @@ a {
   border-radius: 30px !important;
   opacity: 0.7 !important;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08) !important;
-  /* transform: translate(0, 20px) !important; */
 }
 
 .swiper-pagination-bullet-active {
