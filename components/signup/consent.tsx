@@ -9,6 +9,7 @@ import Logo from '../../public/logo5.png';
 interface ConsentProps {
   isAgree: boolean;
   onChange: () => void;
+  handleClose: () => void;
 }
 
 const Consent = ({ props }: { props: ConsentProps }) => {
@@ -65,7 +66,7 @@ omnm은 원칙적으로 이용자의 개인정보를 회원 탈퇴 시 지체없
                   control={
                     <Checkbox
                       checked={props.isAgree}
-                      onChange={props.onChange}
+                      onChange={() => { props.onChange(); props.handleClose(); }}
                       icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
                       checkedIcon={<CheckCircleIcon />}
                       size="small" />
@@ -120,7 +121,7 @@ omnm은 원칙적으로 이용자의 개인정보를 회원 탈퇴 시 지체없
                   control={
                     <Checkbox
                       checked={props.isAgree}
-                      onChange={props.onChange}
+                      onChange={() => { props.onChange(); props.handleClose(); }}
                       icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
                       checkedIcon={<CheckCircleIcon />}
                       size="small" />

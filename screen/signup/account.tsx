@@ -165,7 +165,7 @@ export const AccountBox: React.FunctionComponent<props> = ({ id, setId, pw, setP
           open={open}
           onClose={handleClose}
         >
-          <Consent props={{ isAgree: isAgree, onChange: onChange }} />
+          <Consent props={{ isAgree: isAgree, onChange: onChange, handleClose: handleClose }} />
         </Modal>
       }
 
