@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from 'next/link';
 
-import { Box, Button, Stack, Divider, Typography, IconButton } from "@mui/material";
+import { Box, Button, Stack, Divider, Typography, IconButton, useMediaQuery } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useEffect, useState } from "react";
@@ -17,6 +17,8 @@ export const LoginScreen: NextPage = () => {
   const [pw, setPw] = useState('');
   const [fail, setFail] = useState(false);
   const [innerWidth, setInnerWidth] = useState<number | undefined>();
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const isSurvey = async (token: string) => {
     const url = '/api/yourPersonality';
@@ -103,6 +105,11 @@ export const LoginScreen: NextPage = () => {
                     onChange={(e) => setPw(e.target.value)}
                     autoComplete="off"
                     className="text-gray1 text-sm font-regular rounded-full border border-solid border-gray0 block w-[19rem] h-12 p-4 mt-4 focus:outline-none" required />
+                  {
+                    (!isLabtop && fail) &&
+                    <Typography className='text-red text-xs font-regular mt-2'>아이디 또는 비밀번호를 잘못 입렸했습니다.</Typography>
+                  }
+
                   <Button type="submit" className="bg-accent1 rounded-full border border-gray2 text-white text-base font-medium block w-[19rem] p-4 mt-4">로그인</Button>
                 </Stack>
               </form>
@@ -135,23 +142,22 @@ export const LoginScreen: NextPage = () => {
               </Box>
 
               {
-                fail ?
-                  <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
-                    <Box className="flex justify-end">
-                      <IconButton onClick={() => setFail(false)}>
-                        <CloseIcon aria-label="close" />
-                      </IconButton>
-                    </Box>
-
-                    <Box className="text-center">
-                      <Image src={failIcon} width={72} height={72} />
-                    </Box>
-
-                    <Box className="text-center">
-                      <Typography className="text-sm text-black">아이디 또는 비밀번호를 잘못 입력하였습니다.</Typography>
-                    </Box>
+                (isLabtop && fail) &&
+                <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
+                  <Box className="flex justify-end">
+                    <IconButton onClick={() => setFail(false)}>
+                      <CloseIcon aria-label="close" />
+                    </IconButton>
                   </Box>
-                  : <></>
+
+                  <Box className="text-center">
+                    <Image src={failIcon} width={72} height={72} />
+                  </Box>
+
+                  <Box className="text-center">
+                    <Typography className="text-sm text-black">아이디 또는 비밀번호를 잘못 입력하였습니다.</Typography>
+                  </Box>
+                </Box>
               }
             </Box>
           </Box>
