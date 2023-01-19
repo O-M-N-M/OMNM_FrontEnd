@@ -6,13 +6,13 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <Box className="flex items-center bg-gray5 w-full h-[180px]">
-      <Box className="ml-[15%]">
+    <Box className="flex labtop:flex-row mobile:flex-col labtop:items-center bg-gray5 w-full labtop:h-[180px] mobile:h-fit labtop:py-0 mobile:py-9">
+      <Box className="labtop:ml-[15%] mobile:ml-[5%]">
         <Image src={logo} width={60} height={61} />
         <Typography className="text-gray4 text-sm font-regular mt-1">ⓒ 2023. omnm. All rights reserved.</Typography>
       </Box>
 
-      <Box className="flex flex-row ml-auto mr-[15%]">
+      <Box className="flex labtop:flex-row mobile:flex-col flex-wrap labtop:ml-auto mobile:ml-[5%] labtop:mr-[15%] labtop:mt-0 mobile:mt-9">
         <Link href='/'>
           <a>
             <Typography className="font-medium text-base">서비스 소개</Typography>
@@ -20,21 +20,21 @@ const Footer = () => {
         </Link>
 
         <Link href='/main'>
-          <a className="ml-14">
+          <a className="labtop:ml-14 labtop:mt-0 mobile:mt-8">
             <Typography className="font-medium text-base">메인페이지</Typography>
           </a>
         </Link>
 
-        <Box className="ml-14">
+        <Box className="labtop:ml-14 labtop:mt-0 mobile:mt-8">
           <Link href='/mypage'>
             <a>
-              <Typography className="font-medium text-base mb-2">마이페이지</Typography>
+              <Typography className="font-medium text-base labtop:mb-2 mobile:mb-4">마이페이지</Typography>
             </a>
           </Link>
 
           <Link href='/mypage_surveyme'>
             <a>
-              <Typography className="font-regular text-base mb-2">성향 설문조사</Typography>
+              <Typography className="font-regular text-base labtop:mb-2 mobile:mb-4">성향 설문조사</Typography>
             </a>
           </Link>
           <Link href='/mypage_edit'>
