@@ -200,32 +200,43 @@ export const MainScreen: NextPage = () => {
             <Image src={splash} width={400} height={400} />
           </Box>
         ) : (typeof isMatched !== 'undefined' && isMatched) ? (
-          <Box className="bg-main-move-background bg-cover">
+          <Box className="labtop:bg-main-move-background mobile:bg-sky0 bg-cover labtop:px-0 mobile:px-[5%]">
             <Box className="flex flex-col justify-center items-center w-full h-[calc(100vh-70px)] py-28">
-              <Box className='flex flex-col justify-center items-center bg-white2 rounded-full w-fit px-60 py-28'>
-                <Typography className='text-accent1 text-4xl font-medium'>
-                  {userName}
-                  <Typography component='span' className='text-black text-4xl font-medium'>님은 이미 딱 맞는 룸메이트를 구하셨군요!</Typography>
-                </Typography>
+              <Box className='flex flex-col justify-center items-center bg-white2 labtop:rounded-full mobile:rounded-xl w-fit labtop:px-60 mobile:px-4 labtop:py-28 mobile:py-12'>
+                <Box className='flex flex-row flex-wrap justify-center'>
+                  <Typography className='text-accent1 labtop:text-4xl mobile:text-xl font-medium'>
+                    {userName}
+                    <Typography component='span' className='text-black labtop:text-4xl mobile:text-xl font-medium'>님은 이미&nbsp;</Typography>
+                  </Typography>
+                  <Typography className='text-black labtop:text-4xl mobile:text-xl font-medium'>딱 맞는 룸메이트를 구하셨군요!</Typography>
+                </Box>
 
-                <Box className='bg-sky1 rounded-xl px-6 py-2 mt-8'>
-                  <Typography className='text-accent1 text-xl font-medium'>룸메이트를 다시 구하고 싶다면 마이페이지에서 매칭 상태 버튼을 전환해주세요</Typography>
+                <Box className='flex flex-row flex-wrap justify-center bg-sky1 rounded-xl labtop:px-6 mobile:px-3 py-2 mt-8'>
+                  <Typography className='text-accent1 labtop:text-xl mobile:text-sm labtop:font-medium mobile:font-regular'>룸메이트를 다시 구하고 싶다면&nbsp;</Typography>
+                  <Typography className='text-accent1 labtop:text-xl mobile:text-sm labtop:font-medium mobile:font-regular'>마이페이지에서 매칭 상태 버튼을 전환해주세요</Typography>
                 </Box>
               </Box>
             </Box>
           </Box>
         ) : (
           <>
-            <Box className="bg-main-move-background bg-cover">
-              <Box className="flex flex-col justify-center items-centerw-full h-[calc(100vh-70px)] py-28">
-                <Box className="flex flex-row">
-                  <Typography className="text-accent1 text-4xl font-bold ml-[15%]">
-                    {userName}
-                    <Typography component='span' className='text-black text-4xl font-bold'>님을 위한</Typography>
-                  </Typography>
+            <Box className="labtop:bg-main-move-background mobile:bg-sky0 bg-cover">
+              <Box className="flex flex-col justify-center w-full labtop:h-[calc(100vh-70px)] mobile:h-fit mobile:py-16">
+                <Box className="flex flex-row flex-wrap labtop:ml-[15%] mobile:ml-[5%] labtop:mr-[15%] mobile:mr-[5%]">
+                  <Box className='flex flex-col'>
+                    <Typography className="text-accent1 labtop:text-4xl mobile:text-2xl font-bold">
+                      {userName}
+                      <Typography component='span' className='text-black labtop:text-4xl mobile:text-2xl font-bold'>님을 위한</Typography>
+                    </Typography>
+                    <Typography className="text-black labtop:text-4xl mobile:text-2xl font-bold mt-2">추천 룸메이트 리스트</Typography>
+                    <Box className='flex flex-row flex-wrap mt-4'>
+                      <Typography className="text-black labtop:text-xl mobile:text-sm font-normal">{userName}님의 성향과 가장 높은 일치율을&nbsp;</Typography>
+                      <Typography className="text-black labtop:text-xl mobile:text-sm font-normal">보이는 룸메이트들을 선별한 리스트입니다.</Typography>
+                    </Box>
+                  </Box>
 
-                  <Box className="flex flex-row ml-auto mr-[15%]">
-                    <Typography className="text-accent1 text-base font-medium mt-2 mr-5">성향 일치 개수</Typography>
+                  <Box className="flex flex-row ml-auto labtop:mt-0 mobile:mt-12">
+                    <Typography className="text-accent1 labtop:text-base mobile:text-sm font-medium mt-2 mr-5">성향 일치 개수</Typography>
                     <FormControl size="small">
                       <Select
                         value={count}
@@ -254,21 +265,19 @@ export const MainScreen: NextPage = () => {
                             borderWidth: '1.5px'
                           }
                         }}
-                        className="w-28 h-10 round rounded-xl text-accent1 text-base"
+                        className="w-28 h-10 round rounded-xl text-accent1 labtop:text-base mobile:text-sm"
                       >
-                        <MenuItem value={'4'} className="text-base">4개 이상</MenuItem>
-                        <MenuItem value={'5'} className="text-base">5개 이상</MenuItem>
-                        <MenuItem value={'6'} className="text-base">6개 이상</MenuItem>
-                        <MenuItem value={'7'} className="text-base">7개 이상</MenuItem>
-                        <MenuItem value={'8'} className="text-base">8개</MenuItem>
+                        <MenuItem value={'4'} className="labtop:text-base mobile:text-sm">4개 이상</MenuItem>
+                        <MenuItem value={'5'} className="labtop:text-base mobile:text-sm">5개 이상</MenuItem>
+                        <MenuItem value={'6'} className="labtop:text-base mobile:text-sm">6개 이상</MenuItem>
+                        <MenuItem value={'7'} className="labtop:text-base mobile:text-sm">7개 이상</MenuItem>
+                        <MenuItem value={'8'} className="labtop:text-base mobile:text-sm">8개</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
                 </Box>
-                <Typography className="text-black text-4xl font-bold px-[15%] mt-2">추천 룸메이트 리스트</Typography>
-                <Typography className="text-black text-xl font-normal mt-4 px-[15%]">{userName}님의 성향과 가장 높은 일치율을 보이는 룸메이트들을 선별한 리스트입니다.</Typography>
 
-                <Box className="flex justify-center items-center bg-transparent w-full mt-14 px-[15%]">
+                <Box className="flex justify-center items-center bg-transparent w-full labtop:mt-14 mobile:mt-[-30px] labtop:px-[15%] mobile:px-[5%]">
                   <Swiper
                     onSwiper={setSwiper}
                     initialSlide={1}
