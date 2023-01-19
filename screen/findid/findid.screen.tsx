@@ -72,7 +72,7 @@ export const FindIdScreen: NextPage = () => {
       <Box className="flex flex-col items-center labtop:my-[5%] mobile:my-11">
         <Image src={logo} width={60} height={61} />
 
-        <form onSubmit={onSubmit} className="border border-solid rounded-2xl border-gray0 labtop:px-20 mobile:px-[15%] py-14 mt-8 ">
+        <form onSubmit={onSubmit} className="border border-solid rounded-2xl border-gray0 labtop:px-20 mobile:px-[15%] py-14 mt-8">
           <Typography className="text-black labtop:text-2xl mobile:text-xl font-medium">아이디 찾기</Typography>
           <Typography className="text-black text-lg font-medium labtop:mt-10 mobile:mt-8">이름</Typography>
           <input
@@ -123,9 +123,9 @@ export const FindIdScreen: NextPage = () => {
                 </Box>
 
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', marginTop: { xs: '16px', md: '24px' } }}>
-                  <Typography sx={{ color: '#383838', fontSize: '16px', fontWeight: '400' }}>입력한 정보로 조회된 아이디는</Typography>
-                  <Typography sx={{ color: '#4B99EB', fontSize: '16px', fontWeight: '400' }}>&nbsp;{id}&nbsp;</Typography>
-                  <Typography sx={{ color: '#383838', fontSize: '16px', fontWeight: '400' }}> 입니다.</Typography>
+                  <Typography sx={{ color: '#383838', fontSize: { xs: '16px', md: '18px' }, fontWeight: '400' }}>입력한 정보로 조회된 아이디는</Typography>
+                  <Typography sx={{ color: '#4B99EB', fontSize: { xs: '16px', md: '18px' }, fontWeight: '400' }}>&nbsp;{id}&nbsp;</Typography>
+                  <Typography sx={{ color: '#383838', fontSize: { xs: '16px', md: '18px' }, fontWeight: '400' }}> 입니다.</Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: { xs: '16px', md: '24px' } }}>

@@ -1,4 +1,4 @@
-import { Box, Typography, Button, IconButton } from "@mui/material";
+import { Box, Typography, Button, IconButton, useMediaQuery, Modal, ThemeProvider, createTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import React, { useState } from "react";
@@ -7,9 +7,27 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import emailIcon from '../../public/emailIcon.png';
-import failIcon from '../../public/failIcon.png';
 import logo from '../../public/logo.png';
+import failIcon from '../../public/failIcon.png';
+import emailIcon from '../../public/emailIcon.png';
+import axios from "axios";
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1024,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Spoqa Han Sans Neo'
+    ].join(',')
+  }
+});
 
 export const FindPwScreen: NextPage = () => {
   const [id, setId] = useState('');
@@ -18,51 +36,61 @@ export const FindPwScreen: NextPage = () => {
   const [noEmail, setNoEmail] = useState(false);
   const [notMatch, setNotMatch] = useState(false);
 
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
+
+  const handleOpen = () => setSuccess(true);
+  const handleClose = () => setSuccess(false);
+  const handleNoEmailOpen = () => setNoEmail(true);
+  const handleNoEmailClose = () => setNoEmail(false);
+  const handleNotMatchOpen = () => setNotMatch(true);
+  const handleNotMatchClose = () => setNotMatch(false);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await fetch(`/api/find/loginPw`, {
-        method: 'POST',
-        body: `email=${email}@cau.ac.kr&loginId=${id}`,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+
+    const url = '/api/find/loginPw';
+    const body = `email=${email}@cau.ac.kr&loginId=${id}`;
+    const headers = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    };
+
+    await axios.post(url, body, headers)
+      .then((res) => {
+        if (res.data === '존재하지 않는 이메일') {
+          handleNoEmailOpen();
+        }
+        else if (res.data === '이메일과 아이디가 일치하지 않음') {
+          handleNotMatchOpen();
+        }
+        else if (res.data === '인증번호 발송 성공') {
+          handleOpen();
         }
       })
-        .then(res => res.text())
-        .then(txt => {
-          if (txt === '존재하지 않는 이메일') {
-            setNoEmail(true);
-          }
-          else if (txt === '이메일과 아이디가 일치하지 않음') {
-            setNotMatch(true);
-          }
-          else if (txt === '인증번호 발송 성공') {
-            setSuccess(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
+      .catch((err) => {
+        console.log(err);
+      })
+  };
 
   return (
     <Box className="flex justify-center items-center min-h-[calc(100vh-70px)]">
-      <Box className="flex flex-col items-center my-[5%]">
+      <Box className="flex flex-col items-center labtop:my-[5%] mobile:my-11">
         <Image src={logo} width={60} height={61} />
 
-        <form onSubmit={onSubmit} className="border border-solid rounded-2xl border-gray0 px-20 py-14 mt-8">
-          <Typography className="text-black text-2xl font-medium">비밀번호 찾기</Typography>
-          <Typography className="text-black text-lg font-medium mt-10">아이디</Typography>
+        <form onSubmit={onSubmit} className="border border-solid rounded-2xl border-gray0 labtop:px-20 mobile:px-[15%] py-14 mt-8">
+          <Typography className="text-black labtop:text-2xl mobile:text-xl font-medium">비밀번호 찾기</Typography>
+          <Typography className="text-black text-lg font-medium labtop:mt-10 mobile:mt-8">아이디</Typography>
           <input
             type="text"
             name="id"
             placeholder="아이디 입력"
             value={id}
-            onChange={(e) => setId(e.target.value)}
+            onChange={(e) => { setId(e.target.value); setNoEmail(false); setNotMatch(false); }}
             className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-2 focus:outline-none" required />
 
           <Box>
-            <Typography className="text-black text-lg font-medium mt-10">학교 이메일</Typography>
+            <Typography className="text-black text-lg font-medium labtop:mt-9 mobile:mt-8">학교 이메일</Typography>
             <Typography className="text-gray1 text-xs font-regular">학교 이메일로 임시 비밀번호가 전송됩니다.</Typography>
           </Box>
           <Box className="flex items-center">
@@ -71,74 +99,99 @@ export const FindPwScreen: NextPage = () => {
               name="email"
               placeholder="학교 아이디"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => { setEmail(e.target.value); setNoEmail(false); setNotMatch(false); }}
               className="rounded-full border border-solid border-gray0 text-gray1 text-sm font-regular block w-44 h-12 p-2.5 pl-4 mt-4 focus:outline-none" required />
             <Typography className="text-black text-sm font-regular ml-5 mt-2">@cau.ac.kr</Typography>
           </Box>
 
-          <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-full h-12 p-2.5 mt-10">확인</Button>
+          {
+            (!isLabtop && noEmail) &&
+            <Typography className='text-red text-xs font-regular mt-4'>이메일이 존재하지 않습니다.</Typography>
+          }
+          {
+            (!isLabtop && notMatch) &&
+            <Typography className='text-red text-xs font-regular mt-4'>이메일과 아이디가 일치하지 않습니다.</Typography>
+          }
+
+          <Button type="submit" className="bg-accent1 rounded-full text-white border border-gray2 text-sm block w-full h-12 p-2.5 labtop:mt-10 mobile:mt-8">확인</Button>
         </form>
 
         {
-          success === true ?
-            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 p-10 w-[27rem]">
-              <Box className="text-center">
-                <Image src={emailIcon} />
-              </Box>
+          success &&
+          <ThemeProvider theme={theme}>
+            <Modal
+              open={success}
+              onClose={handleClose}
+            >
+              <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: { xs: '327px', md: '512px' }, paddingX: { xs: '62px', md: '87px' }, paddingY: { xs: '32px', md: '42px' }, outline: 'none' }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  {
+                    isLabtop ?
+                      <Image src={emailIcon} width={80} height={80} /> :
+                      <Image src={emailIcon} width={56} height={56} />
+                  }
+                </Box>
 
-              <Box className="flex justify-center items-center mt-2">
-                <Typography className="text-sm text-black">학교 이메일로</Typography>
-                <Typography className="text-sm text-accent1">&nbsp;임시 비밀번호</Typography>
-                <Typography className="text-sm text-black">를 발송했습니다.</Typography>
-              </Box>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', marginTop: '24px' }}>
+                  <Typography sx={{ color: '#383838', fontSize: { xs: '16px', md: '18px' }, fontWeight: '400' }}>학교 이메일로</Typography>
+                  <Typography sx={{ color: '#4B99EB', fontSize: { xs: '16px', md: '18px' }, fontWeight: '400' }}>&nbsp;임시 비밀번호를</Typography>
+                  <Typography sx={{ color: '#383838', fontSize: { xs: '16px', md: '18px' }, fontWeight: '400' }}>발송했습니다.</Typography>
+                </Box>
 
-              <Box className="flex justify-center items-center mt-4">
-                <Link href="/login">
-                  <a className="bg-accent1 rounded-full w-32 p-2">
-                    <Typography className="text-white text-sm text-center">확인</Typography>
-                  </a>
-                </Link>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Button onClick={() => document.location = '/login'} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', paddingX: '37px', paddingY: '11px', marginTop: '24px' }}>
+                    <Typography sx={{ color: 'white', fontSize: '14px', fontWeight: '500' }}>확인</Typography>
+                  </Button>
+                </Box>
               </Box>
-            </Box>
-            : <></>
+            </Modal>
+          </ThemeProvider>
         }
         {
-          noEmail === true ?
-            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
-              <Box className="flex justify-end">
-                <IconButton onClick={() => setNoEmail(false)}>
+          (isLabtop && noEmail) &&
+          <Modal
+            open={noEmail}
+            onClose={handleNoEmailClose}
+          >
+            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '400px', paddingTop: '20px !important', padding: '40px', outline: 'none' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                <IconButton onClick={handleNoEmailClose}>
                   <CloseIcon aria-label="close" />
                 </IconButton>
               </Box>
 
-              <Box className="text-center">
-                <Image src={failIcon} />
+              <Box sx={{ textAlign: 'center' }}>
+                <Image src={failIcon} width={72} height={72} />
               </Box>
 
-              <Box className="text-center">
-                <Typography className="text-sm text-black">이메일이 존재하지 않습니다.</Typography>
+              <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
+                <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '400' }}>이메일이 존재하지 않습니다.</Typography>
               </Box>
             </Box>
-            : <></>
+          </Modal>
         }
         {
-          notMatch === true ?
-            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded border border-solid border-gray0 pt-5 p-10 w-[27rem]">
-              <Box className="flex justify-end">
-                <IconButton onClick={() => setNotMatch(false)}>
+          (isLabtop && notMatch) &&
+          <Modal
+            open={notMatch}
+            onClose={handleNotMatchClose}
+          >
+            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '400px', paddingTop: '20px !important', padding: '40px', outline: 'none' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                <IconButton onClick={handleNotMatchClose}>
                   <CloseIcon aria-label="close" />
                 </IconButton>
               </Box>
 
-              <Box className="text-center">
-                <Image src={failIcon} />
+              <Box sx={{ textAlign: 'center' }}>
+                <Image src={failIcon} width={72} height={72} />
               </Box>
 
-              <Box className="text-center">
-                <Typography className="text-sm text-black">이메일과 아이디가 일치하지 않습니다.</Typography>
+              <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
+                <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '400' }}>이메일과 아이디가 일치하지 않습니다.</Typography>
               </Box>
             </Box>
-            : <></>
+          </Modal>
         }
       </Box>
     </Box>
