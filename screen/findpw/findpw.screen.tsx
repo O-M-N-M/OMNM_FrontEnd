@@ -11,6 +11,7 @@ import logo from '../../public/logo.png';
 import failIcon from '../../public/failIcon.png';
 import emailIcon from '../../public/emailIcon.png';
 import axios from "axios";
+import SimpleModal from "@/components/simpleModal";
 
 const theme = createTheme({
   breakpoints: {
@@ -149,49 +150,11 @@ export const FindPwScreen: NextPage = () => {
         }
         {
           (isLabtop && noEmail) &&
-          <Modal
-            open={noEmail}
-            onClose={handleNoEmailClose}
-          >
-            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '400px', paddingTop: '20px !important', padding: '40px', outline: 'none' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                <IconButton onClick={handleNoEmailClose}>
-                  <CloseIcon aria-label="close" />
-                </IconButton>
-              </Box>
-
-              <Box sx={{ textAlign: 'center' }}>
-                <Image src={failIcon} width={72} height={72} />
-              </Box>
-
-              <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
-                <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '400' }}>이메일이 존재하지 않습니다.</Typography>
-              </Box>
-            </Box>
-          </Modal>
+          <SimpleModal props={{ open: noEmail, onClose: handleNoEmailClose, src: 'fail', sentence: '이메일이 존재하지 않습니다.' }} />
         }
         {
           (isLabtop && notMatch) &&
-          <Modal
-            open={notMatch}
-            onClose={handleNotMatchClose}
-          >
-            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '400px', paddingTop: '20px !important', padding: '40px', outline: 'none' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                <IconButton onClick={handleNotMatchClose}>
-                  <CloseIcon aria-label="close" />
-                </IconButton>
-              </Box>
-
-              <Box sx={{ textAlign: 'center' }}>
-                <Image src={failIcon} width={72} height={72} />
-              </Box>
-
-              <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
-                <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '400' }}>이메일과 아이디가 일치하지 않습니다.</Typography>
-              </Box>
-            </Box>
-          </Modal>
+          <SimpleModal props={{ open: notMatch, onClose: handleNotMatchClose, src: 'fail', sentence: '이메일과 아이디가 일치하지 않습니다.' }} />
         }
       </Box>
     </Box>

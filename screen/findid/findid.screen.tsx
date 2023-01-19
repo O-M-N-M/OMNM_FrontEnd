@@ -10,6 +10,7 @@ import Image from "next/image";
 import logo from '../../public/logo.png';
 import FailIcon from '../../public/failIcon.png';
 import magnifying from '../../public/magnifying.png';
+import SimpleModal from "@/components/simpleModal";
 
 const theme = createTheme({
   breakpoints: {
@@ -143,25 +144,8 @@ export const FindIdScreen: NextPage = () => {
         }
 
         {
-          (isLabtop && fail) && (
-            <Modal
-              open={failOpen}
-              onClose={handleFailClose}
-            >
-              <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', paddingX: '34px', paddingBottom: '41px', paddingTop: '10px', outline: 'none' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                  <IconButton onClick={handleFailClose}>
-                    <CloseIcon aria-label="close" />
-                  </IconButton>
-                </Box>
-
-                <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }} >
-                  <Image src={FailIcon} width={72} height={72} />
-                  <Typography sx={{ color: '#383838', fontSize: '18px', fontWeight: '400', marginTop: '10px' }}>입력하신 정보와 일치하는 아이디가 없습니다</Typography>
-                </Box>
-              </Box>
-            </Modal>
-          )
+          (isLabtop && fail) &&
+          <SimpleModal props={{ open: failOpen, onClose: handleFailClose, src: 'fail', sentence: '입력하신 정보와 일치하는 아이디가 없습니다' }} />
         }
       </Box>
     </Box>
