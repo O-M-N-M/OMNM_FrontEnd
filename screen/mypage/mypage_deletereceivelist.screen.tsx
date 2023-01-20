@@ -1,17 +1,18 @@
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 
-import { Box, Button, Checkbox, FormControlLabel, IconButton, Pagination, PaginationItem, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControlLabel, IconButton, Pagination, PaginationItem, Typography, useMediaQuery } from "@mui/material";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PrevButton from '../../public/prevButton.png';
 
 import Footer from "@/components/footer";
-import MyPageLeft from "@/components/mypage/mypage_left";
+import MyPageMenu from "@/components/mypage/mypage_menu";
+import MyPageProfile from "@/components/mypage/mypage_profile";
 import MyPageDeleteDetailList from '@/components/mypage/mypage_deletedetaillist';
 
 const token = getCookie('OMNM');
@@ -32,6 +33,8 @@ export const MyPageDeleteReceiveListScreen = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [allSelected, setAllSelected] = useState<object>({});
   const [initialSelected, setInitialSelected] = useState<object>({});
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const handleChange = (_: any, p: any) => setIndex(p - 1);
 
@@ -141,7 +144,11 @@ export const MyPageDeleteReceiveListScreen = () => {
     <Box>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6'>

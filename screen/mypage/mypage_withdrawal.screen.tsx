@@ -1,12 +1,13 @@
 import { deleteCookie, getCookie } from "cookies-next";
 
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography, useMediaQuery } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import MyPageLeft from '../../components/mypage/mypage_left';
 import Footer from "../../components/footer";
+import MyPageProfile from "@/components/mypage/mypage_profile";
+import MyPageMenu from "@/components/mypage/mypage_menu";
 
 export const MyPageWithdrawalScreen = () => {
   const [userId, setUserId] = useState('');
@@ -14,6 +15,8 @@ export const MyPageWithdrawalScreen = () => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [tf, setTf] = useState(false);
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -70,7 +73,11 @@ export const MyPageWithdrawalScreen = () => {
     <>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>

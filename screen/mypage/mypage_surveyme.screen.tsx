@@ -1,13 +1,16 @@
+import { getCookie } from "cookies-next";
 import Image from "next/image";
 
-import { Box, CircularProgress, IconButton, Typography } from "@mui/material"
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import { Box, CircularProgress, IconButton, Typography, useMediaQuery } from "@mui/material"
 
 import EditIcon from '../../public/edit.png';
-import MyPageLeft from "@/components/mypage/mypage_left"
+
 import Footer from "@/components/footer"
-import { useEffect, useState } from "react";
-import { getCookie } from "cookies-next";
-import axios from "axios";
+import MyPageMenu from "@/components/mypage/mypage_menu";
+import MyPageProfile from "@/components/mypage/mypage_profile";
 
 const questions: string[] = ['나이', 'MBTI', '흡연 여부', '학과', '생활 패턴', '수면 패턴', '방 청소 빈도', '국적', '군복무 여부'];
 let answers: any = [];
@@ -15,6 +18,8 @@ let answers: any = [];
 export const MyPageSurveyMeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState('');
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const isSmoking = ['흡연', '비흡연'];
   const lifeCycle = ['아침형', '저녁형'];
@@ -77,7 +82,11 @@ export const MyPageSurveyMeScreen = () => {
     <>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>

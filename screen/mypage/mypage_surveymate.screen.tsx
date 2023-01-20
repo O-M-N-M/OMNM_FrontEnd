@@ -1,13 +1,16 @@
+import { getCookie } from "cookies-next";
 import Image from "next/image";
 
-import { Box, CircularProgress, IconButton, Typography } from "@mui/material"
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import { Box, CircularProgress, IconButton, Typography, useMediaQuery } from "@mui/material"
 
 import EditIcon from '../../public/edit.png';
-import MyPageLeft from "@/components/mypage/mypage_left"
+
 import Footer from "@/components/footer"
-import { useEffect, useState } from "react";
-import { getCookie } from "cookies-next";
-import axios from "axios";
+import MyPageMenu from "@/components/mypage/mypage_menu";
+import MyPageProfile from "@/components/mypage/mypage_profile";
 
 const questions = [
   '선호하는 룸메이트의 나이',
@@ -23,6 +26,8 @@ let answers: any[] = [];
 
 export const MyPageSurveyMateScreen = () => {
   const [loading, setLoading] = useState(false);
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const doNotCare = '상관없음';
 
@@ -88,7 +93,11 @@ export const MyPageSurveyMateScreen = () => {
     <>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>

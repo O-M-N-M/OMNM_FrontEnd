@@ -2,10 +2,11 @@ import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography, useMediaQuery } from "@mui/material";
 
 import Footer from "../../components/footer";
-import MyPageLeft from "../../components/mypage/mypage_left";
+import MyPageMenu from "@/components/mypage/mypage_menu";
+import MyPageProfile from "@/components/mypage/mypage_profile";
 
 export const MyPageChangePwScreen = () => {
   const [open, setOpen] = useState(false);
@@ -17,6 +18,8 @@ export const MyPageChangePwScreen = () => {
   const [resultNowPw, setResultNowPw] = useState(true);
   const [resultNewPw, setResultNewPw] = useState(true);
   const [resultCheckNewPw, setResultCheckNewPw] = useState(true);
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -97,7 +100,11 @@ export const MyPageChangePwScreen = () => {
     <>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>

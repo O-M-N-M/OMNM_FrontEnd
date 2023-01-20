@@ -4,14 +4,15 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Box, Button, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup, Typography, useMediaQuery } from '@mui/material'
 import { PhotoCamera } from "@mui/icons-material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import Footer from "../../components/footer";
-import MyPageLeft from '../../components/mypage/mypage_left'
 import basicProfile from '../../public/basicProfile.png';
+import MyPageMenu from "@/components/mypage/mypage_menu";
+import MyPageProfile from "@/components/mypage/mypage_profile";
 
 export const MyPageEditScreen = () => {
   const [name, setName] = useState('');
@@ -21,6 +22,8 @@ export const MyPageEditScreen = () => {
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const [profile, setProfile] = useState<File | null>(null);
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const dormitoryTitle = ['308관 2인실', '308관 4인실', '309관 2인실'];
 
@@ -100,7 +103,11 @@ export const MyPageEditScreen = () => {
     <>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>

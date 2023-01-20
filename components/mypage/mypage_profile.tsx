@@ -6,8 +6,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import basicProfile from "../../public/basicProfile.png";
 import MyPageToggle from './mypage_toggle';
+
+import basicProfile from "../../public/basicProfile.png";
 
 const token = getCookie('OMNM');
 
@@ -77,7 +78,7 @@ const MyPageProfile = () => {
   }, []);
 
   return (
-    <Box className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] labtop:min-w-[18rem] mobile:min-w-[355px] px-7 py-10'>
+    <Box className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg labtop:min-w-[18rem] mobile:min-w-[355px] px-7 py-10'>
       {
         profile === null ? (
           <Image src={basicProfile} width={100} height={100} />

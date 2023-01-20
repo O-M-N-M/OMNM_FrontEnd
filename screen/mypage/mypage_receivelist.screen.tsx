@@ -1,7 +1,7 @@
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 
-import { Box, IconButton, Pagination, PaginationItem, Typography } from "@mui/material";
+import { Box, IconButton, Pagination, PaginationItem, Typography, useMediaQuery } from "@mui/material";
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -11,7 +11,8 @@ import DeleteIcon from '../../public/deleteIcon.png';
 import NoListIcon from '../../public/noListIcon.png';
 
 import Footer from "@/components/footer";
-import MyPageLeft from "@/components/mypage/mypage_left";
+import MyPageMenu from '@/components/mypage/mypage_menu';
+import MyPageProfile from '@/components/mypage/mypage_profile';
 import MyPageDetailList from '@/components/mypage/mypage_detaillist';
 
 export const MyPageReceiveListScreen = () => {
@@ -20,6 +21,8 @@ export const MyPageReceiveListScreen = () => {
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
   const [totalCount, setTotalCount] = useState<number>(0);
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const handleChange = (_: any, p: any) => setIndex(p - 1);
 
@@ -76,7 +79,11 @@ export const MyPageReceiveListScreen = () => {
     <Box>
       <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
         <Box className='flex flex-col w-full'>

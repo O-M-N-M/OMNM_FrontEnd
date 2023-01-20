@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography, useMediaQuery } from "@mui/material";
 
 import { NextPage } from "next";
 import { getCookie } from "cookies-next";
@@ -9,9 +9,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Footer from '../../components/footer';
-import MyPageLeft from '../../components/mypage/mypage_left';
 import MyPageList from "../../components/mypage/mypage_list";
 import NoListIcon from '../../public/noListIcon.png';
+import MyPageMenu from "@/components/mypage/mypage_menu";
+import MyPageProfile from "@/components/mypage/mypage_profile";
+import MyPageMobileMenu from "@/components/mypage/mypage_mobilemenu";
 
 export const MyPageScreen: NextPage = () => {
   const [userId, setUserId] = useState('');
@@ -26,6 +28,8 @@ export const MyPageScreen: NextPage = () => {
   const [sendSecondData, setSendSecondData] = useState<any[]>([]);
   const [sendFirstKey, setSendFirstKey] = useState('');
   const [sendSecondKey, setSendSecondKey] = useState('');
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   useEffect(() => {
     const token = getCookie('OMNM');
@@ -95,16 +99,23 @@ export const MyPageScreen: NextPage = () => {
     <Box>
       <Box className='flex flex-row labtop:flex-nowrap mobile:flex-wrap justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
         <Box>
-          <MyPageLeft />
+          <MyPageProfile />
+          {
+            isLabtop &&
+            <MyPageMenu />
+          }
         </Box>
 
-        <Box className='flex flex-col w-full'>
-          <Box className='flex flex-row border border-solid border-accent2 rounded-[14px] w-full h-fit px-4 py-4 ml-6'>
-            <Typography className='text-accent2 text-sm font-regular'>서비스 이용방법</Typography>
-            <Typography className='text-black text-sm font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
-          </Box>
+        <Box className='flex flex-col labtop:w-full mobile:w-[355px] labtop:min-w-min mobile:min-w-[355px]'>
+          {
+            isLabtop &&
+            <Box className='flex flex-row border border-solid border-accent2 rounded-[14px] w-full h-fit px-4 py-4 ml-6'>
+              <Typography className='text-accent2 text-sm font-regular'>서비스 이용방법</Typography>
+              <Typography className='text-black text-sm font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
+            </Box>
+          }
 
-          <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6 mt-3'>
+          <Box className='border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit labtop:px-[2.875rem] mobile:px-3 labtop:py-16 mobile:py-8 labtop:ml-6 mt-3'>
             {
               (Array.isArray(receiveFirstData) && receiveFirstData.length === 0) ? (
                 <Box className='flex justify-center items-center w-full h-full mt-10'>
@@ -113,15 +124,19 @@ export const MyPageScreen: NextPage = () => {
               ) :
                 (typeof receiveFirstData === 'undefined' && typeof receiveSecondData === 'undefined'
                   && typeof sendFirstData === 'undefined' && typeof sendSecondData === 'undefined') ? (
-                  <Box className='flex flex-col justify-center items-center w-full h-[786px]'>
-                    <Image src={NoListIcon} width={44} height={55} />
-                    <Typography className='text-gray0 text-base font-regular mt-4'>신청을 주고 받은 룸메이트가 없습니다</Typography>
+                  <Box className='flex flex-col justify-center items-center w-full labtop:h-[786px] mobile:h-[200px] labtop:mt-6 mobile:mt-5'>
+                    {
+                      isLabtop ?
+                        <Image src={NoListIcon} width={44} height={55} /> :
+                        <Image src={NoListIcon} width={26} height={33} />
+                    }
+                    <Typography className='text-gray0 labtop:text-base mobile:text-sm font-regular mt-4'>신청을 주고 받은 룸메이트가 없습니다</Typography>
                   </Box>
                 ) : (
                   <>
                     <Box>
                       <Box className='flex flex-row items-center mx-3.5'>
-                        <Typography className='text-black text-xl font-medium'>룸메이트 신청 받은 리스트</Typography>
+                        <Typography className='text-black labtop:text-xl mobile:text-base font-medium'>룸메이트 신청 받은 리스트</Typography>
                         <Link href='/mypage_receivelist'>
                           <a className='ml-auto'>
                             <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
@@ -131,9 +146,13 @@ export const MyPageScreen: NextPage = () => {
 
                       {
                         (typeof receiveFirstData === 'undefined' && typeof receiveSecondData === 'undefined') ? (
-                          <Box className='flex flex-col justify-center items-center w-full mt-6'>
-                            <Image src={NoListIcon} width={44} height={55} />
-                            <Typography className='text-gray0 text-base font-regular mt-4'>신청 받은 룸메이트가 없습니다</Typography>
+                          <Box className='flex flex-col justify-center items-center w-full mt-6 labtop:mt-6 mobile:mt-5'>
+                            {
+                              isLabtop ?
+                                <Image src={NoListIcon} width={44} height={55} /> :
+                                <Image src={NoListIcon} width={26} height={33} />
+                            }
+                            <Typography className='text-gray0 labtop:text-base mobile:text-sm font-regular mt-4'>신청 받은 룸메이트가 없습니다</Typography>
                           </Box>
                         ) : (
                           <Box className='flex flex-wrap'>
@@ -182,9 +201,9 @@ export const MyPageScreen: NextPage = () => {
                       }
                     </Box>
 
-                    <Box className='mt-14'>
+                    <Box className='labtop:mt-14 mobile:mt-7'>
                       <Box className='flex flex-row items-center mx-3.5'>
-                        <Typography className='text-black text-xl font-medium'>룸메이트 신청 보낸 리스트</Typography>
+                        <Typography className='text-black labtop:text-xl mobile:text-base font-medium'>룸메이트 신청 보낸 리스트</Typography>
                         <Link href='/mypage_sendlist'>
                           <a className='ml-auto'>
                             <Typography className='text-gray1 text-xs font-medium'>더보기</Typography>
@@ -194,13 +213,17 @@ export const MyPageScreen: NextPage = () => {
 
                       {
                         (typeof sendFirstData === 'undefined' && typeof sendSecondData === 'undefined') ? (
-                          <Box className='flex flex-col justify-center items-center w-full mt-6'>
-                            <Image src={NoListIcon} width={44} height={55} />
-                            <Typography className='text-gray0 text-base font-regular mt-4'>신청 보낸 룸메이트가 없습니다</Typography>
+                          <Box className='flex flex-col justify-center items-center w-full mt-6 labtop:mt-6 mobile:mt-5'>
+                            {
+                              isLabtop ?
+                                <Image src={NoListIcon} width={44} height={55} /> :
+                                <Image src={NoListIcon} width={26} height={33} />
+                            }
+                            <Typography className='text-gray0 labtop:text-base mobile:text-sm font-regular mt-4'>신청 보낸 룸메이트가 없습니다</Typography>
                           </Box>
                         ) : (
                           <Box className='flex flex-wrap'>
-                            <Box className='w-[45%] mx-3.5'>
+                            <Box className='labtop:w-[45%] mobile:w-full mx-3.5'>
                               {
                                 typeof sendFirstKey !== 'undefined' && (
                                   <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
@@ -220,7 +243,7 @@ export const MyPageScreen: NextPage = () => {
                                 })
                               }
                             </Box>
-                            <Box className='w-[45%] mx-3.5'>
+                            <Box className='labtop:w-[45%] mobile:w-full mx-3.5'>
                               {
                                 typeof sendSecondKey !== 'undefined' && (
                                   <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
@@ -249,6 +272,13 @@ export const MyPageScreen: NextPage = () => {
             }
           </Box>
         </Box>
+
+        {
+          !isLabtop &&
+          <Box className='w-[355px] min-w-[355px]'>
+            <MyPageMobileMenu />
+          </Box>
+        }
       </Box>
 
       <Footer />
