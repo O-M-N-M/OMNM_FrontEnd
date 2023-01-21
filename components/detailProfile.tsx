@@ -4,11 +4,13 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Box, Button, CircularProgress, createTheme, IconButton, Modal, ThemeProvider, Tooltip, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, IconButton, Modal, ThemeProvider, Tooltip, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import profile from '../public/basicProfile.png';
 import displayNone from '../public/displayNone.png';
+
+import theme from './theme';
 
 interface ComponentProps {
   name: string;
@@ -30,23 +32,6 @@ interface ComponentProps {
   kakaoId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
-
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 1024,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-  typography: {
-    fontFamily: [
-      'Spoqa Han Sans Neo'
-    ].join(',')
-  }
-});
 
 const token = getCookie('OMNM');
 

@@ -1,34 +1,16 @@
-import { Box, Typography, Button, IconButton, useMediaQuery, Modal, ThemeProvider, createTheme } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import { Box, Typography, Button, useMediaQuery, Modal, ThemeProvider } from '@mui/material';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { NextPage } from 'next';
+import Image from 'next/image';
 
 import logo from '../../public/logo.png';
-import failIcon from '../../public/failIcon.png';
 import emailIcon from '../../public/emailIcon.png';
-import axios from "axios";
-import SimpleModal from "@/components/simpleModal";
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 1024,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-  typography: {
-    fontFamily: [
-      'Spoqa Han Sans Neo'
-    ].join(',')
-  }
-});
+import theme from '../../components/theme';
+import SimpleModal from '../..//components/simpleModal';
 
 export const FindPwScreen: NextPage = () => {
   const [id, setId] = useState('');

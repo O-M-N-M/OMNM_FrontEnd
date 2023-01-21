@@ -1,4 +1,4 @@
-import { Box, Typography, Button, IconButton, useMediaQuery, Modal, ThemeProvider, createTheme } from "@mui/material";
+import { Box, Typography, Button, IconButton, useMediaQuery, Modal, ThemeProvider } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 import React, { useState } from "react";
@@ -8,26 +8,11 @@ import { NextPage } from "next";
 import Image from "next/image";
 
 import logo from '../../public/logo.png';
-import FailIcon from '../../public/failIcon.png';
 import magnifying from '../../public/magnifying.png';
-import SimpleModal from "@/components/simpleModal";
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 1024,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-  typography: {
-    fontFamily: [
-      'Spoqa Han Sans Neo'
-    ].join(',')
-  }
-});
+import theme from '../../components/theme';
+import SimpleModal from "../..//components/simpleModal";
+
 
 export const FindIdScreen: NextPage = () => {
   const [name, setName] = useState('');

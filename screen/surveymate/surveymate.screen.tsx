@@ -1,39 +1,24 @@
-import { NextPage } from "next";
-import { getCookie } from "cookies-next";
+import { getCookie } from 'cookies-next';
+import { NextPage } from 'next';
 import Image from 'next/image';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { ThemeProvider } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import { Box, Button, createTheme, Modal, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Modal, Typography, useMediaQuery } from '@mui/material';
 
 import SurveyIcon from '../../public/signupSuccess.png';
-import FirstComponent from "@/components/surveymate/first";
-import SecondComponent from "@/components/surveymate/second";
-import ThirdComponent from "@/components/surveymate/third";
-import FourthComponent from "@/components/surveymate/fourth";
-import FifthComponent from "@/components/surveymate/fifth";
-import SixthComponent from "@/components/surveymate/sixth";
-import SeventhComponent from "@/components/surveymate/seventh";
-import EighthComponent from "@/components/surveymate/eighth";
-import { ThemeProvider } from "@emotion/react";
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 1024,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-  typography: {
-    fontFamily: [
-      'Spoqa Han Sans Neo'
-    ].join(',')
-  }
-});
+import theme from '../../components/theme';
+import FirstComponent from '../../components/surveymate/first';
+import SecondComponent from '../../components/surveymate/second';
+import ThirdComponent from '../../components/surveymate/third';
+import FourthComponent from '../../components/surveymate/fourth';
+import FifthComponent from '../../components/surveymate/fifth';
+import SixthComponent from '../../components/surveymate/sixth';
+import SeventhComponent from '../../components/surveymate/seventh';
+import EighthComponent from '../../components/surveymate/eighth';
 
 const questions = [
   '선호하는 룸메이트의 나이를 선택해주세요.',

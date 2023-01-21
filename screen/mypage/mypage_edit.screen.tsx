@@ -4,15 +4,19 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Box, Button, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup, Typography, useMediaQuery } from '@mui/material'
+import { Box, Button, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup, ThemeProvider, Typography, useMediaQuery } from '@mui/material'
 import { PhotoCamera } from "@mui/icons-material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
+import PrevButton from '../../public/prevButton.png';
 
 import Footer from "../../components/footer";
 import basicProfile from '../../public/basicProfile.png';
 import MyPageMenu from "@/components/mypage/mypage_menu";
 import MyPageProfile from "@/components/mypage/mypage_profile";
+
+import theme from '../../components/theme';
 
 export const MyPageEditScreen = () => {
   const [name, setName] = useState('');
@@ -101,7 +105,7 @@ export const MyPageEditScreen = () => {
 
   return (
     <>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+      <Box className='flex labtop:flex-row mobile:flex-col labtop:justify-center mobile:justify-start min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
         {
           isLabtop &&
           <Box>
@@ -110,10 +114,26 @@ export const MyPageEditScreen = () => {
           </Box>
         }
 
-        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit px-3 labtop:py-20 mobile:py-9 labtop:ml-6 mobile:ml-0'>
-          <Typography className='text-black text-xl font-medium text-center w-full'>개인정보 수정</Typography>
+        {
+          !isLabtop &&
+          <Box className='flex flex-row items-center mb-5'>
+            {
+              !isLabtop &&
+              <IconButton onClick={() => '/mypage'}>
+                <Image src={PrevButton} width={24} height={24} />
+              </IconButton>
+            }
+            <Typography className='text-black text-xl font-medium w-full ml-2'>개인정보 수정</Typography>
+          </Box>
+        }
 
-          <Box className="relative text-center mt-10">
+        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit px-3 labtop:py-20 mobile:py-9 labtop:ml-6 mobile:ml-0'>
+          {
+            isLabtop &&
+            <Typography className='text-black text-xl font-medium text-center w-full'>개인정보 수정</Typography>
+          }
+
+          <Box className="relative text-center labtop:mt-10 mobile:mt-0">
             {
               profile !== null ?
                 <Image src={URL.createObjectURL(profile)} width={90} height={90} className="absolute rounded-full" />
@@ -196,12 +216,14 @@ export const MyPageEditScreen = () => {
             open={open}
             onClose={handleClose}
           >
-            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>개인정보가 수정되었습니다.</Typography>
-                <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+            <ThemeProvider theme={theme}>
+              <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: { xs: '95%', md: '40%' }, maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                  <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>개인정보가 수정되었습니다.</Typography>
+                  <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+                </Box>
               </Box>
-            </Box>
+            </ThemeProvider>
           </Modal>
         }
 

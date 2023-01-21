@@ -1,39 +1,24 @@
-import { NextPage } from "next";
-import { getCookie } from "cookies-next";
+import { getCookie } from 'cookies-next';
+import { NextPage } from 'next';
 import Image from 'next/image';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import { Box, Button, createTheme, Modal, ThemeProvider, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Modal, ThemeProvider, Typography, useMediaQuery } from '@mui/material';
 
 import SurveyIcon from '../../public/signupSuccess.png';
-import FirstComponent from "@/components/surveyme/first";
-import SecondComponent from "@/components/surveyme/second";
-import ThirdComponent from "@/components/surveyme/third";
-import FourthComponent from "@/components/surveyme/fourth";
-import FifthComponent from "@/components/surveyme/fifth";
-import SixthComponent from "@/components/surveyme/sixth";
-import SeventhComponent from "@/components/surveyme/seventh";
-import EighthComponent from "@/components/surveyme/eighth";
-import NinethComponent from "@/components/surveyme/nineth";
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 1024,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-  typography: {
-    fontFamily: [
-      'Spoqa Han Sans Neo'
-    ].join(',')
-  }
-});
+import theme from '../../components/theme';
+import FirstComponent from '../../components/surveyme/first';
+import SecondComponent from '../../components/surveyme/second';
+import ThirdComponent from '../../components/surveyme/third';
+import FourthComponent from '../../components/surveyme/fourth';
+import FifthComponent from '../../components/surveyme/fifth';
+import SixthComponent from '../../components/surveyme/sixth';
+import SeventhComponent from '../../components/surveyme/seventh';
+import EighthComponent from '../../components/surveyme/eighth';
+import NinethComponent from '../../components/surveyme/nineth';
 
 const questions = [
   '당신의 나이를 적어 주세요.',

@@ -1,16 +1,17 @@
-import { getCookie } from "cookies-next";
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import { Box, Button, IconButton, Modal, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, IconButton, Modal, ThemeProvider, Typography, useMediaQuery } from '@mui/material';
 
 import PrevButton from '../../public/prevButton.png';
 
-import Footer from "../../components/footer";
-import MyPageMenu from "@/components/mypage/mypage_menu";
-import MyPageProfile from "@/components/mypage/mypage_profile";
+import theme from '../../components/theme';
+import Footer from '../../components/footer';
+import MyPageMenu from '@/components/mypage/mypage_menu';
+import MyPageProfile from '@/components/mypage/mypage_profile';
 
 export const MyPageChangePwScreen = () => {
   const [open, setOpen] = useState(false);
@@ -196,12 +197,14 @@ export const MyPageChangePwScreen = () => {
           open={open}
           onClose={handleClose}
         >
-          <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>새로운 비밀번호가 설정되었습니다.</Typography>
-              <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+          <ThemeProvider theme={theme}>
+            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: { xs: '95%', md: '40%' }, maxWidth: '530px', height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography sx={{ color: '#383838', fontSize: '1.125rem', fontWeight: '400' }}>새로운 비밀번호가 설정되었습니다.</Typography>
+                <Button onClick={onClick} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>확인</Button>
+              </Box>
             </Box>
-          </Box>
+          </ThemeProvider>
         </Modal>
       }
 
