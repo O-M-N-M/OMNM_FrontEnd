@@ -101,16 +101,16 @@ export const MyPageEditScreen = () => {
 
   return (
     <>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
-        <Box>
-          <MyPageProfile />
-          {
-            isLabtop &&
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+        {
+          isLabtop &&
+          <Box>
+            <MyPageProfile />
             <MyPageMenu />
-          }
-        </Box>
+          </Box>
+        }
 
-        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
+        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit px-3 labtop:py-20 mobile:py-9 labtop:ml-6 mobile:ml-0'>
           <Typography className='text-black text-xl font-medium text-center w-full'>개인정보 수정</Typography>
 
           <Box className="relative text-center mt-10">
@@ -142,7 +142,7 @@ export const MyPageEditScreen = () => {
             <Typography className='text-gray1 text-xs font-medium'>정방형 프로필 사진을 추천드려요</Typography>
           </Box>
 
-          <Box>
+          <Box className='labtop:w-fit mobile:w-full'>
             <Box className='flex flex-row items-center mt-10'>
               <Typography className='text-black text-base font-medium'>이름</Typography>
               <Typography className='text-gray1 text-xs font-regular ml-2'>실명을 기입해주세요</Typography>
@@ -154,11 +154,11 @@ export const MyPageEditScreen = () => {
               value={name}
               maxLength={5}
               onChange={(e) => setName(e.target.value)}
-              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
+              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular labtop:w-80 mobile:w-full p-4 mt-2 focus:outline-none'
               required />
           </Box>
 
-          <Box>
+          <Box className='labtop:w-fit mobile:w-full'>
             <Typography className='text-black text-base font-medium mt-7'>카카오톡 ID</Typography>
             <input
               type="text"
@@ -166,11 +166,11 @@ export const MyPageEditScreen = () => {
               placeholder={kakaoId}
               value={kakaoId}
               onChange={(e) => setKakaoId(e.target.value)}
-              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
+              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular labtop:w-80 mobile:w-full p-4 mt-2 focus:outline-none'
               required />
           </Box>
 
-          <Box className='w-80'>
+          <Box className='labtop:w-80 mobile:w-full'>
             <Typography className='text-black text-base font-medium mt-7'>생활관 정보</Typography>
             <FormControl>
               <RadioGroup row onChange={(e) => setDormitory(parseInt(e.target.value))} className='flex flex-col'>
@@ -183,7 +183,7 @@ export const MyPageEditScreen = () => {
             </FormControl>
           </Box>
 
-          <Box className='flex w-80'>
+          <Box className='flex labtop:w-80 mobile:w-full'>
             <Button type='submit' className='bg-accent1 rounded-full mt-6 px-8 py-2.5 text-right ml-auto'>
               <Typography className='text-white text-sm font-medium'>완료</Typography>
             </Button>
