@@ -1,8 +1,12 @@
 import { getCookie } from "cookies-next";
+import Image from 'next/image';
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Box, Button, Modal, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, IconButton, Modal, Typography, useMediaQuery } from "@mui/material";
+
+import PrevButton from '../../public/prevButton.png';
 
 import Footer from "../../components/footer";
 import MyPageMenu from "@/components/mypage/mypage_menu";
@@ -98,19 +102,35 @@ export const MyPageChangePwScreen = () => {
 
   return (
     <>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
-        <Box>
-          <MyPageProfile />
+      <Box className='flex labtop:flex-row mobile:flex-col labtop:justify-center mobile:justify-start min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+        {
+          isLabtop &&
+          <Box>
+            <MyPageProfile />
+            <MyPageMenu />
+          </Box>
+        }
+
+        {
+          !isLabtop &&
+          <Box className='flex flex-row items-center mb-5'>
+            {
+              !isLabtop &&
+              <IconButton onClick={() => '/mypage'}>
+                <Image src={PrevButton} width={24} height={24} />
+              </IconButton>
+            }
+            <Typography className='text-black text-xl font-medium w-full ml-2'>비밀번호 변경</Typography>
+          </Box>
+        }
+
+        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit labtop:px-0 mobile:px-3 labtop:py-20 mobile:py-9 labtop:ml-6'>
           {
             isLabtop &&
-            <MyPageMenu />
+            <Typography className='text-black text-xl font-medium text-center w-full'>비밀번호 변경</Typography>
           }
-        </Box>
 
-        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 rounded-[1.25rem] w-full h-fit py-20 ml-6'>
-          <Typography className='text-black text-xl font-medium text-center w-full'>비밀번호 변경</Typography>
-
-          <Box className='mt-10'>
+          <Box className='labtop:mt-10 mobile:mt-0 labtop:w-fit mobile:w-full'>
             <Typography className='text-black text-base font-medium'>현재 비밀번호</Typography>
             <input
               type="password"
@@ -118,48 +138,51 @@ export const MyPageChangePwScreen = () => {
               placeholder="현재 비밀번호 입력"
               value={nowPw}
               onChange={(e) => setNowPw(e.target.value)}
-              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
+              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular labtop:w-80 mobile:w-full p-4 mt-2 focus:outline-none'
               required />
             {
               !resultNowPw && <Typography className='text-red text-xs font-regular mt-2 ml-1'>현재 비밀번호가 올바르지 않습니다.</Typography>
             }
           </Box>
 
-          <Box className='mt-7'>
+          <Box className='mt-7 labtop:w-fit mobile:w-full'>
             <Box className='flex flex-row items-center'>
               <Typography className='text-black text-base font-medium'>새 비밀번호</Typography>
               <Typography className='text-gray1 text-xs font-regular ml-2'>6~12자 이내 숫자, 특수문자, 영문자 모두 포함</Typography>
             </Box>
+
             <input
               type="password"
               name="pw"
               placeholder="새 비밀번호 입력"
               value={newPw}
               onChange={(e) => setNewPw(e.target.value)}
-              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
+              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular labtop:w-80 mobile:w-full p-4 mt-2 focus:outline-none'
               required />
+
             {
               !resultNewPw && <Typography className='text-red text-xs font-regular mt-2 ml-1'>6~12자 이내의 영문과 숫자, 특수문자를 조합해 입력해주세요.</Typography>
             }
-
           </Box>
 
-          <Box className='mt-7'>
+          <Box className='mt-7 labtop:w-fit mobile:w-full'>
             <Typography className='text-black text-base font-medium'>새 비밀번호 확인</Typography>
+
             <input
               type="password"
               name="pw"
               placeholder="새 비밀번호 재입력"
               value={checkNewPw}
               onChange={(e) => setCheckNewPw(e.target.value)}
-              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular w-80 p-4 mt-2 focus:outline-none'
+              className='border border-solid border-gray0 rounded-full text-gray1 text-xs font-regular labtop:w-80 mobile:w-full p-4 mt-2 focus:outline-none'
               required />
+
             {
               !resultCheckNewPw && <Typography className='text-red text-xs font-regular mt-2 ml-1'>비밀번호가 일치하지 않습니다.</Typography>
             }
           </Box>
 
-          <Box className='flex w-80'>
+          <Box className='flex labtop:w-80 mobile:w-full'>
             <Button type='submit' className='bg-accent1 rounded-full mt-9 px-8 py-2.5 ml-auto'>
               <Typography className='text-white text-sm font-medium'>확인</Typography>
             </Button>
