@@ -127,7 +127,7 @@ export const MyPageEditScreen = () => {
           </Box>
         }
 
-        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit px-3 labtop:py-20 mobile:py-9 labtop:ml-6 mobile:ml-0'>
+        <form onSubmit={onSubmit} className='flex flex-col justify-center items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit labtop:px-0 mobile:px-3 labtop:py-20 mobile:py-9 labtop:ml-6 mobile:ml-0'>
           {
             isLabtop &&
             <Typography className='text-black text-xl font-medium text-center w-full'>개인정보 수정</Typography>
