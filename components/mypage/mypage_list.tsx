@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getCookie } from 'cookies-next';
 
-import { forwardRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Box, Button, Modal, Typography } from "@mui/material";
