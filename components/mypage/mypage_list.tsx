@@ -126,19 +126,11 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
           open={open}
           onClose={handleClose}
         >
-          <Bar>
-            <DetailProfile props={{ name: name, mbti: mbti, userName: props.userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: userId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: kakaoId, setOpen: setOpen }} />
-          </Bar>
+          <DetailProfile props={{ name: name, mbti: mbti, userName: props.userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: userId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: kakaoId, setOpen: setOpen }} />
         </Modal>
       }
     </>
   );
 }
-
-const Bar = forwardRef((props: any, ref: any) => (
-  <span {...props} ref={ref}>
-    {props.children}
-  </span>
-));
 
 export default MyPageList;

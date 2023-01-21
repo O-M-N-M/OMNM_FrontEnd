@@ -23,6 +23,7 @@ const questions = [
   '선호하는 룸메이트의 국적',
   '선호하는 룸메이트의 군복무 여부'
 ];
+
 let answers: any[] = [];
 
 export const MyPageSurveyMateScreen = () => {
