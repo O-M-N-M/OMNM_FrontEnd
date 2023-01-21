@@ -7,6 +7,7 @@ import axios from "axios";
 import { Box, CircularProgress, IconButton, Typography, useMediaQuery } from "@mui/material"
 
 import EditIcon from '../../public/edit.png';
+import PrevButton from '../../public/prevButton.png';
 
 import Footer from "@/components/footer"
 import MyPageMenu from "@/components/mypage/mypage_menu";
@@ -91,17 +92,23 @@ export const MyPageSurveyMateScreen = () => {
 
   return (
     <>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
-        <Box>
-          <MyPageProfile />
-          {
-            isLabtop &&
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+        {
+          isLabtop &&
+          <Box>
+            <MyPageProfile />
             <MyPageMenu />
-          }
-        </Box>
+          </Box>
+        }
 
-        <Box className='flex flex-col border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-14 py-16 ml-6'>
+        <Box className='flex flex-col border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit labtop:px-14 mobile:px-3 labtop:py-16 mobile:py-9 labtop:ml-6 mobile:ml-0'>
           <Box className='flex flex-row items-center mb-4'>
+            {
+              !isLabtop &&
+              <IconButton onClick={() => '/mypage'}>
+                <Image src={PrevButton} width={24} height={24} />
+              </IconButton>
+            }
             <Typography className='text-black text-xl font-medium'>룸메이트 성향 설문조사</Typography>
             <IconButton onClick={onClick} className='ml-auto'>
               <Image src={EditIcon} width={20} height={20} />
@@ -118,10 +125,14 @@ export const MyPageSurveyMateScreen = () => {
                 {
                   answers.map((v: any, index: number) => {
                     return (
-                      <Box className='flex flex-row items-center border border-solid border-gray0 rounded-[1.25rem] w-full px-10 py-5 mt-5'>
-                        <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {index + 1}</Typography>
+                      <Box className='flex flex-row flex-wrap items-center border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full labtop:px-10 mobile:px-4 py-5 mt-5'>
+                        {
+                          isLabtop ?
+                            <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>문항 {index + 1}</Typography> :
+                            <Typography className='bg-accent2 rounded-full text-white text-xs font-medium px-2.5 py-1'>{index + 1}</Typography>
+                        }
                         <Typography className='text-black text-base font-medium ml-3'>{questions[index]}</Typography>
-                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 max-w-[50%] ml-auto'>{v}</Typography>
+                        <Typography className='text-black text-base font-regular underline underline-offset-4 decoration-1 decoration-accent2 labtop:max-w-[50%] mobile:max-w-[85%] labtop:ml-auto mobile:ml-9 labtop:mt-0 mobile:mt-2'>{v}</Typography>
                       </Box>
                     )
                   })

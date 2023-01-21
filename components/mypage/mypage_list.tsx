@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getCookie } from 'cookies-next';
 
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Box, Button, Modal, Typography } from "@mui/material";
@@ -79,7 +79,6 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
         else {
           const newSP: String[] = [];
           sp.forEach((v: string) => {
-            console.log(v);
             if (v === '0') newSP.push('코골이');
             else if (v === '1') newSP.push('이갈이');
             else if (v === '2') newSP.push('몸부림');
@@ -127,11 +126,19 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
           open={open}
           onClose={handleClose}
         >
-          <DetailProfile props={{ name: name, mbti: mbti, userName: props.userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: userId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: kakaoId, setOpen: setOpen }} />
+          <Bar>
+            <DetailProfile props={{ name: name, mbti: mbti, userName: props.userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: userId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: kakaoId, setOpen: setOpen }} />
+          </Bar>
         </Modal>
       }
     </>
   );
 }
+
+const Bar = forwardRef((props: any, ref: any) => (
+  <span {...props} ref={ref}>
+    {props.children}
+  </span>
+));
 
 export default MyPageList;

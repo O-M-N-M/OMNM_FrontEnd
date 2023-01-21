@@ -156,7 +156,7 @@ export const MyPageScreen: NextPage = () => {
                           </Box>
                         ) : (
                           <Box className='flex flex-wrap'>
-                            <Box className='w-[45%] mx-3.5'>
+                            <Box className='labtop:w-[45%] mobile:w-full mx-3.5'>
                               {
                                 typeof receiveFirstKey !== 'undefined' && (
                                   <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
@@ -176,7 +176,7 @@ export const MyPageScreen: NextPage = () => {
                                 })
                               }
                             </Box>
-                            <Box className='w-[45%] mx-3.5'>
+                            <Box className='labtop:w-[45%] mobile:w-full mx-3.5'>
                               {
                                 typeof receiveSecondKey !== 'undefined' && (
                                   <Box className='border border-solid border-gray1 rounded-full w-fit px-1 py-0.5 mt-6'>
