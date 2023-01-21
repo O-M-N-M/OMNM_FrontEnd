@@ -23,6 +23,7 @@ export const MyPageReceiveListScreen = () => {
   const [totalCount, setTotalCount] = useState<number>(0);
 
   const isLabtop = useMediaQuery('(min-width: 1024px)');
+  const size = isLabtop ? 10 : 5;
 
   const handleChange = (_: any, p: any) => setIndex(p - 1);
 
@@ -49,7 +50,7 @@ export const MyPageReceiveListScreen = () => {
     };
 
     const getPageData = async () => {
-      const url = `/api/users/${userId}/connection/detail?page=${index}&size=10`;
+      const url = `/api/users/${userId}/connection/detail?page=${index}&size=${size}`;
 
       await axios.get(url, headers)
         .then((res) => {
@@ -77,22 +78,26 @@ export const MyPageReceiveListScreen = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
-        <Box>
-          <MyPageProfile />
-          {
-            isLabtop &&
+      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+        {
+          isLabtop &&
+          <Box>
+            <MyPageProfile />
             <MyPageMenu />
-          }
-        </Box>
+          </Box>
+        }
 
         <Box className='flex flex-col w-full'>
-          <Box className='flex flex-row border border-solid border-accent2 rounded-[14px] w-full h-fit px-4 py-4 ml-6'>
-            <Typography className='text-accent2 text-sm font-regular'>서비스 이용방법</Typography>
-            <Typography className='text-black text-sm font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
-          </Box>
+          {
+            isLabtop &&
+            <Box className='flex flex-row border border-solid border-accent2 rounded-[14px] w-full h-fit px-4 py-4 ml-6'>
+              <Typography className='text-accent2 text-sm font-regular'>서비스 이용방법</Typography>
+              <Typography className='text-black text-sm font-regular ml-4'>룸메이트 신청을 받은 상대방의 카카오톡 ID를 확인하고 자유롭게 연락하여 룸메이트를 구하세요!</Typography>
+            </Box>
+          }
 
-          <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6 mt-3'>
+          {
+            !isLabtop &&
             <Box className='flex flex-row items-center'>
               <IconButton onClick={() => document.location = '/mypage'}>
                 <Image src={PrevButton} width={24} height={24} />
@@ -101,6 +106,23 @@ export const MyPageReceiveListScreen = () => {
                 룸메이트 신청 받은 리스트&nbsp;
                 <Typography component='span' className='text-gray1 text-xl font-medium'>({totalCount})</Typography>
               </Typography>
+            </Box>
+          }
+
+          <Box className='border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit labtop:px-[2.875rem] mobile:px-3 labtop:py-16 mobile:py-9 labtop:ml-6 mobile:ml-0 labtop:mt-3 mobile:mt-5'>
+            <Box className='flex flex-row items-center'>
+              {
+                isLabtop &&
+                <>
+                  <IconButton onClick={() => document.location = '/mypage'}>
+                    <Image src={PrevButton} width={24} height={24} />
+                  </IconButton>
+                  <Typography className='text-black text-xl font-medium ml-3'>
+                    룸메이트 신청 받은 리스트&nbsp;
+                    <Typography component='span' className='text-gray1 text-xl font-medium'>({totalCount})</Typography>
+                  </Typography>
+                </>
+              }
               {
                 (totalCount > 0) && (
                   <IconButton onClick={() => document.location = '/mypage_deletereceivelist'} className='ml-auto'>
@@ -110,8 +132,8 @@ export const MyPageReceiveListScreen = () => {
               }
             </Box>
 
-            <Box className='flex flex-col items-center mt-5'>
-              <Box className='w-full min-h-[44rem]'>
+            <Box className='flex flex-col items-center labtop:mt-5 mobile:mt-2'>
+              <Box className='w-full labtop:min-h-[44rem] mobile:min-h-[calc(100vh-350px)]'>
                 {
                   (totalCount > 0) ? data.map((v: any, index: number) => {
                     return (
@@ -127,7 +149,7 @@ export const MyPageReceiveListScreen = () => {
               </Box>
 
               <Pagination
-                count={Math.ceil(totalCount / 10)}
+                count={Math.ceil(totalCount / size)}
                 onChange={handleChange}
                 renderItem={(item) => (
                   <PaginationItem

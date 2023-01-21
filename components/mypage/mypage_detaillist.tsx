@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography, useMediaQuery } from "@mui/material";
 
 import nightIcon from '../../public/nightIcon.png';
 import morningIcon from '../../public/morningIcon.png';
@@ -38,6 +38,8 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
   const [nationality, setNationality] = useState('');
   const [sleepingPattern, setSleepingPattern] = useState<String[]>([]);
   const [detailProfile, setDetailProfile] = useState<any | null>(null);
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -107,7 +109,7 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
 
   return (
     <>
-      <Box key={props.index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 px-6 py-3'>
+      <Box key={props.index} className='flex flex-row flex-wrap items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 labtop:px-6 mobile:px-3 labtop:py-3 mobile:py-2'>
         <Box className='border border-solid border-gray1 rounded-full px-1 py-0.5'>
           {
             props.v.time[5] === '0' ? (
@@ -118,7 +120,7 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
           }
         </Box>
 
-        <Box className='flex items-center ml-8'>
+        <Box className='flex items-center labtop:ml-8 mobile:ml-2'>
           {
             props.v.profileUrl === null ?
               <Image src={basicProfile} width={24} height={24} />
@@ -129,18 +131,23 @@ const MyPageDetailList = ({ props }: { props: ComponentProps }) => {
 
         <Typography className='text-black text-base font-medium ml-3 w-16'>{props.v.name}</Typography>
         <Typography className='text-gray1 text-xs font-regular ml-2'>{props.v.age}세</Typography>
-        <Typography className='text-black text-xs font-regular ml-5 w-8'>{props.v.mbti}</Typography>
         {
-          props.v.lifeCycle === 0 ? (
-            <Box className='flex flex-row ml-5'>
-              <Image src={morningIcon} width={14} height={14} />
-              <Typography className='text-black text-xs font-regular ml-1.5'>아침형 인간</Typography>
-            </Box>
-          ) : (
-            <Box className='flex flex-row ml-5'>
-              <Image src={nightIcon} width={14} height={14} />
-              <Typography className='text-black text-xs font-regular ml-1.5'>저녁형 인간</Typography>
-            </Box>
+          isLabtop &&
+          <Typography className='text-black text-xs font-regular ml-5 w-8'>{props.v.mbti}</Typography>
+        }
+        {
+          isLabtop && (
+            props.v.lifeCycle === 0 ? (
+              <Box className='flex flex-row ml-5'>
+                <Image src={morningIcon} width={14} height={14} />
+                <Typography className='text-black text-xs font-regular ml-1.5'>아침형 인간</Typography>
+              </Box>
+            ) : (
+              <Box className='flex flex-row ml-5'>
+                <Image src={nightIcon} width={14} height={14} />
+                <Typography className='text-black text-xs font-regular ml-1.5'>저녁형 인간</Typography>
+              </Box>
+            )
           )
         }
         <Button onClick={() => { onClick(); handleOpen(); }} className='bg-white border border-solid border-accent1 rounded-full ml-auto'>
