@@ -94,7 +94,7 @@ export const MyPageSurveyMeScreen = () => {
           <Box className='flex flex-row items-center mb-4'>
             {
               !isLabtop &&
-              <IconButton onClick={() => '/mypage'}>
+              <IconButton onClick={() => document.location = '/mypage'}>
                 <Image src={PrevButton} width={24} height={24} />
               </IconButton>
             }

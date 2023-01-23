@@ -196,12 +196,12 @@ export const MainScreen: NextPage = () => {
     <>
       {
         (isSplash) ? (
-          <Box className='bg-sky0 flex flex-col justify-center items-center w-full h-[calc(100vh-70px)]'>
+          <Box className='bg-sky0 flex flex-col justify-center items-center w-full labtop:h-[calc(100vh-70px)] mobile:h-[calc(100vh-53px)]'>
             <Image src={splash} width={400} height={400} />
           </Box>
         ) : (typeof isMatched !== 'undefined' && isMatched) ? (
           <Box className="labtop:bg-main-move-background mobile:bg-sky0 bg-cover labtop:px-0 mobile:px-[5%]">
-            <Box className="flex flex-col justify-center items-center w-full h-[calc(100vh-70px)] py-28">
+            <Box className="flex flex-col justify-center items-center w-full labtop:h-[calc(100vh-70px)] mobile:h-[calc(100vh-53px)] py-28">
               <Box className='flex flex-col justify-center items-center bg-white2 labtop:rounded-full mobile:rounded-xl w-fit labtop:px-60 mobile:px-4 labtop:py-28 mobile:py-12'>
                 <Box className='flex flex-row flex-wrap justify-center'>
                   <Typography className='text-accent1 labtop:text-4xl mobile:text-xl font-medium'>
@@ -221,7 +221,7 @@ export const MainScreen: NextPage = () => {
         ) : (
           <>
             <Box className="labtop:bg-main-move-background mobile:bg-sky0 bg-cover">
-              <Box className="flex flex-col justify-center w-full labtop:h-[calc(100vh-70px)] mobile:h-fit mobile:py-16">
+              <Box className="flex flex-col justify-center w-full labtop:h-[calc(100vh-70px)] mobile:h-[calc(100vh-53px)] mobile:py-16">
                 <Box className="flex flex-row flex-wrap labtop:ml-[15%] mobile:ml-[5%] labtop:mr-[15%] mobile:mr-[5%]">
                   <Box className='flex flex-col'>
                     <Typography className="text-accent1 labtop:text-4xl mobile:text-2xl font-bold">

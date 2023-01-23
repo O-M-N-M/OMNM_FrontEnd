@@ -75,7 +75,7 @@ export const MyPageWithdrawalScreen = () => {
 
   return (
     <>
-      <Box className='flex labtop:flex-row mobile:flex-col labtop:justify-center mobile:justify-start min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+      <Box className='flex labtop:flex-row mobile:flex-col labtop:justify-center mobile:justify-start labtop:min-h-[calc(100vh-70px)] mobile:min-h-[calc(100vh-53px)] labtop:px-[15%] mobile:px-[5%] py-[5%]'>
         {
           isLabtop &&
           <Box>
@@ -89,7 +89,7 @@ export const MyPageWithdrawalScreen = () => {
           <Box className='flex flex-row items-center mb-5'>
             {
               !isLabtop &&
-              <IconButton onClick={() => '/mypage'}>
+              <IconButton onClick={() => document.location = '/mypage'}>
                 <Image src={PrevButton} width={24} height={24} />
               </IconButton>
             }

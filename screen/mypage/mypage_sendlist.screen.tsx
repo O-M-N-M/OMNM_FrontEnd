@@ -78,7 +78,7 @@ export const MyPageSendListScreen = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] labtop:mx-[15%] mobile:mx-[5%] my-[5%]'>
+      <Box className='flex flex-row justify-center labtop:min-h-[calc(100vh-70px)] mobile:min-h-[calc(100vh-53px)] labtop:px-[15%] mobile:px-[5%] py-[5%]'>
         {
           isLabtop &&
           <Box>
@@ -101,11 +101,11 @@ export const MyPageSendListScreen = () => {
             </Box>
           }
 
-          <Box className='border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full h-fit labtop:px-[2.875rem] mobile:px-3 labtop:py-16 mobile:py-9 labtop:ml-6 mobile:ml-0 labtop:mt-0 mobile:mt-5'>
+          <Box className='border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full labtop:h-fit mobile:h-full labtop:px-[2.875rem] mobile:px-3 labtop:py-16 mobile:py-9 labtop:ml-6 mobile:ml-0 labtop:mt-0 mobile:mt-5'>
             <Box className='flex flex-row items-center'>
               {
                 isLabtop &&
-                <>
+                <Box className='flex flex-row items-center'>
                   <IconButton onClick={() => document.location = '/mypage'}>
                     <Image src={PrevButton} width={24} height={24} />
                   </IconButton>
@@ -113,7 +113,7 @@ export const MyPageSendListScreen = () => {
                     룸메이트 신청 보낸 리스트&nbsp;
                     <Typography component='span' className='text-gray1 text-xl font-medium'>({totalCount})</Typography>
                   </Typography>
-                </>
+                </Box>
               }
               {
                 (totalCount > 0) && (
@@ -124,15 +124,15 @@ export const MyPageSendListScreen = () => {
               }
             </Box>
 
-            <Box className='flex flex-col items-center labtop:mt-5 mobile:mt-2'>
-              <Box className='w-full labtop:min-h-[44rem] mobile:min-h-[calc(100vh-350px)]'>
+            <Box className='flex flex-col items-center h-full labtop:mt-5 mobile:mt-2'>
+              <Box className='w-full labtop:min-h-[43.2rem] mobile:min-h-0'>
                 {
                   (totalCount > 0) ? data.map((v: any, index: number) => {
                     return (
                       <MyPageDetailList key={index} props={{ v: v, index: index, userName: userName, isReceive: false }} />
                     )
                   }) : (
-                    <Box className='flex flex-col justify-center items-center w-full h-[786px]'>
+                    <Box className='flex flex-col justify-center items-center w-full labtop:h-[752px] mobile:h-[calc(100vh-300px)]'>
                       <Image src={NoListIcon} width={44} height={55} />
                       <Typography className='text-gray0 text-base font-regular mt-4'>신청 보낸 룸메이트가 없습니다</Typography>
                     </Box>
@@ -154,7 +154,8 @@ export const MyPageSendListScreen = () => {
                   />
                 )}
                 sx={{
-                  marginTop: '2.5rem'
+                  marginTop: 'auto',
+                  mb: '36px'
                 }}
               />
             </Box>

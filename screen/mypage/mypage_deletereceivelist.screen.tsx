@@ -35,6 +35,7 @@ export const MyPageDeleteReceiveListScreen = () => {
   const [initialSelected, setInitialSelected] = useState<object>({});
 
   const isLabtop = useMediaQuery('(min-width: 1024px)');
+  const size = isLabtop ? 10 : 5;
 
   const handleChange = (_: any, p: any) => setIndex(p - 1);
 
@@ -68,7 +69,7 @@ export const MyPageDeleteReceiveListScreen = () => {
   };
 
   const getPageData = async () => {
-    const url = `/api/users/${userId}/connection/detail?page=${index}&size=10`;
+    const url = `/api/users/${userId}/connection/detail?page=${index}&size=${size}`;
 
     await axios.get(url, headers)
       .then((res) => {
@@ -126,7 +127,7 @@ export const MyPageDeleteReceiveListScreen = () => {
     };
 
     getMyData();
-  }, [userId, index]);
+  }, [userId, index, totalCount]);
 
   useEffect(() => {
     const getIsDisabled = () => {
@@ -142,79 +143,96 @@ export const MyPageDeleteReceiveListScreen = () => {
 
   return (
     <Box>
-      <Box className='flex flex-row justify-center min-h-[calc(100vh-70px)] mx-[15%] my-[5%]'>
-        <Box>
-          <MyPageProfile />
-          {
-            isLabtop &&
+      <Box className='flex flex-row justify-center labtop:min-h-[calc(100vh-70px)] mobile:min-h-[calc(100vh-53px)] labtop:px-[15%] mobile:px-[5%] py-[5%]'>
+        {
+          isLabtop &&
+          <Box>
+            <MyPageProfile />
             <MyPageMenu />
-          }
-        </Box>
+          </Box>
+        }
 
-        <Box className='border border-solid border-gray0 rounded-[1.25rem] w-full h-fit px-[2.875rem] py-16 ml-6'>
-          <Box className='flex flex-row'>
+        <Box className='flex flex-col w-full'>
+          {
+            !isLabtop &&
             <Box className='flex flex-row items-center'>
               <IconButton onClick={() => document.location = '/mypage_receivelist'}>
                 <Image src={PrevButton} width={18.44} height={23.48} />
               </IconButton>
               <Typography className='text-black text-xl font-medium ml-3'>룸메이트 신청 받은 리스트</Typography>
             </Box>
+          }
 
-            <Box className='flex flex-row items-center ml-auto'>
-              <Button onClick={onChangeAll} className='rounded-full text-gray1 text-base font-regular'>모두 선택</Button>
+          <Box className='border border-solid border-gray0 labtop:rounded-[1.25rem] mobile:rounded-lg w-full labtop:h-fit mobile:h-full labtop:px-[2.875rem] mobile:px-3 labtop:py-16 mobile:py-9 labtop:ml-6 mobile:ml-0 labtop:mt-0 mobile:mt-5'>
+            <Box className='flex flex-row'>
               {
-                isDisabled ?
-                  <Button disabled className='rounded-full text-gray0 text-base font-regular ml-6'>삭제</Button> :
-                  <Button onClick={onClick} className='rounded-full text-gray1 text-base font-regular ml-6'>삭제</Button>
+                isLabtop &&
+                <Box className='flex flex-row items-center'>
+                  <IconButton onClick={() => document.location = '/mypage_receivelist'}>
+                    <Image src={PrevButton} width={18.44} height={23.48} />
+                  </IconButton>
+                  <Typography className='text-black text-xl font-medium ml-3'>룸메이트 신청 받은 리스트</Typography>
+                </Box>
               }
-              <Button onClick={() => document.location = '/mypage_receivelist'} className='bg-accent1 rounded-full w-fit h-fit px-4 py-1.5 ml-7'>
-                <Typography className=' text-white text-base font-regular'>완료</Typography>
-              </Button>
-            </Box>
-          </Box>
 
-          <Box className='flex flex-col items-center mt-5'>
-            <Box className='w-full min-h-[44rem]'>
-              {
-                data && data.map((v: any, index: number) => {
-                  return (
-                    <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 px-6 py-3'>
-                      <FormControlLabel
-                        value={v.userId}
-                        control={
-                          <Checkbox
-                            checked={isSelected[v.userId as keyof typeof isSelected]}
-                            onChange={(e) => onChangeEach(e)}
-                            icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB" }} />}
-                            checkedIcon={<CheckCircleIcon />}
-                            size="small" />
-                        }
-                        label={undefined}
-                      />
-                      <MyPageDeleteDetailList props={{ v: v, index: index, userName: userName, isReceive: true }} />
-                    </Box>
-                  )
-                })
-              }
+              <Box className='flex flex-row items-center ml-auto'>
+                <Button onClick={onChangeAll} className='rounded-full text-gray1 labtop:text-base mobile:text-sm font-regular'>모두 선택</Button>
+                {
+                  isDisabled ?
+                    <Button disabled className='rounded-full text-gray0 labtop:text-base mobile:text-sm font-regular labtop:ml-6 mobile:ml-2'>삭제</Button> :
+                    <Button onClick={onClick} className='rounded-full text-gray1 labtop:text-base mobile:text-sm font-regular labtop:ml-6 mobile:ml-2'>삭제</Button>
+                }
+                <Button onClick={() => document.location = '/mypage_sendlist'} className='bg-accent1 rounded-full w-fit h-fit px-4 py-1.5 labtop:ml-7 mobile:ml-3'>
+                  <Typography className=' text-white labtop:text-base mobile:text-sm font-regular'>완료</Typography>
+                </Button>
+              </Box>
             </Box>
 
-            <Pagination
-              count={Math.ceil(totalCount / 10)}
-              onChange={handleChange}
-              renderItem={(item) => (
-                <PaginationItem
-                  {...item}
-                  sx={{
-                    color: '#9B9EA1',
-                    fontSize: '0.875rem',
-                    fontWeight: '500'
-                  }}
-                />
-              )}
-              sx={{
-                marginTop: '2.5rem'
-              }}
-            />
+            <Box className='flex flex-col items-center h-full labtop:mt-5 mobile:mt-2'>
+              <Box className='w-full labtop:min-h-[44rem] mobile:min-h-0'>
+                {
+                  data && data.map((v: any, index: number) => {
+                    return (
+                      <Box key={index} className='flex flex-row items-center border border-solid border-gray0 rounded-xl w-full h-fit mt-4 labtop:px-6 mobile:px-3 py-3'>
+                        <FormControlLabel
+                          value={v.userId}
+                          control={
+                            <Checkbox
+                              checked={isSelected[v.userId as keyof typeof isSelected]}
+                              onChange={(e) => onChangeEach(e)}
+                              icon={<CheckCircleOutlineIcon sx={{ color: "#DBDBDB", width: '22px', height: '22px' }} />}
+                              checkedIcon={<CheckCircleIcon sx={{ width: '22px', height: '22px' }} />}
+                              size="small" />
+                          }
+                          sx={{ width: '22px', height: '22px' }}
+                          label={undefined}
+                        />
+                        <MyPageDeleteDetailList props={{ v: v, index: index, userName: userName, isReceive: true }} />
+                      </Box>
+                    )
+                  })
+                }
+              </Box>
+
+              <Pagination
+                count={Math.ceil(totalCount / size)}
+                onChange={handleChange}
+                renderItem={(item) => (
+                  <PaginationItem
+                    {...item}
+                    sx={{
+                      color: '#9B9EA1',
+                      fontSize: '0.875rem',
+                      fontWeight: '500'
+                    }}
+                  />
+                )}
+                sx={{
+                  marginTop: 'auto',
+                  mb: '36px'
+                }}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>
