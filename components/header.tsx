@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 
 import logo from '../public/logo2.png';
 import LogoutIcon from '../public/logoutIcon.png';
@@ -16,6 +16,8 @@ const Header = () => {
   const [isCookie, setIsCookie] = useState(false);
   const [profile, setProfile] = useState<string | null>(null);
   const [innerWidth, setInnerWidth] = useState<number | undefined>();
+
+  const isLabtop = useMediaQuery('(min-width: 1024px)');
 
   const onClick = () => {
     deleteCookie('OMNM');
@@ -87,72 +89,73 @@ const Header = () => {
   }, [innerWidth]);
 
   return (
-    <>
+    <Box className="flex items-center bg-white border-gray0 border-0 border-b border-solid w-auto labtop:h-[70px] mobile:h-[54px]">
       {
-        (typeof innerWidth !== 'undefined' && innerWidth >= 768) ? (
-          <Box className="flex items-center bg-white border-gray0 border-0 border-b border-solid w-auto h-[70px]">
-            {
-              isCookie ? (
-                <>
-                  <Link href='/main'>
-                    <a className="ml-[15%]">
-                      <Image src={logo} width={161} height={28} />
-                    </a>
-                  </Link>
-
-                  <Box className="flex flex-row items-center ml-auto mr-[15%] mt-1">
-                    <Link href='/mypage_edit'>
-                      <a className='ml-8'>
-                        <Image src={SettingIcon} width={24} height={24} />
-                      </a>
-                    </Link>
-                    <a onClick={onClick} className='ml-8 cursor-pointer'>
-                      <Image src={LogoutIcon} width={24} height={24} className='ml-8' />
-                    </a>
-                    <Link href='/mypage'>
-                      <a className='ml-8'>
-                        {
-                          profile === null ? (
-                            <Image src={profileIcon} width={36} height={36} />
-                          ) : (
-                            <Box className='border border-gray1 border-solid rounded-full w-[36px] h-[36px]'>
-                              <Image loader={() => profile} src={profile} width={36} height={36} className='rounded-full' />
-                            </Box>
-                          )
-                        }
-                      </a>
-                    </Link>
-                  </Box>
-                </>
-              ) : (
-                <>
-                  <Link href='/'>
-                    <a className="ml-[15%]">
-                      <Image src={logo} width={115} height={20} />
-                    </a>
-                  </Link>
-
-                  <Link href='/login'>
-                    <a className="ml-auto mr-[15%] mt-1">
-                      <Typography className="text-base fomt-medium">로그인</Typography>
-                    </a>
-                  </Link>
-                </>
-              )
-            }
-          </Box>
-
-        ) : (
-          <Box className="flex justify-center items-center bg-white border-gray0 border-0 border-b border-solid w-full h-[49px]">
-            <Link href='/'>
-              <a>
-                <Image src={logo} width={86} height={15} />
+        isCookie ? (
+          <>
+            <Link href='/main'>
+              <a className="labtop:ml-[15%] mobile:ml-[5%]">
+                {
+                  isLabtop ?
+                    <Image src={logo} width={161} height={28} /> :
+                    <Image src={logo} width={103} height={18} />
+                }
               </a>
             </Link>
-          </Box>
+
+            <Box className="flex flex-row items-center ml-auto labtop:mr-[15%] mobile:mr-[5%] mt-1">
+              {
+                isLabtop &&
+                <Link href='/mypage_edit'>
+                  <a className='ml-8'>
+                    <Image src={SettingIcon} width={24} height={24} />
+                  </a>
+                </Link>
+              }
+
+              {
+                isLabtop &&
+                <a onClick={onClick} className='ml-8 cursor-pointer'>
+                  <Image src={LogoutIcon} width={24} height={24} className='ml-8' />
+                </a>
+              }
+
+              <Link href='/mypage'>
+                <a className='ml-8'>
+                  {
+                    profile === null ? (
+                      <Image src={profileIcon} width={36} height={36} />
+                    ) : (
+                      <Box className='border border-gray1 border-solid rounded-full w-[36px] h-[36px]'>
+                        <Image loader={() => profile} src={profile} width={36} height={36} className='rounded-full' />
+                      </Box>
+                    )
+                  }
+                </a>
+              </Link>
+            </Box>
+          </>
+        ) : (
+          <>
+            <Link href='/'>
+              <a className="labtop:ml-[15%] mobile:ml-[5%]">
+                {
+                  isLabtop ?
+                    <Image src={logo} width={161} height={28} /> :
+                    <Image src={logo} width={103} height={18} />
+                }
+              </a>
+            </Link>
+
+            <Link href='/login'>
+              <a className="ml-auto labtop:mr-[15%] mobile:mr-[5%] mt-1">
+                <Typography className="text-base fomt-medium">로그인</Typography>
+              </a>
+            </Link>
+          </>
         )
       }
-    </>
+    </Box>
   );
 }
 
