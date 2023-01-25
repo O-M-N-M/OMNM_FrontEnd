@@ -235,7 +235,7 @@ export const MainScreen: NextPage = () => {
                     </Box>
                   </Box>
 
-                  <Box className="flex flex-row ml-auto labtop:mt-0 mobile:mt-12">
+                  <Box className="flex flex-row ml-auto labtop:mt-0 mobile:mt-5">
                     <Typography className="text-accent1 labtop:text-base mobile:text-sm font-medium mt-2 mr-5">성향 일치 개수</Typography>
                     <FormControl size="small">
                       <Select
@@ -277,7 +277,7 @@ export const MainScreen: NextPage = () => {
                   </Box>
                 </Box>
 
-                <Box className="flex justify-center items-center bg-transparent w-full labtop:mt-14 mobile:mt-[-30px] labtop:px-[15%] mobile:px-[5%]">
+                <Box className="flex justify-center items-center bg-transparent w-full labtop:px-[15%] mobile:px-[5%]">
                   <Swiper
                     onSwiper={setSwiper}
                     initialSlide={1}
