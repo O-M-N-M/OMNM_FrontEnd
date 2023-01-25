@@ -104,7 +104,7 @@ export const LoginScreen: NextPage = () => {
               className="text-gray1 text-sm font-regular rounded-full border border-solid border-gray0 block w-[19rem] h-12 p-4 mt-4 focus:outline-none" required />
             {
               (!isLabtop && fail) &&
-              <Typography className='text-red text-xs font-regular mt-2'>아이디 또는 비밀번호를 잘못 입렸했습니다.</Typography>
+              <Typography className='text-red text-xs font-regular mt-2'>아이디 또는 비밀번호를 잘못 입력하였습니다.</Typography>
             }
 
             <Button type="submit" className="bg-accent1 rounded-full border border-gray2 text-white text-base font-medium block w-[19rem] p-4 mt-4">로그인</Button>
