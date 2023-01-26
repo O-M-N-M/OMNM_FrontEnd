@@ -18,6 +18,7 @@ const Header = () => {
   const [innerWidth, setInnerWidth] = useState<number | undefined>();
 
   const isLabtop = useMediaQuery('(min-width: 1024px)');
+  const isTablet = useMediaQuery('(min-width: 768px');
 
   const onClick = () => {
     deleteCookie('OMNM');
@@ -96,16 +97,16 @@ const Header = () => {
             <Link href='/main'>
               <a className="labtop:ml-[15%] mobile:ml-[5%]">
                 {
-                  isLabtop ?
-                    <Image src={logo} width={161} height={28} /> :
-                    <Image src={logo} width={103} height={18} />
+                  isLabtop ? <Image src={logo} width={161} height={28} /> :
+                    isTablet ? <Image src={logo} width={155} height={27} /> :
+                      <Image src={logo} width={103} height={18} />
                 }
               </a>
             </Link>
 
             <Box className="flex flex-row items-center ml-auto labtop:mr-[15%] mobile:mr-[5%] mt-1">
               {
-                isLabtop &&
+                isTablet &&
                 <Link href='/mypage_edit'>
                   <a className='ml-8'>
                     <Image src={SettingIcon} width={24} height={24} />
@@ -114,7 +115,7 @@ const Header = () => {
               }
 
               {
-                isLabtop &&
+                isTablet &&
                 <a onClick={onClick} className='ml-8 cursor-pointer'>
                   <Image src={LogoutIcon} width={24} height={24} className='ml-8' />
                 </a>
