@@ -15,6 +15,7 @@ import theme from './theme';
 interface ComponentProps {
   name: string;
   mbti: string;
+  message: string | null | undefined;
   userName: string;
   lifeCycle: string;
   isSmoking: string;
@@ -39,6 +40,9 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
   const [isProposed, setIsProposed] = useState<boolean>();
   const [secondOpen, setSecondOpen] = useState(false);
   const [thirdOpen, setThirdOpen] = useState(false);
+  const [fourthOpen, setFourthOpen] = useState(false);
+
+  const [sendMessage, setSendMessage] = useState<string>('');
 
   const handleOpen = () => setSecondOpen(true);
   const handleClose = () => setSecondOpen(false);
@@ -46,8 +50,12 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
   const handleOpen2 = () => setThirdOpen(true);
   const handleClose2 = () => setThirdOpen(false);
 
+  const handleOpen3 = () => setFourthOpen(true);
+  const handleClose3 = () => setFourthOpen(false);
+
   const applyMate = async () => {
     const url = `/api/main/propose/${props.matchingId}`;
+    const body = `message=${sendMessage}`;
     const token = getCookie('OMNM');
     const headers = {
       headers: {
@@ -55,10 +63,11 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
       }
     };
 
-    await axios.post(url, {}, headers)
-      .then((res) => {
+    await axios.post(url, body, headers)
+      .then(() => {
         setIsProposed(true);
         handleClose();
+        handleClose3();
         handleOpen2();
       });
   };
@@ -142,6 +151,11 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                     <Button onClick={handleOpen} sx={{ backgroundColor: '#4B99EB !important', width: '50%', minWidth: { xs: '235px' }, height: 'fit-content', borderRadius: '200px', color: 'white', marginTop: { xs: '8px', md: '1rem' }, paddingY: '0.625rem' }}>룸메이트 신청하기</Button>
                 }
 
+                {
+                  (props.message && props.message.length > 0) &&
+                  <Typography>메세지 있음</Typography>
+                }
+
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center', width: '50%', minWidth: { xs: '235px' }, marginTop: { xs: '16px', md: '2rem' } }}>
                   <Typography sx={{ color: '#383838', fontSize: '1rem', fontWeight: '500' }}>{props.userName}님과 {props.name}님의 성향은&nbsp;</Typography>
                   <Typography sx={{ color: '#1CDDAD', fontSize: '1rem', fontWeight: '500' }}>{props.matchPercent}%&nbsp;</Typography>
@@ -182,8 +196,39 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                 </Typography>
 
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                  <Button onClick={applyMate} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>예</Button>
+                  <Button onClick={handleOpen3} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>예</Button>
                   <Button onClick={handleClose} sx={{ backgroundColor: '#9B9EA1 !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px', marginLeft: '16px' }}>아니오</Button>
+                </Box>
+              </Box>
+            </Box>
+          </Modal>
+        }
+        {
+          fourthOpen &&
+          <Modal
+            open={fourthOpen}
+            onClose={handleClose3}
+          >
+            <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '40%', maxWidth: '530px', minWidth: { xs: '327px', md: '400px' }, height: 'fit-content', outline: 'none', paddingX: '', paddingY: '3rem' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography sx={{ color: '#4B99EB', fontSize: { xs: '16px', md: '1.125rem' }, fontWeight: '400' }}>
+                  {props.name}
+                  <Typography component='span' sx={{ color: '#383838', fontSize: { xs: '16px', md: '1.125rem' }, fontWeight: '400' }}>님에게 보낼 신청 메시지를 작성해주세요.</Typography>
+                </Typography>
+                <Typography sx={{ color: '#9B9EA1', fontSize: { md: '14px' }, fontWeight: '400' }}>50자 이내</Typography>
+
+                <textarea
+                  name='message'
+                  placeholder='신청 메세지 입력'
+                  value={sendMessage}
+                  maxLength={50}
+                  onChange={(e) => setSendMessage(e.target.value)}
+                  style={{ fontFamily: 'Spoqa Han Sans Neo', backgroundColor: '#F0F9FF', border: '1px solid #E0F2FE', borderRadius: '10px', width: '70%', height: '92px', paddingLeft: '24px', paddingRight: '24px', paddingTop: '16px', paddingBottom: '16px', marginTop: '24px', resize: 'none', outline: 'none' }}
+                />
+
+                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                  <Button onClick={handleClose3} sx={{ backgroundColor: '#9B9EA1 !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px' }}>취소</Button>
+                  <Button onClick={applyMate} sx={{ backgroundColor: '#4B99EB !important', borderRadius: '200px', color: 'white', width: '100px', height: '40px', marginTop: '24px', marginLeft: '16px' }}>보내기</Button>
                 </Box>
               </Box>
             </Box>
