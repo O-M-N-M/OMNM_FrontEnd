@@ -47,7 +47,6 @@ export const MainScreen: NextPage = () => {
   const [matchPercent, setMatchPercent] = useState(-1.1);
   const [mbti, setMbti] = useState('');
   const [department, setDepartment] = useState('');
-  const [message, setMessage] = useState<string>('');
 
   const token = getCookie('OMNM');
   const headers = {
@@ -73,7 +72,6 @@ export const MainScreen: NextPage = () => {
       .then((res) => {
         setName(res.data.name);
         setAge(res.data.age);
-        setMessage(res.data.message);
         setNationality(res.data.nationality === 0 ? '내국인' : '외국인');
         setMatchPercent(res.data.percent);
         res.data.profileUrl === null ? setDetailProfile(null) : setDetailProfile(res.data.profileUrl);
@@ -363,7 +361,7 @@ export const MainScreen: NextPage = () => {
                     open={open}
                     onClose={handleClose}
                   >
-                    <DetailProfile props={{ name: name, mbti: mbti, message: message, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: '', setOpen: setOpen }} />
+                    <DetailProfile props={{ name: name, mbti: mbti, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: '', setOpen: setOpen }} />
                   </Modal>
                 }
               </Box>
