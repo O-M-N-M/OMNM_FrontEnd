@@ -4,9 +4,8 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Box, Button, CardContent, CircularProgress, Collapse, IconButton, Modal, ThemeProvider, Tooltip, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, IconButton, Modal, ThemeProvider, Tooltip, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import profile from '../public/basicProfile.png';
 import displayNone from '../public/displayNone.png';
@@ -44,7 +43,6 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
   const [fourthOpen, setFourthOpen] = useState(false);
 
   const [message, setMessage] = useState('');
-  const [showMessage, setShowMessage] = useState(false);
 
   const handleOpen = () => setSecondOpen(true);
   const handleClose = () => setSecondOpen(false);
@@ -54,9 +52,6 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
 
   const handleOpen3 = () => setFourthOpen(true);
   const handleClose3 = () => setFourthOpen(false);
-
-  const messageOpen = () => setShowMessage(true);
-  const messageClose = () => setShowMessage(false);
 
   const applyMate = async () => {
     const url = `/api/main/propose/${props.matchingId}`;
