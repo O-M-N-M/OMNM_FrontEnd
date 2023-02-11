@@ -15,7 +15,7 @@ import theme from './theme';
 interface ComponentProps {
   name: string;
   mbti: string;
-  message: string | null | undefined;
+  message?: string | null | undefined;
   userName: string;
   lifeCycle: string;
   isSmoking: string;
