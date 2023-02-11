@@ -15,6 +15,7 @@ import theme from './theme';
 interface ComponentProps {
   name: string;
   mbti: string;
+  message: string;
   userName: string;
   lifeCycle: string;
   isSmoking: string;
@@ -29,7 +30,6 @@ interface ComponentProps {
   sleepingPattern: String[];
   detailProfile: any | null;
   armyService: string | null | undefined;
-  message: string;
   kakaoId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
