@@ -4,8 +4,10 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Box, Button, CircularProgress, IconButton, Modal, ThemeProvider, Tooltip, Typography } from "@mui/material";
+import { Box, Button, CardContent, CircularProgress, Collapse, IconButton, Modal, ThemeProvider, Tooltip, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import DownIcon from '../public/downIcon.png';
+import UpIcon from '../public/upIcon.png';
 
 import profile from '../public/basicProfile.png';
 import displayNone from '../public/displayNone.png';
@@ -43,6 +45,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
   const [fourthOpen, setFourthOpen] = useState(false);
 
   const [sendMessage, setSendMessage] = useState<string>('');
+  const [messageOpen, setMessageOpen] = useState<boolean>(false);
 
   const handleOpen = () => setSecondOpen(true);
   const handleClose = () => setSecondOpen(false);
@@ -52,6 +55,9 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
 
   const handleOpen3 = () => setFourthOpen(true);
   const handleClose3 = () => setFourthOpen(false);
+
+  const handleMessageOpen = () => setMessageOpen(true);
+  const handleMessageClose = () => setMessageOpen(false);
 
   const applyMate = async () => {
     const url = `/api/main/propose/${props.matchingId}`;
@@ -93,14 +99,14 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '30%', minWidth: { xs: '327px', md: '400px' }, height: '70%', minHeight: '650px', outline: 'none' }}>
+      <Box sx={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '10px', width: '30%', minWidth: { xs: '327px', md: '400px' }, height: 'fit-content', outline: 'none' }}>
         {
           props.loading ? (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
               <CircularProgress color="inherit" />
             </Box>
           ) : (
-            <>
+            <Box>
               <IconButton onClick={() => props.setOpen(false)} sx={{ float: 'right' }}>
                 <CloseIcon aria-label="close" />
               </IconButton>
@@ -108,9 +114,11 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
               <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', height: '90%', justifyContent: 'center', alignItems: 'center' }} >
                 {
                   props.detailProfile === null ? (
-                    <Image src={profile} width={80} height={80} />
+                    <Box sx={{ width: '80px', height: '80px', marginTop: { md: '25px' } }} >
+                      <Image src={profile} width={80} height={80} />
+                    </Box>
                   ) : (
-                    <Box sx={{ border: '1px solid #9B9EA1', borderRadius: '100%', width: '80px', height: '80px' }} >
+                    <Box sx={{ border: '1px solid #9B9EA1', borderRadius: '100%', width: '80px', height: '80px', marginTop: { md: '25px' } }} >
                       <Image src={props.detailProfile} width={80} height={80} style={{ borderRadius: '100%' }} />
                     </Box>
                   )
@@ -153,7 +161,29 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
 
                 {
                   (props.message && props.message.length > 0) &&
-                  <Typography>메세지 있음</Typography>
+                  (
+                    <>
+                      {
+                        messageOpen ? (
+                          <Button onClick={handleMessageClose} sx={{ border: '1px solid #4B99EB', borderRadius: '20px', width: 'fit-content', height: 'fit-content', marginTop: '24px' }}>
+                            <Typography sx={{ color: '#4B99EB', fontSize: '14px', fontWeight: '500', marginRight: '8px' }}>{props.name}님이 보낸 신청 메세지</Typography>
+                            <Image src={UpIcon} width={14} height={14} /> :
+                          </Button>
+                        ) : (
+                          <Button onClick={handleMessageOpen} sx={{ border: '1px solid #4B99EB', borderRadius: '20px', width: 'fit-content', height: 'fit-content', marginTop: '24px' }}>
+                            <Typography sx={{ color: '#4B99EB', fontSize: '14px', fontWeight: '500', marginRight: '8px' }}>{props.name}님이 보낸 신청 메세지</Typography>
+                            <Image src={DownIcon} width={14} height={14} /> :
+                          </Button>
+                        )
+                      }
+
+                      <Collapse in={messageOpen} timeout="auto" unmountOnExit>
+                        <CardContent sx={{ backgroundColor: '#F0F9FF', border: '1px solid #E0F2FE', borderRadius: '10px', width: '80%', minWidth: { xs: '263px', md: '353px' }, marginTop: '8px', marginLeft: '10%', paddingX: '20px', paddingY: '16px' }}>
+                          <Typography sx={{ color: '#383838', fontSize: '16px', fontWeight: 400, wordBreak: 'break-all' }}>{props.message}</Typography>
+                        </CardContent>
+                      </Collapse>
+                    </>
+                  )
                 }
 
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center', width: '50%', minWidth: { xs: '235px' }, marginTop: { xs: '16px', md: '2rem' } }}>
@@ -162,7 +192,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                   <Typography sx={{ color: '#383838', fontSize: '1rem', fontWeight: '500' }}>일치합니다.</Typography>
                 </Box>
 
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '0.5rem', justifyContent: 'center', alignItems: 'center' }}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '0.5rem', justifyContent: 'center', alignItems: 'center', marginBottom: '25px' }}>
                   <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#7DD3FC', fontSize: { xs: '14px', md: '16px' }, fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.mbti}</Typography>
                   <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#EA9B76', fontSize: { xs: '14px', md: '16px' }, fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.department}</Typography>
                   <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#FC7DD3', fontSize: { xs: '14px', md: '16px' }, fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.lifeCycle}</Typography>
@@ -178,7 +208,7 @@ const DetailProfile = ({ props }: { props: ComponentProps }) => {
                   {props.armyService !== null && <Typography sx={{ border: 'solid 1px #DBDBDB', borderRadius: '100px', color: '#2DD4BF', fontSize: { xs: '14px', md: '16px' }, fontWeight: '500', paddingX: '0.875rem', paddingY: '0.375rem', marginX: '0.625rem', marginTop: '0.75rem' }}>{props.armyService}</Typography>}
                 </Box>
               </Box>
-            </>
+            </Box>
           )
         }
 

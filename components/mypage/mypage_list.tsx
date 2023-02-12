@@ -25,6 +25,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
   const [matchPercent, setMatchPercent] = useState(-1.1);
   const [name, setName] = useState('');
   const [mbti, setMbti] = useState('');
+  const [message, setMessage] = useState('');
   const [kakaoId, setKakaoId] = useState('');
   const [isSmoking, setIsSmoking] = useState('');
   const [lifeCycle, setLifeCycle] = useState('');
@@ -56,6 +57,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
         setAge(res.data.age);
         setName(res.data.name);
         setMbti(res.data.mbti);
+        setMessage(res.data.message);
         setMatchPercent(res.data.percent);
         setDepartment(res.data.department);
 
@@ -126,7 +128,7 @@ const MyPageList = ({ props }: { props: ComponentProps }) => {
           open={open}
           onClose={handleClose}
         >
-          <DetailProfile props={{ name: name, mbti: mbti, userName: props.userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: userId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: kakaoId, setOpen: setOpen }} />
+          <DetailProfile props={{ name: name, mbti: mbti, message: message, userName: props.userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: userId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: kakaoId, setOpen: setOpen }} />
         </Modal>
       }
     </>

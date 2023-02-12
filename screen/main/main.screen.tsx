@@ -362,6 +362,7 @@ export const MainScreen: NextPage = () => {
                   <Modal
                     open={open}
                     onClose={handleClose}
+                    sx={{ overflow: 'auto' }}
                   >
                     <DetailProfile props={{ name: name, mbti: mbti, message: message, userName: userName, lifeCycle: lifeCycle, isSmoking: isSmoking, dormitory: dormitory, department: department, isCleaning: isCleaning, nationality: nationality, age: age, matchingId: matchingId, matchPercent: matchPercent, loading: loading, sleepingPattern: sleepingPattern, detailProfile: detailProfile, armyService: armyService, kakaoId: '', setOpen: setOpen }} />
                   </Modal>
